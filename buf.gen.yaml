@@ -20,9 +20,9 @@ plugins:
     opt: paths=import,module=github.com/caraml-dev/universal-prediction-interface/gen/go
 # Python code gen
   - remote: buf.build/protocolbuffers/plugins/python:v3.19.1-1
-    out: gen/python/grpc
+    out: gen/python
   - remote: buf.build/grpc/plugins/python:v1.46.2-1
-    out: gen/python/grpc
+    out: gen/python
 # Documentations
   - remote: buf.build/grpc-ecosystem/plugins/openapiv2:v2.6.0-1
     out: docs/openapiv2
