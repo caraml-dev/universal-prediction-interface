@@ -8,21 +8,21 @@ managed:
 plugins:
 # Golang code gen
   - name: go
-    out: gen/go
+    out: gen/go/grpc
     opt: paths=import,module=github.com/caraml-dev/universal-prediction-interface/gen/go
   - name: go-grpc
-    out: gen/go
+    out: gen/go/grpc
     opt:
       - paths=import,module=github.com/caraml-dev/universal-prediction-interface/gen/go
       - require_unimplemented_servers=false
   - name: grpc-gateway
-    out: gen/go
+    out: gen/go/grpc
     opt: paths=import,module=github.com/caraml-dev/universal-prediction-interface/gen/go
 # Python code gen
   - remote: buf.build/protocolbuffers/plugins/python:v3.19.1-1
-    out: gen/python
+    out: gen/python/grpc
   - remote: buf.build/grpc/plugins/python:v1.46.2-1
-    out: gen/python
+    out: gen/python/grpc
 # Documentations
   - remote: buf.build/grpc-ecosystem/plugins/openapiv2:v2.6.0-1
     out: docs/openapiv2
