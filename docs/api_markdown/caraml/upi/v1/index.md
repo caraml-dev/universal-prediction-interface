@@ -1,0 +1,243 @@
+# Protocol Documentation
+<a name="top"></a>
+
+## Table of Contents
+
+- [caraml/upi/v1/value.proto](#caraml_upi_v1_value-proto)
+    - [NamedValue](#caraml-upi-v1-NamedValue)
+  
+    - [NamedValue.Type](#caraml-upi-v1-NamedValue-Type)
+  
+- [caraml/upi/v1/upi.proto](#caraml_upi_v1_upi-proto)
+    - [ModelMetadata](#caraml-upi-v1-ModelMetadata)
+    - [PredictValuesRequest](#caraml-upi-v1-PredictValuesRequest)
+    - [PredictValuesResponse](#caraml-upi-v1-PredictValuesResponse)
+    - [PredictionResultRow](#caraml-upi-v1-PredictionResultRow)
+    - [PredictionRow](#caraml-upi-v1-PredictionRow)
+    - [RequestMetadata](#caraml-upi-v1-RequestMetadata)
+    - [ResponseMetadata](#caraml-upi-v1-ResponseMetadata)
+  
+    - [UniversalPredictionService](#caraml-upi-v1-UniversalPredictionService)
+  
+- [Scalar Value Types](#scalar-value-types)
+
+
+
+<a name="caraml_upi_v1_value-proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## caraml/upi/v1/value.proto
+
+
+
+<a name="caraml-upi-v1-NamedValue"></a>
+
+### NamedValue
+Represents a named and typed data point.
+Can be used as a prediction input, output or metdadata.
+Oneof types are avoided as these can be difficult to handle
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | Name describing what the value represents. Uses include: - Ensuring ML models process columns in the correct order - Defining a Feast row entity name - Parsing metadata to apply traffic rules |
+| type | [NamedValue.Type](#caraml-upi-v1-NamedValue-Type) |  |  |
+| double_value | [double](#double) |  |  |
+| integer_value | [int32](#int32) |  |  |
+| string_value | [string](#string) |  |  |
+
+
+
+
+
+ 
+
+
+<a name="caraml-upi-v1-NamedValue-Type"></a>
+
+### NamedValue.Type
+
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| TYPE_UNSPECIFIED | 0 |  |
+| TYPE_DOUBLE | 1 |  |
+| TYPE_INTEGER | 2 |  |
+| TYPE_STRING | 3 |  |
+
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="caraml_upi_v1_upi-proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## caraml/upi/v1/upi.proto
+
+
+
+<a name="caraml-upi-v1-ModelMetadata"></a>
+
+### ModelMetadata
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | Model name that produce prediction |
+| version | [string](#string) |  | Model version that produce prediction |
+
+
+
+
+
+
+<a name="caraml-upi-v1-PredictValuesRequest"></a>
+
+### PredictValuesRequest
+Represents a request to predict multiple values
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| prediction_rows | [PredictionRow](#caraml-upi-v1-PredictionRow) | repeated | Collection of prediction instances to be predicted. Each prediction row correspond to one prediction instance. NOTE: the ordering of prediction_rows might differ with prediction_result_rows in the response |
+| target_name | [string](#string) |  | Name of the concept we wish to predict. In the context of Marketplace&#39;s domain entities, this will correspond to a Numeric Dimension, eg. &#34;CancellationProb&#34; or &#34;AcceptanceProb&#34; */ |
+| prediction_context | [NamedValue](#caraml-upi-v1-NamedValue) | repeated | Prediction context may contain additional data applicable to all prediction instances For example it can be used to store information for traffic rules, experimentation or tracking purposes. Eg. country_code, service_type, service_area_id |
+| metadata | [RequestMetadata](#caraml-upi-v1-RequestMetadata) |  |  |
+
+
+
+
+
+
+<a name="caraml-upi-v1-PredictValuesResponse"></a>
+
+### PredictValuesResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| prediction_result_rows | [PredictionResultRow](#caraml-upi-v1-PredictionResultRow) | repeated | Prediction results corresponding to the prediction rows provided in the request. NOTE: the ordering of prediction_result_rows might differ with prediction_rows in the request |
+| target_name | [string](#string) |  | Target name as defined in the request metadata |
+| prediction_context | [NamedValue](#caraml-upi-v1-NamedValue) | repeated | Extensible field to cover unforeseen requirements |
+| metadata | [ResponseMetadata](#caraml-upi-v1-ResponseMetadata) |  | Response metadata |
+
+
+
+
+
+
+<a name="caraml-upi-v1-PredictionResultRow"></a>
+
+### PredictionResultRow
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| row_id | [string](#string) |  | Row ID defined by the caller used to join a prediction result with a prediction row |
+| values | [NamedValue](#caraml-upi-v1-NamedValue) | repeated | Represents the predicted values corresponding to a single prediction row. This will often be the output of an ML model. This field is repeated to support multi-task models with non-scalar outputs |
+
+
+
+
+
+
+<a name="caraml-upi-v1-PredictionRow"></a>
+
+### PredictionRow
+Represents an single instance we wish to predict.
+Eg. for Matchmaking a prediction row will typically
+correspond to a proposed driver plan
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| row_id | [string](#string) |  | Row ID is defined by the client and can be used to join a prediction row with the prediction result, and to track predictions generated by multiple models. The user is expected include row ID (along with prediction ID) when calling the observations API so that predictions and observations can be joined. |
+| model_inputs | [NamedValue](#caraml-upi-v1-NamedValue) | repeated | Model inputs contain all preprocessed feature that model use to perform prediction. The feature ordering in model_inputs must be the same as feature order expected by model. Model inputs can be populated via 3 ways: - By performing preprocessing in the client-side and sent as part of original request. - By transforming raw feature values stored in transformer_inputs. - By retrieving precomputed feature value from feature store. |
+| transformer_inputs | [NamedValue](#caraml-upi-v1-NamedValue) | repeated | Transformer input contains raw values that can be used to enrich model_inputs using transformer. Typically transformer_inputs contains: - unprocessed/raw features that requires further processing. - list of entities for which their precomputed features are retrieved from feature store. |
+
+
+
+
+
+
+<a name="caraml-upi-v1-RequestMetadata"></a>
+
+### RequestMetadata
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| prediction_id | [string](#string) |  | Unique identifier for each request. Optional. Prediction ID will generated by the platform. The user is expected include the prediction ID (along with row ID) when calling the observations API so that predictions and observations can be joined. Prediction ID is needed because row ID may not be globally unique across requests (only locally unique within each request). If there are experiments with alternative models, the mapping from prediciton ID to treatment ID will be logged by the platform |
+| request_timestamp | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | Timestamp of the request |
+
+
+
+
+
+
+<a name="caraml-upi-v1-ResponseMetadata"></a>
+
+### ResponseMetadata
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| prediction_id | [string](#string) |  | Prediction ID generated by the platform. The user is expected include the prediction ID (along with row ID) when calling the observations API so that predictions and observations can be joined. Prediction ID is needed because row ID may not be globally unique across requests (only locally unique within each request). If there are experiments with alternative models, the mapping from prediciton ID to treatment ID will be logged by the platform |
+| models | [ModelMetadata](#caraml-upi-v1-ModelMetadata) | repeated | List of model that produces the prediction This field is repeated to cater for use case such as ensembling several model production results |
+| experiment_id | [string](#string) |  | Optional experimentation metadata |
+| treatment_id | [string](#string) |  |  |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+
+<a name="caraml-upi-v1-UniversalPredictionService"></a>
+
+### UniversalPredictionService
+Service for performing model prediction
+
+| Method Name | Request Type | Response Type | Description |
+| ----------- | ------------ | ------------- | ------------|
+| PredictValues | [PredictValuesRequest](#caraml-upi-v1-PredictValuesRequest) | [PredictValuesResponse](#caraml-upi-v1-PredictValuesResponse) |  |
+
+ 
+
+
+
+## Scalar Value Types
+
+| .proto Type | Notes | C++ | Java | Python | Go | C# | PHP | Ruby |
+| ----------- | ----- | --- | ---- | ------ | -- | -- | --- | ---- |
+| <a name="double" /> double |  | double | double | float | float64 | double | float | Float |
+| <a name="float" /> float |  | float | float | float | float32 | float | float | Float |
+| <a name="int32" /> int32 | Uses variable-length encoding. Inefficient for encoding negative numbers – if your field is likely to have negative values, use sint32 instead. | int32 | int | int | int32 | int | integer | Bignum or Fixnum (as required) |
+| <a name="int64" /> int64 | Uses variable-length encoding. Inefficient for encoding negative numbers – if your field is likely to have negative values, use sint64 instead. | int64 | long | int/long | int64 | long | integer/string | Bignum |
+| <a name="uint32" /> uint32 | Uses variable-length encoding. | uint32 | int | int/long | uint32 | uint | integer | Bignum or Fixnum (as required) |
+| <a name="uint64" /> uint64 | Uses variable-length encoding. | uint64 | long | int/long | uint64 | ulong | integer/string | Bignum or Fixnum (as required) |
+| <a name="sint32" /> sint32 | Uses variable-length encoding. Signed int value. These more efficiently encode negative numbers than regular int32s. | int32 | int | int | int32 | int | integer | Bignum or Fixnum (as required) |
+| <a name="sint64" /> sint64 | Uses variable-length encoding. Signed int value. These more efficiently encode negative numbers than regular int64s. | int64 | long | int/long | int64 | long | integer/string | Bignum |
+| <a name="fixed32" /> fixed32 | Always four bytes. More efficient than uint32 if values are often greater than 2^28. | uint32 | int | int | uint32 | uint | integer | Bignum or Fixnum (as required) |
+| <a name="fixed64" /> fixed64 | Always eight bytes. More efficient than uint64 if values are often greater than 2^56. | uint64 | long | int/long | uint64 | ulong | integer/string | Bignum |
+| <a name="sfixed32" /> sfixed32 | Always four bytes. | int32 | int | int | int32 | int | integer | Bignum or Fixnum (as required) |
+| <a name="sfixed64" /> sfixed64 | Always eight bytes. | int64 | long | int/long | int64 | long | integer/string | Bignum |
+| <a name="bool" /> bool |  | bool | boolean | boolean | bool | bool | boolean | TrueClass/FalseClass |
+| <a name="string" /> string | A string must always contain UTF-8 encoded or 7-bit ASCII text. | string | String | str/unicode | string | string | string | String (UTF-8) |
+| <a name="bytes" /> bytes | May contain any arbitrary sequence of bytes. | string | ByteString | str | []byte | ByteString | string | String (ASCII-8BIT) |
+
