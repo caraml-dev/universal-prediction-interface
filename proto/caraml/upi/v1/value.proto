@@ -21,6 +21,6 @@ message NamedValue {
    }
    Type type = 2;
    double double_value = 3;
-   int32 integer_value = 4;
+   int64 integer_value = 4;
    string string_value = 5;
 }
