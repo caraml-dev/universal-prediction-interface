@@ -8,10 +8,12 @@ To get started, install following software:
 
 - [buf](https://docs.buf.build/installation)
 - [Go 1.18 or above](https://go.dev/doc/install)
-- Go dependencies
+- Go dependencies and protoc plugins
+
+    ```bash
+    make setup
     ```
-    go mod tidy
-    ```
+
 To generate all code and documentation
 ```
 make
