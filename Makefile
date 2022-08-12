@@ -2,8 +2,8 @@
 .PHONY: generate
 generate: lint
 	@buf generate
-	@OPENAPI_GENERATOR_VERSION=6.0.1 openapi-generator-cli generate -i docs/openapiv2/caraml/upi/v1/upi.swagger.json -g go -o ./gen/go/openapi -p enumClassPrefix=true && \
-									 openapi-generator-cli generate -i docs/openapiv2/caraml/upi/v1/upi.swagger.json -g python -o ./gen/python/openapi -p enumClassPrefix=true
+	@OPENAPI_GENERATOR_VERSION=6.0.1 tools/openapi-generator-cli generate -i docs/openapiv2/caraml/upi/v1/upi.swagger.json -g go -o ./gen/go/openapi -p enumClassPrefix=true && \
+									 tools/openapi-generator-cli generate -i docs/openapiv2/caraml/upi/v1/upi.swagger.json -g python -o ./gen/python/openapi -p enumClassPrefix=true
 
 # Protobuf linting
 .PHONY: lint

@@ -8,7 +8,6 @@ To get started, install following software:
 
 - [buf](https://docs.buf.build/installation)
 - [Go 1.18 or above](https://go.dev/doc/install)
-- [Open API Generator](https://github.com/OpenAPITools/openapi-generator#launcher-script). Use the Launcher Script method for installing.
 - Go dependencies
     ```
     go mod tidy
