@@ -43,7 +43,7 @@ Oneof types are avoided as these can be difficult to handle
 | name | [string](#string) |  | Name describing what the value represents. Uses include: - Ensuring ML models process columns in the correct order - Defining a Feast row entity name - Parsing metadata to apply traffic rules |
 | type | [NamedValue.Type](#caraml-upi-v1-NamedValue-Type) |  |  |
 | double_value | [double](#double) |  |  |
-| integer_value | [int32](#int32) |  |  |
+| integer_value | [int64](#int64) |  |  |
 | string_value | [string](#string) |  |  |
 
 
@@ -106,7 +106,7 @@ Represents a request to predict multiple values
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | prediction_rows | [PredictionRow](#caraml-upi-v1-PredictionRow) | repeated | Collection of prediction instances to be predicted. Each prediction row correspond to one prediction instance. NOTE: the ordering of prediction_rows might differ with prediction_result_rows in the response |
-| target_name | [string](#string) |  | Name of the concept we wish to predict. In the context of Marketplace&#39;s domain entities, this will correspond to a Numeric Dimension, eg. &#34;CancellationProb&#34; or &#34;AcceptanceProb&#34; */ |
+| target_name | [string](#string) |  | Name of the concept we wish to predict. For example in context of iris classification problem it can be &#34;iris-species&#34; |
 | prediction_context | [NamedValue](#caraml-upi-v1-NamedValue) | repeated | Prediction context may contain additional data applicable to all prediction instances For example it can be used to store information for traffic rules, experimentation or tracking purposes. Eg. country_code, service_type, service_area_id |
 | metadata | [RequestMetadata](#caraml-upi-v1-RequestMetadata) |  |  |
 

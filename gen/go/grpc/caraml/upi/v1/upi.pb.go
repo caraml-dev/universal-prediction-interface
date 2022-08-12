@@ -33,9 +33,7 @@ type PredictValuesRequest struct {
 	// NOTE: the ordering of prediction_rows might differ with prediction_result_rows in the response
 	PredictionRows []*PredictionRow `protobuf:"bytes,1,rep,name=prediction_rows,json=predictionRows,proto3" json:"prediction_rows,omitempty"`
 	// Name of the concept we wish to predict.
-	// In the context of Marketplace's domain entities,
-	// this will correspond to a Numeric Dimension,
-	// eg. "CancellationProb" or "AcceptanceProb" */
+	// For example in context of iris classification problem it can be "iris-species"
 	TargetName string `protobuf:"bytes,2,opt,name=target_name,json=targetName,proto3" json:"target_name,omitempty"`
 	// Prediction context may contain additional data applicable to all prediction instances
 	// For example it can be used to store information for traffic rules, experimentation

@@ -69,7 +69,7 @@ components:
       example:
         stringValue: stringValue
         name: name
-        integerValue: 6
+        integerValue: integerValue
         doubleValue: 0.8008281904610115
         type: null
       properties:
@@ -87,8 +87,8 @@ components:
           format: double
           type: number
         integerValue:
-          format: int32
-          type: integer
+          format: int64
+          type: string
         stringValue:
           type: string
       title: "Represents a named and typed data point.\nCan be used as a prediction\
@@ -113,9 +113,9 @@ components:
             \ might differ with prediction_result_rows in the response"
           type: array
         targetName:
-          title: "Name of the concept we wish to predict.\nIn the context of Marketplace's\
-            \ domain entities,\nthis will correspond to a Numeric Dimension,\neg.\
-            \ \"CancellationProb\" or \"AcceptanceProb\" */"
+          title: |-
+            Name of the concept we wish to predict.
+            For example in context of iris classification problem it can be "iris-species"
           type: string
         predictionContext:
           items:
@@ -144,36 +144,36 @@ components:
         predictionContext:
         - stringValue: stringValue
           name: name
-          integerValue: 6
+          integerValue: integerValue
           doubleValue: 0.8008281904610115
           type: null
         - stringValue: stringValue
           name: name
-          integerValue: 6
+          integerValue: integerValue
           doubleValue: 0.8008281904610115
           type: null
         predictionResultRows:
         - values:
           - stringValue: stringValue
             name: name
-            integerValue: 6
+            integerValue: integerValue
             doubleValue: 0.8008281904610115
             type: null
           - stringValue: stringValue
             name: name
-            integerValue: 6
+            integerValue: integerValue
             doubleValue: 0.8008281904610115
             type: null
           rowId: rowId
         - values:
           - stringValue: stringValue
             name: name
-            integerValue: 6
+            integerValue: integerValue
             doubleValue: 0.8008281904610115
             type: null
           - stringValue: stringValue
             name: name
-            integerValue: 6
+            integerValue: integerValue
             doubleValue: 0.8008281904610115
             type: null
           rowId: rowId
@@ -201,12 +201,12 @@ components:
         values:
         - stringValue: stringValue
           name: name
-          integerValue: 6
+          integerValue: integerValue
           doubleValue: 0.8008281904610115
           type: null
         - stringValue: stringValue
           name: name
-          integerValue: 6
+          integerValue: integerValue
           doubleValue: 0.8008281904610115
           type: null
         rowId: rowId

@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **name** | **str** |  | [optional] 
 **type** | [**V1NamedValueType**](V1NamedValueType.md) |  | [optional] 
 **double_value** | **float** |  | [optional] 
-**integer_value** | **int** |  | [optional] 
+**integer_value** | **str** |  | [optional] 
 **string_value** | **str** |  | [optional] 
 **any string name** | **bool, date, datetime, dict, float, int, list, str, none_type** | any string name can be used but the value must be the correct type | [optional]
 

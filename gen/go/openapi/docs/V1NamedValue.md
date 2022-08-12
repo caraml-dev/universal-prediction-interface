@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** |  | [optional] 
 **Type** | Pointer to [**V1NamedValueType**](V1NamedValueType.md) |  | [optional] [default to V1NAMEDVALUETYPE_UNSPECIFIED]
 **DoubleValue** | Pointer to **float64** |  | [optional] 
-**IntegerValue** | Pointer to **int32** |  | [optional] 
+**IntegerValue** | Pointer to **string** |  | [optional] 
 **StringValue** | Pointer to **string** |  | [optional] 
 
 ## Methods
@@ -106,20 +106,20 @@ HasDoubleValue returns a boolean if a field has been set.
 
 ### GetIntegerValue
 
-`func (o *V1NamedValue) GetIntegerValue() int32`
+`func (o *V1NamedValue) GetIntegerValue() string`
 
 GetIntegerValue returns the IntegerValue field if non-nil, zero value otherwise.
 
 ### GetIntegerValueOk
 
-`func (o *V1NamedValue) GetIntegerValueOk() (*int32, bool)`
+`func (o *V1NamedValue) GetIntegerValueOk() (*string, bool)`
 
 GetIntegerValueOk returns a tuple with the IntegerValue field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetIntegerValue
 
-`func (o *V1NamedValue) SetIntegerValue(v int32)`
+`func (o *V1NamedValue) SetIntegerValue(v string)`
 
 SetIntegerValue sets IntegerValue field to given value.
 

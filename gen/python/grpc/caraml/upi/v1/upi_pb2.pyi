@@ -29,9 +29,7 @@ class PredictValuesRequest(google.protobuf.message.Message):
         pass
     target_name: typing.Text
     """Name of the concept we wish to predict.
-    In the context of Marketplace's domain entities,
-    this will correspond to a Numeric Dimension,
-    eg. "CancellationProb" or "AcceptanceProb" */
+    For example in context of iris classification problem it can be "iris-species"
     """
 
     @property

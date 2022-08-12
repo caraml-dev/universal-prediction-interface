@@ -105,8 +105,8 @@
           "format": "double"
         },
         "integerValue": {
-          "type": "integer",
-          "format": "int32"
+          "type": "string",
+          "format": "int64"
         },
         "stringValue": {
           "type": "string"
@@ -136,7 +136,7 @@
         },
         "targetName": {
           "type": "string",
-          "title": "Name of the concept we wish to predict.\nIn the context of Marketplace's domain entities,\nthis will correspond to a Numeric Dimension,\neg. \"CancellationProb\" or \"AcceptanceProb\" */"
+          "title": "Name of the concept we wish to predict.\nFor example in context of iris classification problem it can be \"iris-species\""
         },
         "predictionContext": {
           "type": "array",

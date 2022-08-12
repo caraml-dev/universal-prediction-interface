@@ -90,7 +90,7 @@ class V1NamedValue(ModelNormal):
             'name': (str,),  # noqa: E501
             'type': (V1NamedValueType,),  # noqa: E501
             'double_value': (float,),  # noqa: E501
-            'integer_value': (int,),  # noqa: E501
+            'integer_value': (str,),  # noqa: E501
             'string_value': (str,),  # noqa: E501
         }
 
@@ -151,7 +151,7 @@ class V1NamedValue(ModelNormal):
             name (str): [optional]  # noqa: E501
             type (V1NamedValueType): [optional]  # noqa: E501
             double_value (float): [optional]  # noqa: E501
-            integer_value (int): [optional]  # noqa: E501
+            integer_value (str): [optional]  # noqa: E501
             string_value (str): [optional]  # noqa: E501
         """
 
@@ -241,7 +241,7 @@ class V1NamedValue(ModelNormal):
             name (str): [optional]  # noqa: E501
             type (V1NamedValueType): [optional]  # noqa: E501
             double_value (float): [optional]  # noqa: E501
-            integer_value (int): [optional]  # noqa: E501
+            integer_value (str): [optional]  # noqa: E501
             string_value (str): [optional]  # noqa: E501
         """
 

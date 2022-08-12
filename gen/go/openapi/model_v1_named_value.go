@@ -19,7 +19,7 @@ type V1NamedValue struct {
 	Name *string `json:"name,omitempty"`
 	Type *V1NamedValueType `json:"type,omitempty"`
 	DoubleValue *float64 `json:"doubleValue,omitempty"`
-	IntegerValue *int32 `json:"integerValue,omitempty"`
+	IntegerValue *string `json:"integerValue,omitempty"`
 	StringValue *string `json:"stringValue,omitempty"`
 }
 
@@ -141,9 +141,9 @@ func (o *V1NamedValue) SetDoubleValue(v float64) {
 }
 
 // GetIntegerValue returns the IntegerValue field value if set, zero value otherwise.
-func (o *V1NamedValue) GetIntegerValue() int32 {
+func (o *V1NamedValue) GetIntegerValue() string {
 	if o == nil || o.IntegerValue == nil {
-		var ret int32
+		var ret string
 		return ret
 	}
 	return *o.IntegerValue
@@ -151,7 +151,7 @@ func (o *V1NamedValue) GetIntegerValue() int32 {
 
 // GetIntegerValueOk returns a tuple with the IntegerValue field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *V1NamedValue) GetIntegerValueOk() (*int32, bool) {
+func (o *V1NamedValue) GetIntegerValueOk() (*string, bool) {
 	if o == nil || o.IntegerValue == nil {
 		return nil, false
 	}
@@ -167,8 +167,8 @@ func (o *V1NamedValue) HasIntegerValue() bool {
 	return false
 }
 
-// SetIntegerValue gets a reference to the given int32 and assigns it to the IntegerValue field.
-func (o *V1NamedValue) SetIntegerValue(v int32) {
+// SetIntegerValue gets a reference to the given string and assigns it to the IntegerValue field.
+func (o *V1NamedValue) SetIntegerValue(v string) {
 	o.IntegerValue = &v
 }
 
