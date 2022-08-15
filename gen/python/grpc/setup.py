@@ -1,7 +1,11 @@
+import os
+
 from setuptools import setup, find_packages  # noqa: H301
+from importlib.machinery import SourceFileLoader
+
 
 NAME = "caraml-upi-protos"
-VERSION = "0.0.3"
+VERSION =  SourceFileLoader("caraml.upi.version", os.path.join("caraml", "upi", "version.py")).load_module().VERSION
 
 REQUIRES = [
   "grpcio-tools >= 1.38.1",
