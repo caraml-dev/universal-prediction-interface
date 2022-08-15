@@ -1,0 +1,259 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "caraml/upi/v1/upi.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "UniversalPredictionService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/predict": {
+      "post": {
+        "operationId": "UniversalPredictionService_PredictValues",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1PredictValuesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1PredictValuesRequest"
+            }
+          }
+        ],
+        "tags": [
+          "UniversalPredictionService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1ModelMetadata": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "Model name that produce prediction"
+        },
+        "version": {
+          "type": "string",
+          "title": "Model version that produce prediction"
+        }
+      }
+    },
+    "v1NamedValue": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "Name describing what the value represents.\nUses include:\n- Ensuring ML models process columns in the correct order\n- Defining a Feast row entity name\n- Parsing metadata to apply traffic rules"
+        },
+        "type": {
+          "$ref": "#/definitions/v1NamedValueType"
+        },
+        "doubleValue": {
+          "type": "number",
+          "format": "double"
+        },
+        "integerValue": {
+          "type": "string",
+          "format": "int64"
+        },
+        "stringValue": {
+          "type": "string"
+        }
+      },
+      "title": "Represents a named and typed data point.\nCan be used as a prediction input, output or metdadata.\nOneof types are avoided as these can be difficult to handle"
+    },
+    "v1NamedValueType": {
+      "type": "string",
+      "enum": [
+        "TYPE_UNSPECIFIED",
+        "TYPE_DOUBLE",
+        "TYPE_INTEGER",
+        "TYPE_STRING"
+      ],
+      "default": "TYPE_UNSPECIFIED"
+    },
+    "v1PredictValuesRequest": {
+      "type": "object",
+      "properties": {
+        "predictionRows": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1PredictionRow"
+          },
+          "title": "Collection of prediction instances to be predicted.\nEach prediction row correspond to one prediction instance.\nNOTE: the ordering of prediction_rows might differ with prediction_result_rows in the response"
+        },
+        "targetName": {
+          "type": "string",
+          "title": "Name of the concept we wish to predict.\nFor example in context of iris classification problem it can be \"iris-species\""
+        },
+        "predictionContext": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1NamedValue"
+          },
+          "title": "Prediction context may contain additional data applicable to all prediction instances\nFor example it can be used to store information for traffic rules, experimentation\nor tracking purposes.\nEg. country_code, service_type, service_area_id"
+        },
+        "metadata": {
+          "$ref": "#/definitions/v1RequestMetadata"
+        }
+      },
+      "title": "Represents a request to predict multiple values"
+    },
+    "v1PredictValuesResponse": {
+      "type": "object",
+      "properties": {
+        "predictionResultRows": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1PredictionResultRow"
+          },
+          "title": "Prediction results corresponding to the\nprediction rows provided in the request. \nNOTE: the ordering of prediction_result_rows might differ with prediction_rows in the request"
+        },
+        "targetName": {
+          "type": "string",
+          "title": "Target name as defined in the request metadata"
+        },
+        "predictionContext": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1NamedValue"
+          },
+          "title": "Extensible field to cover unforeseen requirements"
+        },
+        "metadata": {
+          "$ref": "#/definitions/v1ResponseMetadata",
+          "title": "Response metadata"
+        }
+      }
+    },
+    "v1PredictionResultRow": {
+      "type": "object",
+      "properties": {
+        "rowId": {
+          "type": "string",
+          "title": "Row ID defined by the caller used to join a prediction result with a prediction row"
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1NamedValue"
+          },
+          "title": "Represents the predicted values corresponding to a \nsingle prediction row. This will often be the output of an ML model.\nThis field is repeated to support multi-task models with non-scalar outputs"
+        }
+      }
+    },
+    "v1PredictionRow": {
+      "type": "object",
+      "properties": {
+        "rowId": {
+          "type": "string",
+          "description": "Row ID is defined by the client and can be used\nto join a prediction row with the prediction result,\nand to track predictions generated by multiple models.\nThe user is expected include row ID (along with prediction ID)\nwhen calling the observations API so that predictions\nand observations can be joined."
+        },
+        "modelInputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1NamedValue"
+          },
+          "description": "Model inputs contain all preprocessed feature that model use to perform prediction.\nThe feature ordering in model_inputs must be the same as feature order expected by model. \nModel inputs can be populated via 3 ways:\n- By performing preprocessing in the client-side and sent as part of original request.\n- By transforming raw feature values stored in transformer_inputs.\n- By retrieving precomputed feature value from feature store."
+        },
+        "transformerInputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1NamedValue"
+          },
+          "description": "Transformer input contains raw values that can be used to enrich model_inputs using transformer.\nTypically transformer_inputs contains:\n- unprocessed/raw features that requires further processing. \n- list of entities for which their precomputed features are retrieved from feature store."
+        }
+      },
+      "title": "Represents an single instance we wish to predict.\nEg. for Matchmaking a prediction row will typically\ncorrespond to a proposed driver plan"
+    },
+    "v1RequestMetadata": {
+      "type": "object",
+      "properties": {
+        "predictionId": {
+          "type": "string",
+          "title": "Unique identifier for each request. Optional.\nPrediction ID will generated by the platform. The user is expected\ninclude the prediction ID (along with row ID) when calling\nthe observations API so that predictions and observations can be joined.\nPrediction ID is needed because row ID may not be globally unique\nacross requests (only locally unique within each request).\nIf there are experiments with alternative models, the mapping\nfrom prediciton ID to treatment ID will be logged by the platform"
+        },
+        "requestTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "title": "Timestamp of the request"
+        }
+      }
+    },
+    "v1ResponseMetadata": {
+      "type": "object",
+      "properties": {
+        "predictionId": {
+          "type": "string",
+          "title": "Prediction ID generated by the platform. \nThe user is expected include the prediction ID (along with row ID) when calling\nthe observations API so that predictions and observations can be joined.\nPrediction ID is needed because row ID may not be globally unique\nacross requests (only locally unique within each request).\nIf there are experiments with alternative models, the mapping\nfrom prediciton ID to treatment ID will be logged by the platform"
+        },
+        "models": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1ModelMetadata"
+          },
+          "title": "List of model that produces the prediction \nThis field is repeated to cater for use case such as ensembling several model production results"
+        },
+        "experimentId": {
+          "type": "string",
+          "title": "Optional experimentation metadata"
+        },
+        "treatmentId": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+version: v1
+name: buf.build/caraml/universal-prediction-interface
+deps:
+  - buf.build/googleapis/googleapis
+  - buf.build/grpc-ecosystem/grpc-gateway
+breaking:
+  use:
+    - FILE
+lint:
+  use:
+    - DEFAULT
+  except:
+    - RPC_REQUEST_RESPONSE_UNIQUE
