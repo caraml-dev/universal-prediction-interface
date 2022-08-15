@@ -8,8 +8,8 @@ NAME = "caraml-upi-protos"
 VERSION =  SourceFileLoader("caraml.upi.version", os.path.join("caraml", "upi", "version.py")).load_module().VERSION
 
 REQUIRES = [
-  "grpcio-tools >= 1.38.1",
-  "googleapis-common-protos >= 1.52.0",
+  "grpcio-tools >= 1.21.1",
+  "googleapis-common-protos >= 1.50.0",
 ]
 
 TEST_REQUIRES = [
