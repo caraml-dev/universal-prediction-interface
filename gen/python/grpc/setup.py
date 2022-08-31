@@ -18,7 +18,7 @@ TEST_REQUIRES = [
 
 setup(
     name=NAME,
-    version=VERSION,
+    version="0.0.6",
     description="Generated Python code from caraml-dev/universal-prediction-interface",  
     author="CaraML Developer",
     author_email="dsp@gojek.com",
@@ -28,6 +28,7 @@ setup(
     install_requires=REQUIRES,
     extras_require={ "test": TEST_REQUIRES },
     packages=find_packages(exclude=["test"]),
+    package_data={"caraml.upi.v1": ["*.pyi"]},
     long_description=open("README.md").read(),
     long_description_content_type='text/markdown',
 )
