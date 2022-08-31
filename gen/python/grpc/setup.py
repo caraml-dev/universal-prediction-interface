@@ -18,7 +18,7 @@ TEST_REQUIRES = [
 
 setup(
     name=NAME,
-    version="0.0.6",
+    version=VERSION,
     description="Generated Python code from caraml-dev/universal-prediction-interface",  
     author="CaraML Developer",
     author_email="dsp@gojek.com",
