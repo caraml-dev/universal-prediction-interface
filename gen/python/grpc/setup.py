@@ -28,6 +28,7 @@ setup(
     install_requires=REQUIRES,
     extras_require={ "test": TEST_REQUIRES },
     packages=find_packages(exclude=["test"]),
+    package_data={"caraml.upi.v1": ["*.pyi"]},
     long_description=open("README.md").read(),
     long_description_content_type='text/markdown',
 )
