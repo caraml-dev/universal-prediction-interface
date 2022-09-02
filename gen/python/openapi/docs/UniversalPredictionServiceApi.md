@@ -35,34 +35,68 @@ with openapi_client.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = universal_prediction_service_api.UniversalPredictionServiceApi(api_client)
     body = V1PredictValuesRequest(
-        prediction_rows=[
-            V1PredictionRow(
-                row_id="row_id_example",
-                model_inputs=[
-                    V1NamedValue(
-                        name="name_example",
-                        type=V1NamedValueType("TYPE_UNSPECIFIED"),
-                        double_value=3.14,
-                        integer_value="integer_value_example",
-                        string_value="string_value_example",
-                    ),
-                ],
-                transformer_inputs=[
-                    V1NamedValue(
-                        name="name_example",
-                        type=V1NamedValueType("TYPE_UNSPECIFIED"),
-                        double_value=3.14,
-                        integer_value="integer_value_example",
-                        string_value="string_value_example",
-                    ),
-                ],
-            ),
-        ],
+        prediction_table=V1Table(
+            name="name_example",
+            columns=[
+                V1Column(
+                    name="name_example",
+                    type=Upiv1Type("TYPE_UNSPECIFIED"),
+                ),
+            ],
+            rows=[
+                V1Row(
+                    row_id="row_id_example",
+                    values=[
+                        V1Value(
+                            double_value=3.14,
+                            integer_value="integer_value_example",
+                            string_value="string_value_example",
+                            is_null=True,
+                        ),
+                    ],
+                ),
+            ],
+        ),
+        transformer_input=V1TransformerInput(
+            tables=[
+                V1Table(
+                    name="name_example",
+                    columns=[
+                        V1Column(
+                            name="name_example",
+                            type=Upiv1Type("TYPE_UNSPECIFIED"),
+                        ),
+                    ],
+                    rows=[
+                        V1Row(
+                            row_id="row_id_example",
+                            values=[
+                                V1Value(
+                                    double_value=3.14,
+                                    integer_value="integer_value_example",
+                                    string_value="string_value_example",
+                                    is_null=True,
+                                ),
+                            ],
+                        ),
+                    ],
+                ),
+            ],
+            variables=[
+                V1NamedValue(
+                    name="name_example",
+                    type=Upiv1Type("TYPE_UNSPECIFIED"),
+                    double_value=3.14,
+                    integer_value="integer_value_example",
+                    string_value="string_value_example",
+                ),
+            ],
+        ),
         target_name="target_name_example",
         prediction_context=[
             V1NamedValue(
                 name="name_example",
-                type=V1NamedValueType("TYPE_UNSPECIFIED"),
+                type=Upiv1Type("TYPE_UNSPECIFIED"),
                 double_value=3.14,
                 integer_value="integer_value_example",
                 string_value="string_value_example",

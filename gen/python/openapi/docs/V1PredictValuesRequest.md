@@ -4,7 +4,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**prediction_rows** | [**[V1PredictionRow]**](V1PredictionRow.md) |  | [optional] 
+**prediction_table** | [**V1Table**](V1Table.md) |  | [optional] 
+**transformer_input** | [**V1TransformerInput**](V1TransformerInput.md) |  | [optional] 
 **target_name** | **str** |  | [optional] 
 **prediction_context** | [**[V1NamedValue]**](V1NamedValue.md) |  | [optional] 
 **metadata** | [**V1RequestMetadata**](V1RequestMetadata.md) |  | [optional] 

@@ -31,11 +31,11 @@ from openapi_client.exceptions import ApiAttributeError
 
 def lazy_import():
     from openapi_client.model.v1_named_value import V1NamedValue
-    from openapi_client.model.v1_prediction_result_row import V1PredictionResultRow
     from openapi_client.model.v1_response_metadata import V1ResponseMetadata
+    from openapi_client.model.v1_table import V1Table
     globals()['V1NamedValue'] = V1NamedValue
-    globals()['V1PredictionResultRow'] = V1PredictionResultRow
     globals()['V1ResponseMetadata'] = V1ResponseMetadata
+    globals()['V1Table'] = V1Table
 
 
 class V1PredictValuesResponse(ModelNormal):
@@ -91,7 +91,7 @@ class V1PredictValuesResponse(ModelNormal):
         """
         lazy_import()
         return {
-            'prediction_result_rows': ([V1PredictionResultRow],),  # noqa: E501
+            'prediction_result_table': (V1Table,),  # noqa: E501
             'target_name': (str,),  # noqa: E501
             'prediction_context': ([V1NamedValue],),  # noqa: E501
             'metadata': (V1ResponseMetadata,),  # noqa: E501
@@ -103,7 +103,7 @@ class V1PredictValuesResponse(ModelNormal):
 
 
     attribute_map = {
-        'prediction_result_rows': 'predictionResultRows',  # noqa: E501
+        'prediction_result_table': 'predictionResultTable',  # noqa: E501
         'target_name': 'targetName',  # noqa: E501
         'prediction_context': 'predictionContext',  # noqa: E501
         'metadata': 'metadata',  # noqa: E501
@@ -150,7 +150,7 @@ class V1PredictValuesResponse(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            prediction_result_rows ([V1PredictionResultRow]): [optional]  # noqa: E501
+            prediction_result_table (V1Table): [optional]  # noqa: E501
             target_name (str): [optional]  # noqa: E501
             prediction_context ([V1NamedValue]): [optional]  # noqa: E501
             metadata (V1ResponseMetadata): [optional]  # noqa: E501
@@ -239,7 +239,7 @@ class V1PredictValuesResponse(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            prediction_result_rows ([V1PredictionResultRow]): [optional]  # noqa: E501
+            prediction_result_table (V1Table): [optional]  # noqa: E501
             target_name (str): [optional]  # noqa: E501
             prediction_context ([V1NamedValue]): [optional]  # noqa: E501
             metadata (V1ResponseMetadata): [optional]  # noqa: E501
