@@ -77,6 +77,29 @@
         }
       }
     },
+    "upiv1Type": {
+      "type": "string",
+      "enum": [
+        "TYPE_UNSPECIFIED",
+        "TYPE_DOUBLE",
+        "TYPE_INTEGER",
+        "TYPE_STRING"
+      ],
+      "default": "TYPE_UNSPECIFIED"
+    },
+    "v1Column": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "Column's name"
+        },
+        "type": {
+          "$ref": "#/definitions/upiv1Type",
+          "title": "Ccolumn's type"
+        }
+      }
+    },
     "v1ModelMetadata": {
       "type": "object",
       "properties": {
@@ -98,7 +121,7 @@
           "title": "Name describing what the value represents.\nUses include:\n- Ensuring ML models process columns in the correct order\n- Defining a Feast row entity name\n- Parsing metadata to apply traffic rules"
         },
         "type": {
-          "$ref": "#/definitions/v1NamedValueType"
+          "$ref": "#/definitions/upiv1Type"
         },
         "doubleValue": {
           "type": "number",
@@ -114,25 +137,16 @@
       },
       "title": "Represents a named and typed data point.\nCan be used as a prediction input, output or metdadata.\nOneof types are avoided as these can be difficult to handle"
     },
-    "v1NamedValueType": {
-      "type": "string",
-      "enum": [
-        "TYPE_UNSPECIFIED",
-        "TYPE_DOUBLE",
-        "TYPE_INTEGER",
-        "TYPE_STRING"
-      ],
-      "default": "TYPE_UNSPECIFIED"
-    },
     "v1PredictValuesRequest": {
       "type": "object",
       "properties": {
-        "predictionRows": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/v1PredictionRow"
-          },
-          "title": "Collection of prediction instances to be predicted.\nEach prediction row correspond to one prediction instance.\nNOTE: the ordering of prediction_rows might differ with prediction_result_rows in the response"
+        "predictionTable": {
+          "$ref": "#/definitions/v1Table",
+          "title": "Prediction table contains instances to be predicted.\nEach row in the table correspond to one prediction instance.\nPrediction table should contain all preprocessed feature that model use to perform prediction.\nThe column ordering in the prediction table must be the same as feature order expected by model in the case of standard model\nPrediction table can be populated via 3 ways:\n- By performing preprocessing in the client-side and sent as part of original request.\n- By transforming raw feature values stored in transformer_inputs.\n- By retrieving precomputed feature value from feature store. \nNOTE: the ordering of rows might differ in the response"
+        },
+        "transformerInput": {
+          "$ref": "#/definitions/v1TransformerInput",
+          "description": "Transformer input contains list of tables and variables that can be used to enrich prediction_table using transformer.\nTypically transformer_inputs contains:\n- unprocessed/raw features that requires further processing. \n- list of entities for which their precomputed features are retrieved from feature store."
         },
         "targetName": {
           "type": "string",
@@ -154,12 +168,9 @@
     "v1PredictValuesResponse": {
       "type": "object",
       "properties": {
-        "predictionResultRows": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/v1PredictionResultRow"
-          },
-          "title": "Prediction results corresponding to the\nprediction rows provided in the request. \nNOTE: the ordering of prediction_result_rows might differ with prediction_rows in the request"
+        "predictionResultTable": {
+          "$ref": "#/definitions/v1Table",
+          "title": "Prediction results corresponding to the\nprediction rows provided in the request. \nNOTE: the ordering of prediction_result_rows might differ with prediction_table in the request but the number of row must match with the prediction_table"
         },
         "targetName": {
           "type": "string",
@@ -177,46 +188,6 @@
           "title": "Response metadata"
         }
       }
-    },
-    "v1PredictionResultRow": {
-      "type": "object",
-      "properties": {
-        "rowId": {
-          "type": "string",
-          "title": "Row ID defined by the caller used to join a prediction result with a prediction row"
-        },
-        "values": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/v1NamedValue"
-          },
-          "title": "Represents the predicted values corresponding to a \nsingle prediction row. This will often be the output of an ML model.\nThis field is repeated to support multi-task models with non-scalar outputs"
-        }
-      }
-    },
-    "v1PredictionRow": {
-      "type": "object",
-      "properties": {
-        "rowId": {
-          "type": "string",
-          "description": "Row ID is defined by the client and can be used\nto join a prediction row with the prediction result,\nand to track predictions generated by multiple models.\nThe user is expected include row ID (along with prediction ID)\nwhen calling the observations API so that predictions\nand observations can be joined."
-        },
-        "modelInputs": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/v1NamedValue"
-          },
-          "description": "Model inputs contain all preprocessed feature that model use to perform prediction.\nThe feature ordering in model_inputs must be the same as feature order expected by model. \nModel inputs can be populated via 3 ways:\n- By performing preprocessing in the client-side and sent as part of original request.\n- By transforming raw feature values stored in transformer_inputs.\n- By retrieving precomputed feature value from feature store."
-        },
-        "transformerInputs": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/v1NamedValue"
-          },
-          "description": "Transformer input contains raw values that can be used to enrich model_inputs using transformer.\nTypically transformer_inputs contains:\n- unprocessed/raw features that requires further processing. \n- list of entities for which their precomputed features are retrieved from feature store."
-        }
-      },
-      "title": "Represents an single instance we wish to predict.\nEg. for Matchmaking a prediction row will typically\ncorrespond to a proposed driver plan"
     },
     "v1RequestMetadata": {
       "type": "object",
@@ -252,6 +223,87 @@
         },
         "treatmentId": {
           "type": "string"
+        }
+      }
+    },
+    "v1Row": {
+      "type": "object",
+      "properties": {
+        "rowId": {
+          "type": "string",
+          "description": "Row ID is defined by the client and can be used\nto join a prediction row with the prediction result,\nand to track predictions generated by multiple models.\nThe user is expected include row ID (along with prediction ID)\nwhen calling the observations API so that predictions\nand observations can be joined."
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Value"
+          },
+          "description": "List of values within a row. \nIt is table's creator responsibility to ensure that the number of entry \nvalues matches with the length of columns in the table."
+        }
+      }
+    },
+    "v1Table": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "Table's name"
+        },
+        "columns": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Column"
+          },
+          "description": "Columns stores schema informations of all columns in the table."
+        },
+        "rows": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Row"
+          },
+          "title": "Rows stores list of rows in the table"
+        }
+      },
+      "title": "Table represents a 2D labeled data structure have one or more columns \nwith potentially different types (see Type for the supported types)"
+    },
+    "v1TransformerInput": {
+      "type": "object",
+      "properties": {
+        "tables": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Table"
+          },
+          "title": "List of tables\nAll tables must have unique name and it can have arbitrary dimensions"
+        },
+        "variables": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1NamedValue"
+          },
+          "title": "List of variables"
+        }
+      },
+      "title": "Transformer input contains additional information that can be used to enrich prediction_table using standard transformer.\nAll tables and variables within transformer input \nwill be imported to the standard transformer runtime automatically"
+    },
+    "v1Value": {
+      "type": "object",
+      "properties": {
+        "doubleValue": {
+          "type": "number",
+          "format": "double",
+          "title": "One of following field will be set depending on the column's type"
+        },
+        "integerValue": {
+          "type": "string",
+          "format": "int64"
+        },
+        "stringValue": {
+          "type": "string"
+        },
+        "isNull": {
+          "type": "boolean",
+          "title": "Flag to be used to signify that the value is null"
         }
       }
     }
