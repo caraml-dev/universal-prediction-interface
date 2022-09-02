@@ -46,4 +46,18 @@ jobs:
         run: pip install -e .[test]
       - name: Run test
         working-directory: ./gen/python/grpc
+        run: pytest --benchmark-disable
+  benchmark: 
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.7"
+      - name: Install dependencies
+        working-directory: ./gen/python/grpc
+        run: pip install -e .[test]
+      - name: Run test
+        working-directory: ./gen/python/grpc
         run: pytest
