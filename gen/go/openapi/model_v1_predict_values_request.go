@@ -16,7 +16,8 @@ import (
 
 // V1PredictValuesRequest struct for V1PredictValuesRequest
 type V1PredictValuesRequest struct {
-	PredictionRows []V1PredictionRow `json:"predictionRows,omitempty"`
+	PredictionTable *V1Table `json:"predictionTable,omitempty"`
+	TransformerInput *V1TransformerInput `json:"transformerInput,omitempty"`
 	TargetName *string `json:"targetName,omitempty"`
 	PredictionContext []V1NamedValue `json:"predictionContext,omitempty"`
 	Metadata *V1RequestMetadata `json:"metadata,omitempty"`
@@ -39,36 +40,68 @@ func NewV1PredictValuesRequestWithDefaults() *V1PredictValuesRequest {
 	return &this
 }
 
-// GetPredictionRows returns the PredictionRows field value if set, zero value otherwise.
-func (o *V1PredictValuesRequest) GetPredictionRows() []V1PredictionRow {
-	if o == nil || o.PredictionRows == nil {
-		var ret []V1PredictionRow
+// GetPredictionTable returns the PredictionTable field value if set, zero value otherwise.
+func (o *V1PredictValuesRequest) GetPredictionTable() V1Table {
+	if o == nil || o.PredictionTable == nil {
+		var ret V1Table
 		return ret
 	}
-	return o.PredictionRows
+	return *o.PredictionTable
 }
 
-// GetPredictionRowsOk returns a tuple with the PredictionRows field value if set, nil otherwise
+// GetPredictionTableOk returns a tuple with the PredictionTable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *V1PredictValuesRequest) GetPredictionRowsOk() ([]V1PredictionRow, bool) {
-	if o == nil || o.PredictionRows == nil {
+func (o *V1PredictValuesRequest) GetPredictionTableOk() (*V1Table, bool) {
+	if o == nil || o.PredictionTable == nil {
 		return nil, false
 	}
-	return o.PredictionRows, true
+	return o.PredictionTable, true
 }
 
-// HasPredictionRows returns a boolean if a field has been set.
-func (o *V1PredictValuesRequest) HasPredictionRows() bool {
-	if o != nil && o.PredictionRows != nil {
+// HasPredictionTable returns a boolean if a field has been set.
+func (o *V1PredictValuesRequest) HasPredictionTable() bool {
+	if o != nil && o.PredictionTable != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetPredictionRows gets a reference to the given []V1PredictionRow and assigns it to the PredictionRows field.
-func (o *V1PredictValuesRequest) SetPredictionRows(v []V1PredictionRow) {
-	o.PredictionRows = v
+// SetPredictionTable gets a reference to the given V1Table and assigns it to the PredictionTable field.
+func (o *V1PredictValuesRequest) SetPredictionTable(v V1Table) {
+	o.PredictionTable = &v
+}
+
+// GetTransformerInput returns the TransformerInput field value if set, zero value otherwise.
+func (o *V1PredictValuesRequest) GetTransformerInput() V1TransformerInput {
+	if o == nil || o.TransformerInput == nil {
+		var ret V1TransformerInput
+		return ret
+	}
+	return *o.TransformerInput
+}
+
+// GetTransformerInputOk returns a tuple with the TransformerInput field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *V1PredictValuesRequest) GetTransformerInputOk() (*V1TransformerInput, bool) {
+	if o == nil || o.TransformerInput == nil {
+		return nil, false
+	}
+	return o.TransformerInput, true
+}
+
+// HasTransformerInput returns a boolean if a field has been set.
+func (o *V1PredictValuesRequest) HasTransformerInput() bool {
+	if o != nil && o.TransformerInput != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTransformerInput gets a reference to the given V1TransformerInput and assigns it to the TransformerInput field.
+func (o *V1PredictValuesRequest) SetTransformerInput(v V1TransformerInput) {
+	o.TransformerInput = &v
 }
 
 // GetTargetName returns the TargetName field value if set, zero value otherwise.
@@ -169,8 +202,11 @@ func (o *V1PredictValuesRequest) SetMetadata(v V1RequestMetadata) {
 
 func (o V1PredictValuesRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.PredictionRows != nil {
-		toSerialize["predictionRows"] = o.PredictionRows
+	if o.PredictionTable != nil {
+		toSerialize["predictionTable"] = o.PredictionTable
+	}
+	if o.TransformerInput != nil {
+		toSerialize["transformerInput"] = o.TransformerInput
 	}
 	if o.TargetName != nil {
 		toSerialize["targetName"] = o.TargetName

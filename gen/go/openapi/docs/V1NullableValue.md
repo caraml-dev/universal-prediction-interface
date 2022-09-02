@@ -1,156 +1,104 @@
-# V1NamedValue
+# V1NullableValue
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | Pointer to **string** |  | [optional] 
-**Type** | Pointer to [**Upiv1Type**](Upiv1Type.md) |  | [optional] [default to UPIV1TYPE_UNSPECIFIED]
 **DoubleValue** | Pointer to **float64** |  | [optional] 
 **IntegerValue** | Pointer to **string** |  | [optional] 
 **StringValue** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
-### NewV1NamedValue
+### NewV1NullableValue
 
-`func NewV1NamedValue() *V1NamedValue`
+`func NewV1NullableValue() *V1NullableValue`
 
-NewV1NamedValue instantiates a new V1NamedValue object
+NewV1NullableValue instantiates a new V1NullableValue object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewV1NamedValueWithDefaults
+### NewV1NullableValueWithDefaults
 
-`func NewV1NamedValueWithDefaults() *V1NamedValue`
+`func NewV1NullableValueWithDefaults() *V1NullableValue`
 
-NewV1NamedValueWithDefaults instantiates a new V1NamedValue object
+NewV1NullableValueWithDefaults instantiates a new V1NullableValue object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetName
-
-`func (o *V1NamedValue) GetName() string`
-
-GetName returns the Name field if non-nil, zero value otherwise.
-
-### GetNameOk
-
-`func (o *V1NamedValue) GetNameOk() (*string, bool)`
-
-GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetName
-
-`func (o *V1NamedValue) SetName(v string)`
-
-SetName sets Name field to given value.
-
-### HasName
-
-`func (o *V1NamedValue) HasName() bool`
-
-HasName returns a boolean if a field has been set.
-
-### GetType
-
-`func (o *V1NamedValue) GetType() Upiv1Type`
-
-GetType returns the Type field if non-nil, zero value otherwise.
-
-### GetTypeOk
-
-`func (o *V1NamedValue) GetTypeOk() (*Upiv1Type, bool)`
-
-GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetType
-
-`func (o *V1NamedValue) SetType(v Upiv1Type)`
-
-SetType sets Type field to given value.
-
-### HasType
-
-`func (o *V1NamedValue) HasType() bool`
-
-HasType returns a boolean if a field has been set.
-
 ### GetDoubleValue
 
-`func (o *V1NamedValue) GetDoubleValue() float64`
+`func (o *V1NullableValue) GetDoubleValue() float64`
 
 GetDoubleValue returns the DoubleValue field if non-nil, zero value otherwise.
 
 ### GetDoubleValueOk
 
-`func (o *V1NamedValue) GetDoubleValueOk() (*float64, bool)`
+`func (o *V1NullableValue) GetDoubleValueOk() (*float64, bool)`
 
 GetDoubleValueOk returns a tuple with the DoubleValue field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDoubleValue
 
-`func (o *V1NamedValue) SetDoubleValue(v float64)`
+`func (o *V1NullableValue) SetDoubleValue(v float64)`
 
 SetDoubleValue sets DoubleValue field to given value.
 
 ### HasDoubleValue
 
-`func (o *V1NamedValue) HasDoubleValue() bool`
+`func (o *V1NullableValue) HasDoubleValue() bool`
 
 HasDoubleValue returns a boolean if a field has been set.
 
 ### GetIntegerValue
 
-`func (o *V1NamedValue) GetIntegerValue() string`
+`func (o *V1NullableValue) GetIntegerValue() string`
 
 GetIntegerValue returns the IntegerValue field if non-nil, zero value otherwise.
 
 ### GetIntegerValueOk
 
-`func (o *V1NamedValue) GetIntegerValueOk() (*string, bool)`
+`func (o *V1NullableValue) GetIntegerValueOk() (*string, bool)`
 
 GetIntegerValueOk returns a tuple with the IntegerValue field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetIntegerValue
 
-`func (o *V1NamedValue) SetIntegerValue(v string)`
+`func (o *V1NullableValue) SetIntegerValue(v string)`
 
 SetIntegerValue sets IntegerValue field to given value.
 
 ### HasIntegerValue
 
-`func (o *V1NamedValue) HasIntegerValue() bool`
+`func (o *V1NullableValue) HasIntegerValue() bool`
 
 HasIntegerValue returns a boolean if a field has been set.
 
 ### GetStringValue
 
-`func (o *V1NamedValue) GetStringValue() string`
+`func (o *V1NullableValue) GetStringValue() string`
 
 GetStringValue returns the StringValue field if non-nil, zero value otherwise.
 
 ### GetStringValueOk
 
-`func (o *V1NamedValue) GetStringValueOk() (*string, bool)`
+`func (o *V1NullableValue) GetStringValueOk() (*string, bool)`
 
 GetStringValueOk returns a tuple with the StringValue field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStringValue
 
-`func (o *V1NamedValue) SetStringValue(v string)`
+`func (o *V1NullableValue) SetStringValue(v string)`
 
 SetStringValue sets StringValue field to given value.
 
 ### HasStringValue
 
-`func (o *V1NamedValue) HasStringValue() bool`
+`func (o *V1NullableValue) HasStringValue() bool`
 
 HasStringValue returns a boolean if a field has been set.
 

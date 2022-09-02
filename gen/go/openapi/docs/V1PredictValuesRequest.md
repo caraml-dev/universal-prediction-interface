@@ -4,7 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**PredictionRows** | Pointer to [**[]V1PredictionRow**](V1PredictionRow.md) |  | [optional] 
+**PredictionTable** | Pointer to [**V1Table**](V1Table.md) |  | [optional] 
+**TransformerInput** | Pointer to [**V1TransformerInput**](V1TransformerInput.md) |  | [optional] 
 **TargetName** | Pointer to **string** |  | [optional] 
 **PredictionContext** | Pointer to [**[]V1NamedValue**](V1NamedValue.md) |  | [optional] 
 **Metadata** | Pointer to [**V1RequestMetadata**](V1RequestMetadata.md) |  | [optional] 
@@ -28,30 +29,55 @@ NewV1PredictValuesRequestWithDefaults instantiates a new V1PredictValuesRequest 
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetPredictionRows
+### GetPredictionTable
 
-`func (o *V1PredictValuesRequest) GetPredictionRows() []V1PredictionRow`
+`func (o *V1PredictValuesRequest) GetPredictionTable() V1Table`
 
-GetPredictionRows returns the PredictionRows field if non-nil, zero value otherwise.
+GetPredictionTable returns the PredictionTable field if non-nil, zero value otherwise.
 
-### GetPredictionRowsOk
+### GetPredictionTableOk
 
-`func (o *V1PredictValuesRequest) GetPredictionRowsOk() (*[]V1PredictionRow, bool)`
+`func (o *V1PredictValuesRequest) GetPredictionTableOk() (*V1Table, bool)`
 
-GetPredictionRowsOk returns a tuple with the PredictionRows field if it's non-nil, zero value otherwise
+GetPredictionTableOk returns a tuple with the PredictionTable field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetPredictionRows
+### SetPredictionTable
 
-`func (o *V1PredictValuesRequest) SetPredictionRows(v []V1PredictionRow)`
+`func (o *V1PredictValuesRequest) SetPredictionTable(v V1Table)`
 
-SetPredictionRows sets PredictionRows field to given value.
+SetPredictionTable sets PredictionTable field to given value.
 
-### HasPredictionRows
+### HasPredictionTable
 
-`func (o *V1PredictValuesRequest) HasPredictionRows() bool`
+`func (o *V1PredictValuesRequest) HasPredictionTable() bool`
 
-HasPredictionRows returns a boolean if a field has been set.
+HasPredictionTable returns a boolean if a field has been set.
+
+### GetTransformerInput
+
+`func (o *V1PredictValuesRequest) GetTransformerInput() V1TransformerInput`
+
+GetTransformerInput returns the TransformerInput field if non-nil, zero value otherwise.
+
+### GetTransformerInputOk
+
+`func (o *V1PredictValuesRequest) GetTransformerInputOk() (*V1TransformerInput, bool)`
+
+GetTransformerInputOk returns a tuple with the TransformerInput field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTransformerInput
+
+`func (o *V1PredictValuesRequest) SetTransformerInput(v V1TransformerInput)`
+
+SetTransformerInput sets TransformerInput field to given value.
+
+### HasTransformerInput
+
+`func (o *V1PredictValuesRequest) HasTransformerInput() bool`
+
+HasTransformerInput returns a boolean if a field has been set.
 
 ### GetTargetName
 

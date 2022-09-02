@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**PredictionResultRows** | Pointer to [**[]V1PredictionResultRow**](V1PredictionResultRow.md) |  | [optional] 
+**PredictionResultTable** | Pointer to [**V1Table**](V1Table.md) |  | [optional] 
 **TargetName** | Pointer to **string** |  | [optional] 
 **PredictionContext** | Pointer to [**[]V1NamedValue**](V1NamedValue.md) |  | [optional] 
 **Metadata** | Pointer to [**V1ResponseMetadata**](V1ResponseMetadata.md) |  | [optional] 
@@ -28,30 +28,30 @@ NewV1PredictValuesResponseWithDefaults instantiates a new V1PredictValuesRespons
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetPredictionResultRows
+### GetPredictionResultTable
 
-`func (o *V1PredictValuesResponse) GetPredictionResultRows() []V1PredictionResultRow`
+`func (o *V1PredictValuesResponse) GetPredictionResultTable() V1Table`
 
-GetPredictionResultRows returns the PredictionResultRows field if non-nil, zero value otherwise.
+GetPredictionResultTable returns the PredictionResultTable field if non-nil, zero value otherwise.
 
-### GetPredictionResultRowsOk
+### GetPredictionResultTableOk
 
-`func (o *V1PredictValuesResponse) GetPredictionResultRowsOk() (*[]V1PredictionResultRow, bool)`
+`func (o *V1PredictValuesResponse) GetPredictionResultTableOk() (*V1Table, bool)`
 
-GetPredictionResultRowsOk returns a tuple with the PredictionResultRows field if it's non-nil, zero value otherwise
+GetPredictionResultTableOk returns a tuple with the PredictionResultTable field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetPredictionResultRows
+### SetPredictionResultTable
 
-`func (o *V1PredictValuesResponse) SetPredictionResultRows(v []V1PredictionResultRow)`
+`func (o *V1PredictValuesResponse) SetPredictionResultTable(v V1Table)`
 
-SetPredictionResultRows sets PredictionResultRows field to given value.
+SetPredictionResultTable sets PredictionResultTable field to given value.
 
-### HasPredictionResultRows
+### HasPredictionResultTable
 
-`func (o *V1PredictValuesResponse) HasPredictionResultRows() bool`
+`func (o *V1PredictValuesResponse) HasPredictionResultTable() bool`
 
-HasPredictionResultRows returns a boolean if a field has been set.
+HasPredictionResultTable returns a boolean if a field has been set.
 
 ### GetTargetName
 
