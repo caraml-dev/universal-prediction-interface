@@ -18,7 +18,7 @@ bench_response_test_cases = [
     (1000, 10),
 ]
 
-# represents number of rows x number of featuress
+# represents number of rows x number of features
 bench_request_test_cases = [
     (1, 1),
     (1, 100),
