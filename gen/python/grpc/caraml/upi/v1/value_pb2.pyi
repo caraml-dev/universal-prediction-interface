@@ -11,29 +11,31 @@ import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
+class _Type:
+    ValueType = typing.NewType('ValueType', builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+class _TypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_Type.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    TYPE_UNSPECIFIED: _Type.ValueType  # 0
+    TYPE_DOUBLE: _Type.ValueType  # 1
+    TYPE_INTEGER: _Type.ValueType  # 2
+    TYPE_STRING: _Type.ValueType  # 3
+class Type(_Type, metaclass=_TypeEnumTypeWrapper):
+    pass
+
+TYPE_UNSPECIFIED: Type.ValueType  # 0
+TYPE_DOUBLE: Type.ValueType  # 1
+TYPE_INTEGER: Type.ValueType  # 2
+TYPE_STRING: Type.ValueType  # 3
+global___Type = Type
+
+
 class NamedValue(google.protobuf.message.Message):
     """Represents a named and typed data point.
     Can be used as a prediction input, output or metdadata.
     Oneof types are avoided as these can be difficult to handle
     """
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
-    class _Type:
-        ValueType = typing.NewType('ValueType', builtins.int)
-        V: typing_extensions.TypeAlias = ValueType
-    class _TypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[NamedValue._Type.ValueType], builtins.type):
-        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
-        TYPE_UNSPECIFIED: NamedValue._Type.ValueType  # 0
-        TYPE_DOUBLE: NamedValue._Type.ValueType  # 1
-        TYPE_INTEGER: NamedValue._Type.ValueType  # 2
-        TYPE_STRING: NamedValue._Type.ValueType  # 3
-    class Type(_Type, metaclass=_TypeEnumTypeWrapper):
-        pass
-
-    TYPE_UNSPECIFIED: NamedValue.Type.ValueType  # 0
-    TYPE_DOUBLE: NamedValue.Type.ValueType  # 1
-    TYPE_INTEGER: NamedValue.Type.ValueType  # 2
-    TYPE_STRING: NamedValue.Type.ValueType  # 3
-
     NAME_FIELD_NUMBER: builtins.int
     TYPE_FIELD_NUMBER: builtins.int
     DOUBLE_VALUE_FIELD_NUMBER: builtins.int
@@ -47,14 +49,14 @@ class NamedValue(google.protobuf.message.Message):
     - Parsing metadata to apply traffic rules
     """
 
-    type: global___NamedValue.Type.ValueType
+    type: global___Type.ValueType
     double_value: builtins.float
     integer_value: builtins.int
     string_value: typing.Text
     def __init__(self,
         *,
         name: typing.Text = ...,
-        type: global___NamedValue.Type.ValueType = ...,
+        type: global___Type.ValueType = ...,
         double_value: builtins.float = ...,
         integer_value: builtins.int = ...,
         string_value: typing.Text = ...,
