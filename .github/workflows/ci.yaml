@@ -47,17 +47,29 @@ jobs:
       - name: Run test
         working-directory: ./gen/python/grpc
         run: pytest --benchmark-disable
-  benchmark: 
+  benchmark:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Set up Python
+      - name: Set up Python 3.7
         uses: actions/setup-python@v4
         with:
           python-version: "3.7"
+      - name: Download previous benchmark data
+        uses: actions/cache@v1
+        with:
+          path: ./cache
+          key: ${{ runner.os }}-benchmark
       - name: Install dependencies
         working-directory: ./gen/python/grpc
         run: pip install -e .[test]
       - name: Run test
         working-directory: ./gen/python/grpc
-        run: pytest
+        run: pytest --benchmark-json output.json
+      - name: Store benchmark result
+        uses: benchmark-action/github-action-benchmark@v1
+        with:
+          tool: 'pytest'
+          output-file-path: ./gen/python/grpc/output.json
+          external-data-json-path: ./cache/benchmark-data.json
+          fail-on-alert: true
