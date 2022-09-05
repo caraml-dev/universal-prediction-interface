@@ -90,13 +90,13 @@ Oneof types are avoided as these can be difficult to handle
 <a name="caraml-upi-v1-Column"></a>
 
 ### Column
-
+Column represent a column definition within a table
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | name | [string](#string) |  | Column&#39;s name |
-| type | [Type](#caraml-upi-v1-Type) |  | Ccolumn&#39;s type |
+| type | [Type](#caraml-upi-v1-Type) |  | Column&#39;s type |
 
 
 
@@ -106,7 +106,7 @@ Oneof types are avoided as these can be difficult to handle
 <a name="caraml-upi-v1-Row"></a>
 
 ### Row
-
+Row represents list of value stored within a row of a table
 
 
 | Field | Type | Label | Description |
@@ -122,15 +122,15 @@ Oneof types are avoided as these can be difficult to handle
 <a name="caraml-upi-v1-Table"></a>
 
 ### Table
-Table represents a 2D labeled data structure have one or more columns 
-with potentially different types (see Type for the supported types)
+Table represents a 2D data structure that has one or more columns 
+with potentially different types
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | name | [string](#string) |  | Table&#39;s name |
 | columns | [Column](#caraml-upi-v1-Column) | repeated | Columns stores schema informations of all columns in the table. |
-| rows | [Row](#caraml-upi-v1-Row) | repeated | Rows stores list of rows in the table |
+| rows | [Row](#caraml-upi-v1-Row) | repeated | Rows stores list of row values in the table. |
 
 
 
@@ -140,7 +140,7 @@ with potentially different types (see Type for the supported types)
 <a name="caraml-upi-v1-Value"></a>
 
 ### Value
-
+Value of a cell within a table. Value is nullable.
 
 
 | Field | Type | Label | Description |
@@ -195,11 +195,11 @@ Represents a request to predict multiple values
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| prediction_table | [Table](#caraml-upi-v1-Table) |  | Prediction table contains instances to be predicted. Each row in the table correspond to one prediction instance. Prediction table should contain all preprocessed feature that model use to perform prediction. The column ordering in the prediction table must be the same as feature order expected by model in the case of standard model Prediction table can be populated via 3 ways: - By performing preprocessing in the client-side and sent as part of original request. - By transforming raw feature values stored in transformer_inputs. - By retrieving precomputed feature value from feature store. NOTE: the ordering of rows might differ in the response |
-| transformer_input | [TransformerInput](#caraml-upi-v1-TransformerInput) |  | Transformer input contains list of tables and variables that can be used to enrich prediction_table using transformer. Typically transformer_inputs contains: - unprocessed/raw features that requires further processing. - list of entities for which their precomputed features are retrieved from feature store. |
+| prediction_table | [Table](#caraml-upi-v1-Table) |  | Prediction table contains instances to be predicted. Each row in the table correspond to one prediction instance. Prediction table should contain all preprocessed feature that model use to perform prediction. The column ordering in the prediction table must be the same as feature order expected by model in the case of standard model. Prediction table can be populated via 3 ways: - By performing preprocessing in the client-side and sent as part of original request. - By transforming feature values stored in transformer_inputs. - By retrieving precomputed feature value from feature store. NOTE: the ordering of rows might differ in the response but the number of row must remain the same. |
+| transformer_input | [TransformerInput](#caraml-upi-v1-TransformerInput) |  | Transformer input contains list of tables and variables that can be used to enrich prediction_table using transformer. Typically transformer_inputs contains: - unprocessed/raw features that requires further transformation. - list of entities for which their precomputed features are retrieved from feature store using standard transformer. |
 | target_name | [string](#string) |  | Name of the concept we wish to predict. For example in context of iris classification problem it can be &#34;iris-species&#34; |
 | prediction_context | [NamedValue](#caraml-upi-v1-NamedValue) | repeated | Prediction context may contain additional data applicable to all prediction instances For example it can be used to store information for traffic rules, experimentation or tracking purposes. Eg. country_code, service_type, service_area_id |
-| metadata | [RequestMetadata](#caraml-upi-v1-RequestMetadata) |  |  |
+| metadata | [RequestMetadata](#caraml-upi-v1-RequestMetadata) |  | Request metadata |
 
 
 
@@ -278,13 +278,12 @@ Represents a request to predict multiple values
 
 ### TransformerInput
 Transformer input contains additional information that can be used to enrich prediction_table using standard transformer.
-All tables and variables within transformer input 
-will be imported to the standard transformer runtime automatically
+All tables and variables within transformer input will be imported to the standard transformer runtime automatically.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| tables | [Table](#caraml-upi-v1-Table) | repeated | List of tables All tables must have unique name and it can have arbitrary dimensions |
+| tables | [Table](#caraml-upi-v1-Table) | repeated | List of tables All tables must have unique name. Each table doesn&#39;t need to have same number of row. |
 | variables | [NamedValue](#caraml-upi-v1-NamedValue) | repeated | List of variables |
 
 

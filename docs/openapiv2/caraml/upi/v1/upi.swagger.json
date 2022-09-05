@@ -96,9 +96,10 @@
         },
         "type": {
           "$ref": "#/definitions/upiv1Type",
-          "title": "Ccolumn's type"
+          "title": "Column's type"
         }
-      }
+      },
+      "title": "Column represent a column definition within a table"
     },
     "v1ModelMetadata": {
       "type": "object",
@@ -142,11 +143,11 @@
       "properties": {
         "predictionTable": {
           "$ref": "#/definitions/v1Table",
-          "title": "Prediction table contains instances to be predicted.\nEach row in the table correspond to one prediction instance.\nPrediction table should contain all preprocessed feature that model use to perform prediction.\nThe column ordering in the prediction table must be the same as feature order expected by model in the case of standard model\nPrediction table can be populated via 3 ways:\n- By performing preprocessing in the client-side and sent as part of original request.\n- By transforming raw feature values stored in transformer_inputs.\n- By retrieving precomputed feature value from feature store. \nNOTE: the ordering of rows might differ in the response"
+          "description": "Prediction table contains instances to be predicted.\nEach row in the table correspond to one prediction instance.\nPrediction table should contain all preprocessed feature that model use to perform prediction.\nThe column ordering in the prediction table must be the same as feature order expected by model in the case of standard model.\nPrediction table can be populated via 3 ways:\n- By performing preprocessing in the client-side and sent as part of original request.\n- By transforming feature values stored in transformer_inputs.\n- By retrieving precomputed feature value from feature store. \nNOTE: the ordering of rows might differ in the response but the number of row must remain the same."
         },
         "transformerInput": {
           "$ref": "#/definitions/v1TransformerInput",
-          "description": "Transformer input contains list of tables and variables that can be used to enrich prediction_table using transformer.\nTypically transformer_inputs contains:\n- unprocessed/raw features that requires further processing. \n- list of entities for which their precomputed features are retrieved from feature store."
+          "description": "Transformer input contains list of tables and variables that can be used to enrich prediction_table using transformer.\nTypically transformer_inputs contains:\n- unprocessed/raw features that requires further transformation. \n- list of entities for which their precomputed features are retrieved from feature store using standard transformer."
         },
         "targetName": {
           "type": "string",
@@ -160,7 +161,8 @@
           "title": "Prediction context may contain additional data applicable to all prediction instances\nFor example it can be used to store information for traffic rules, experimentation\nor tracking purposes.\nEg. country_code, service_type, service_area_id"
         },
         "metadata": {
-          "$ref": "#/definitions/v1RequestMetadata"
+          "$ref": "#/definitions/v1RequestMetadata",
+          "title": "Request metadata"
         }
       },
       "title": "Represents a request to predict multiple values"
@@ -240,7 +242,8 @@
           },
           "description": "List of values within a row. \nIt is table's creator responsibility to ensure that the number of entry \nvalues matches with the length of columns in the table."
         }
-      }
+      },
+      "title": "Row represents list of value stored within a row of a table"
     },
     "v1Table": {
       "type": "object",
@@ -261,10 +264,10 @@
           "items": {
             "$ref": "#/definitions/v1Row"
           },
-          "title": "Rows stores list of rows in the table"
+          "description": "Rows stores list of row values in the table."
         }
       },
-      "title": "Table represents a 2D labeled data structure have one or more columns \nwith potentially different types (see Type for the supported types)"
+      "title": "Table represents a 2D data structure that has one or more columns \nwith potentially different types"
     },
     "v1TransformerInput": {
       "type": "object",
@@ -274,7 +277,7 @@
           "items": {
             "$ref": "#/definitions/v1Table"
           },
-          "title": "List of tables\nAll tables must have unique name and it can have arbitrary dimensions"
+          "description": "List of tables\nAll tables must have unique name.\nEach table doesn't need to have same number of row."
         },
         "variables": {
           "type": "array",
@@ -284,7 +287,7 @@
           "title": "List of variables"
         }
       },
-      "title": "Transformer input contains additional information that can be used to enrich prediction_table using standard transformer.\nAll tables and variables within transformer input \nwill be imported to the standard transformer runtime automatically"
+      "description": "Transformer input contains additional information that can be used to enrich prediction_table using standard transformer.\nAll tables and variables within transformer input will be imported to the standard transformer runtime automatically."
     },
     "v1Value": {
       "type": "object",
@@ -305,7 +308,8 @@
           "type": "boolean",
           "title": "Flag to be used to signify that the value is null"
         }
-      }
+      },
+      "description": "Value of a cell within a table. Value is nullable."
     }
   }
 }

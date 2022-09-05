@@ -380,7 +380,7 @@ Uses include:
 
       
         <h3 id="caraml.upi.v1.Column">Column</h3>
-        <p></p>
+        <p>Column represent a column definition within a table</p>
 
         
           <table class="field-table">
@@ -400,7 +400,7 @@ Uses include:
                   <td>type</td>
                   <td><a href="#caraml.upi.v1.Type">Type</a></td>
                   <td></td>
-                  <td><p>Ccolumn&#39;s type </p></td>
+                  <td><p>Column&#39;s type </p></td>
                 </tr>
               
             </tbody>
@@ -411,7 +411,7 @@ Uses include:
         
       
         <h3 id="caraml.upi.v1.Row">Row</h3>
-        <p></p>
+        <p>Row represents list of value stored within a row of a table</p>
 
         
           <table class="field-table">
@@ -449,7 +449,7 @@ values matches with the length of columns in the table. </p></td>
         
       
         <h3 id="caraml.upi.v1.Table">Table</h3>
-        <p>Table represents a 2D labeled data structure have one or more columns </p><p>with potentially different types (see Type for the supported types)</p>
+        <p>Table represents a 2D data structure that has one or more columns </p><p>with potentially different types</p>
 
         
           <table class="field-table">
@@ -476,7 +476,7 @@ values matches with the length of columns in the table. </p></td>
                   <td>rows</td>
                   <td><a href="#caraml.upi.v1.Row">Row</a></td>
                   <td>repeated</td>
-                  <td><p>Rows stores list of rows in the table </p></td>
+                  <td><p>Rows stores list of row values in the table. </p></td>
                 </tr>
               
             </tbody>
@@ -487,7 +487,7 @@ values matches with the length of columns in the table. </p></td>
         
       
         <h3 id="caraml.upi.v1.Value">Value</h3>
-        <p></p>
+        <p>Value of a cell within a table. Value is nullable.</p>
 
         
           <table class="field-table">
@@ -593,12 +593,12 @@ values matches with the length of columns in the table. </p></td>
                   <td><p>Prediction table contains instances to be predicted.
 Each row in the table correspond to one prediction instance.
 Prediction table should contain all preprocessed feature that model use to perform prediction.
-The column ordering in the prediction table must be the same as feature order expected by model in the case of standard model
+The column ordering in the prediction table must be the same as feature order expected by model in the case of standard model.
 Prediction table can be populated via 3 ways:
 - By performing preprocessing in the client-side and sent as part of original request.
-- By transforming raw feature values stored in transformer_inputs.
+- By transforming feature values stored in transformer_inputs.
 - By retrieving precomputed feature value from feature store. 
-NOTE: the ordering of rows might differ in the response </p></td>
+NOTE: the ordering of rows might differ in the response but the number of row must remain the same. </p></td>
                 </tr>
               
                 <tr>
@@ -607,8 +607,8 @@ NOTE: the ordering of rows might differ in the response </p></td>
                   <td></td>
                   <td><p>Transformer input contains list of tables and variables that can be used to enrich prediction_table using transformer.
 Typically transformer_inputs contains:
-- unprocessed/raw features that requires further processing. 
-- list of entities for which their precomputed features are retrieved from feature store. </p></td>
+- unprocessed/raw features that requires further transformation. 
+- list of entities for which their precomputed features are retrieved from feature store using standard transformer. </p></td>
                 </tr>
               
                 <tr>
@@ -633,7 +633,7 @@ Eg. country_code, service_type, service_area_id </p></td>
                   <td>metadata</td>
                   <td><a href="#caraml.upi.v1.RequestMetadata">RequestMetadata</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Request metadata </p></td>
                 </tr>
               
             </tbody>
@@ -814,7 +814,7 @@ This field is repeated to cater for use case such as ensembling several model pr
         
       
         <h3 id="caraml.upi.v1.TransformerInput">TransformerInput</h3>
-        <p>Transformer input contains additional information that can be used to enrich prediction_table using standard transformer.</p><p>All tables and variables within transformer input </p><p>will be imported to the standard transformer runtime automatically</p>
+        <p>Transformer input contains additional information that can be used to enrich prediction_table using standard transformer.</p><p>All tables and variables within transformer input will be imported to the standard transformer runtime automatically.</p>
 
         
           <table class="field-table">
@@ -828,7 +828,8 @@ This field is repeated to cater for use case such as ensembling several model pr
                   <td><a href="#caraml.upi.v1.Table">Table</a></td>
                   <td>repeated</td>
                   <td><p>List of tables
-All tables must have unique name and it can have arbitrary dimensions </p></td>
+All tables must have unique name.
+Each table doesn&#39;t need to have same number of row. </p></td>
                 </tr>
               
                 <tr>
