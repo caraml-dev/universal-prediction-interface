@@ -5,24 +5,26 @@ package caraml.upi.v1;
 import "caraml/upi/v1/value.proto";
 
 
-// Table represents a 2D labeled data structure have one or more columns 
-// with potentially different types (see Type for the supported types)
+// Table represents a 2D data structure that has one or more columns 
+// with potentially different types
 message Table {
     // Table's name
     string name = 1;
     // Columns stores schema informations of all columns in the table.
     repeated Column columns = 2;
-    // Rows stores list of rows in the table
+    // Rows stores list of row values in the table.
     repeated Row rows = 3;
 }
 
+// Column represent a column definition within a table
 message Column {
     // Column's name
     string name = 1;
-    // Ccolumn's type
+    // Column's type
     Type type = 2;
 }
 
+// Row represents list of value stored within a row of a table
 message Row {
     // Row ID is defined by the client and can be used
     // to join a prediction row with the prediction result,
@@ -38,6 +40,7 @@ message Row {
     repeated Value values = 2;
 }
 
+// Value of a cell within a table. Value is nullable.
 message Value {
     // One of following field will be set depending on the column's type 
     double double_value = 1;
