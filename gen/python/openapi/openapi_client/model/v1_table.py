@@ -148,7 +148,7 @@ class V1Table(ModelNormal):
                                 _visited_composed_classes = (Animal,)
             name (str): [optional]  # noqa: E501
             columns ([V1Column]): Columns stores schema informations of all columns in the table.. [optional]  # noqa: E501
-            rows ([V1Row]): [optional]  # noqa: E501
+            rows ([V1Row]): Rows stores list of row values in the table.. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -236,7 +236,7 @@ class V1Table(ModelNormal):
                                 _visited_composed_classes = (Animal,)
             name (str): [optional]  # noqa: E501
             columns ([V1Column]): Columns stores schema informations of all columns in the table.. [optional]  # noqa: E501
-            rows ([V1Row]): [optional]  # noqa: E501
+            rows ([V1Row]): Rows stores list of row values in the table.. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)

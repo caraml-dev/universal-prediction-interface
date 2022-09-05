@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Tables** | Pointer to [**[]V1Table**](V1Table.md) |  | [optional] 
+**Tables** | Pointer to [**[]V1Table**](V1Table.md) | List of tables All tables must have unique name. Each table doesn&#39;t need to have same number of row. | [optional] 
 **Variables** | Pointer to [**[]V1NamedValue**](V1NamedValue.md) |  | [optional] 
 
 ## Methods

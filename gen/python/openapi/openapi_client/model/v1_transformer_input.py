@@ -144,7 +144,7 @@ class V1TransformerInput(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            tables ([V1Table]): [optional]  # noqa: E501
+            tables ([V1Table]): List of tables All tables must have unique name. Each table doesn't need to have same number of row.. [optional]  # noqa: E501
             variables ([V1NamedValue]): [optional]  # noqa: E501
         """
 
@@ -231,7 +231,7 @@ class V1TransformerInput(ModelNormal):
                                 Animal class but this time we won't travel
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
-            tables ([V1Table]): [optional]  # noqa: E501
+            tables ([V1Table]): List of tables All tables must have unique name. Each table doesn't need to have same number of row.. [optional]  # noqa: E501
             variables ([V1NamedValue]): [optional]  # noqa: E501
         """
 

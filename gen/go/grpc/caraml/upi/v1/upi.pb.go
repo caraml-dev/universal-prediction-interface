@@ -31,17 +31,17 @@ type PredictValuesRequest struct {
 	// Prediction table contains instances to be predicted.
 	// Each row in the table correspond to one prediction instance.
 	// Prediction table should contain all preprocessed feature that model use to perform prediction.
-	// The column ordering in the prediction table must be the same as feature order expected by model in the case of standard model
+	// The column ordering in the prediction table must be the same as feature order expected by model in the case of standard model.
 	// Prediction table can be populated via 3 ways:
 	// - By performing preprocessing in the client-side and sent as part of original request.
-	// - By transforming raw feature values stored in transformer_inputs.
+	// - By transforming feature values stored in transformer_inputs.
 	// - By retrieving precomputed feature value from feature store.
-	// NOTE: the ordering of rows might differ in the response
+	// NOTE: the ordering of rows might differ in the response but the number of row must remain the same.
 	PredictionTable *Table `protobuf:"bytes,1,opt,name=prediction_table,json=predictionTable,proto3" json:"prediction_table,omitempty"`
 	// Transformer input contains list of tables and variables that can be used to enrich prediction_table using transformer.
 	// Typically transformer_inputs contains:
-	// - unprocessed/raw features that requires further processing.
-	// - list of entities for which their precomputed features are retrieved from feature store.
+	// - unprocessed/raw features that requires further transformation.
+	// - list of entities for which their precomputed features are retrieved from feature store using standard transformer.
 	TransformerInput *TransformerInput `protobuf:"bytes,4,opt,name=transformer_input,json=transformerInput,proto3" json:"transformer_input,omitempty"`
 	// Name of the concept we wish to predict.
 	// For example in context of iris classification problem it can be "iris-species"
@@ -50,8 +50,9 @@ type PredictValuesRequest struct {
 	// For example it can be used to store information for traffic rules, experimentation
 	// or tracking purposes.
 	// Eg. country_code, service_type, service_area_id
-	PredictionContext []*NamedValue    `protobuf:"bytes,3,rep,name=prediction_context,json=predictionContext,proto3" json:"prediction_context,omitempty"`
-	Metadata          *RequestMetadata `protobuf:"bytes,10,opt,name=metadata,proto3" json:"metadata,omitempty"`
+	PredictionContext []*NamedValue `protobuf:"bytes,3,rep,name=prediction_context,json=predictionContext,proto3" json:"prediction_context,omitempty"`
+	// Request metadata
+	Metadata *RequestMetadata `protobuf:"bytes,10,opt,name=metadata,proto3" json:"metadata,omitempty"`
 }
 
 func (x *PredictValuesRequest) Reset() {
@@ -460,15 +461,15 @@ func (x *ModelMetadata) GetVersion() string {
 }
 
 // Transformer input contains additional information that can be used to enrich prediction_table using standard transformer.
-// All tables and variables within transformer input
-// will be imported to the standard transformer runtime automatically
+// All tables and variables within transformer input will be imported to the standard transformer runtime automatically.
 type TransformerInput struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
 	// List of tables
-	// All tables must have unique name and it can have arbitrary dimensions
+	// All tables must have unique name.
+	// Each table doesn't need to have same number of row.
 	Tables []*Table `protobuf:"bytes,1,rep,name=tables,proto3" json:"tables,omitempty"`
 	// List of variables
 	Variables []*NamedValue `protobuf:"bytes,2,rep,name=variables,proto3" json:"variables,omitempty"`

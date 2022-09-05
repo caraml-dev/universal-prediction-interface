@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | Pointer to **string** |  | [optional] 
 **Columns** | Pointer to [**[]V1Column**](V1Column.md) | Columns stores schema informations of all columns in the table. | [optional] 
-**Rows** | Pointer to [**[]V1Row**](V1Row.md) |  | [optional] 
+**Rows** | Pointer to [**[]V1Row**](V1Row.md) | Rows stores list of row values in the table. | [optional] 
 
 ## Methods
 

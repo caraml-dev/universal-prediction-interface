@@ -19,6 +19,7 @@ type V1Table struct {
 	Name *string `json:"name,omitempty"`
 	// Columns stores schema informations of all columns in the table.
 	Columns []V1Column `json:"columns,omitempty"`
+	// Rows stores list of row values in the table.
 	Rows []V1Row `json:"rows,omitempty"`
 }
 

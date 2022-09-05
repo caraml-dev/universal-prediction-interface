@@ -13,8 +13,8 @@ import typing_extensions
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
 class Table(google.protobuf.message.Message):
-    """Table represents a 2D labeled data structure have one or more columns 
-    with potentially different types (see Type for the supported types)
+    """Table represents a 2D data structure that has one or more columns 
+    with potentially different types
     """
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     NAME_FIELD_NUMBER: builtins.int
@@ -29,7 +29,7 @@ class Table(google.protobuf.message.Message):
         pass
     @property
     def rows(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Row]:
-        """Rows stores list of rows in the table"""
+        """Rows stores list of row values in the table."""
         pass
     def __init__(self,
         *,
@@ -41,6 +41,7 @@ class Table(google.protobuf.message.Message):
 global___Table = Table
 
 class Column(google.protobuf.message.Message):
+    """Column represent a column definition within a table"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     NAME_FIELD_NUMBER: builtins.int
     TYPE_FIELD_NUMBER: builtins.int
@@ -48,7 +49,7 @@ class Column(google.protobuf.message.Message):
     """Column's name"""
 
     type: caraml.upi.v1.value_pb2.Type.ValueType
-    """Ccolumn's type"""
+    """Column's type"""
 
     def __init__(self,
         *,
@@ -59,6 +60,7 @@ class Column(google.protobuf.message.Message):
 global___Column = Column
 
 class Row(google.protobuf.message.Message):
+    """Row represents list of value stored within a row of a table"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     ROW_ID_FIELD_NUMBER: builtins.int
     VALUES_FIELD_NUMBER: builtins.int
@@ -87,6 +89,7 @@ class Row(google.protobuf.message.Message):
 global___Row = Row
 
 class Value(google.protobuf.message.Message):
+    """Value of a cell within a table. Value is nullable."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     DOUBLE_VALUE_FIELD_NUMBER: builtins.int
     INTEGER_VALUE_FIELD_NUMBER: builtins.int

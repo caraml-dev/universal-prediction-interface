@@ -27,20 +27,20 @@ class PredictValuesRequest(google.protobuf.message.Message):
         """Prediction table contains instances to be predicted.
         Each row in the table correspond to one prediction instance.
         Prediction table should contain all preprocessed feature that model use to perform prediction.
-        The column ordering in the prediction table must be the same as feature order expected by model in the case of standard model
+        The column ordering in the prediction table must be the same as feature order expected by model in the case of standard model.
         Prediction table can be populated via 3 ways:
         - By performing preprocessing in the client-side and sent as part of original request.
-        - By transforming raw feature values stored in transformer_inputs.
+        - By transforming feature values stored in transformer_inputs.
         - By retrieving precomputed feature value from feature store. 
-        NOTE: the ordering of rows might differ in the response
+        NOTE: the ordering of rows might differ in the response but the number of row must remain the same.
         """
         pass
     @property
     def transformer_input(self) -> global___TransformerInput:
         """Transformer input contains list of tables and variables that can be used to enrich prediction_table using transformer.
         Typically transformer_inputs contains:
-        - unprocessed/raw features that requires further processing. 
-        - list of entities for which their precomputed features are retrieved from feature store.
+        - unprocessed/raw features that requires further transformation. 
+        - list of entities for which their precomputed features are retrieved from feature store using standard transformer.
         """
         pass
     target_name: typing.Text
@@ -57,7 +57,9 @@ class PredictValuesRequest(google.protobuf.message.Message):
         """
         pass
     @property
-    def metadata(self) -> global___RequestMetadata: ...
+    def metadata(self) -> global___RequestMetadata:
+        """Request metadata"""
+        pass
     def __init__(self,
         *,
         prediction_table: typing.Optional[caraml.upi.v1.table_pb2.Table] = ...,
@@ -211,8 +213,7 @@ global___ModelMetadata = ModelMetadata
 
 class TransformerInput(google.protobuf.message.Message):
     """Transformer input contains additional information that can be used to enrich prediction_table using standard transformer.
-    All tables and variables within transformer input 
-    will be imported to the standard transformer runtime automatically
+    All tables and variables within transformer input will be imported to the standard transformer runtime automatically.
     """
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     TABLES_FIELD_NUMBER: builtins.int
@@ -220,7 +221,8 @@ class TransformerInput(google.protobuf.message.Message):
     @property
     def tables(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[caraml.upi.v1.table_pb2.Table]:
         """List of tables
-        All tables must have unique name and it can have arbitrary dimensions
+        All tables must have unique name.
+        Each table doesn't need to have same number of row.
         """
         pass
     @property

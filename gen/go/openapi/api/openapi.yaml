@@ -71,6 +71,7 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/upiv1Type'
+      title: Column represent a column definition within a table
       type: object
     v1ModelMetadata:
       example:
@@ -278,6 +279,7 @@ components:
           items:
             $ref: '#/components/schemas/v1Value'
           type: array
+      title: Row represents list of value stored within a row of a table
       type: object
     v1Table:
       example:
@@ -318,33 +320,34 @@ components:
             $ref: '#/components/schemas/v1Column'
           type: array
         rows:
+          description: Rows stores list of row values in the table.
           items:
             $ref: '#/components/schemas/v1Row'
-          title: Rows stores list of rows in the table
           type: array
-      title: "Table represents a 2D labeled data structure have one or more columns\
-        \ \nwith potentially different types (see Type for the supported types)"
+      title: "Table represents a 2D data structure that has one or more columns \n\
+        with potentially different types"
       type: object
     v1TransformerInput:
+      description: |-
+        Transformer input contains additional information that can be used to enrich prediction_table using standard transformer.
+        All tables and variables within transformer input will be imported to the standard transformer runtime automatically.
       properties:
         tables:
+          description: |-
+            List of tables
+            All tables must have unique name.
+            Each table doesn't need to have same number of row.
           items:
             $ref: '#/components/schemas/v1Table'
-          title: |-
-            List of tables
-            All tables must have unique name and it can have arbitrary dimensions
           type: array
         variables:
           items:
             $ref: '#/components/schemas/v1NamedValue'
           title: List of variables
           type: array
-      title: "Transformer input contains additional information that can be used to\
-        \ enrich prediction_table using standard transformer.\nAll tables and variables\
-        \ within transformer input \nwill be imported to the standard transformer\
-        \ runtime automatically"
       type: object
     v1Value:
+      description: Value of a cell within a table. Value is nullable.
       example:
         stringValue: stringValue
         isNull: true

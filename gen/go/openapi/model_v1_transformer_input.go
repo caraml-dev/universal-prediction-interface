@@ -14,8 +14,9 @@ import (
 	"encoding/json"
 )
 
-// V1TransformerInput struct for V1TransformerInput
+// V1TransformerInput Transformer input contains additional information that can be used to enrich prediction_table using standard transformer. All tables and variables within transformer input will be imported to the standard transformer runtime automatically.
 type V1TransformerInput struct {
+	// List of tables All tables must have unique name. Each table doesn't need to have same number of row.
 	Tables []V1Table `json:"tables,omitempty"`
 	Variables []V1NamedValue `json:"variables,omitempty"`
 }

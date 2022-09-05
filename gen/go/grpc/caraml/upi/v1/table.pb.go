@@ -20,8 +20,8 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// Table represents a 2D labeled data structure have one or more columns
-// with potentially different types (see Type for the supported types)
+// Table represents a 2D data structure that has one or more columns
+// with potentially different types
 type Table struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -31,7 +31,7 @@ type Table struct {
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// Columns stores schema informations of all columns in the table.
 	Columns []*Column `protobuf:"bytes,2,rep,name=columns,proto3" json:"columns,omitempty"`
-	// Rows stores list of rows in the table
+	// Rows stores list of row values in the table.
 	Rows []*Row `protobuf:"bytes,3,rep,name=rows,proto3" json:"rows,omitempty"`
 }
 
@@ -88,6 +88,7 @@ func (x *Table) GetRows() []*Row {
 	return nil
 }
 
+// Column represent a column definition within a table
 type Column struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -95,7 +96,7 @@ type Column struct {
 
 	// Column's name
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// Ccolumn's type
+	// Column's type
 	Type Type `protobuf:"varint,2,opt,name=type,proto3,enum=caraml.upi.v1.Type" json:"type,omitempty"`
 }
 
@@ -145,6 +146,7 @@ func (x *Column) GetType() Type {
 	return Type_TYPE_UNSPECIFIED
 }
 
+// Row represents list of value stored within a row of a table
 type Row struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -209,6 +211,7 @@ func (x *Row) GetValues() []*Value {
 	return nil
 }
 
+// Value of a cell within a table. Value is nullable.
 type Value struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

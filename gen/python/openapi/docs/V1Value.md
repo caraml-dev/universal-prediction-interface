@@ -1,5 +1,6 @@
 # V1Value
 
+Value of a cell within a table. Value is nullable.
 
 ## Properties
 Name | Type | Description | Notes
