@@ -1,0 +1,27 @@
+name: publish-python-sdk
+on:
+  release:
+    types: [published]
+jobs:
+  publish-python-sdk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.7
+      - name: Install dependencies
+        working-directory: ./gen/python/grpc
+        run: |
+          python -m pip install --upgrade pip
+          pip install setuptools wheel twine
+      - name: Build and publish
+        env:
+          TWINE_USERNAME: ${{ secrets.PIPY_USERNAME }}
+          TWINE_PASSWORD: ${{ secrets.PIPY_PASSWORD }}
+        working-directory: ./gen/python/grpc
+        run: |
+          tag=$(git describe --tags --always --first-parent)
+          sed -i -e "s|VERSION = \".*\"|VERSION = \"`echo "${tag//v}"`\"|g" ./caraml/upi/version.py
+          python setup.py sdist bdist_wheel
+          twine upload dist/*
