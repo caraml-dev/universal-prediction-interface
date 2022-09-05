@@ -21,6 +21,7 @@ def df_to_table(df: pd.DataFrame, table_name: str) -> table_pb2.Table:
     columns = [table_pb2.Column(name=name, type=dtype_to_upi_type(dtype)) for name, dtype in
                zip(df.columns, df.dtypes)]
     rows: List[table_pb2.Row] = []
+    df_dtypes = df.dtypes
 
     for row in df.itertuples():
         values: List[table_pb2.Value] = []
@@ -29,15 +30,15 @@ def df_to_table(df: pd.DataFrame, table_name: str) -> table_pb2.Table:
             if i == 0:
                 continue
 
-            dtype = df.dtypes[i - 1]
-            if dtype == np.float:
+            dtype = df_dtypes[i - 1]
+            if dtype == np.float64:
                 if isnan(value):
                     values.append(table_pb2.Value(is_null=True))
                     continue
 
                 values.append(
                     table_pb2.Value(double_value=float(value)))
-            elif dtype == np.int:
+            elif dtype == np.int64:
                 values.append(
                     table_pb2.Value(integer_value=int(value)))
             else:
@@ -123,9 +124,9 @@ def dtype_to_upi_type(dtype):
     Returns: upi type
 
     """
-    if dtype == np.int:
+    if dtype == np.int64:
         return value_pb2.TYPE_INTEGER
-    if dtype == np.float:
+    if dtype == np.float64:
         return value_pb2.TYPE_DOUBLE
     # any other type will be treated as string
     return value_pb2.TYPE_STRING
