@@ -55,6 +55,11 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: "3.7"
+      - name: Download previous benchmark data
+        uses: actions/cache@v1
+        with:
+          path: ./cache
+          key: ${{ runner.os }}-benchmark
       - name: Install dependencies
         working-directory: ./gen/python/grpc
         run: pip install -e .[test]
@@ -66,3 +71,5 @@ jobs:
         with:
           tool: 'pytest'
           output-file-path: ./gen/python/grpc/output.json
+          external-data-json-path: ./cache/benchmark-data.json
+          fail-on-alert: true
