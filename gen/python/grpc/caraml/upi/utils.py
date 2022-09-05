@@ -21,7 +21,7 @@ def df_to_table(df: pd.DataFrame, table_name: str) -> table_pb2.Table:
     columns = [table_pb2.Column(name=name, type=dtype_to_upi_type(dtype)) for name, dtype in
                zip(df.columns, df.dtypes)]
     rows: List[table_pb2.Row] = []
-    df_dtypes = df.dtypes
+    df_dtypes = df.dtypes.tolist()
 
     for row in df.itertuples():
         values: List[table_pb2.Value] = []
