@@ -12,8 +12,8 @@ import sys
 import unittest
 
 import openapi_client
-from openapi_client.model.v1_nullable_value import V1NullableValue
-globals()['V1NullableValue'] = V1NullableValue
+from openapi_client.model.v1_value import V1Value
+globals()['V1Value'] = V1Value
 from openapi_client.model.v1_row import V1Row
 
 

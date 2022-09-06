@@ -14,10 +14,8 @@ import unittest
 import openapi_client
 from openapi_client.model.v1_named_value import V1NamedValue
 from openapi_client.model.v1_table import V1Table
-from openapi_client.model.v1_transformer_input_type import V1TransformerInputType
 globals()['V1NamedValue'] = V1NamedValue
 globals()['V1Table'] = V1Table
-globals()['V1TransformerInputType'] = V1TransformerInputType
 from openapi_client.model.v1_transformer_input import V1TransformerInput
 
 
