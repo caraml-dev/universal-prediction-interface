@@ -237,10 +237,6 @@
                 </li>
               
                 <li>
-                  <a href="#caraml.upi.v1.PredictionResultRow"><span class="badge">M</span>PredictionResultRow</a>
-                </li>
-              
-                <li>
                   <a href="#caraml.upi.v1.RequestMetadata"><span class="badge">M</span>RequestMetadata</a>
                 </li>
               
@@ -681,39 +677,6 @@ NOTE: the ordering of prediction_result_rows might differ with prediction_table 
                   <td><a href="#caraml.upi.v1.ResponseMetadata">ResponseMetadata</a></td>
                   <td></td>
                   <td><p>Response metadata </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="caraml.upi.v1.PredictionResultRow">PredictionResultRow</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>row_id</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Row ID defined by the caller used to join a prediction result with a prediction row </p></td>
-                </tr>
-              
-                <tr>
-                  <td>values</td>
-                  <td><a href="#caraml.upi.v1.NamedValue">NamedValue</a></td>
-                  <td>repeated</td>
-                  <td><p>Represents the predicted values corresponding to a 
-single prediction row. This will often be the output of an ML model.
-This field is repeated to support multi-task models with non-scalar outputs </p></td>
                 </tr>
               
             </tbody>

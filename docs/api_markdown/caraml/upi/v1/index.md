@@ -18,7 +18,6 @@
     - [ModelMetadata](#caraml-upi-v1-ModelMetadata)
     - [PredictValuesRequest](#caraml-upi-v1-PredictValuesRequest)
     - [PredictValuesResponse](#caraml-upi-v1-PredictValuesResponse)
-    - [PredictionResultRow](#caraml-upi-v1-PredictionResultRow)
     - [RequestMetadata](#caraml-upi-v1-RequestMetadata)
     - [ResponseMetadata](#caraml-upi-v1-ResponseMetadata)
     - [TransformerInput](#caraml-upi-v1-TransformerInput)
@@ -218,22 +217,6 @@ Represents a request to predict multiple values
 | target_name | [string](#string) |  | Target name as defined in the request metadata |
 | prediction_context | [NamedValue](#caraml-upi-v1-NamedValue) | repeated | Extensible field to cover unforeseen requirements |
 | metadata | [ResponseMetadata](#caraml-upi-v1-ResponseMetadata) |  | Response metadata |
-
-
-
-
-
-
-<a name="caraml-upi-v1-PredictionResultRow"></a>
-
-### PredictionResultRow
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| row_id | [string](#string) |  | Row ID defined by the caller used to join a prediction result with a prediction row |
-| values | [NamedValue](#caraml-upi-v1-NamedValue) | repeated | Represents the predicted values corresponding to a single prediction row. This will often be the output of an ML model. This field is repeated to support multi-task models with non-scalar outputs |
 
 
 
