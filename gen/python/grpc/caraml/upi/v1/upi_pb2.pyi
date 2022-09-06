@@ -135,28 +135,6 @@ class PredictValuesResponse(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["metadata",b"metadata","prediction_context",b"prediction_context","prediction_result_table",b"prediction_result_table","target_name",b"target_name"]) -> None: ...
 global___PredictValuesResponse = PredictValuesResponse
 
-class PredictionResultRow(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-    ROW_ID_FIELD_NUMBER: builtins.int
-    VALUES_FIELD_NUMBER: builtins.int
-    row_id: typing.Text
-    """Row ID defined by the caller used to join a prediction result with a prediction row"""
-
-    @property
-    def values(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[caraml.upi.v1.value_pb2.NamedValue]:
-        """Represents the predicted values corresponding to a 
-        single prediction row. This will often be the output of an ML model.
-        This field is repeated to support multi-task models with non-scalar outputs
-        """
-        pass
-    def __init__(self,
-        *,
-        row_id: typing.Text = ...,
-        values: typing.Optional[typing.Iterable[caraml.upi.v1.value_pb2.NamedValue]] = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["row_id",b"row_id","values",b"values"]) -> None: ...
-global___PredictionResultRow = PredictionResultRow
-
 class ResponseMetadata(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     PREDICTION_ID_FIELD_NUMBER: builtins.int
