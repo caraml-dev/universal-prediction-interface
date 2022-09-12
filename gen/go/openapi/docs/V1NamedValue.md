@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | Pointer to **string** |  | [optional] 
-**Type** | Pointer to [**V1NamedValueType**](V1NamedValueType.md) |  | [optional] [default to V1NAMEDVALUETYPE_UNSPECIFIED]
+**Type** | Pointer to [**Upiv1Type**](Upiv1Type.md) |  | [optional] [default to UPIV1TYPE_UNSPECIFIED]
 **DoubleValue** | Pointer to **float64** |  | [optional] 
 **IntegerValue** | Pointer to **string** |  | [optional] 
 **StringValue** | Pointer to **string** |  | [optional] 
@@ -56,20 +56,20 @@ HasName returns a boolean if a field has been set.
 
 ### GetType
 
-`func (o *V1NamedValue) GetType() V1NamedValueType`
+`func (o *V1NamedValue) GetType() Upiv1Type`
 
 GetType returns the Type field if non-nil, zero value otherwise.
 
 ### GetTypeOk
 
-`func (o *V1NamedValue) GetTypeOk() (*V1NamedValueType, bool)`
+`func (o *V1NamedValue) GetTypeOk() (*Upiv1Type, bool)`
 
 GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetType
 
-`func (o *V1NamedValue) SetType(v V1NamedValueType)`
+`func (o *V1NamedValue) SetType(v Upiv1Type)`
 
 SetType sets Type field to given value.
 

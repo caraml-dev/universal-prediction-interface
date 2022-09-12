@@ -12,8 +12,8 @@ import sys
 import unittest
 
 import openapi_client
-from openapi_client.model.v1_named_value_type import V1NamedValueType
-globals()['V1NamedValueType'] = V1NamedValueType
+from openapi_client.model.upiv1_type import Upiv1Type
+globals()['Upiv1Type'] = Upiv1Type
 from openapi_client.model.v1_named_value import V1NamedValue
 
 

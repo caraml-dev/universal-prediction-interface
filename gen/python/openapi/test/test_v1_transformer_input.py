@@ -13,12 +13,14 @@ import unittest
 
 import openapi_client
 from openapi_client.model.v1_named_value import V1NamedValue
+from openapi_client.model.v1_table import V1Table
 globals()['V1NamedValue'] = V1NamedValue
-from openapi_client.model.v1_prediction_row import V1PredictionRow
+globals()['V1Table'] = V1Table
+from openapi_client.model.v1_transformer_input import V1TransformerInput
 
 
-class TestV1PredictionRow(unittest.TestCase):
-    """V1PredictionRow unit test stubs"""
+class TestV1TransformerInput(unittest.TestCase):
+    """V1TransformerInput unit test stubs"""
 
     def setUp(self):
         pass
@@ -26,10 +28,10 @@ class TestV1PredictionRow(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def testV1PredictionRow(self):
-        """Test V1PredictionRow"""
+    def testV1TransformerInput(self):
+        """Test V1TransformerInput"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = V1PredictionRow()  # noqa: E501
+        # model = V1TransformerInput()  # noqa: E501
         pass
 
 

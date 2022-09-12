@@ -14,31 +14,32 @@ import (
 	"encoding/json"
 )
 
-// V1PredictionResultRow struct for V1PredictionResultRow
-type V1PredictionResultRow struct {
+// V1Row struct for V1Row
+type V1Row struct {
 	RowId *string `json:"rowId,omitempty"`
-	Values []V1NamedValue `json:"values,omitempty"`
+	// List of values within a row.  It is table's creator responsibility to ensure that the number of entry  values matches with the length of columns in the table.
+	Values []V1Value `json:"values,omitempty"`
 }
 
-// NewV1PredictionResultRow instantiates a new V1PredictionResultRow object
+// NewV1Row instantiates a new V1Row object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewV1PredictionResultRow() *V1PredictionResultRow {
-	this := V1PredictionResultRow{}
+func NewV1Row() *V1Row {
+	this := V1Row{}
 	return &this
 }
 
-// NewV1PredictionResultRowWithDefaults instantiates a new V1PredictionResultRow object
+// NewV1RowWithDefaults instantiates a new V1Row object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewV1PredictionResultRowWithDefaults() *V1PredictionResultRow {
-	this := V1PredictionResultRow{}
+func NewV1RowWithDefaults() *V1Row {
+	this := V1Row{}
 	return &this
 }
 
 // GetRowId returns the RowId field value if set, zero value otherwise.
-func (o *V1PredictionResultRow) GetRowId() string {
+func (o *V1Row) GetRowId() string {
 	if o == nil || o.RowId == nil {
 		var ret string
 		return ret
@@ -48,7 +49,7 @@ func (o *V1PredictionResultRow) GetRowId() string {
 
 // GetRowIdOk returns a tuple with the RowId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *V1PredictionResultRow) GetRowIdOk() (*string, bool) {
+func (o *V1Row) GetRowIdOk() (*string, bool) {
 	if o == nil || o.RowId == nil {
 		return nil, false
 	}
@@ -56,7 +57,7 @@ func (o *V1PredictionResultRow) GetRowIdOk() (*string, bool) {
 }
 
 // HasRowId returns a boolean if a field has been set.
-func (o *V1PredictionResultRow) HasRowId() bool {
+func (o *V1Row) HasRowId() bool {
 	if o != nil && o.RowId != nil {
 		return true
 	}
@@ -65,14 +66,14 @@ func (o *V1PredictionResultRow) HasRowId() bool {
 }
 
 // SetRowId gets a reference to the given string and assigns it to the RowId field.
-func (o *V1PredictionResultRow) SetRowId(v string) {
+func (o *V1Row) SetRowId(v string) {
 	o.RowId = &v
 }
 
 // GetValues returns the Values field value if set, zero value otherwise.
-func (o *V1PredictionResultRow) GetValues() []V1NamedValue {
+func (o *V1Row) GetValues() []V1Value {
 	if o == nil || o.Values == nil {
-		var ret []V1NamedValue
+		var ret []V1Value
 		return ret
 	}
 	return o.Values
@@ -80,7 +81,7 @@ func (o *V1PredictionResultRow) GetValues() []V1NamedValue {
 
 // GetValuesOk returns a tuple with the Values field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *V1PredictionResultRow) GetValuesOk() ([]V1NamedValue, bool) {
+func (o *V1Row) GetValuesOk() ([]V1Value, bool) {
 	if o == nil || o.Values == nil {
 		return nil, false
 	}
@@ -88,7 +89,7 @@ func (o *V1PredictionResultRow) GetValuesOk() ([]V1NamedValue, bool) {
 }
 
 // HasValues returns a boolean if a field has been set.
-func (o *V1PredictionResultRow) HasValues() bool {
+func (o *V1Row) HasValues() bool {
 	if o != nil && o.Values != nil {
 		return true
 	}
@@ -96,12 +97,12 @@ func (o *V1PredictionResultRow) HasValues() bool {
 	return false
 }
 
-// SetValues gets a reference to the given []V1NamedValue and assigns it to the Values field.
-func (o *V1PredictionResultRow) SetValues(v []V1NamedValue) {
+// SetValues gets a reference to the given []V1Value and assigns it to the Values field.
+func (o *V1Row) SetValues(v []V1Value) {
 	o.Values = v
 }
 
-func (o V1PredictionResultRow) MarshalJSON() ([]byte, error) {
+func (o V1Row) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.RowId != nil {
 		toSerialize["rowId"] = o.RowId
@@ -112,38 +113,38 @@ func (o V1PredictionResultRow) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullableV1PredictionResultRow struct {
-	value *V1PredictionResultRow
+type NullableV1Row struct {
+	value *V1Row
 	isSet bool
 }
 
-func (v NullableV1PredictionResultRow) Get() *V1PredictionResultRow {
+func (v NullableV1Row) Get() *V1Row {
 	return v.value
 }
 
-func (v *NullableV1PredictionResultRow) Set(val *V1PredictionResultRow) {
+func (v *NullableV1Row) Set(val *V1Row) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableV1PredictionResultRow) IsSet() bool {
+func (v NullableV1Row) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableV1PredictionResultRow) Unset() {
+func (v *NullableV1Row) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableV1PredictionResultRow(val *V1PredictionResultRow) *NullableV1PredictionResultRow {
-	return &NullableV1PredictionResultRow{value: val, isSet: true}
+func NewNullableV1Row(val *V1Row) *NullableV1Row {
+	return &NullableV1Row{value: val, isSet: true}
 }
 
-func (v NullableV1PredictionResultRow) MarshalJSON() ([]byte, error) {
+func (v NullableV1Row) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableV1PredictionResultRow) UnmarshalJSON(src []byte) error {
+func (v *NullableV1Row) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

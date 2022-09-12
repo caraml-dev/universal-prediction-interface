@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **str** |  | [optional] 
-**type** | [**V1NamedValueType**](V1NamedValueType.md) |  | [optional] 
+**type** | [**Upiv1Type**](Upiv1Type.md) |  | [optional] 
 **double_value** | **float** |  | [optional] 
 **integer_value** | **str** |  | [optional] 
 **string_value** | **str** |  | [optional] 

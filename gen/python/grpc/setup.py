@@ -14,7 +14,8 @@ REQUIRES = [
 
 TEST_REQUIRES = [
   "pytest == 7.1.2",
-  "pytest-benchmark == 3.4.1"
+  "pytest-benchmark == 3.4.1",
+  "pandas"
 ]
 
 setup(

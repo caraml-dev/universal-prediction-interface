@@ -17,7 +17,7 @@ import (
 // V1NamedValue struct for V1NamedValue
 type V1NamedValue struct {
 	Name *string `json:"name,omitempty"`
-	Type *V1NamedValueType `json:"type,omitempty"`
+	Type *Upiv1Type `json:"type,omitempty"`
 	DoubleValue *float64 `json:"doubleValue,omitempty"`
 	IntegerValue *string `json:"integerValue,omitempty"`
 	StringValue *string `json:"stringValue,omitempty"`
@@ -29,7 +29,7 @@ type V1NamedValue struct {
 // will change when the set of required properties is changed
 func NewV1NamedValue() *V1NamedValue {
 	this := V1NamedValue{}
-	var type_ V1NamedValueType = V1NAMEDVALUETYPE_UNSPECIFIED
+	var type_ Upiv1Type = UPIV1TYPE_UNSPECIFIED
 	this.Type = &type_
 	return &this
 }
@@ -39,7 +39,7 @@ func NewV1NamedValue() *V1NamedValue {
 // but it doesn't guarantee that properties required by API are set
 func NewV1NamedValueWithDefaults() *V1NamedValue {
 	this := V1NamedValue{}
-	var type_ V1NamedValueType = V1NAMEDVALUETYPE_UNSPECIFIED
+	var type_ Upiv1Type = UPIV1TYPE_UNSPECIFIED
 	this.Type = &type_
 	return &this
 }
@@ -77,9 +77,9 @@ func (o *V1NamedValue) SetName(v string) {
 }
 
 // GetType returns the Type field value if set, zero value otherwise.
-func (o *V1NamedValue) GetType() V1NamedValueType {
+func (o *V1NamedValue) GetType() Upiv1Type {
 	if o == nil || o.Type == nil {
-		var ret V1NamedValueType
+		var ret Upiv1Type
 		return ret
 	}
 	return *o.Type
@@ -87,7 +87,7 @@ func (o *V1NamedValue) GetType() V1NamedValueType {
 
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *V1NamedValue) GetTypeOk() (*V1NamedValueType, bool) {
+func (o *V1NamedValue) GetTypeOk() (*Upiv1Type, bool) {
 	if o == nil || o.Type == nil {
 		return nil, false
 	}
@@ -103,8 +103,8 @@ func (o *V1NamedValue) HasType() bool {
 	return false
 }
 
-// SetType gets a reference to the given V1NamedValueType and assigns it to the Type field.
-func (o *V1NamedValue) SetType(v V1NamedValueType) {
+// SetType gets a reference to the given Upiv1Type and assigns it to the Type field.
+func (o *V1NamedValue) SetType(v Upiv1Type) {
 	o.Type = &v
 }
 

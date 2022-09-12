@@ -85,15 +85,18 @@ Class | Method | HTTP request | Description
 
  - [ProtobufAny](docs/ProtobufAny.md)
  - [RpcStatus](docs/RpcStatus.md)
+ - [Upiv1Type](docs/Upiv1Type.md)
+ - [V1Column](docs/V1Column.md)
  - [V1ModelMetadata](docs/V1ModelMetadata.md)
  - [V1NamedValue](docs/V1NamedValue.md)
- - [V1NamedValueType](docs/V1NamedValueType.md)
  - [V1PredictValuesRequest](docs/V1PredictValuesRequest.md)
  - [V1PredictValuesResponse](docs/V1PredictValuesResponse.md)
- - [V1PredictionResultRow](docs/V1PredictionResultRow.md)
- - [V1PredictionRow](docs/V1PredictionRow.md)
  - [V1RequestMetadata](docs/V1RequestMetadata.md)
  - [V1ResponseMetadata](docs/V1ResponseMetadata.md)
+ - [V1Row](docs/V1Row.md)
+ - [V1Table](docs/V1Table.md)
+ - [V1TransformerInput](docs/V1TransformerInput.md)
+ - [V1Value](docs/V1Value.md)
 
 
 ## Documentation For Authorization

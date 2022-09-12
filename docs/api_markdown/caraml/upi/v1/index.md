@@ -6,16 +6,21 @@
 - [caraml/upi/v1/value.proto](#caraml_upi_v1_value-proto)
     - [NamedValue](#caraml-upi-v1-NamedValue)
   
-    - [NamedValue.Type](#caraml-upi-v1-NamedValue-Type)
+    - [Type](#caraml-upi-v1-Type)
+  
+- [caraml/upi/v1/table.proto](#caraml_upi_v1_table-proto)
+    - [Column](#caraml-upi-v1-Column)
+    - [Row](#caraml-upi-v1-Row)
+    - [Table](#caraml-upi-v1-Table)
+    - [Value](#caraml-upi-v1-Value)
   
 - [caraml/upi/v1/upi.proto](#caraml_upi_v1_upi-proto)
     - [ModelMetadata](#caraml-upi-v1-ModelMetadata)
     - [PredictValuesRequest](#caraml-upi-v1-PredictValuesRequest)
     - [PredictValuesResponse](#caraml-upi-v1-PredictValuesResponse)
-    - [PredictionResultRow](#caraml-upi-v1-PredictionResultRow)
-    - [PredictionRow](#caraml-upi-v1-PredictionRow)
     - [RequestMetadata](#caraml-upi-v1-RequestMetadata)
     - [ResponseMetadata](#caraml-upi-v1-ResponseMetadata)
+    - [TransformerInput](#caraml-upi-v1-TransformerInput)
   
     - [UniversalPredictionService](#caraml-upi-v1-UniversalPredictionService)
   
@@ -41,7 +46,7 @@ Oneof types are avoided as these can be difficult to handle
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | name | [string](#string) |  | Name describing what the value represents. Uses include: - Ensuring ML models process columns in the correct order - Defining a Feast row entity name - Parsing metadata to apply traffic rules |
-| type | [NamedValue.Type](#caraml-upi-v1-NamedValue-Type) |  |  |
+| type | [Type](#caraml-upi-v1-Type) |  |  |
 | double_value | [double](#double) |  |  |
 | integer_value | [int64](#int64) |  |  |
 | string_value | [string](#string) |  |  |
@@ -53,9 +58,9 @@ Oneof types are avoided as these can be difficult to handle
  
 
 
-<a name="caraml-upi-v1-NamedValue-Type"></a>
+<a name="caraml-upi-v1-Type"></a>
 
-### NamedValue.Type
+### Type
 
 
 | Name | Number | Description |
@@ -65,6 +70,90 @@ Oneof types are avoided as these can be difficult to handle
 | TYPE_INTEGER | 2 |  |
 | TYPE_STRING | 3 |  |
 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="caraml_upi_v1_table-proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## caraml/upi/v1/table.proto
+
+
+
+<a name="caraml-upi-v1-Column"></a>
+
+### Column
+Column represent a column definition within a table
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | Column&#39;s name |
+| type | [Type](#caraml-upi-v1-Type) |  | Column&#39;s type |
+
+
+
+
+
+
+<a name="caraml-upi-v1-Row"></a>
+
+### Row
+Row represents list of value stored within a row of a table
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| row_id | [string](#string) |  | Id of the particular row in a table. The row id should be at least locally unique within the table. Row ID must be populated for prediction_table |
+| values | [Value](#caraml-upi-v1-Value) | repeated | List of values within a row. It is table&#39;s creator responsibility to ensure that the number of entry values matches with the length of columns in the table. |
+
+
+
+
+
+
+<a name="caraml-upi-v1-Table"></a>
+
+### Table
+Table represents a 2D data structure that has one or more columns 
+with potentially different types
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | Table&#39;s name |
+| columns | [Column](#caraml-upi-v1-Column) | repeated | Columns stores schema informations of all columns in the table. |
+| rows | [Row](#caraml-upi-v1-Row) | repeated | Rows stores list of row values in the table. |
+
+
+
+
+
+
+<a name="caraml-upi-v1-Value"></a>
+
+### Value
+Value of a cell within a table. Value is nullable.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| double_value | [double](#double) |  | One of following field will be set depending on the column&#39;s type |
+| integer_value | [int64](#int64) |  |  |
+| string_value | [string](#string) |  |  |
+| is_null | [bool](#bool) |  | Flag to be used to signify that the value is null |
+
+
+
+
+
+ 
 
  
 
@@ -105,10 +194,11 @@ Represents a request to predict multiple values
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| prediction_rows | [PredictionRow](#caraml-upi-v1-PredictionRow) | repeated | Collection of prediction instances to be predicted. Each prediction row correspond to one prediction instance. NOTE: the ordering of prediction_rows might differ with prediction_result_rows in the response |
+| prediction_table | [Table](#caraml-upi-v1-Table) |  | Prediction table contains instances to be predicted. Each row in the table correspond to one prediction instance. Prediction table should contain all preprocessed feature that model use to perform prediction. The column ordering in the prediction table must be the same as feature order expected by model in the case of standard model. Prediction table can be populated via 3 ways: - By performing preprocessing in the client-side and sent as part of original request. - By transforming feature values stored in transformer_inputs. - By retrieving precomputed feature value from feature store. Row ID of the prediction_table must be populated by the client and can be used to join a row in prediction_table with another row in the prediction_result_table, and to track predictions generated by multiple models. The user is expected to include row ID (along with prediction ID) when calling the observations API so that predictions and observations can be joined. NOTE: the ordering of rows might differ in the response but the number of row must remain the same. |
+| transformer_input | [TransformerInput](#caraml-upi-v1-TransformerInput) |  | Transformer input contains list of tables and variables that can be used to enrich prediction_table using transformer. Typically transformer_inputs contains: - unprocessed/raw features that requires further transformation. - list of entities for which their precomputed features are retrieved from feature store using standard transformer. |
 | target_name | [string](#string) |  | Name of the concept we wish to predict. For example in context of iris classification problem it can be &#34;iris-species&#34; |
 | prediction_context | [NamedValue](#caraml-upi-v1-NamedValue) | repeated | Prediction context may contain additional data applicable to all prediction instances For example it can be used to store information for traffic rules, experimentation or tracking purposes. Eg. country_code, service_type, service_area_id |
-| metadata | [RequestMetadata](#caraml-upi-v1-RequestMetadata) |  |  |
+| metadata | [RequestMetadata](#caraml-upi-v1-RequestMetadata) |  | Request metadata |
 
 
 
@@ -123,45 +213,10 @@ Represents a request to predict multiple values
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| prediction_result_rows | [PredictionResultRow](#caraml-upi-v1-PredictionResultRow) | repeated | Prediction results corresponding to the prediction rows provided in the request. NOTE: the ordering of prediction_result_rows might differ with prediction_rows in the request |
+| prediction_result_table | [Table](#caraml-upi-v1-Table) |  | Prediction results corresponding to the prediction rows provided in the request. NOTE: the ordering of prediction_result_rows might differ with prediction_table in the request but the number of row must match with the prediction_table |
 | target_name | [string](#string) |  | Target name as defined in the request metadata |
 | prediction_context | [NamedValue](#caraml-upi-v1-NamedValue) | repeated | Extensible field to cover unforeseen requirements |
 | metadata | [ResponseMetadata](#caraml-upi-v1-ResponseMetadata) |  | Response metadata |
-
-
-
-
-
-
-<a name="caraml-upi-v1-PredictionResultRow"></a>
-
-### PredictionResultRow
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| row_id | [string](#string) |  | Row ID defined by the caller used to join a prediction result with a prediction row |
-| values | [NamedValue](#caraml-upi-v1-NamedValue) | repeated | Represents the predicted values corresponding to a single prediction row. This will often be the output of an ML model. This field is repeated to support multi-task models with non-scalar outputs |
-
-
-
-
-
-
-<a name="caraml-upi-v1-PredictionRow"></a>
-
-### PredictionRow
-Represents an single instance we wish to predict.
-Eg. for Matchmaking a prediction row will typically
-correspond to a proposed driver plan
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| row_id | [string](#string) |  | Row ID is defined by the client and can be used to join a prediction row with the prediction result, and to track predictions generated by multiple models. The user is expected include row ID (along with prediction ID) when calling the observations API so that predictions and observations can be joined. |
-| model_inputs | [NamedValue](#caraml-upi-v1-NamedValue) | repeated | Model inputs contain all preprocessed feature that model use to perform prediction. The feature ordering in model_inputs must be the same as feature order expected by model. Model inputs can be populated via 3 ways: - By performing preprocessing in the client-side and sent as part of original request. - By transforming raw feature values stored in transformer_inputs. - By retrieving precomputed feature value from feature store. |
-| transformer_inputs | [NamedValue](#caraml-upi-v1-NamedValue) | repeated | Transformer input contains raw values that can be used to enrich model_inputs using transformer. Typically transformer_inputs contains: - unprocessed/raw features that requires further processing. - list of entities for which their precomputed features are retrieved from feature store. |
 
 
 
@@ -196,6 +251,23 @@ correspond to a proposed driver plan
 | models | [ModelMetadata](#caraml-upi-v1-ModelMetadata) | repeated | List of model that produces the prediction This field is repeated to cater for use case such as ensembling several model production results |
 | experiment_id | [string](#string) |  | Optional experimentation metadata |
 | treatment_id | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="caraml-upi-v1-TransformerInput"></a>
+
+### TransformerInput
+Transformer input contains additional information that can be used to enrich prediction_table using standard transformer.
+All tables and variables within transformer input will be imported to the standard transformer runtime automatically.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| tables | [Table](#caraml-upi-v1-Table) | repeated | List of tables All tables must have unique name. Each table doesn&#39;t need to have same number of row. |
+| variables | [NamedValue](#caraml-upi-v1-NamedValue) | repeated | List of variables |
 
 
 

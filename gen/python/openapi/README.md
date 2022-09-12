@@ -66,34 +66,68 @@ with openapi_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = universal_prediction_service_api.UniversalPredictionServiceApi(api_client)
     body = V1PredictValuesRequest(
-        prediction_rows=[
-            V1PredictionRow(
-                row_id="row_id_example",
-                model_inputs=[
-                    V1NamedValue(
-                        name="name_example",
-                        type=V1NamedValueType("TYPE_UNSPECIFIED"),
-                        double_value=3.14,
-                        integer_value="integer_value_example",
-                        string_value="string_value_example",
-                    ),
-                ],
-                transformer_inputs=[
-                    V1NamedValue(
-                        name="name_example",
-                        type=V1NamedValueType("TYPE_UNSPECIFIED"),
-                        double_value=3.14,
-                        integer_value="integer_value_example",
-                        string_value="string_value_example",
-                    ),
-                ],
-            ),
-        ],
+        prediction_table=V1Table(
+            name="name_example",
+            columns=[
+                V1Column(
+                    name="name_example",
+                    type=Upiv1Type("TYPE_UNSPECIFIED"),
+                ),
+            ],
+            rows=[
+                V1Row(
+                    row_id="row_id_example",
+                    values=[
+                        V1Value(
+                            double_value=3.14,
+                            integer_value="integer_value_example",
+                            string_value="string_value_example",
+                            is_null=True,
+                        ),
+                    ],
+                ),
+            ],
+        ),
+        transformer_input=V1TransformerInput(
+            tables=[
+                V1Table(
+                    name="name_example",
+                    columns=[
+                        V1Column(
+                            name="name_example",
+                            type=Upiv1Type("TYPE_UNSPECIFIED"),
+                        ),
+                    ],
+                    rows=[
+                        V1Row(
+                            row_id="row_id_example",
+                            values=[
+                                V1Value(
+                                    double_value=3.14,
+                                    integer_value="integer_value_example",
+                                    string_value="string_value_example",
+                                    is_null=True,
+                                ),
+                            ],
+                        ),
+                    ],
+                ),
+            ],
+            variables=[
+                V1NamedValue(
+                    name="name_example",
+                    type=Upiv1Type("TYPE_UNSPECIFIED"),
+                    double_value=3.14,
+                    integer_value="integer_value_example",
+                    string_value="string_value_example",
+                ),
+            ],
+        ),
         target_name="target_name_example",
         prediction_context=[
             V1NamedValue(
                 name="name_example",
-                type=V1NamedValueType("TYPE_UNSPECIFIED"),
+                type=Upiv1Type("TYPE_UNSPECIFIED"),
                 double_value=3.14,
                 integer_value="integer_value_example",
                 string_value="string_value_example",
@@ -125,15 +159,18 @@ Class | Method | HTTP request | Description
 
  - [ProtobufAny](docs/ProtobufAny.md)
  - [RpcStatus](docs/RpcStatus.md)
+ - [Upiv1Type](docs/Upiv1Type.md)
+ - [V1Column](docs/V1Column.md)
  - [V1ModelMetadata](docs/V1ModelMetadata.md)
  - [V1NamedValue](docs/V1NamedValue.md)
- - [V1NamedValueType](docs/V1NamedValueType.md)
  - [V1PredictValuesRequest](docs/V1PredictValuesRequest.md)
  - [V1PredictValuesResponse](docs/V1PredictValuesResponse.md)
- - [V1PredictionResultRow](docs/V1PredictionResultRow.md)
- - [V1PredictionRow](docs/V1PredictionRow.md)
  - [V1RequestMetadata](docs/V1RequestMetadata.md)
  - [V1ResponseMetadata](docs/V1ResponseMetadata.md)
+ - [V1Row](docs/V1Row.md)
+ - [V1Table](docs/V1Table.md)
+ - [V1TransformerInput](docs/V1TransformerInput.md)
+ - [V1Value](docs/V1Value.md)
 
 
 ## Documentation For Authorization

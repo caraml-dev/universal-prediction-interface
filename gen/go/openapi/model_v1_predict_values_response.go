@@ -16,7 +16,7 @@ import (
 
 // V1PredictValuesResponse struct for V1PredictValuesResponse
 type V1PredictValuesResponse struct {
-	PredictionResultRows []V1PredictionResultRow `json:"predictionResultRows,omitempty"`
+	PredictionResultTable *V1Table `json:"predictionResultTable,omitempty"`
 	TargetName *string `json:"targetName,omitempty"`
 	PredictionContext []V1NamedValue `json:"predictionContext,omitempty"`
 	Metadata *V1ResponseMetadata `json:"metadata,omitempty"`
@@ -39,36 +39,36 @@ func NewV1PredictValuesResponseWithDefaults() *V1PredictValuesResponse {
 	return &this
 }
 
-// GetPredictionResultRows returns the PredictionResultRows field value if set, zero value otherwise.
-func (o *V1PredictValuesResponse) GetPredictionResultRows() []V1PredictionResultRow {
-	if o == nil || o.PredictionResultRows == nil {
-		var ret []V1PredictionResultRow
+// GetPredictionResultTable returns the PredictionResultTable field value if set, zero value otherwise.
+func (o *V1PredictValuesResponse) GetPredictionResultTable() V1Table {
+	if o == nil || o.PredictionResultTable == nil {
+		var ret V1Table
 		return ret
 	}
-	return o.PredictionResultRows
+	return *o.PredictionResultTable
 }
 
-// GetPredictionResultRowsOk returns a tuple with the PredictionResultRows field value if set, nil otherwise
+// GetPredictionResultTableOk returns a tuple with the PredictionResultTable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *V1PredictValuesResponse) GetPredictionResultRowsOk() ([]V1PredictionResultRow, bool) {
-	if o == nil || o.PredictionResultRows == nil {
+func (o *V1PredictValuesResponse) GetPredictionResultTableOk() (*V1Table, bool) {
+	if o == nil || o.PredictionResultTable == nil {
 		return nil, false
 	}
-	return o.PredictionResultRows, true
+	return o.PredictionResultTable, true
 }
 
-// HasPredictionResultRows returns a boolean if a field has been set.
-func (o *V1PredictValuesResponse) HasPredictionResultRows() bool {
-	if o != nil && o.PredictionResultRows != nil {
+// HasPredictionResultTable returns a boolean if a field has been set.
+func (o *V1PredictValuesResponse) HasPredictionResultTable() bool {
+	if o != nil && o.PredictionResultTable != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetPredictionResultRows gets a reference to the given []V1PredictionResultRow and assigns it to the PredictionResultRows field.
-func (o *V1PredictValuesResponse) SetPredictionResultRows(v []V1PredictionResultRow) {
-	o.PredictionResultRows = v
+// SetPredictionResultTable gets a reference to the given V1Table and assigns it to the PredictionResultTable field.
+func (o *V1PredictValuesResponse) SetPredictionResultTable(v V1Table) {
+	o.PredictionResultTable = &v
 }
 
 // GetTargetName returns the TargetName field value if set, zero value otherwise.
@@ -169,8 +169,8 @@ func (o *V1PredictValuesResponse) SetMetadata(v V1ResponseMetadata) {
 
 func (o V1PredictValuesResponse) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.PredictionResultRows != nil {
-		toSerialize["predictionResultRows"] = o.PredictionResultRows
+	if o.PredictionResultTable != nil {
+		toSerialize["predictionResultTable"] = o.PredictionResultTable
 	}
 	if o.TargetName != nil {
 		toSerialize["targetName"] = o.TargetName

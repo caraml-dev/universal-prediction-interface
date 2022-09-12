@@ -184,8 +184,35 @@
               
               
                 <li>
-                  <a href="#caraml.upi.v1.NamedValue.Type"><span class="badge">E</span>NamedValue.Type</a>
+                  <a href="#caraml.upi.v1.Type"><span class="badge">E</span>Type</a>
                 </li>
+              
+              
+              
+            </ul>
+          </li>
+        
+          
+          <li>
+            <a href="#caraml%2fupi%2fv1%2ftable.proto">caraml/upi/v1/table.proto</a>
+            <ul>
+              
+                <li>
+                  <a href="#caraml.upi.v1.Column"><span class="badge">M</span>Column</a>
+                </li>
+              
+                <li>
+                  <a href="#caraml.upi.v1.Row"><span class="badge">M</span>Row</a>
+                </li>
+              
+                <li>
+                  <a href="#caraml.upi.v1.Table"><span class="badge">M</span>Table</a>
+                </li>
+              
+                <li>
+                  <a href="#caraml.upi.v1.Value"><span class="badge">M</span>Value</a>
+                </li>
+              
               
               
               
@@ -210,19 +237,15 @@
                 </li>
               
                 <li>
-                  <a href="#caraml.upi.v1.PredictionResultRow"><span class="badge">M</span>PredictionResultRow</a>
-                </li>
-              
-                <li>
-                  <a href="#caraml.upi.v1.PredictionRow"><span class="badge">M</span>PredictionRow</a>
-                </li>
-              
-                <li>
                   <a href="#caraml.upi.v1.RequestMetadata"><span class="badge">M</span>RequestMetadata</a>
                 </li>
               
                 <li>
                   <a href="#caraml.upi.v1.ResponseMetadata"><span class="badge">M</span>ResponseMetadata</a>
+                </li>
+              
+                <li>
+                  <a href="#caraml.upi.v1.TransformerInput"><span class="badge">M</span>TransformerInput</a>
                 </li>
               
               
@@ -270,7 +293,7 @@ Uses include:
               
                 <tr>
                   <td>type</td>
-                  <td><a href="#caraml.upi.v1.NamedValue.Type">NamedValue.Type</a></td>
+                  <td><a href="#caraml.upi.v1.Type">Type</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
@@ -305,7 +328,7 @@ Uses include:
       
 
       
-        <h3 id="caraml.upi.v1.NamedValue.Type">NamedValue.Type</h3>
+        <h3 id="caraml.upi.v1.Type">Type</h3>
         <p></p>
         <table class="enum-table">
           <thead>
@@ -339,6 +362,169 @@ Uses include:
             
           </tbody>
         </table>
+      
+
+      
+
+      
+    
+      
+      <div class="file-heading">
+        <h2 id="caraml/upi/v1/table.proto">caraml/upi/v1/table.proto</h2><a href="#title">Top</a>
+      </div>
+      <p></p>
+
+      
+        <h3 id="caraml.upi.v1.Column">Column</h3>
+        <p>Column represent a column definition within a table</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Column&#39;s name </p></td>
+                </tr>
+              
+                <tr>
+                  <td>type</td>
+                  <td><a href="#caraml.upi.v1.Type">Type</a></td>
+                  <td></td>
+                  <td><p>Column&#39;s type </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="caraml.upi.v1.Row">Row</h3>
+        <p>Row represents list of value stored within a row of a table</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>row_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Id of the particular row in a table.
+The row id should be at least locally unique within the table.
+Row ID must be populated for prediction_table </p></td>
+                </tr>
+              
+                <tr>
+                  <td>values</td>
+                  <td><a href="#caraml.upi.v1.Value">Value</a></td>
+                  <td>repeated</td>
+                  <td><p>List of values within a row. 
+It is table&#39;s creator responsibility to ensure that the number of entry 
+values matches with the length of columns in the table. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="caraml.upi.v1.Table">Table</h3>
+        <p>Table represents a 2D data structure that has one or more columns </p><p>with potentially different types</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Table&#39;s name </p></td>
+                </tr>
+              
+                <tr>
+                  <td>columns</td>
+                  <td><a href="#caraml.upi.v1.Column">Column</a></td>
+                  <td>repeated</td>
+                  <td><p>Columns stores schema informations of all columns in the table. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>rows</td>
+                  <td><a href="#caraml.upi.v1.Row">Row</a></td>
+                  <td>repeated</td>
+                  <td><p>Rows stores list of row values in the table. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="caraml.upi.v1.Value">Value</h3>
+        <p>Value of a cell within a table. Value is nullable.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>double_value</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p>One of following field will be set depending on the column&#39;s type </p></td>
+                </tr>
+              
+                <tr>
+                  <td>integer_value</td>
+                  <td><a href="#int64">int64</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>string_value</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>is_null</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Flag to be used to signify that the value is null </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+
       
 
       
@@ -394,12 +580,34 @@ Uses include:
             <tbody>
               
                 <tr>
-                  <td>prediction_rows</td>
-                  <td><a href="#caraml.upi.v1.PredictionRow">PredictionRow</a></td>
-                  <td>repeated</td>
-                  <td><p>Collection of prediction instances to be predicted.
-Each prediction row correspond to one prediction instance.
-NOTE: the ordering of prediction_rows might differ with prediction_result_rows in the response </p></td>
+                  <td>prediction_table</td>
+                  <td><a href="#caraml.upi.v1.Table">Table</a></td>
+                  <td></td>
+                  <td><p>Prediction table contains instances to be predicted.
+Each row in the table correspond to one prediction instance.
+Prediction table should contain all preprocessed feature that model use to perform prediction.
+The column ordering in the prediction table must be the same as feature order expected by model in the case of standard model.
+Prediction table can be populated via 3 ways:
+- By performing preprocessing in the client-side and sent as part of original request.
+- By transforming feature values stored in transformer_inputs.
+- By retrieving precomputed feature value from feature store. 
+Row ID of the prediction_table must be populated by the client and can be used
+to join a row in prediction_table with another row in the prediction_result_table,
+and to track predictions generated by multiple models.
+The user is expected to include row ID (along with prediction ID)
+when calling the observations API so that predictions
+and observations can be joined. 
+NOTE: the ordering of rows might differ in the response but the number of row must remain the same. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>transformer_input</td>
+                  <td><a href="#caraml.upi.v1.TransformerInput">TransformerInput</a></td>
+                  <td></td>
+                  <td><p>Transformer input contains list of tables and variables that can be used to enrich prediction_table using transformer.
+Typically transformer_inputs contains:
+- unprocessed/raw features that requires further transformation. 
+- list of entities for which their precomputed features are retrieved from feature store using standard transformer. </p></td>
                 </tr>
               
                 <tr>
@@ -424,7 +632,7 @@ Eg. country_code, service_type, service_area_id </p></td>
                   <td>metadata</td>
                   <td><a href="#caraml.upi.v1.RequestMetadata">RequestMetadata</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Request metadata </p></td>
                 </tr>
               
             </tbody>
@@ -445,12 +653,12 @@ Eg. country_code, service_type, service_area_id </p></td>
             <tbody>
               
                 <tr>
-                  <td>prediction_result_rows</td>
-                  <td><a href="#caraml.upi.v1.PredictionResultRow">PredictionResultRow</a></td>
-                  <td>repeated</td>
+                  <td>prediction_result_table</td>
+                  <td><a href="#caraml.upi.v1.Table">Table</a></td>
+                  <td></td>
                   <td><p>Prediction results corresponding to the
 prediction rows provided in the request. 
-NOTE: the ordering of prediction_result_rows might differ with prediction_rows in the request </p></td>
+NOTE: the ordering of prediction_result_rows might differ with prediction_table in the request but the number of row must match with the prediction_table </p></td>
                 </tr>
               
                 <tr>
@@ -472,90 +680,6 @@ NOTE: the ordering of prediction_result_rows might differ with prediction_rows i
                   <td><a href="#caraml.upi.v1.ResponseMetadata">ResponseMetadata</a></td>
                   <td></td>
                   <td><p>Response metadata </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="caraml.upi.v1.PredictionResultRow">PredictionResultRow</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>row_id</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Row ID defined by the caller used to join a prediction result with a prediction row </p></td>
-                </tr>
-              
-                <tr>
-                  <td>values</td>
-                  <td><a href="#caraml.upi.v1.NamedValue">NamedValue</a></td>
-                  <td>repeated</td>
-                  <td><p>Represents the predicted values corresponding to a 
-single prediction row. This will often be the output of an ML model.
-This field is repeated to support multi-task models with non-scalar outputs </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="caraml.upi.v1.PredictionRow">PredictionRow</h3>
-        <p>Represents an single instance we wish to predict.</p><p>Eg. for Matchmaking a prediction row will typically</p><p>correspond to a proposed driver plan</p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>row_id</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Row ID is defined by the client and can be used
-to join a prediction row with the prediction result,
-and to track predictions generated by multiple models.
-The user is expected include row ID (along with prediction ID)
-when calling the observations API so that predictions
-and observations can be joined. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>model_inputs</td>
-                  <td><a href="#caraml.upi.v1.NamedValue">NamedValue</a></td>
-                  <td>repeated</td>
-                  <td><p>Model inputs contain all preprocessed feature that model use to perform prediction.
-The feature ordering in model_inputs must be the same as feature order expected by model. 
-Model inputs can be populated via 3 ways:
-- By performing preprocessing in the client-side and sent as part of original request.
-- By transforming raw feature values stored in transformer_inputs.
-- By retrieving precomputed feature value from feature store. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>transformer_inputs</td>
-                  <td><a href="#caraml.upi.v1.NamedValue">NamedValue</a></td>
-                  <td>repeated</td>
-                  <td><p>Transformer input contains raw values that can be used to enrich model_inputs using transformer.
-Typically transformer_inputs contains:
-- unprocessed/raw features that requires further processing. 
-- list of entities for which their precomputed features are retrieved from feature store. </p></td>
                 </tr>
               
             </tbody>
@@ -646,6 +770,39 @@ This field is repeated to cater for use case such as ensembling several model pr
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="caraml.upi.v1.TransformerInput">TransformerInput</h3>
+        <p>Transformer input contains additional information that can be used to enrich prediction_table using standard transformer.</p><p>All tables and variables within transformer input will be imported to the standard transformer runtime automatically.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>tables</td>
+                  <td><a href="#caraml.upi.v1.Table">Table</a></td>
+                  <td>repeated</td>
+                  <td><p>List of tables
+All tables must have unique name.
+Each table doesn&#39;t need to have same number of row. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>variables</td>
+                  <td><a href="#caraml.upi.v1.NamedValue">NamedValue</a></td>
+                  <td>repeated</td>
+                  <td><p>List of variables </p></td>
                 </tr>
               
             </tbody>

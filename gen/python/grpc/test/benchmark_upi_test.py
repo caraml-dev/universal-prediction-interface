@@ -1,14 +1,15 @@
 import json
-import random
 import uuid
-from typing import List
 from google.protobuf.json_format import MessageToDict
 
 import pytest
 
-from caraml.upi.v1 import upi_pb2, value_pb2
+from caraml.upi.utils import df_to_table
+from caraml.upi.v1 import table_pb2, upi_pb2, value_pb2
 
 # represents number of prediction rows x number of prediction values
+from test.benchmark_utils_test import create_df
+
 bench_response_test_cases = [
     (1, 1),
     (1, 10),
@@ -135,18 +136,10 @@ def create_request(n_rows, n_cols) -> upi_pb2.PredictValuesRequest:
     """
     Create PredictValuesRequest with n_rows rows, and n_cols columns (number of features in each model_inputs)
     """
-    rows: List[upi_pb2.PredictionRow] = []
-    for i in range(n_rows):
-        model_inputs: List[value_pb2.NamedValue] = []
-        for y in range(n_cols):
-            model_input = value_pb2.NamedValue(name=f"feature_{y}", type=value_pb2.NamedValue.TYPE_DOUBLE,
-                                               double_value=float(random.randint(0, 1000)))
-            model_inputs.append(model_input)
-        prediction_row = upi_pb2.PredictionRow(row_id=str(uuid.uuid1()), model_inputs=model_inputs)
-        rows.append(prediction_row)
-
+    df = create_df(n_rows, n_cols)
+    table = df_to_table(df, "benchmark-table")
     return upi_pb2.PredictValuesRequest(
-        prediction_rows=rows,
+        prediction_table=table,
         target_name="my-target",
         metadata=upi_pb2.RequestMetadata(
             prediction_id=str(uuid.uuid1())
@@ -158,18 +151,10 @@ def create_response(n_rows, n_cols) -> upi_pb2.PredictValuesResponse:
     """
     Create PredictionRValuesResponse with n_rows rows, and n_cols columns (number of prediction columns)
     """
-    rows: List[upi_pb2.PredictionResultRow] = []
-    for i in range(n_rows):
-        prediction_values: List[value_pb2.NamedValue] = []
-        for y in range(n_cols):
-            prediction_value = value_pb2.NamedValue(name=f"result_{y}", type=value_pb2.NamedValue.TYPE_DOUBLE,
-                                                    double_value=float(random.randint(0, 1000)))
-            prediction_values.append(prediction_value)
-        result_row = upi_pb2.PredictionResultRow(row_id=str(uuid.uuid1()), values=prediction_values)
-        rows.append(result_row)
-
+    df = create_df(n_rows, n_cols)
+    table = df_to_table(df, "benchmark-table")
     return upi_pb2.PredictValuesResponse(
-        prediction_result_rows=rows,
+        prediction_result_table=table,
         target_name="my-target",
         metadata=upi_pb2.ResponseMetadata(
             prediction_id=str(uuid.uuid1())

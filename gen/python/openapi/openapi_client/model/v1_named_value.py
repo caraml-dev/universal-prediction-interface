@@ -30,8 +30,8 @@ from openapi_client.exceptions import ApiAttributeError
 
 
 def lazy_import():
-    from openapi_client.model.v1_named_value_type import V1NamedValueType
-    globals()['V1NamedValueType'] = V1NamedValueType
+    from openapi_client.model.upiv1_type import Upiv1Type
+    globals()['Upiv1Type'] = Upiv1Type
 
 
 class V1NamedValue(ModelNormal):
@@ -88,7 +88,7 @@ class V1NamedValue(ModelNormal):
         lazy_import()
         return {
             'name': (str,),  # noqa: E501
-            'type': (V1NamedValueType,),  # noqa: E501
+            'type': (Upiv1Type,),  # noqa: E501
             'double_value': (float,),  # noqa: E501
             'integer_value': (str,),  # noqa: E501
             'string_value': (str,),  # noqa: E501
@@ -149,7 +149,7 @@ class V1NamedValue(ModelNormal):
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
             name (str): [optional]  # noqa: E501
-            type (V1NamedValueType): [optional]  # noqa: E501
+            type (Upiv1Type): [optional]  # noqa: E501
             double_value (float): [optional]  # noqa: E501
             integer_value (str): [optional]  # noqa: E501
             string_value (str): [optional]  # noqa: E501
@@ -239,7 +239,7 @@ class V1NamedValue(ModelNormal):
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
             name (str): [optional]  # noqa: E501
-            type (V1NamedValueType): [optional]  # noqa: E501
+            type (Upiv1Type): [optional]  # noqa: E501
             double_value (float): [optional]  # noqa: E501
             integer_value (str): [optional]  # noqa: E501
             string_value (str): [optional]  # noqa: E501

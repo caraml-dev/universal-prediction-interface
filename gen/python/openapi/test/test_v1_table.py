@@ -12,11 +12,15 @@ import sys
 import unittest
 
 import openapi_client
-from openapi_client.model.v1_named_value_type import V1NamedValueType
+from openapi_client.model.v1_column import V1Column
+from openapi_client.model.v1_row import V1Row
+globals()['V1Column'] = V1Column
+globals()['V1Row'] = V1Row
+from openapi_client.model.v1_table import V1Table
 
 
-class TestV1NamedValueType(unittest.TestCase):
-    """V1NamedValueType unit test stubs"""
+class TestV1Table(unittest.TestCase):
+    """V1Table unit test stubs"""
 
     def setUp(self):
         pass
@@ -24,10 +28,10 @@ class TestV1NamedValueType(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def testV1NamedValueType(self):
-        """Test V1NamedValueType"""
+    def testV1Table(self):
+        """Test V1Table"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = V1NamedValueType()  # noqa: E501
+        # model = V1Table()  # noqa: E501
         pass
 
 

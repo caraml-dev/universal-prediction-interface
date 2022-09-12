@@ -12,13 +12,11 @@ import sys
 import unittest
 
 import openapi_client
-from openapi_client.model.v1_named_value import V1NamedValue
-globals()['V1NamedValue'] = V1NamedValue
-from openapi_client.model.v1_prediction_result_row import V1PredictionResultRow
+from openapi_client.model.v1_value import V1Value
 
 
-class TestV1PredictionResultRow(unittest.TestCase):
-    """V1PredictionResultRow unit test stubs"""
+class TestV1Value(unittest.TestCase):
+    """V1Value unit test stubs"""
 
     def setUp(self):
         pass
@@ -26,10 +24,10 @@ class TestV1PredictionResultRow(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def testV1PredictionResultRow(self):
-        """Test V1PredictionResultRow"""
+    def testV1Value(self):
+        """Test V1Value"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = V1PredictionResultRow()  # noqa: E501
+        # model = V1Value()  # noqa: E501
         pass
 
 

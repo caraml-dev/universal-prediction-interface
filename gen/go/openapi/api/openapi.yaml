@@ -53,6 +53,26 @@ components:
             $ref: '#/components/schemas/protobufAny'
           type: array
       type: object
+    upiv1Type:
+      default: TYPE_UNSPECIFIED
+      enum:
+      - TYPE_UNSPECIFIED
+      - TYPE_DOUBLE
+      - TYPE_INTEGER
+      - TYPE_STRING
+      type: string
+    v1Column:
+      example:
+        name: name
+        type: null
+      properties:
+        name:
+          title: Column's name
+          type: string
+        type:
+          $ref: '#/components/schemas/upiv1Type'
+      title: Column represent a column definition within a table
+      type: object
     v1ModelMetadata:
       example:
         name: name
@@ -70,7 +90,7 @@ components:
         stringValue: stringValue
         name: name
         integerValue: integerValue
-        doubleValue: 0.8008281904610115
+        doubleValue: 6.027456183070403
         type: null
       properties:
         name:
@@ -82,7 +102,7 @@ components:
             - Parsing metadata to apply traffic rules
           type: string
         type:
-          $ref: '#/components/schemas/v1NamedValueType'
+          $ref: '#/components/schemas/upiv1Type'
         doubleValue:
           format: double
           type: number
@@ -95,23 +115,12 @@ components:
         \ input, output or metdadata.\nOneof types are avoided as these can be difficult\
         \ to handle"
       type: object
-    v1NamedValueType:
-      default: TYPE_UNSPECIFIED
-      enum:
-      - TYPE_UNSPECIFIED
-      - TYPE_DOUBLE
-      - TYPE_INTEGER
-      - TYPE_STRING
-      type: string
     v1PredictValuesRequest:
       properties:
-        predictionRows:
-          items:
-            $ref: '#/components/schemas/v1PredictionRow'
-          title: "Collection of prediction instances to be predicted.\nEach prediction\
-            \ row correspond to one prediction instance.\nNOTE: the ordering of prediction_rows\
-            \ might differ with prediction_result_rows in the response"
-          type: array
+        predictionTable:
+          $ref: '#/components/schemas/v1Table'
+        transformerInput:
+          $ref: '#/components/schemas/v1TransformerInput'
         targetName:
           title: |-
             Name of the concept we wish to predict.
@@ -131,6 +140,34 @@ components:
       type: object
     v1PredictValuesResponse:
       example:
+        predictionResultTable:
+          columns:
+          - name: name
+            type: null
+          - name: name
+            type: null
+          name: name
+          rows:
+          - values:
+            - stringValue: stringValue
+              isNull: true
+              integerValue: integerValue
+              doubleValue: 0.8008281904610115
+            - stringValue: stringValue
+              isNull: true
+              integerValue: integerValue
+              doubleValue: 0.8008281904610115
+            rowId: rowId
+          - values:
+            - stringValue: stringValue
+              isNull: true
+              integerValue: integerValue
+              doubleValue: 0.8008281904610115
+            - stringValue: stringValue
+              isNull: true
+              integerValue: integerValue
+              doubleValue: 0.8008281904610115
+            rowId: rowId
         targetName: targetName
         metadata:
           models:
@@ -145,46 +182,16 @@ components:
         - stringValue: stringValue
           name: name
           integerValue: integerValue
-          doubleValue: 0.8008281904610115
+          doubleValue: 6.027456183070403
           type: null
         - stringValue: stringValue
           name: name
           integerValue: integerValue
-          doubleValue: 0.8008281904610115
+          doubleValue: 6.027456183070403
           type: null
-        predictionResultRows:
-        - values:
-          - stringValue: stringValue
-            name: name
-            integerValue: integerValue
-            doubleValue: 0.8008281904610115
-            type: null
-          - stringValue: stringValue
-            name: name
-            integerValue: integerValue
-            doubleValue: 0.8008281904610115
-            type: null
-          rowId: rowId
-        - values:
-          - stringValue: stringValue
-            name: name
-            integerValue: integerValue
-            doubleValue: 0.8008281904610115
-            type: null
-          - stringValue: stringValue
-            name: name
-            integerValue: integerValue
-            doubleValue: 0.8008281904610115
-            type: null
-          rowId: rowId
       properties:
-        predictionResultRows:
-          items:
-            $ref: '#/components/schemas/v1PredictionResultRow'
-          title: "Prediction results corresponding to the\nprediction rows provided\
-            \ in the request. \nNOTE: the ordering of prediction_result_rows might\
-            \ differ with prediction_rows in the request"
-          type: array
+        predictionResultTable:
+          $ref: '#/components/schemas/v1Table'
         targetName:
           title: Target name as defined in the request metadata
           type: string
@@ -195,67 +202,6 @@ components:
           type: array
         metadata:
           $ref: '#/components/schemas/v1ResponseMetadata'
-      type: object
-    v1PredictionResultRow:
-      example:
-        values:
-        - stringValue: stringValue
-          name: name
-          integerValue: integerValue
-          doubleValue: 0.8008281904610115
-          type: null
-        - stringValue: stringValue
-          name: name
-          integerValue: integerValue
-          doubleValue: 0.8008281904610115
-          type: null
-        rowId: rowId
-      properties:
-        rowId:
-          title: Row ID defined by the caller used to join a prediction result with
-            a prediction row
-          type: string
-        values:
-          items:
-            $ref: '#/components/schemas/v1NamedValue'
-          title: "Represents the predicted values corresponding to a \nsingle prediction\
-            \ row. This will often be the output of an ML model.\nThis field is repeated\
-            \ to support multi-task models with non-scalar outputs"
-          type: array
-      type: object
-    v1PredictionRow:
-      properties:
-        rowId:
-          description: "Row ID is defined by the client and can be used\nto join a\
-            \ prediction row with the prediction result,\nand to track predictions\
-            \ generated by multiple models.\nThe user is expected include row ID (along\
-            \ with prediction ID)\nwhen calling the observations API so that predictions\n\
-            and observations can be joined."
-          type: string
-        modelInputs:
-          description: "Model inputs contain all preprocessed feature that model use\
-            \ to perform prediction.\nThe feature ordering in model_inputs must be\
-            \ the same as feature order expected by model. \nModel inputs can be populated\
-            \ via 3 ways:\n- By performing preprocessing in the client-side and sent\
-            \ as part of original request.\n- By transforming raw feature values stored\
-            \ in transformer_inputs.\n- By retrieving precomputed feature value from\
-            \ feature store."
-          items:
-            $ref: '#/components/schemas/v1NamedValue'
-          type: array
-        transformerInputs:
-          description: "Transformer input contains raw values that can be used to\
-            \ enrich model_inputs using transformer.\nTypically transformer_inputs\
-            \ contains:\n- unprocessed/raw features that requires further processing.\
-            \ \n- list of entities for which their precomputed features are retrieved\
-            \ from feature store."
-          items:
-            $ref: '#/components/schemas/v1NamedValue'
-          type: array
-      title: |-
-        Represents an single instance we wish to predict.
-        Eg. for Matchmaking a prediction row will typically
-        correspond to a proposed driver plan
       type: object
     v1RequestMetadata:
       properties:
@@ -305,5 +251,119 @@ components:
           type: string
         treatmentId:
           type: string
+      type: object
+    v1Row:
+      example:
+        values:
+        - stringValue: stringValue
+          isNull: true
+          integerValue: integerValue
+          doubleValue: 0.8008281904610115
+        - stringValue: stringValue
+          isNull: true
+          integerValue: integerValue
+          doubleValue: 0.8008281904610115
+        rowId: rowId
+      properties:
+        rowId:
+          title: |-
+            Id of the particular row in a table.
+            The row id should be at least locally unique within the table.
+            Row ID must be populated for prediction_table
+          type: string
+        values:
+          description: "List of values within a row. \nIt is table's creator responsibility\
+            \ to ensure that the number of entry \nvalues matches with the length\
+            \ of columns in the table."
+          items:
+            $ref: '#/components/schemas/v1Value'
+          type: array
+      title: Row represents list of value stored within a row of a table
+      type: object
+    v1Table:
+      example:
+        columns:
+        - name: name
+          type: null
+        - name: name
+          type: null
+        name: name
+        rows:
+        - values:
+          - stringValue: stringValue
+            isNull: true
+            integerValue: integerValue
+            doubleValue: 0.8008281904610115
+          - stringValue: stringValue
+            isNull: true
+            integerValue: integerValue
+            doubleValue: 0.8008281904610115
+          rowId: rowId
+        - values:
+          - stringValue: stringValue
+            isNull: true
+            integerValue: integerValue
+            doubleValue: 0.8008281904610115
+          - stringValue: stringValue
+            isNull: true
+            integerValue: integerValue
+            doubleValue: 0.8008281904610115
+          rowId: rowId
+      properties:
+        name:
+          title: Table's name
+          type: string
+        columns:
+          description: Columns stores schema informations of all columns in the table.
+          items:
+            $ref: '#/components/schemas/v1Column'
+          type: array
+        rows:
+          description: Rows stores list of row values in the table.
+          items:
+            $ref: '#/components/schemas/v1Row'
+          type: array
+      title: "Table represents a 2D data structure that has one or more columns \n\
+        with potentially different types"
+      type: object
+    v1TransformerInput:
+      description: |-
+        Transformer input contains additional information that can be used to enrich prediction_table using standard transformer.
+        All tables and variables within transformer input will be imported to the standard transformer runtime automatically.
+      properties:
+        tables:
+          description: |-
+            List of tables
+            All tables must have unique name.
+            Each table doesn't need to have same number of row.
+          items:
+            $ref: '#/components/schemas/v1Table'
+          type: array
+        variables:
+          items:
+            $ref: '#/components/schemas/v1NamedValue'
+          title: List of variables
+          type: array
+      type: object
+    v1Value:
+      description: Value of a cell within a table. Value is nullable.
+      example:
+        stringValue: stringValue
+        isNull: true
+        integerValue: integerValue
+        doubleValue: 0.8008281904610115
+      properties:
+        doubleValue:
+          format: double
+          title: One of following field will be set depending on the column's type
+          type: number
+        integerValue:
+          format: int64
+          type: string
+        stringValue:
+          type: string
+        isNull:
+          title: Flag to be used to signify that the value is null
+          type: boolean
       type: object
 x-original-swagger-version: "2.0"

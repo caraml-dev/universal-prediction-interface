@@ -2,6 +2,14 @@ syntax = "proto3";
 
 package caraml.upi.v1;
 
+
+enum Type {
+   TYPE_UNSPECIFIED = 0;
+   TYPE_DOUBLE = 1;
+   TYPE_INTEGER = 2;
+   TYPE_STRING = 3;
+}
+
 // Represents a named and typed data point.
 // Can be used as a prediction input, output or metdadata.
 // Oneof types are avoided as these can be difficult to handle
@@ -12,13 +20,6 @@ message NamedValue {
    // - Defining a Feast row entity name
    // - Parsing metadata to apply traffic rules
    string name = 1;
-
-   enum Type {
-    TYPE_UNSPECIFIED = 0;
-    TYPE_DOUBLE = 1;
-    TYPE_INTEGER = 2;
-    TYPE_STRING = 3;
-   }
    Type type = 2;
    double double_value = 3;
    int64 integer_value = 4;
