@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package caraml.upi.v1;
 
-import "caraml/upi/v1/value.proto";
+import "caraml/upi/v1/type.proto";
 
 
 // Table represents a 2D data structure that has one or more columns 
@@ -46,5 +46,5 @@ message Value {
 
     // Flag to be used to signify that the value is null
     bool is_null = 10;
- }
+}
  

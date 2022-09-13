@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package caraml.upi.v1;
 
-import "caraml/upi/v1/value.proto";
+import "caraml/upi/v1/variable.proto";
 import "caraml/upi/v1/table.proto";
 import "google/protobuf/timestamp.proto";
 import "google/api/annotations.proto";
@@ -51,7 +51,7 @@ message PredictValuesRequest {
   // For example it can be used to store information for traffic rules, experimentation
   // or tracking purposes.
   // Eg. country_code, service_type, service_area_id 
-  repeated NamedValue prediction_context = 3;
+  repeated Variable prediction_contexts = 3;
 
   // Request metadata
   RequestMetadata metadata = 10;
@@ -83,7 +83,7 @@ message PredictValuesResponse {
   string target_name = 2;
 
   // Extensible field to cover unforeseen requirements
-  repeated NamedValue prediction_context = 3;
+  repeated Variable prediction_contexts = 3;
 
   // Response metadata
   ResponseMetadata metadata = 10;
@@ -123,5 +123,5 @@ message TransformerInput {
    // Each table doesn't need to have same number of row.
    repeated Table tables = 1;  
    // List of variables
-   repeated NamedValue variables = 2;
+   repeated Variable variables = 2;
 }

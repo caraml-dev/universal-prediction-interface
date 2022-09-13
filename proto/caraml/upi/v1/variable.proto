@@ -2,25 +2,23 @@ syntax = "proto3";
 
 package caraml.upi.v1;
 
-
-enum Type {
-   TYPE_UNSPECIFIED = 0;
-   TYPE_DOUBLE = 1;
-   TYPE_INTEGER = 2;
-   TYPE_STRING = 3;
-}
+import "caraml/upi/v1/type.proto";
 
 // Represents a named and typed data point.
-// Can be used as a prediction input, output or metdadata.
+// Can be used as a prediction input, output or metadata.
 // Oneof types are avoided as these can be difficult to handle
-message NamedValue {
+message Variable {
    // Name describing what the value represents.
    // Uses include:
    // - Ensuring ML models process columns in the correct order
    // - Defining a Feast row entity name
    // - Parsing metadata to apply traffic rules
    string name = 1;
+
+   // Type of the variable
    Type type = 2;
+
+   // One of the following field will be set depending on the type
    double double_value = 3;
    int64 integer_value = 4;
    string string_value = 5;
