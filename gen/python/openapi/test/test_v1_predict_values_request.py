@@ -12,14 +12,14 @@ import sys
 import unittest
 
 import openapi_client
-from openapi_client.model.v1_named_value import V1NamedValue
 from openapi_client.model.v1_request_metadata import V1RequestMetadata
 from openapi_client.model.v1_table import V1Table
 from openapi_client.model.v1_transformer_input import V1TransformerInput
-globals()['V1NamedValue'] = V1NamedValue
+from openapi_client.model.v1_variable import V1Variable
 globals()['V1RequestMetadata'] = V1RequestMetadata
 globals()['V1Table'] = V1Table
 globals()['V1TransformerInput'] = V1TransformerInput
+globals()['V1Variable'] = V1Variable
 from openapi_client.model.v1_predict_values_request import V1PredictValuesRequest
 
 
