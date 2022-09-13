@@ -19,7 +19,7 @@ type V1PredictValuesRequest struct {
 	PredictionTable *V1Table `json:"predictionTable,omitempty"`
 	TransformerInput *V1TransformerInput `json:"transformerInput,omitempty"`
 	TargetName *string `json:"targetName,omitempty"`
-	PredictionContext []V1NamedValue `json:"predictionContext,omitempty"`
+	PredictionContexts []V1Variable `json:"predictionContexts,omitempty"`
 	Metadata *V1RequestMetadata `json:"metadata,omitempty"`
 }
 
@@ -136,36 +136,36 @@ func (o *V1PredictValuesRequest) SetTargetName(v string) {
 	o.TargetName = &v
 }
 
-// GetPredictionContext returns the PredictionContext field value if set, zero value otherwise.
-func (o *V1PredictValuesRequest) GetPredictionContext() []V1NamedValue {
-	if o == nil || o.PredictionContext == nil {
-		var ret []V1NamedValue
+// GetPredictionContexts returns the PredictionContexts field value if set, zero value otherwise.
+func (o *V1PredictValuesRequest) GetPredictionContexts() []V1Variable {
+	if o == nil || o.PredictionContexts == nil {
+		var ret []V1Variable
 		return ret
 	}
-	return o.PredictionContext
+	return o.PredictionContexts
 }
 
-// GetPredictionContextOk returns a tuple with the PredictionContext field value if set, nil otherwise
+// GetPredictionContextsOk returns a tuple with the PredictionContexts field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *V1PredictValuesRequest) GetPredictionContextOk() ([]V1NamedValue, bool) {
-	if o == nil || o.PredictionContext == nil {
+func (o *V1PredictValuesRequest) GetPredictionContextsOk() ([]V1Variable, bool) {
+	if o == nil || o.PredictionContexts == nil {
 		return nil, false
 	}
-	return o.PredictionContext, true
+	return o.PredictionContexts, true
 }
 
-// HasPredictionContext returns a boolean if a field has been set.
-func (o *V1PredictValuesRequest) HasPredictionContext() bool {
-	if o != nil && o.PredictionContext != nil {
+// HasPredictionContexts returns a boolean if a field has been set.
+func (o *V1PredictValuesRequest) HasPredictionContexts() bool {
+	if o != nil && o.PredictionContexts != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetPredictionContext gets a reference to the given []V1NamedValue and assigns it to the PredictionContext field.
-func (o *V1PredictValuesRequest) SetPredictionContext(v []V1NamedValue) {
-	o.PredictionContext = v
+// SetPredictionContexts gets a reference to the given []V1Variable and assigns it to the PredictionContexts field.
+func (o *V1PredictValuesRequest) SetPredictionContexts(v []V1Variable) {
+	o.PredictionContexts = v
 }
 
 // GetMetadata returns the Metadata field value if set, zero value otherwise.
@@ -211,8 +211,8 @@ func (o V1PredictValuesRequest) MarshalJSON() ([]byte, error) {
 	if o.TargetName != nil {
 		toSerialize["targetName"] = o.TargetName
 	}
-	if o.PredictionContext != nil {
-		toSerialize["predictionContext"] = o.PredictionContext
+	if o.PredictionContexts != nil {
+		toSerialize["predictionContexts"] = o.PredictionContexts
 	}
 	if o.Metadata != nil {
 		toSerialize["metadata"] = o.Metadata

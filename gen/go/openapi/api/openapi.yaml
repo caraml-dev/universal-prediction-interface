@@ -55,11 +55,14 @@ components:
       type: object
     upiv1Type:
       default: TYPE_UNSPECIFIED
+      description: "- TYPE_DOUBLE: Double precision floating number (64-bit)\n - TYPE_INTEGER:\
+        \ 64-bit Integer\n - TYPE_STRING: String"
       enum:
       - TYPE_UNSPECIFIED
       - TYPE_DOUBLE
       - TYPE_INTEGER
       - TYPE_STRING
+      title: Type supported by UPI
       type: string
     v1Column:
       example:
@@ -85,36 +88,6 @@ components:
           title: Model version that produce prediction
           type: string
       type: object
-    v1NamedValue:
-      example:
-        stringValue: stringValue
-        name: name
-        integerValue: integerValue
-        doubleValue: 6.027456183070403
-        type: null
-      properties:
-        name:
-          title: |-
-            Name describing what the value represents.
-            Uses include:
-            - Ensuring ML models process columns in the correct order
-            - Defining a Feast row entity name
-            - Parsing metadata to apply traffic rules
-          type: string
-        type:
-          $ref: '#/components/schemas/upiv1Type'
-        doubleValue:
-          format: double
-          type: number
-        integerValue:
-          format: int64
-          type: string
-        stringValue:
-          type: string
-      title: "Represents a named and typed data point.\nCan be used as a prediction\
-        \ input, output or metdadata.\nOneof types are avoided as these can be difficult\
-        \ to handle"
-      type: object
     v1PredictValuesRequest:
       properties:
         predictionTable:
@@ -126,9 +99,9 @@ components:
             Name of the concept we wish to predict.
             For example in context of iris classification problem it can be "iris-species"
           type: string
-        predictionContext:
+        predictionContexts:
           items:
-            $ref: '#/components/schemas/v1NamedValue'
+            $ref: '#/components/schemas/v1Variable'
           title: "Prediction context may contain additional data applicable to all\
             \ prediction instances\nFor example it can be used to store information\
             \ for traffic rules, experimentation\nor tracking purposes.\nEg. country_code,\
@@ -168,6 +141,17 @@ components:
               integerValue: integerValue
               doubleValue: 0.8008281904610115
             rowId: rowId
+        predictionContexts:
+        - stringValue: stringValue
+          name: name
+          integerValue: integerValue
+          doubleValue: 6.027456183070403
+          type: null
+        - stringValue: stringValue
+          name: name
+          integerValue: integerValue
+          doubleValue: 6.027456183070403
+          type: null
         targetName: targetName
         metadata:
           models:
@@ -178,26 +162,15 @@ components:
           experimentId: experimentId
           predictionId: predictionId
           treatmentId: treatmentId
-        predictionContext:
-        - stringValue: stringValue
-          name: name
-          integerValue: integerValue
-          doubleValue: 6.027456183070403
-          type: null
-        - stringValue: stringValue
-          name: name
-          integerValue: integerValue
-          doubleValue: 6.027456183070403
-          type: null
       properties:
         predictionResultTable:
           $ref: '#/components/schemas/v1Table'
         targetName:
           title: Target name as defined in the request metadata
           type: string
-        predictionContext:
+        predictionContexts:
           items:
-            $ref: '#/components/schemas/v1NamedValue'
+            $ref: '#/components/schemas/v1Variable'
           title: Extensible field to cover unforeseen requirements
           type: array
         metadata:
@@ -341,7 +314,7 @@ components:
           type: array
         variables:
           items:
-            $ref: '#/components/schemas/v1NamedValue'
+            $ref: '#/components/schemas/v1Variable'
           title: List of variables
           type: array
       type: object
@@ -365,5 +338,36 @@ components:
         isNull:
           title: Flag to be used to signify that the value is null
           type: boolean
+      type: object
+    v1Variable:
+      example:
+        stringValue: stringValue
+        name: name
+        integerValue: integerValue
+        doubleValue: 6.027456183070403
+        type: null
+      properties:
+        name:
+          title: |-
+            Name describing what the value represents.
+            Uses include:
+            - Ensuring ML models process columns in the correct order
+            - Defining a Feast row entity name
+            - Parsing metadata to apply traffic rules
+          type: string
+        type:
+          $ref: '#/components/schemas/upiv1Type'
+        doubleValue:
+          format: double
+          title: One of the following field will be set depending on the type
+          type: number
+        integerValue:
+          format: int64
+          type: string
+        stringValue:
+          type: string
+      title: "Represents a named and typed data point.\nCan be used as a prediction\
+        \ input, output or metadata.\nOneof types are avoided as these can be difficult\
+        \ to handle"
       type: object
 x-original-swagger-version: "2.0"
