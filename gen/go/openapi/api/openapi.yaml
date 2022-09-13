@@ -99,7 +99,7 @@ components:
             Name of the concept we wish to predict.
             For example in context of iris classification problem it can be "iris-species"
           type: string
-        predictionContexts:
+        predictionContext:
           items:
             $ref: '#/components/schemas/v1Variable'
           title: "Prediction context may contain additional data applicable to all\
@@ -141,17 +141,6 @@ components:
               integerValue: integerValue
               doubleValue: 0.8008281904610115
             rowId: rowId
-        predictionContexts:
-        - stringValue: stringValue
-          name: name
-          integerValue: integerValue
-          doubleValue: 6.027456183070403
-          type: null
-        - stringValue: stringValue
-          name: name
-          integerValue: integerValue
-          doubleValue: 6.027456183070403
-          type: null
         targetName: targetName
         metadata:
           models:
@@ -162,13 +151,24 @@ components:
           experimentId: experimentId
           predictionId: predictionId
           treatmentId: treatmentId
+        predictionContext:
+        - stringValue: stringValue
+          name: name
+          integerValue: integerValue
+          doubleValue: 6.027456183070403
+          type: null
+        - stringValue: stringValue
+          name: name
+          integerValue: integerValue
+          doubleValue: 6.027456183070403
+          type: null
       properties:
         predictionResultTable:
           $ref: '#/components/schemas/v1Table'
         targetName:
           title: Target name as defined in the request metadata
           type: string
-        predictionContexts:
+        predictionContext:
           items:
             $ref: '#/components/schemas/v1Variable'
           title: Extensible field to cover unforeseen requirements

@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **PredictionTable** | Pointer to [**V1Table**](V1Table.md) |  | [optional] 
 **TransformerInput** | Pointer to [**V1TransformerInput**](V1TransformerInput.md) |  | [optional] 
 **TargetName** | Pointer to **string** |  | [optional] 
-**PredictionContexts** | Pointer to [**[]V1Variable**](V1Variable.md) |  | [optional] 
+**PredictionContext** | Pointer to [**[]V1Variable**](V1Variable.md) |  | [optional] 
 **Metadata** | Pointer to [**V1RequestMetadata**](V1RequestMetadata.md) |  | [optional] 
 
 ## Methods
@@ -104,30 +104,30 @@ SetTargetName sets TargetName field to given value.
 
 HasTargetName returns a boolean if a field has been set.
 
-### GetPredictionContexts
+### GetPredictionContext
 
-`func (o *V1PredictValuesRequest) GetPredictionContexts() []V1Variable`
+`func (o *V1PredictValuesRequest) GetPredictionContext() []V1Variable`
 
-GetPredictionContexts returns the PredictionContexts field if non-nil, zero value otherwise.
+GetPredictionContext returns the PredictionContext field if non-nil, zero value otherwise.
 
-### GetPredictionContextsOk
+### GetPredictionContextOk
 
-`func (o *V1PredictValuesRequest) GetPredictionContextsOk() (*[]V1Variable, bool)`
+`func (o *V1PredictValuesRequest) GetPredictionContextOk() (*[]V1Variable, bool)`
 
-GetPredictionContextsOk returns a tuple with the PredictionContexts field if it's non-nil, zero value otherwise
+GetPredictionContextOk returns a tuple with the PredictionContext field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetPredictionContexts
+### SetPredictionContext
 
-`func (o *V1PredictValuesRequest) SetPredictionContexts(v []V1Variable)`
+`func (o *V1PredictValuesRequest) SetPredictionContext(v []V1Variable)`
 
-SetPredictionContexts sets PredictionContexts field to given value.
+SetPredictionContext sets PredictionContext field to given value.
 
-### HasPredictionContexts
+### HasPredictionContext
 
-`func (o *V1PredictValuesRequest) HasPredictionContexts() bool`
+`func (o *V1PredictValuesRequest) HasPredictionContext() bool`
 
-HasPredictionContexts returns a boolean if a field has been set.
+HasPredictionContext returns a boolean if a field has been set.
 
 ### GetMetadata
 
