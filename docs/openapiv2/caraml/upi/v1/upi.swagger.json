@@ -131,7 +131,7 @@
           "type": "string",
           "title": "Name of the concept we wish to predict.\nFor example in context of iris classification problem it can be \"iris-species\""
         },
-        "predictionContexts": {
+        "predictionContext": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/v1Variable"
@@ -156,7 +156,7 @@
           "type": "string",
           "title": "Target name as defined in the request metadata"
         },
-        "predictionContexts": {
+        "predictionContext": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/v1Variable"
