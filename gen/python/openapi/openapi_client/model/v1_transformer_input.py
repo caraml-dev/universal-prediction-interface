@@ -30,10 +30,10 @@ from openapi_client.exceptions import ApiAttributeError
 
 
 def lazy_import():
-    from openapi_client.model.v1_named_value import V1NamedValue
     from openapi_client.model.v1_table import V1Table
-    globals()['V1NamedValue'] = V1NamedValue
+    from openapi_client.model.v1_variable import V1Variable
     globals()['V1Table'] = V1Table
+    globals()['V1Variable'] = V1Variable
 
 
 class V1TransformerInput(ModelNormal):
@@ -90,7 +90,7 @@ class V1TransformerInput(ModelNormal):
         lazy_import()
         return {
             'tables': ([V1Table],),  # noqa: E501
-            'variables': ([V1NamedValue],),  # noqa: E501
+            'variables': ([V1Variable],),  # noqa: E501
         }
 
     @cached_property
@@ -145,7 +145,7 @@ class V1TransformerInput(ModelNormal):
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
             tables ([V1Table]): List of tables All tables must have unique name. Each table doesn't need to have same number of row.. [optional]  # noqa: E501
-            variables ([V1NamedValue]): [optional]  # noqa: E501
+            variables ([V1Variable]): [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -232,7 +232,7 @@ class V1TransformerInput(ModelNormal):
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
             tables ([V1Table]): List of tables All tables must have unique name. Each table doesn't need to have same number of row.. [optional]  # noqa: E501
-            variables ([V1NamedValue]): [optional]  # noqa: E501
+            variables ([V1Variable]): [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)

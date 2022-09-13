@@ -83,7 +83,7 @@ with openapi_client.ApiClient() as api_client:
                 ),
             ],
             variables=[
-                V1NamedValue(
+                V1Variable(
                     name="name_example",
                     type=Upiv1Type("TYPE_UNSPECIFIED"),
                     double_value=3.14,
@@ -93,8 +93,8 @@ with openapi_client.ApiClient() as api_client:
             ],
         ),
         target_name="target_name_example",
-        prediction_context=[
-            V1NamedValue(
+        prediction_contexts=[
+            V1Variable(
                 name="name_example",
                 type=Upiv1Type("TYPE_UNSPECIFIED"),
                 double_value=3.14,
