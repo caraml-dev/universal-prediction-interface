@@ -124,7 +124,7 @@ with openapi_client.ApiClient(configuration) as api_client:
             ],
         ),
         target_name="target_name_example",
-        prediction_contexts=[
+        prediction_context=[
             V1Variable(
                 name="name_example",
                 type=Upiv1Type("TYPE_UNSPECIFIED"),

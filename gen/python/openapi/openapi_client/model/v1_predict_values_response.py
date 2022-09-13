@@ -93,7 +93,7 @@ class V1PredictValuesResponse(ModelNormal):
         return {
             'prediction_result_table': (V1Table,),  # noqa: E501
             'target_name': (str,),  # noqa: E501
-            'prediction_contexts': ([V1Variable],),  # noqa: E501
+            'prediction_context': ([V1Variable],),  # noqa: E501
             'metadata': (V1ResponseMetadata,),  # noqa: E501
         }
 
@@ -105,7 +105,7 @@ class V1PredictValuesResponse(ModelNormal):
     attribute_map = {
         'prediction_result_table': 'predictionResultTable',  # noqa: E501
         'target_name': 'targetName',  # noqa: E501
-        'prediction_contexts': 'predictionContexts',  # noqa: E501
+        'prediction_context': 'predictionContext',  # noqa: E501
         'metadata': 'metadata',  # noqa: E501
     }
 
@@ -152,7 +152,7 @@ class V1PredictValuesResponse(ModelNormal):
                                 _visited_composed_classes = (Animal,)
             prediction_result_table (V1Table): [optional]  # noqa: E501
             target_name (str): [optional]  # noqa: E501
-            prediction_contexts ([V1Variable]): [optional]  # noqa: E501
+            prediction_context ([V1Variable]): [optional]  # noqa: E501
             metadata (V1ResponseMetadata): [optional]  # noqa: E501
         """
 
@@ -241,7 +241,7 @@ class V1PredictValuesResponse(ModelNormal):
                                 _visited_composed_classes = (Animal,)
             prediction_result_table (V1Table): [optional]  # noqa: E501
             target_name (str): [optional]  # noqa: E501
-            prediction_contexts ([V1Variable]): [optional]  # noqa: E501
+            prediction_context ([V1Variable]): [optional]  # noqa: E501
             metadata (V1ResponseMetadata): [optional]  # noqa: E501
         """
 

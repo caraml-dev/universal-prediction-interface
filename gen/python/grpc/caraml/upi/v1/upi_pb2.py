@@ -18,7 +18,7 @@ from google.protobuf import timestamp_pb2 as google_dot_protobuf_dot_timestamp__
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x17\x63\x61raml/upi/v1/upi.proto\x12\rcaraml.upi.v1\x1a\x1c\x63\x61raml/upi/v1/variable.proto\x1a\x19\x63\x61raml/upi/v1/table.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/api/annotations.proto\"\xcc\x02\n\x14PredictValuesRequest\x12?\n\x10prediction_table\x18\x01 \x01(\x0b\x32\x14.caraml.upi.v1.TableR\x0fpredictionTable\x12L\n\x11transformer_input\x18\x04 \x01(\x0b\x32\x1f.caraml.upi.v1.TransformerInputR\x10transformerInput\x12\x1f\n\x0btarget_name\x18\x02 \x01(\tR\ntargetName\x12H\n\x13prediction_contexts\x18\x03 \x03(\x0b\x32\x17.caraml.upi.v1.VariableR\x12predictionContexts\x12:\n\x08metadata\x18\n \x01(\x0b\x32\x1e.caraml.upi.v1.RequestMetadataR\x08metadata\"\x7f\n\x0fRequestMetadata\x12#\n\rprediction_id\x18\x01 \x01(\tR\x0cpredictionId\x12G\n\x11request_timestamp\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.TimestampR\x10requestTimestamp\"\x8d\x02\n\x15PredictValuesResponse\x12L\n\x17prediction_result_table\x18\x01 \x01(\x0b\x32\x14.caraml.upi.v1.TableR\x15predictionResultTable\x12\x1f\n\x0btarget_name\x18\x02 \x01(\tR\ntargetName\x12H\n\x13prediction_contexts\x18\x03 \x03(\x0b\x32\x17.caraml.upi.v1.VariableR\x12predictionContexts\x12;\n\x08metadata\x18\n \x01(\x0b\x32\x1f.caraml.upi.v1.ResponseMetadataR\x08metadata\"\xb5\x01\n\x10ResponseMetadata\x12#\n\rprediction_id\x18\x01 \x01(\tR\x0cpredictionId\x12\x34\n\x06models\x18\x02 \x03(\x0b\x32\x1c.caraml.upi.v1.ModelMetadataR\x06models\x12#\n\rexperiment_id\x18\x03 \x01(\tR\x0c\x65xperimentId\x12!\n\x0ctreatment_id\x18\x04 \x01(\tR\x0btreatmentId\"=\n\rModelMetadata\x12\x12\n\x04name\x18\x01 \x01(\tR\x04name\x12\x18\n\x07version\x18\x02 \x01(\tR\x07version\"w\n\x10TransformerInput\x12,\n\x06tables\x18\x01 \x03(\x0b\x32\x14.caraml.upi.v1.TableR\x06tables\x12\x35\n\tvariables\x18\x02 \x03(\x0b\x32\x17.caraml.upi.v1.VariableR\tvariables2\x90\x01\n\x1aUniversalPredictionService\x12r\n\rPredictValues\x12#.caraml.upi.v1.PredictValuesRequest\x1a$.caraml.upi.v1.PredictValuesResponse\"\x16\x82\xd3\xe4\x93\x02\x10:\x01*\"\x0b/v1/predictB\xc4\x01\n\x11\x63om.caraml.upi.v1B\x08UpiProtoP\x01ZOgithub.com/caraml-dev/universal-prediction-interface/gen/go/caraml/upi/v1;upiv1\xa2\x02\x03\x43UX\xaa\x02\rCaraml.Upi.V1\xca\x02\rCaraml\\Upi\\V1\xe2\x02\x19\x43\x61raml\\Upi\\V1\\GPBMetadata\xea\x02\x0f\x43\x61raml::Upi::V1b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x17\x63\x61raml/upi/v1/upi.proto\x12\rcaraml.upi.v1\x1a\x1c\x63\x61raml/upi/v1/variable.proto\x1a\x19\x63\x61raml/upi/v1/table.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/api/annotations.proto\"\xca\x02\n\x14PredictValuesRequest\x12?\n\x10prediction_table\x18\x01 \x01(\x0b\x32\x14.caraml.upi.v1.TableR\x0fpredictionTable\x12L\n\x11transformer_input\x18\x04 \x01(\x0b\x32\x1f.caraml.upi.v1.TransformerInputR\x10transformerInput\x12\x1f\n\x0btarget_name\x18\x02 \x01(\tR\ntargetName\x12\x46\n\x12prediction_context\x18\x03 \x03(\x0b\x32\x17.caraml.upi.v1.VariableR\x11predictionContext\x12:\n\x08metadata\x18\n \x01(\x0b\x32\x1e.caraml.upi.v1.RequestMetadataR\x08metadata\"\x7f\n\x0fRequestMetadata\x12#\n\rprediction_id\x18\x01 \x01(\tR\x0cpredictionId\x12G\n\x11request_timestamp\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.TimestampR\x10requestTimestamp\"\x8b\x02\n\x15PredictValuesResponse\x12L\n\x17prediction_result_table\x18\x01 \x01(\x0b\x32\x14.caraml.upi.v1.TableR\x15predictionResultTable\x12\x1f\n\x0btarget_name\x18\x02 \x01(\tR\ntargetName\x12\x46\n\x12prediction_context\x18\x03 \x03(\x0b\x32\x17.caraml.upi.v1.VariableR\x11predictionContext\x12;\n\x08metadata\x18\n \x01(\x0b\x32\x1f.caraml.upi.v1.ResponseMetadataR\x08metadata\"\xb5\x01\n\x10ResponseMetadata\x12#\n\rprediction_id\x18\x01 \x01(\tR\x0cpredictionId\x12\x34\n\x06models\x18\x02 \x03(\x0b\x32\x1c.caraml.upi.v1.ModelMetadataR\x06models\x12#\n\rexperiment_id\x18\x03 \x01(\tR\x0c\x65xperimentId\x12!\n\x0ctreatment_id\x18\x04 \x01(\tR\x0btreatmentId\"=\n\rModelMetadata\x12\x12\n\x04name\x18\x01 \x01(\tR\x04name\x12\x18\n\x07version\x18\x02 \x01(\tR\x07version\"w\n\x10TransformerInput\x12,\n\x06tables\x18\x01 \x03(\x0b\x32\x14.caraml.upi.v1.TableR\x06tables\x12\x35\n\tvariables\x18\x02 \x03(\x0b\x32\x17.caraml.upi.v1.VariableR\tvariables2\x90\x01\n\x1aUniversalPredictionService\x12r\n\rPredictValues\x12#.caraml.upi.v1.PredictValuesRequest\x1a$.caraml.upi.v1.PredictValuesResponse\"\x16\x82\xd3\xe4\x93\x02\x10:\x01*\"\x0b/v1/predictB\xc4\x01\n\x11\x63om.caraml.upi.v1B\x08UpiProtoP\x01ZOgithub.com/caraml-dev/universal-prediction-interface/gen/go/caraml/upi/v1;upiv1\xa2\x02\x03\x43UX\xaa\x02\rCaraml.Upi.V1\xca\x02\rCaraml\\Upi\\V1\xe2\x02\x19\x43\x61raml\\Upi\\V1\\GPBMetadata\xea\x02\x0f\x43\x61raml::Upi::V1b\x06proto3')
 
 
 
@@ -78,17 +78,17 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _UNIVERSALPREDICTIONSERVICE.methods_by_name['PredictValues']._options = None
   _UNIVERSALPREDICTIONSERVICE.methods_by_name['PredictValues']._serialized_options = b'\202\323\344\223\002\020:\001*\"\013/v1/predict'
   _PREDICTVALUESREQUEST._serialized_start=163
-  _PREDICTVALUESREQUEST._serialized_end=495
-  _REQUESTMETADATA._serialized_start=497
-  _REQUESTMETADATA._serialized_end=624
-  _PREDICTVALUESRESPONSE._serialized_start=627
-  _PREDICTVALUESRESPONSE._serialized_end=896
-  _RESPONSEMETADATA._serialized_start=899
-  _RESPONSEMETADATA._serialized_end=1080
-  _MODELMETADATA._serialized_start=1082
-  _MODELMETADATA._serialized_end=1143
-  _TRANSFORMERINPUT._serialized_start=1145
-  _TRANSFORMERINPUT._serialized_end=1264
-  _UNIVERSALPREDICTIONSERVICE._serialized_start=1267
-  _UNIVERSALPREDICTIONSERVICE._serialized_end=1411
+  _PREDICTVALUESREQUEST._serialized_end=493
+  _REQUESTMETADATA._serialized_start=495
+  _REQUESTMETADATA._serialized_end=622
+  _PREDICTVALUESRESPONSE._serialized_start=625
+  _PREDICTVALUESRESPONSE._serialized_end=892
+  _RESPONSEMETADATA._serialized_start=895
+  _RESPONSEMETADATA._serialized_end=1076
+  _MODELMETADATA._serialized_start=1078
+  _MODELMETADATA._serialized_end=1139
+  _TRANSFORMERINPUT._serialized_start=1141
+  _TRANSFORMERINPUT._serialized_end=1260
+  _UNIVERSALPREDICTIONSERVICE._serialized_start=1263
+  _UNIVERSALPREDICTIONSERVICE._serialized_end=1407
 # @@protoc_insertion_point(module_scope)

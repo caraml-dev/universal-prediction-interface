@@ -96,7 +96,7 @@ class V1PredictValuesRequest(ModelNormal):
             'prediction_table': (V1Table,),  # noqa: E501
             'transformer_input': (V1TransformerInput,),  # noqa: E501
             'target_name': (str,),  # noqa: E501
-            'prediction_contexts': ([V1Variable],),  # noqa: E501
+            'prediction_context': ([V1Variable],),  # noqa: E501
             'metadata': (V1RequestMetadata,),  # noqa: E501
         }
 
@@ -109,7 +109,7 @@ class V1PredictValuesRequest(ModelNormal):
         'prediction_table': 'predictionTable',  # noqa: E501
         'transformer_input': 'transformerInput',  # noqa: E501
         'target_name': 'targetName',  # noqa: E501
-        'prediction_contexts': 'predictionContexts',  # noqa: E501
+        'prediction_context': 'predictionContext',  # noqa: E501
         'metadata': 'metadata',  # noqa: E501
     }
 
@@ -157,7 +157,7 @@ class V1PredictValuesRequest(ModelNormal):
             prediction_table (V1Table): [optional]  # noqa: E501
             transformer_input (V1TransformerInput): [optional]  # noqa: E501
             target_name (str): [optional]  # noqa: E501
-            prediction_contexts ([V1Variable]): [optional]  # noqa: E501
+            prediction_context ([V1Variable]): [optional]  # noqa: E501
             metadata (V1RequestMetadata): [optional]  # noqa: E501
         """
 
@@ -247,7 +247,7 @@ class V1PredictValuesRequest(ModelNormal):
             prediction_table (V1Table): [optional]  # noqa: E501
             transformer_input (V1TransformerInput): [optional]  # noqa: E501
             target_name (str): [optional]  # noqa: E501
-            prediction_contexts ([V1Variable]): [optional]  # noqa: E501
+            prediction_context ([V1Variable]): [optional]  # noqa: E501
             metadata (V1RequestMetadata): [optional]  # noqa: E501
         """
 

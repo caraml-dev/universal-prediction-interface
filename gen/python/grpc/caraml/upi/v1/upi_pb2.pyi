@@ -20,7 +20,7 @@ class PredictValuesRequest(google.protobuf.message.Message):
     PREDICTION_TABLE_FIELD_NUMBER: builtins.int
     TRANSFORMER_INPUT_FIELD_NUMBER: builtins.int
     TARGET_NAME_FIELD_NUMBER: builtins.int
-    PREDICTION_CONTEXTS_FIELD_NUMBER: builtins.int
+    PREDICTION_CONTEXT_FIELD_NUMBER: builtins.int
     METADATA_FIELD_NUMBER: builtins.int
     @property
     def prediction_table(self) -> caraml.upi.v1.table_pb2.Table:
@@ -55,7 +55,7 @@ class PredictValuesRequest(google.protobuf.message.Message):
     """
 
     @property
-    def prediction_contexts(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[caraml.upi.v1.variable_pb2.Variable]:
+    def prediction_context(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[caraml.upi.v1.variable_pb2.Variable]:
         """Prediction context may contain additional data applicable to all prediction instances
         For example it can be used to store information for traffic rules, experimentation
         or tracking purposes.
@@ -71,11 +71,11 @@ class PredictValuesRequest(google.protobuf.message.Message):
         prediction_table: typing.Optional[caraml.upi.v1.table_pb2.Table] = ...,
         transformer_input: typing.Optional[global___TransformerInput] = ...,
         target_name: typing.Text = ...,
-        prediction_contexts: typing.Optional[typing.Iterable[caraml.upi.v1.variable_pb2.Variable]] = ...,
+        prediction_context: typing.Optional[typing.Iterable[caraml.upi.v1.variable_pb2.Variable]] = ...,
         metadata: typing.Optional[global___RequestMetadata] = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["metadata",b"metadata","prediction_table",b"prediction_table","transformer_input",b"transformer_input"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["metadata",b"metadata","prediction_contexts",b"prediction_contexts","prediction_table",b"prediction_table","target_name",b"target_name","transformer_input",b"transformer_input"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["metadata",b"metadata","prediction_context",b"prediction_context","prediction_table",b"prediction_table","target_name",b"target_name","transformer_input",b"transformer_input"]) -> None: ...
 global___PredictValuesRequest = PredictValuesRequest
 
 class RequestMetadata(google.protobuf.message.Message):
@@ -110,7 +110,7 @@ class PredictValuesResponse(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     PREDICTION_RESULT_TABLE_FIELD_NUMBER: builtins.int
     TARGET_NAME_FIELD_NUMBER: builtins.int
-    PREDICTION_CONTEXTS_FIELD_NUMBER: builtins.int
+    PREDICTION_CONTEXT_FIELD_NUMBER: builtins.int
     METADATA_FIELD_NUMBER: builtins.int
     @property
     def prediction_result_table(self) -> caraml.upi.v1.table_pb2.Table:
@@ -123,7 +123,7 @@ class PredictValuesResponse(google.protobuf.message.Message):
     """Target name as defined in the request metadata"""
 
     @property
-    def prediction_contexts(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[caraml.upi.v1.variable_pb2.Variable]:
+    def prediction_context(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[caraml.upi.v1.variable_pb2.Variable]:
         """Extensible field to cover unforeseen requirements"""
         pass
     @property
@@ -134,11 +134,11 @@ class PredictValuesResponse(google.protobuf.message.Message):
         *,
         prediction_result_table: typing.Optional[caraml.upi.v1.table_pb2.Table] = ...,
         target_name: typing.Text = ...,
-        prediction_contexts: typing.Optional[typing.Iterable[caraml.upi.v1.variable_pb2.Variable]] = ...,
+        prediction_context: typing.Optional[typing.Iterable[caraml.upi.v1.variable_pb2.Variable]] = ...,
         metadata: typing.Optional[global___ResponseMetadata] = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["metadata",b"metadata","prediction_result_table",b"prediction_result_table"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["metadata",b"metadata","prediction_contexts",b"prediction_contexts","prediction_result_table",b"prediction_result_table","target_name",b"target_name"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["metadata",b"metadata","prediction_context",b"prediction_context","prediction_result_table",b"prediction_result_table","target_name",b"target_name"]) -> None: ...
 global___PredictValuesResponse = PredictValuesResponse
 
 class ResponseMetadata(google.protobuf.message.Message):
