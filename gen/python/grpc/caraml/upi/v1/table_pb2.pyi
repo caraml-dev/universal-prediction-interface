@@ -3,7 +3,7 @@
 isort:skip_file
 """
 import builtins
-import caraml.upi.v1.value_pb2
+import caraml.upi.v1.type_pb2
 import google.protobuf.descriptor
 import google.protobuf.internal.containers
 import google.protobuf.message
@@ -48,13 +48,13 @@ class Column(google.protobuf.message.Message):
     name: typing.Text
     """Column's name"""
 
-    type: caraml.upi.v1.value_pb2.Type.ValueType
+    type: caraml.upi.v1.type_pb2.Type.ValueType
     """Column's type"""
 
     def __init__(self,
         *,
         name: typing.Text = ...,
-        type: caraml.upi.v1.value_pb2.Type.ValueType = ...,
+        type: caraml.upi.v1.type_pb2.Type.ValueType = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["name",b"name","type",b"type"]) -> None: ...
 global___Column = Column

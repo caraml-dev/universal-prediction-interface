@@ -88,7 +88,6 @@ Class | Method | HTTP request | Description
  - [Upiv1Type](docs/Upiv1Type.md)
  - [V1Column](docs/V1Column.md)
  - [V1ModelMetadata](docs/V1ModelMetadata.md)
- - [V1NamedValue](docs/V1NamedValue.md)
  - [V1PredictValuesRequest](docs/V1PredictValuesRequest.md)
  - [V1PredictValuesResponse](docs/V1PredictValuesResponse.md)
  - [V1RequestMetadata](docs/V1RequestMetadata.md)
@@ -97,6 +96,7 @@ Class | Method | HTTP request | Description
  - [V1Table](docs/V1Table.md)
  - [V1TransformerInput](docs/V1TransformerInput.md)
  - [V1Value](docs/V1Value.md)
+ - [V1Variable](docs/V1Variable.md)
 
 
 ## Documentation For Authorization

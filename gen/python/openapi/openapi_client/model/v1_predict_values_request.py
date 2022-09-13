@@ -30,14 +30,14 @@ from openapi_client.exceptions import ApiAttributeError
 
 
 def lazy_import():
-    from openapi_client.model.v1_named_value import V1NamedValue
     from openapi_client.model.v1_request_metadata import V1RequestMetadata
     from openapi_client.model.v1_table import V1Table
     from openapi_client.model.v1_transformer_input import V1TransformerInput
-    globals()['V1NamedValue'] = V1NamedValue
+    from openapi_client.model.v1_variable import V1Variable
     globals()['V1RequestMetadata'] = V1RequestMetadata
     globals()['V1Table'] = V1Table
     globals()['V1TransformerInput'] = V1TransformerInput
+    globals()['V1Variable'] = V1Variable
 
 
 class V1PredictValuesRequest(ModelNormal):
@@ -96,7 +96,7 @@ class V1PredictValuesRequest(ModelNormal):
             'prediction_table': (V1Table,),  # noqa: E501
             'transformer_input': (V1TransformerInput,),  # noqa: E501
             'target_name': (str,),  # noqa: E501
-            'prediction_context': ([V1NamedValue],),  # noqa: E501
+            'prediction_context': ([V1Variable],),  # noqa: E501
             'metadata': (V1RequestMetadata,),  # noqa: E501
         }
 
@@ -157,7 +157,7 @@ class V1PredictValuesRequest(ModelNormal):
             prediction_table (V1Table): [optional]  # noqa: E501
             transformer_input (V1TransformerInput): [optional]  # noqa: E501
             target_name (str): [optional]  # noqa: E501
-            prediction_context ([V1NamedValue]): [optional]  # noqa: E501
+            prediction_context ([V1Variable]): [optional]  # noqa: E501
             metadata (V1RequestMetadata): [optional]  # noqa: E501
         """
 
@@ -247,7 +247,7 @@ class V1PredictValuesRequest(ModelNormal):
             prediction_table (V1Table): [optional]  # noqa: E501
             transformer_input (V1TransformerInput): [optional]  # noqa: E501
             target_name (str): [optional]  # noqa: E501
-            prediction_context ([V1NamedValue]): [optional]  # noqa: E501
+            prediction_context ([V1Variable]): [optional]  # noqa: E501
             metadata (V1RequestMetadata): [optional]  # noqa: E501
         """
 

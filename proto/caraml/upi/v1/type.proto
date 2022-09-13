@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package caraml.upi.v1;
+
+// Type supported by UPI
+enum Type {
+   TYPE_UNSPECIFIED = 0;
+   // Double precision floating number (64-bit)
+   TYPE_DOUBLE = 1;
+   // 64-bit Integer
+   TYPE_INTEGER = 2;
+   // String
+   TYPE_STRING = 3;
+}

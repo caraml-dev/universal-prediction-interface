@@ -175,12 +175,8 @@
         
           
           <li>
-            <a href="#caraml%2fupi%2fv1%2fvalue.proto">caraml/upi/v1/value.proto</a>
+            <a href="#caraml%2fupi%2fv1%2ftype.proto">caraml/upi/v1/type.proto</a>
             <ul>
-              
-                <li>
-                  <a href="#caraml.upi.v1.NamedValue"><span class="badge">M</span>NamedValue</a>
-                </li>
               
               
                 <li>
@@ -211,6 +207,21 @@
               
                 <li>
                   <a href="#caraml.upi.v1.Value"><span class="badge">M</span>Value</a>
+                </li>
+              
+              
+              
+              
+            </ul>
+          </li>
+        
+          
+          <li>
+            <a href="#caraml%2fupi%2fv1%2fvariable.proto">caraml/upi/v1/variable.proto</a>
+            <ul>
+              
+                <li>
+                  <a href="#caraml.upi.v1.Variable"><span class="badge">M</span>Variable</a>
                 </li>
               
               
@@ -265,71 +276,15 @@
     
       
       <div class="file-heading">
-        <h2 id="caraml/upi/v1/value.proto">caraml/upi/v1/value.proto</h2><a href="#title">Top</a>
+        <h2 id="caraml/upi/v1/type.proto">caraml/upi/v1/type.proto</h2><a href="#title">Top</a>
       </div>
       <p></p>
 
       
-        <h3 id="caraml.upi.v1.NamedValue">NamedValue</h3>
-        <p>Represents a named and typed data point.</p><p>Can be used as a prediction input, output or metdadata.</p><p>Oneof types are avoided as these can be difficult to handle</p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>name</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Name describing what the value represents.
-Uses include:
-- Ensuring ML models process columns in the correct order
-- Defining a Feast row entity name
-- Parsing metadata to apply traffic rules </p></td>
-                </tr>
-              
-                <tr>
-                  <td>type</td>
-                  <td><a href="#caraml.upi.v1.Type">Type</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>double_value</td>
-                  <td><a href="#double">double</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>integer_value</td>
-                  <td><a href="#int64">int64</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>string_value</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
 
       
         <h3 id="caraml.upi.v1.Type">Type</h3>
-        <p></p>
+        <p>Type supported by UPI</p>
         <table class="enum-table">
           <thead>
             <tr><td>Name</td><td>Number</td><td>Description</td></tr>
@@ -345,19 +300,19 @@ Uses include:
               <tr>
                 <td>TYPE_DOUBLE</td>
                 <td>1</td>
-                <td><p></p></td>
+                <td><p>Double precision floating number (64-bit)</p></td>
               </tr>
             
               <tr>
                 <td>TYPE_INTEGER</td>
                 <td>2</td>
-                <td><p></p></td>
+                <td><p>64-bit Integer</p></td>
               </tr>
             
               <tr>
                 <td>TYPE_STRING</td>
                 <td>3</td>
-                <td><p></p></td>
+                <td><p>String</p></td>
               </tr>
             
           </tbody>
@@ -533,6 +488,76 @@ values matches with the length of columns in the table. </p></td>
     
       
       <div class="file-heading">
+        <h2 id="caraml/upi/v1/variable.proto">caraml/upi/v1/variable.proto</h2><a href="#title">Top</a>
+      </div>
+      <p></p>
+
+      
+        <h3 id="caraml.upi.v1.Variable">Variable</h3>
+        <p>Represents a named and typed data point.</p><p>Can be used as a prediction input, output or metadata.</p><p>Oneof types are avoided as these can be difficult to handle</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Name describing what the value represents.
+Uses include:
+- Ensuring ML models process columns in the correct order
+- Defining a Feast row entity name
+- Parsing metadata to apply traffic rules </p></td>
+                </tr>
+              
+                <tr>
+                  <td>type</td>
+                  <td><a href="#caraml.upi.v1.Type">Type</a></td>
+                  <td></td>
+                  <td><p>Type of the variable </p></td>
+                </tr>
+              
+                <tr>
+                  <td>double_value</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p>One of the following field will be set depending on the type </p></td>
+                </tr>
+              
+                <tr>
+                  <td>integer_value</td>
+                  <td><a href="#int64">int64</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>string_value</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+
+      
+
+      
+
+      
+    
+      
+      <div class="file-heading">
         <h2 id="caraml/upi/v1/upi.proto">caraml/upi/v1/upi.proto</h2><a href="#title">Top</a>
       </div>
       <p></p>
@@ -620,7 +645,7 @@ For example in context of iris classification problem it can be &#34;iris-specie
               
                 <tr>
                   <td>prediction_context</td>
-                  <td><a href="#caraml.upi.v1.NamedValue">NamedValue</a></td>
+                  <td><a href="#caraml.upi.v1.Variable">Variable</a></td>
                   <td>repeated</td>
                   <td><p>Prediction context may contain additional data applicable to all prediction instances
 For example it can be used to store information for traffic rules, experimentation
@@ -670,7 +695,7 @@ NOTE: the ordering of prediction_result_rows might differ with prediction_table 
               
                 <tr>
                   <td>prediction_context</td>
-                  <td><a href="#caraml.upi.v1.NamedValue">NamedValue</a></td>
+                  <td><a href="#caraml.upi.v1.Variable">Variable</a></td>
                   <td>repeated</td>
                   <td><p>Extensible field to cover unforeseen requirements </p></td>
                 </tr>
@@ -800,7 +825,7 @@ Each table doesn&#39;t need to have same number of row. </p></td>
               
                 <tr>
                   <td>variables</td>
-                  <td><a href="#caraml.upi.v1.NamedValue">NamedValue</a></td>
+                  <td><a href="#caraml.upi.v1.Variable">Variable</a></td>
                   <td>repeated</td>
                   <td><p>List of variables </p></td>
                 </tr>

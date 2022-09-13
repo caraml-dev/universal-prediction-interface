@@ -5,7 +5,7 @@ from google.protobuf.json_format import MessageToDict
 import pytest
 
 from caraml.upi.utils import df_to_table
-from caraml.upi.v1 import table_pb2, upi_pb2, value_pb2
+from caraml.upi.v1 import upi_pb2
 
 # represents number of prediction rows x number of prediction values
 from test.benchmark_utils_test import create_df

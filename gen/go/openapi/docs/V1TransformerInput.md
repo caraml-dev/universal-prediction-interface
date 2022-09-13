@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Tables** | Pointer to [**[]V1Table**](V1Table.md) | List of tables All tables must have unique name. Each table doesn&#39;t need to have same number of row. | [optional] 
-**Variables** | Pointer to [**[]V1NamedValue**](V1NamedValue.md) |  | [optional] 
+**Variables** | Pointer to [**[]V1Variable**](V1Variable.md) |  | [optional] 
 
 ## Methods
 
@@ -53,20 +53,20 @@ HasTables returns a boolean if a field has been set.
 
 ### GetVariables
 
-`func (o *V1TransformerInput) GetVariables() []V1NamedValue`
+`func (o *V1TransformerInput) GetVariables() []V1Variable`
 
 GetVariables returns the Variables field if non-nil, zero value otherwise.
 
 ### GetVariablesOk
 
-`func (o *V1TransformerInput) GetVariablesOk() (*[]V1NamedValue, bool)`
+`func (o *V1TransformerInput) GetVariablesOk() (*[]V1Variable, bool)`
 
 GetVariablesOk returns a tuple with the Variables field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetVariables
 
-`func (o *V1TransformerInput) SetVariables(v []V1NamedValue)`
+`func (o *V1TransformerInput) SetVariables(v []V1Variable)`
 
 SetVariables sets Variables field to given value.
 

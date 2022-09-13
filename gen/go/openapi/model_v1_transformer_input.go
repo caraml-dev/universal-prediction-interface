@@ -18,7 +18,7 @@ import (
 type V1TransformerInput struct {
 	// List of tables All tables must have unique name. Each table doesn't need to have same number of row.
 	Tables []V1Table `json:"tables,omitempty"`
-	Variables []V1NamedValue `json:"variables,omitempty"`
+	Variables []V1Variable `json:"variables,omitempty"`
 }
 
 // NewV1TransformerInput instantiates a new V1TransformerInput object
@@ -71,9 +71,9 @@ func (o *V1TransformerInput) SetTables(v []V1Table) {
 }
 
 // GetVariables returns the Variables field value if set, zero value otherwise.
-func (o *V1TransformerInput) GetVariables() []V1NamedValue {
+func (o *V1TransformerInput) GetVariables() []V1Variable {
 	if o == nil || o.Variables == nil {
-		var ret []V1NamedValue
+		var ret []V1Variable
 		return ret
 	}
 	return o.Variables
@@ -81,7 +81,7 @@ func (o *V1TransformerInput) GetVariables() []V1NamedValue {
 
 // GetVariablesOk returns a tuple with the Variables field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *V1TransformerInput) GetVariablesOk() ([]V1NamedValue, bool) {
+func (o *V1TransformerInput) GetVariablesOk() ([]V1Variable, bool) {
 	if o == nil || o.Variables == nil {
 		return nil, false
 	}
@@ -97,8 +97,8 @@ func (o *V1TransformerInput) HasVariables() bool {
 	return false
 }
 
-// SetVariables gets a reference to the given []V1NamedValue and assigns it to the Variables field.
-func (o *V1TransformerInput) SetVariables(v []V1NamedValue) {
+// SetVariables gets a reference to the given []V1Variable and assigns it to the Variables field.
+func (o *V1TransformerInput) SetVariables(v []V1Variable) {
 	o.Variables = v
 }
 

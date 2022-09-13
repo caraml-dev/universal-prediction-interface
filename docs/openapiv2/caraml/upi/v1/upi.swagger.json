@@ -85,7 +85,9 @@
         "TYPE_INTEGER",
         "TYPE_STRING"
       ],
-      "default": "TYPE_UNSPECIFIED"
+      "default": "TYPE_UNSPECIFIED",
+      "description": "- TYPE_DOUBLE: Double precision floating number (64-bit)\n - TYPE_INTEGER: 64-bit Integer\n - TYPE_STRING: String",
+      "title": "Type supported by UPI"
     },
     "v1Column": {
       "type": "object",
@@ -114,30 +116,6 @@
         }
       }
     },
-    "v1NamedValue": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "title": "Name describing what the value represents.\nUses include:\n- Ensuring ML models process columns in the correct order\n- Defining a Feast row entity name\n- Parsing metadata to apply traffic rules"
-        },
-        "type": {
-          "$ref": "#/definitions/upiv1Type"
-        },
-        "doubleValue": {
-          "type": "number",
-          "format": "double"
-        },
-        "integerValue": {
-          "type": "string",
-          "format": "int64"
-        },
-        "stringValue": {
-          "type": "string"
-        }
-      },
-      "title": "Represents a named and typed data point.\nCan be used as a prediction input, output or metdadata.\nOneof types are avoided as these can be difficult to handle"
-    },
     "v1PredictValuesRequest": {
       "type": "object",
       "properties": {
@@ -156,7 +134,7 @@
         "predictionContext": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/v1NamedValue"
+            "$ref": "#/definitions/v1Variable"
           },
           "title": "Prediction context may contain additional data applicable to all prediction instances\nFor example it can be used to store information for traffic rules, experimentation\nor tracking purposes.\nEg. country_code, service_type, service_area_id"
         },
@@ -181,7 +159,7 @@
         "predictionContext": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/v1NamedValue"
+            "$ref": "#/definitions/v1Variable"
           },
           "title": "Extensible field to cover unforeseen requirements"
         },
@@ -282,7 +260,7 @@
         "variables": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/v1NamedValue"
+            "$ref": "#/definitions/v1Variable"
           },
           "title": "List of variables"
         }
@@ -310,6 +288,32 @@
         }
       },
       "description": "Value of a cell within a table. Value is nullable."
+    },
+    "v1Variable": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "Name describing what the value represents.\nUses include:\n- Ensuring ML models process columns in the correct order\n- Defining a Feast row entity name\n- Parsing metadata to apply traffic rules"
+        },
+        "type": {
+          "$ref": "#/definitions/upiv1Type",
+          "title": "Type of the variable"
+        },
+        "doubleValue": {
+          "type": "number",
+          "format": "double",
+          "title": "One of the following field will be set depending on the type"
+        },
+        "integerValue": {
+          "type": "string",
+          "format": "int64"
+        },
+        "stringValue": {
+          "type": "string"
+        }
+      },
+      "title": "Represents a named and typed data point.\nCan be used as a prediction input, output or metadata.\nOneof types are avoided as these can be difficult to handle"
     }
   }
 }

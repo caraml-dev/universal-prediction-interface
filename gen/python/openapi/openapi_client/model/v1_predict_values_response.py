@@ -30,12 +30,12 @@ from openapi_client.exceptions import ApiAttributeError
 
 
 def lazy_import():
-    from openapi_client.model.v1_named_value import V1NamedValue
     from openapi_client.model.v1_response_metadata import V1ResponseMetadata
     from openapi_client.model.v1_table import V1Table
-    globals()['V1NamedValue'] = V1NamedValue
+    from openapi_client.model.v1_variable import V1Variable
     globals()['V1ResponseMetadata'] = V1ResponseMetadata
     globals()['V1Table'] = V1Table
+    globals()['V1Variable'] = V1Variable
 
 
 class V1PredictValuesResponse(ModelNormal):
@@ -93,7 +93,7 @@ class V1PredictValuesResponse(ModelNormal):
         return {
             'prediction_result_table': (V1Table,),  # noqa: E501
             'target_name': (str,),  # noqa: E501
-            'prediction_context': ([V1NamedValue],),  # noqa: E501
+            'prediction_context': ([V1Variable],),  # noqa: E501
             'metadata': (V1ResponseMetadata,),  # noqa: E501
         }
 
@@ -152,7 +152,7 @@ class V1PredictValuesResponse(ModelNormal):
                                 _visited_composed_classes = (Animal,)
             prediction_result_table (V1Table): [optional]  # noqa: E501
             target_name (str): [optional]  # noqa: E501
-            prediction_context ([V1NamedValue]): [optional]  # noqa: E501
+            prediction_context ([V1Variable]): [optional]  # noqa: E501
             metadata (V1ResponseMetadata): [optional]  # noqa: E501
         """
 
@@ -241,7 +241,7 @@ class V1PredictValuesResponse(ModelNormal):
                                 _visited_composed_classes = (Animal,)
             prediction_result_table (V1Table): [optional]  # noqa: E501
             target_name (str): [optional]  # noqa: E501
-            prediction_context ([V1NamedValue]): [optional]  # noqa: E501
+            prediction_context ([V1Variable]): [optional]  # noqa: E501
             metadata (V1ResponseMetadata): [optional]  # noqa: E501
         """
 

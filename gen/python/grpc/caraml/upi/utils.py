@@ -4,7 +4,7 @@ from typing import List, Tuple, Union
 import pandas as pd
 import numpy as np
 
-from caraml.upi.v1 import table_pb2, value_pb2
+from caraml.upi.v1 import table_pb2, type_pb2
 
 
 def df_to_table(df: pd.DataFrame, table_name: str) -> table_pb2.Table:
@@ -93,7 +93,7 @@ def table_to_df(table: table_pb2.Table) -> Tuple[pd.DataFrame, str]:
     return pd.DataFrame(columns=columns, data=rows_values, index=indices), table.name
 
 
-def get_value(value: table_pb2.Value, type: value_pb2.Type) -> Union[int, float, str, None]:
+def get_value(value: table_pb2.Value, type: type_pb2.Type) -> Union[int, float, str, None]:
     """
     Get UPI value given its type.
 
@@ -104,11 +104,11 @@ def get_value(value: table_pb2.Value, type: value_pb2.Type) -> Union[int, float,
     Returns: None or value depending its type.
 
     """
-    if (type == value_pb2.TYPE_DOUBLE):
+    if (type == type_pb2.TYPE_DOUBLE):
         return value.double_value if not value.is_null else np.NaN
-    if (type == value_pb2.TYPE_STRING):
+    if (type == type_pb2.TYPE_STRING):
         return value.string_value if not value.is_null else None
-    if (type == value_pb2.TYPE_INTEGER):
+    if (type == type_pb2.TYPE_INTEGER):
         return value.integer_value if not value.is_null else None
 
     raise ValueError(f"unknown type {type}")
@@ -125,8 +125,8 @@ def dtype_to_upi_type(dtype):
 
     """
     if dtype == np.int64:
-        return value_pb2.TYPE_INTEGER
+        return type_pb2.TYPE_INTEGER
     if dtype == np.float64:
-        return value_pb2.TYPE_DOUBLE
+        return type_pb2.TYPE_DOUBLE
     # any other type will be treated as string
-    return value_pb2.TYPE_STRING
+    return type_pb2.TYPE_STRING

@@ -18,7 +18,7 @@ import (
 type V1PredictValuesResponse struct {
 	PredictionResultTable *V1Table `json:"predictionResultTable,omitempty"`
 	TargetName *string `json:"targetName,omitempty"`
-	PredictionContext []V1NamedValue `json:"predictionContext,omitempty"`
+	PredictionContext []V1Variable `json:"predictionContext,omitempty"`
 	Metadata *V1ResponseMetadata `json:"metadata,omitempty"`
 }
 
@@ -104,9 +104,9 @@ func (o *V1PredictValuesResponse) SetTargetName(v string) {
 }
 
 // GetPredictionContext returns the PredictionContext field value if set, zero value otherwise.
-func (o *V1PredictValuesResponse) GetPredictionContext() []V1NamedValue {
+func (o *V1PredictValuesResponse) GetPredictionContext() []V1Variable {
 	if o == nil || o.PredictionContext == nil {
-		var ret []V1NamedValue
+		var ret []V1Variable
 		return ret
 	}
 	return o.PredictionContext
@@ -114,7 +114,7 @@ func (o *V1PredictValuesResponse) GetPredictionContext() []V1NamedValue {
 
 // GetPredictionContextOk returns a tuple with the PredictionContext field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *V1PredictValuesResponse) GetPredictionContextOk() ([]V1NamedValue, bool) {
+func (o *V1PredictValuesResponse) GetPredictionContextOk() ([]V1Variable, bool) {
 	if o == nil || o.PredictionContext == nil {
 		return nil, false
 	}
@@ -130,8 +130,8 @@ func (o *V1PredictValuesResponse) HasPredictionContext() bool {
 	return false
 }
 
-// SetPredictionContext gets a reference to the given []V1NamedValue and assigns it to the PredictionContext field.
-func (o *V1PredictValuesResponse) SetPredictionContext(v []V1NamedValue) {
+// SetPredictionContext gets a reference to the given []V1Variable and assigns it to the PredictionContext field.
+func (o *V1PredictValuesResponse) SetPredictionContext(v []V1Variable) {
 	o.PredictionContext = v
 }
 

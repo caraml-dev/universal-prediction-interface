@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **PredictionResultTable** | Pointer to [**V1Table**](V1Table.md) |  | [optional] 
 **TargetName** | Pointer to **string** |  | [optional] 
-**PredictionContext** | Pointer to [**[]V1NamedValue**](V1NamedValue.md) |  | [optional] 
+**PredictionContext** | Pointer to [**[]V1Variable**](V1Variable.md) |  | [optional] 
 **Metadata** | Pointer to [**V1ResponseMetadata**](V1ResponseMetadata.md) |  | [optional] 
 
 ## Methods
@@ -80,20 +80,20 @@ HasTargetName returns a boolean if a field has been set.
 
 ### GetPredictionContext
 
-`func (o *V1PredictValuesResponse) GetPredictionContext() []V1NamedValue`
+`func (o *V1PredictValuesResponse) GetPredictionContext() []V1Variable`
 
 GetPredictionContext returns the PredictionContext field if non-nil, zero value otherwise.
 
 ### GetPredictionContextOk
 
-`func (o *V1PredictValuesResponse) GetPredictionContextOk() (*[]V1NamedValue, bool)`
+`func (o *V1PredictValuesResponse) GetPredictionContextOk() (*[]V1Variable, bool)`
 
 GetPredictionContextOk returns a tuple with the PredictionContext field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPredictionContext
 
-`func (o *V1PredictValuesResponse) SetPredictionContext(v []V1NamedValue)`
+`func (o *V1PredictValuesResponse) SetPredictionContext(v []V1Variable)`
 
 SetPredictionContext sets PredictionContext field to given value.
 
