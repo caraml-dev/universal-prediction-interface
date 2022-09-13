@@ -12,10 +12,10 @@ import sys
 import unittest
 
 import openapi_client
-from openapi_client.model.v1_named_value import V1NamedValue
 from openapi_client.model.v1_table import V1Table
-globals()['V1NamedValue'] = V1NamedValue
+from openapi_client.model.v1_variable import V1Variable
 globals()['V1Table'] = V1Table
+globals()['V1Variable'] = V1Variable
 from openapi_client.model.v1_transformer_input import V1TransformerInput
 
 
