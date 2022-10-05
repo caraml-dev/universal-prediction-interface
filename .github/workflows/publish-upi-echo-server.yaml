@@ -1,4 +1,4 @@
-name: publish-python-sdk
+name: publish-upi-echo-server
 on:
   workflow_dispatch:
 jobs:
