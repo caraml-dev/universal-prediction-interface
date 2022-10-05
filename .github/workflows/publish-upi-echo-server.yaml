@@ -8,9 +8,6 @@ on:
         type: string
         required: false
         default: ghcr.io
-    secrets:
-      ghcr_token:
-        required: true
 
 jobs:
   create-version:
@@ -61,7 +58,7 @@ jobs:
         with:
           registry: ${{ inputs.container_registry }}
           username: ${{ github.actor }}
-          password: ${{ secrets.ghcr_token }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Download API Docker Artifact
         uses: actions/download-artifact@v2
