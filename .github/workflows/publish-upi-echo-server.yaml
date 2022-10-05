@@ -1,0 +1,41 @@
+name: publish-python-sdk
+on:
+  workflow_dispatch:
+jobs:
+  create-version:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.create_version.outputs.version }}
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - id: create_version
+        name: Create version string
+        run: |
+          # Strip git ref prefix from version
+          VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+          [ "$VERSION" == "main" ] && VERSION=$(git describe --tags --always --first-parent)
+          # Strip "v" prefix
+          [[ "${VERSION}" == "v"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
+          # If it's pull request the version string is prefixed by 0.0.0-
+          [ ${{ github.event_name}} == "pull_request" ] && VERSION="0.0.0-${{ github.event.pull_request.head.sha }}"
+          echo ${VERSION}
+          echo "::set-output name=version::${VERSION}"
+
+  build-upi-echo-server:
+    runs-on: ubuntu-latest
+    needs:
+      - create-version
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build Docker image
+        run: docker build -t upi-echo-server.${{ needs.create-version.outputs.version }} -f example/go/simple/Dockerfile .
+      - name: Save Docker image
+        run: docker image save --output upi-echo-server.${{ needs.create-version.outputs.version }}.tar upi-echo-server:${{ needs.create-version.outputs.version }}
+      - name: Publish Docker Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: upi-echo-server.${{ needs.create-version.outputs.version }}.tar
+          path: upi-echo-server.${{ needs.create-version.outputs.version }}.tar
+          retention-days: ${{ env.ARTIFACT_RETENTION_DAYS }}
