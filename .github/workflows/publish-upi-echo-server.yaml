@@ -1,13 +1,8 @@
 name: publish-upi-echo-server
 on:
-  push:
+  release:
+    types: [published]
   workflow_dispatch:
-  workflow_call:
-    inputs:
-      container_registry:
-        type: string
-        required: false
-        default: ghcr.io
 
 env:
   DOCKER_REGISTRY: ghcr.io
@@ -71,7 +66,6 @@ jobs:
         run: |
           go mod tidy
           go test ./...
-
 
   publish-upi-echo-server:
     runs-on: ubuntu-latest
