@@ -71,8 +71,10 @@ jobs:
           name: upi-echo-server.${{ needs.create-version.outputs.version }}.tar
 
       - name: Publish Docker Image
+        env:
+          CONTAINER_REGISTRY: ${{ env.DOCKER_REGISTRY }}//${{ github.repository_owner }}
         run: |
-          IMAGE_TAG="${{ env.DOCKER_REGISTRY }}/caraml/upi-echo-server:${{ needs.create-version.outputs.version }}"
+          IMAGE_TAG="${{ env.CONTAINER_REGISTRY }}/upi-echo-server:${{ needs.create-version.outputs.version }}"
           docker image load --input upi-echo-server.${{ needs.create-version.outputs.version }}.tar
           docker tag upi-echo-server:${{ needs.create-version.outputs.version }} ${IMAGE_TAG}
           docker push ${IMAGE_TAG}
