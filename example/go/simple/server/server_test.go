@@ -2,30 +2,27 @@ package main
 
 import (
 	"context"
-	"flag"
-	"log"
-	"time"
-
+	"fmt"
 	upiv1 "github.com/caraml-dev/universal-prediction-interface/gen/go/grpc/caraml/upi/v1"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
+	"log"
+	"testing"
+	"time"
 )
 
-var (
-	addr = flag.String("addr", "localhost:50051", "the address to connect to")
-)
+func TestUpiServer_Run(t *testing.T) {
+	address := fmt.Sprintf(":%d", 50555)
+	upiServer := UpiServer{}
+	go upiServer.Run(address)
 
-func main() {
-	flag.Parse()
-	// Set up a connection to the server.
-	conn, err := grpc.Dial(*addr, grpc.WithTransportCredentials(insecure.NewCredentials()))
+	conn, err := grpc.Dial(address, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		log.Fatalf("did not connect: %v", err)
 	}
+
 	defer conn.Close()
 	c := upiv1.NewUniversalPredictionServiceClient(conn)
-
-	// Contact the server and print out its response.
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
 	r, err := c.PredictValues(ctx, &upiv1.PredictValuesRequest{
