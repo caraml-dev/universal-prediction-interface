@@ -2,6 +2,16 @@ name: publish-upi-echo-server
 on:
   push:
   workflow_dispatch:
+  workflow_call:
+    inputs:
+      container_registry:
+        type: string
+        required: false
+        default: ghcr.io
+    secrets:
+      ghcr_token:
+        required: true
+
 jobs:
   create-version:
     runs-on: ubuntu-latest
@@ -40,3 +50,31 @@ jobs:
           name: upi-echo-server.${{ needs.create-version.outputs.version }}.tar
           path: upi-echo-server.${{ needs.create-version.outputs.version }}.tar
           retention-days: ${{ env.ARTIFACT_RETENTION_DAYS }}
+
+  publish-upi-echo-server:
+    runs-on: ubuntu-latest
+    needs:
+      - create-version
+    steps:
+      - name: Log in to the Container registry
+        uses: docker/login-action@v1
+        with:
+          registry: ${{ inputs.container_registry }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.ghcr_token }}
+
+      - name: Download API Docker Artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: upi-echo-server.${{ needs.create-version.outputs.version }}.tar
+
+      - name: Publish Docker Image
+        env:
+          DOCKER_REPOSITORY: ${{ inputs.container_registry }}/${{ github.repository }}
+        run: |
+          docker image load --input upi-echo-server.${{ inputs.router_version }}.tar
+          docker tag \
+            upi-echo-server:${{ needs.create-version.outputs.version }} \
+            ${{ env.DOCKER_REPOSITORY }}/upi-echo-server:${{ needs.create-version.outputs.version }}
+          
+          docker push ${{ env.DOCKER_REPOSITORY }}/upi-echo-server:${{ needs.create-version.outputs.version }}
