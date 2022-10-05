@@ -31,7 +31,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build Docker image
-        run: docker build -t upi-echo-server.${{ needs.create-version.outputs.version }} -f example/go/simple/Dockerfile .
+        run: docker build -t upi-echo-server:${{ needs.create-version.outputs.version }} -f example/go/simple/Dockerfile .
       - name: Save Docker image
         run: docker image save --output upi-echo-server.${{ needs.create-version.outputs.version }}.tar upi-echo-server:${{ needs.create-version.outputs.version }}
       - name: Publish Docker Artifact
