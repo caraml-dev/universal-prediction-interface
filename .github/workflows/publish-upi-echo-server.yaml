@@ -1,5 +1,6 @@
 name: publish-upi-echo-server
 on:
+  push:
   workflow_dispatch:
 jobs:
   create-version:
