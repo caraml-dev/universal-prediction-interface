@@ -72,7 +72,7 @@ jobs:
 
       - name: Publish Docker Image
         env:
-          CONTAINER_REGISTRY: ${{ env.DOCKER_REGISTRY }}//${{ github.repository_owner }}
+          CONTAINER_REGISTRY: ${{ env.DOCKER_REGISTRY }}/${{ github.repository_owner }}
         run: |
           IMAGE_TAG="${{ env.CONTAINER_REGISTRY }}/upi-echo-server:${{ needs.create-version.outputs.version }}"
           docker image load --input upi-echo-server.${{ needs.create-version.outputs.version }}.tar
