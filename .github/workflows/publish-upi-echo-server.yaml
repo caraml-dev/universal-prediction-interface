@@ -9,6 +9,9 @@ on:
         required: false
         default: ghcr.io
 
+env:
+  DOCKER_REGISTRY: ghcr.io
+
 jobs:
   create-version:
     runs-on: ubuntu-latest
@@ -56,7 +59,7 @@ jobs:
       - name: Log in to the Container registry
         uses: docker/login-action@v1
         with:
-          registry: ${{ inputs.container_registry }}
+          registry: ${{ env.DOCKER_REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
@@ -66,12 +69,8 @@ jobs:
           name: upi-echo-server.${{ needs.create-version.outputs.version }}.tar
 
       - name: Publish Docker Image
-        env:
-          DOCKER_REPOSITORY: ${{ inputs.container_registry }}/${{ github.repository }}
         run: |
+          IMAGE_TAG="${{ env.DOCKER_REGISTRY }}/caraml/upi-echo-server:${{ inputs.version }}"
           docker image load --input upi-echo-server.${{ inputs.router_version }}.tar
-          docker tag \
-            upi-echo-server:${{ needs.create-version.outputs.version }} \
-            ${{ env.DOCKER_REPOSITORY }}/upi-echo-server:${{ needs.create-version.outputs.version }}
-          
-          docker push ${{ env.DOCKER_REPOSITORY }}/upi-echo-server:${{ needs.create-version.outputs.version }}
+          docker tag upi-echo-server:${{ needs.create-version.outputs.version }} ${IMAGE_TAG}
+          docker push ${IMAGE_TAG}
