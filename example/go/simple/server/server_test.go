@@ -3,18 +3,28 @@ package main
 import (
 	"context"
 	"fmt"
+	"log"
+	"os"
+	"testing"
+	"time"
+
 	upiv1 "github.com/caraml-dev/universal-prediction-interface/gen/go/grpc/caraml/upi/v1"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
-	"log"
-	"testing"
-	"time"
 )
 
-func TestUpiServer_Run(t *testing.T) {
-	address := fmt.Sprintf(":%d", 50555)
+const testPort = 50555
+
+var address = fmt.Sprintf(":%d", testPort)
+
+func TestMain(m *testing.M) {
+
 	upiServer := UpiServer{}
 	go upiServer.Run(address)
+	os.Exit(m.Run())
+}
+
+func TestUpiServer_Run(t *testing.T) {
 
 	conn, err := grpc.Dial(address, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
