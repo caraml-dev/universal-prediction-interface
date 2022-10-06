@@ -75,4 +75,4 @@ jobs:
           external-data-json-path: ./cache/benchmark-data.json
           fail-on-alert: true
   publish-upi-echo-server:
-    uses: ./.github/workflows/publish-upi-echo-server.yml
+    uses: ./.github/workflows/publish-upi-echo-server.yaml
