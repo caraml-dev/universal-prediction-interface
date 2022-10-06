@@ -1,7 +1,5 @@
 name: publish-upi-echo-server
 on:
-  release:
-    types: [published]
   workflow_dispatch:
 
 env:
