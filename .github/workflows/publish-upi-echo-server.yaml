@@ -1,6 +1,4 @@
 name: publish-upi-echo-server
-on:
-  workflow_dispatch:
 
 env:
   DOCKER_REGISTRY: ghcr.io
