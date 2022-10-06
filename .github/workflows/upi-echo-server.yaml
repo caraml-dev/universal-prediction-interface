@@ -30,7 +30,7 @@ jobs:
           echo ${VERSION}
           echo "::set-output name=version::${VERSION}"
 
-  build-upi-echo-server:
+  build:
     runs-on: ubuntu-latest
     needs:
       - create-version
@@ -47,7 +47,7 @@ jobs:
           path: upi-echo-server.${{ needs.create-version.outputs.version }}.tar
           retention-days: ${{ env.ARTIFACT_RETENTION_DAYS }}
 
-  test-upi-echo-server:
+  test:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -66,12 +66,12 @@ jobs:
           go mod tidy
           go test ./...
 
-  publish-upi-echo-server:
+  release:
     runs-on: ubuntu-latest
     needs:
       - create-version
-      - build-upi-echo-server
-      - test-upi-echo-server
+      - build
+      - test
     steps:
       - name: Log in to the Container registry
         uses: docker/login-action@v1
