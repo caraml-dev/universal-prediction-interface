@@ -75,5 +75,5 @@ jobs:
           output-file-path: ./gen/python/grpc/output.json
           external-data-json-path: ./cache/benchmark-data.json
           fail-on-alert: true
-  publish-upi-echo-server:
+  upi-echo-server:
     uses: ./.github/workflows/publish-upi-echo-server.yaml
