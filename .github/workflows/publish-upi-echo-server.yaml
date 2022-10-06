@@ -1,4 +1,4 @@
-name: publish-upi-echo-server
+name: upi-echo-server
 on:
   workflow_call:
   workflow_dispatch:
@@ -67,6 +67,7 @@ jobs:
           go test ./...
 
   release:
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     needs:
       - create-version
