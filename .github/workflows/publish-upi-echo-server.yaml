@@ -1,0 +1,96 @@
+name: upi-echo-server
+on:
+  workflow_call:
+  workflow_dispatch:
+
+env:
+  DOCKER_REGISTRY: ghcr.io
+  ARTIFACT_RETENTION_DAYS: 1
+  GO_VERSION: 1.18
+
+jobs:
+  create-version:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.create_version.outputs.version }}
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - id: create_version
+        name: Create version string
+        run: |
+          # Strip git ref prefix from version
+          VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+          [ "$VERSION" == "main" ] && VERSION=$(git describe --tags --always --first-parent)
+          # Strip "v" prefix
+          [[ "${VERSION}" == "v"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
+          # If it's pull request the version string is prefixed by 0.0.0-
+          [ ${{ github.event_name}} == "pull_request" ] && VERSION="0.0.0-${{ github.event.pull_request.head.sha }}"
+          echo ${VERSION}
+          echo "::set-output name=version::${VERSION}"
+
+  build:
+    runs-on: ubuntu-latest
+    needs:
+      - create-version
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build Docker image
+        run: docker build -t upi-echo-server:${{ needs.create-version.outputs.version }} -f example/go/simple/Dockerfile .
+      - name: Save Docker image
+        run: docker image save --output upi-echo-server.${{ needs.create-version.outputs.version }}.tar upi-echo-server:${{ needs.create-version.outputs.version }}
+      - name: Publish Docker Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: upi-echo-server.${{ needs.create-version.outputs.version }}.tar
+          path: upi-echo-server.${{ needs.create-version.outputs.version }}.tar
+          retention-days: ${{ env.ARTIFACT_RETENTION_DAYS }}
+
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: example/go/simple
+    env:
+      GOPATH: ${{ github.workspace }}/example/go/simple/.go
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: ${{ env.GO_VERSION }}
+      - name: Test
+        run: |
+          go mod tidy
+          go test ./... -v
+
+  release:
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    needs:
+      - create-version
+      - build
+      - test
+    steps:
+      - name: Log in to the Container registry
+        uses: docker/login-action@v1
+        with:
+          registry: ${{ env.DOCKER_REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Download API Docker Artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: upi-echo-server.${{ needs.create-version.outputs.version }}.tar
+
+      - name: Publish Docker Image
+        env:
+          CONTAINER_REGISTRY: ${{ env.DOCKER_REGISTRY }}/${{ github.repository_owner }}
+        run: |
+          IMAGE_TAG="${{ env.CONTAINER_REGISTRY }}/upi-echo-server:${{ needs.create-version.outputs.version }}"
+          docker image load --input upi-echo-server.${{ needs.create-version.outputs.version }}.tar
+          docker tag upi-echo-server:${{ needs.create-version.outputs.version }} ${IMAGE_TAG}
+          docker push ${IMAGE_TAG}
