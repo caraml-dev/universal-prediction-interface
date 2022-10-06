@@ -76,4 +76,5 @@ jobs:
           external-data-json-path: ./cache/benchmark-data.json
           fail-on-alert: true
   publish-upi-echo-server:
+    if: github.event_name != 'pull_request'
     uses: ./.github/workflows/upi-echo-server.yaml
