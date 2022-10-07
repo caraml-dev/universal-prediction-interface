@@ -31,14 +31,14 @@ def df_to_table(df: pd.DataFrame, table_name: str) -> table_pb2.Table:
                 continue
 
             dtype = df_dtypes[i - 1]
-            if dtype == np.float64:
+            if dtype == np.float64 or dtype == np.float32:
                 if isnan(value):
                     values.append(table_pb2.Value(is_null=True))
                     continue
 
                 values.append(
                     table_pb2.Value(double_value=float(value)))
-            elif dtype == np.int64:
+            elif dtype == np.int64 or dtype == np.int32:
                 values.append(
                     table_pb2.Value(integer_value=int(value)))
             else:
@@ -124,9 +124,9 @@ def dtype_to_upi_type(dtype):
     Returns: upi type
 
     """
-    if dtype == np.int64:
+    if dtype == np.int64 or dtype == np.int32:
         return type_pb2.TYPE_INTEGER
-    if dtype == np.float64:
+    if dtype == np.float64 or dtype == np.float32:
         return type_pb2.TYPE_DOUBLE
     # any other type will be treated as string
     return type_pb2.TYPE_STRING

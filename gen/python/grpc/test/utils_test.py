@@ -1,3 +1,4 @@
+import numpy as np
 import pytest
 import pandas as pd
 from caraml.upi.utils import df_to_table, table_to_df
@@ -11,7 +12,18 @@ conversion_test_cases = [
                         columns=[table_pb2.Column(name="int_col", type=type_pb2.TYPE_INTEGER)],
                         rows=[table_pb2.Row(row_id="0",
                                             values=[
-                                                table_pb2.Value(integer_value=111)])])
+                                                table_pb2.Value(integer_value=111)])]),
+        False,
+    ),
+    (
+        "int_table_np_int32",
+        pd.DataFrame(data=[111], columns=["int_col"], index=["0"]).astype(np.int32),
+        table_pb2.Table(name="int_table_np_int32",
+                        columns=[table_pb2.Column(name="int_col", type=type_pb2.TYPE_INTEGER)],
+                        rows=[table_pb2.Row(row_id="0",
+                                            values=[
+                                                table_pb2.Value(integer_value=111)])]),
+        True,
     ),
     (
         "float_table",
@@ -21,7 +33,8 @@ conversion_test_cases = [
                         rows=[table_pb2.Row(row_id="0",
                                             values=[
                                                 table_pb2.Value(
-                                                    double_value=111.11)])])
+                                                    double_value=111.11)])]),
+        False,
     ),
     (
         "string_table",
@@ -31,7 +44,8 @@ conversion_test_cases = [
                         rows=[table_pb2.Row(row_id="0",
                                             values=[
                                                 table_pb2.Value(
-                                                    string_value="111.11")])])
+                                                    string_value="111.11")])]),
+        False,
     ),
     # pandas will convert int column containing null to double
     (
@@ -44,7 +58,8 @@ conversion_test_cases = [
                                                 table_pb2.Value(double_value=111)]),
                               table_pb2.Row(row_id="1",
                                             values=[table_pb2.Value(is_null=True)]),
-                              ])
+                              ]),
+        False,
     ),
     (
         "float_table_with_null",
@@ -57,7 +72,22 @@ conversion_test_cases = [
                                                     double_value=111.11)]),
                               table_pb2.Row(row_id="1",
                                             values=[table_pb2.Value(is_null=True)]),
-                              ])
+                              ]),
+        False,
+    ),
+    (
+        "float_table_with_null_np_float32",
+        pd.DataFrame(data=[[111], [None]], columns=["float_col"], index=["0", "1"]).astype(np.float32),
+        table_pb2.Table(name="float_table_with_null_np_float32",
+                        columns=[table_pb2.Column(name="float_col", type=type_pb2.TYPE_DOUBLE)],
+                        rows=[table_pb2.Row(row_id="0",
+                                            values=[
+                                                table_pb2.Value(
+                                                    double_value=111)]),
+                              table_pb2.Row(row_id="1",
+                                            values=[table_pb2.Value(is_null=True)]),
+                              ]),
+        True,
     ),
     (
         "string_table_with_null",
@@ -70,7 +100,8 @@ conversion_test_cases = [
                                                     string_value="111.11")]),
                               table_pb2.Row(row_id="1",
                                             values=[table_pb2.Value(is_null=True)]),
-                              ])
+                              ]),
+        False,
     ),
     (
         "table_with_custom_index",
@@ -85,19 +116,24 @@ conversion_test_cases = [
                                             values=[
                                                 table_pb2.Value(
                                                     string_value="222.22")]),
-                              ])
+                              ]),
+        False,
     ),
 ]
 
 
-@pytest.mark.parametrize("name,df,exp", conversion_test_cases)
-def test_df_to_table(name, df, exp):
+@pytest.mark.parametrize("name,df,exp,cast", conversion_test_cases)
+def test_df_to_table(name, df, exp, cast):
     table = df_to_table(df, name)
     assert table == exp
 
 
-@pytest.mark.parametrize("exp_name,exp_df,table", conversion_test_cases)
-def test_table_to_df(exp_name, exp_df, table):
+@pytest.mark.parametrize("exp_name,exp_df,table,cast", conversion_test_cases)
+def test_table_to_df(exp_name, exp_df, table, cast):
+    if cast:
+        # skip test that involve casting
+        return
+
     df, name = table_to_df(table)
     assert exp_df.equals(df)
     assert name == exp_name
