@@ -1,3 +1,4 @@
+import numpy as np
 import pytest
 import pandas as pd
 from caraml.upi.utils import df_to_table, table_to_df
@@ -8,6 +9,15 @@ conversion_test_cases = [
         "int_table",
         pd.DataFrame(data=[111], columns=["int_col"], index=["0"]),
         table_pb2.Table(name="int_table",
+                        columns=[table_pb2.Column(name="int_col", type=type_pb2.TYPE_INTEGER)],
+                        rows=[table_pb2.Row(row_id="0",
+                                            values=[
+                                                table_pb2.Value(integer_value=111)])])
+    ),
+    (
+        "int_table_np_int32",
+        pd.DataFrame(data=[111], columns=["int_col"], index=["0"]).astype(np.int32),
+        table_pb2.Table(name="int_table_np_int32",
                         columns=[table_pb2.Column(name="int_col", type=type_pb2.TYPE_INTEGER)],
                         rows=[table_pb2.Row(row_id="0",
                                             values=[
@@ -55,6 +65,19 @@ conversion_test_cases = [
                                             values=[
                                                 table_pb2.Value(
                                                     double_value=111.11)]),
+                              table_pb2.Row(row_id="1",
+                                            values=[table_pb2.Value(is_null=True)]),
+                              ])
+    ),
+    (
+        "float_table_with_null_np_float32",
+        pd.DataFrame(data=[[111], [None]], columns=["float_col"], index=["0", "1"]).astype(np.float32),
+        table_pb2.Table(name="float_table_with_null_np_float32",
+                        columns=[table_pb2.Column(name="float_col", type=type_pb2.TYPE_DOUBLE)],
+                        rows=[table_pb2.Row(row_id="0",
+                                            values=[
+                                                table_pb2.Value(
+                                                    double_value=111)]),
                               table_pb2.Row(row_id="1",
                                             values=[table_pb2.Value(is_null=True)]),
                               ])
