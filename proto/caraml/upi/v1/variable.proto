@@ -8,18 +8,16 @@ import "caraml/upi/v1/type.proto";
 // Can be used as a prediction input, output or metadata.
 // Oneof types are avoided as these can be difficult to handle
 message Variable {
-   // Name describing what the value represents.
-   // Uses include:
-   // - Ensuring ML models process columns in the correct order
-   // - Defining a Feast row entity name
-   // - Parsing metadata to apply traffic rules
+   // Name of the variable.
    string name = 1;
 
-   // Type of the variable
+   // Type of the variable. One of double_value, integer_value, and string_value field should be set depending on the type.
    Type type = 2;
 
-   // One of the following field will be set depending on the type
+   // Double precision floating number (64-bit). Should be set when the variable type is TYPE_DOUBLE
    double double_value = 3;
+   // 64-bit Integer value. Should be set when the variable type is TYPE_INTEGER
    int64 integer_value = 4;
+   // String value. Should be set when the variable type is TYPE_STRING
    string string_value = 5;
 }

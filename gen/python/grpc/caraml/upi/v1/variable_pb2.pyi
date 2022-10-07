@@ -23,21 +23,20 @@ class Variable(google.protobuf.message.Message):
     INTEGER_VALUE_FIELD_NUMBER: builtins.int
     STRING_VALUE_FIELD_NUMBER: builtins.int
     name: typing.Text
-    """Name describing what the value represents.
-    Uses include:
-    - Ensuring ML models process columns in the correct order
-    - Defining a Feast row entity name
-    - Parsing metadata to apply traffic rules
-    """
+    """Name of the variable."""
 
     type: caraml.upi.v1.type_pb2.Type.ValueType
-    """Type of the variable"""
+    """Type of the variable. One of double_value, integer_value, and string_value field should be set depending on the type."""
 
     double_value: builtins.float
-    """One of the following field will be set depending on the type"""
+    """Double precision floating number (64-bit). Should be set when the variable type is TYPE_DOUBLE"""
 
     integer_value: builtins.int
+    """64-bit Integer value. Should be set when the variable type is TYPE_INTEGER"""
+
     string_value: typing.Text
+    """String value. Should be set when the variable type is TYPE_STRING"""
+
     def __init__(self,
         *,
         name: typing.Text = ...,

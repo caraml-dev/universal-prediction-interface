@@ -13,9 +13,7 @@ import typing_extensions
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
 class Table(google.protobuf.message.Message):
-    """Table represents a 2D data structure that has one or more columns 
-    with potentially different types
-    """
+    """Table represents a 2D data structure that has one or more columns with potentially different types"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     NAME_FIELD_NUMBER: builtins.int
     COLUMNS_FIELD_NUMBER: builtins.int
@@ -73,8 +71,8 @@ class Row(google.protobuf.message.Message):
     @property
     def values(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Value]:
         """List of values within a row. 
-        It is table's creator responsibility to ensure that the number of entry 
-        values matches with the length of columns in the table.
+        It is table's creator responsibility to ensure that the length of 
+        this field matches with the number of columns in the table.
         """
         pass
     def __init__(self,
@@ -86,17 +84,23 @@ class Row(google.protobuf.message.Message):
 global___Row = Row
 
 class Value(google.protobuf.message.Message):
-    """Value of a cell within a table. Value is nullable."""
+    """Value of a cell within a table. Value is nullable by setting is_null to true. 
+    Depending on the column's type, one of double_value, integer_value, or string_value field should be set when is_null is false
+    """
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     DOUBLE_VALUE_FIELD_NUMBER: builtins.int
     INTEGER_VALUE_FIELD_NUMBER: builtins.int
     STRING_VALUE_FIELD_NUMBER: builtins.int
     IS_NULL_FIELD_NUMBER: builtins.int
     double_value: builtins.float
-    """One of following field will be set depending on the column's type"""
+    """Double precision floating number (64-bit). Should be set when the column type is TYPE_DOUBLE"""
 
     integer_value: builtins.int
+    """64-bit Integer value. Should be set when the column type is TYPE_INTEGER"""
+
     string_value: typing.Text
+    """String value. Should be set when the column type is TYPE_STRING"""
+
     is_null: builtins.bool
     """Flag to be used to signify that the value is null"""
 

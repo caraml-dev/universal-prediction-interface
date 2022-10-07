@@ -17,7 +17,7 @@ import (
 // V1Row struct for V1Row
 type V1Row struct {
 	RowId *string `json:"rowId,omitempty"`
-	// List of values within a row.  It is table's creator responsibility to ensure that the number of entry  values matches with the length of columns in the table.
+	// List of values within a row.  It is table's creator responsibility to ensure that the length of  this field matches with the number of columns in the table.
 	Values []V1Value `json:"values,omitempty"`
 }
 

@@ -16,6 +16,7 @@ import (
 
 // V1Variable struct for V1Variable
 type V1Variable struct {
+	// Name of the variable.
 	Name *string `json:"name,omitempty"`
 	Type *Upiv1Type `json:"type,omitempty"`
 	DoubleValue *float64 `json:"doubleValue,omitempty"`

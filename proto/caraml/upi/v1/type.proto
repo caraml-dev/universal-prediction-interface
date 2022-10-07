@@ -4,6 +4,7 @@ package caraml.upi.v1;
 
 // Type supported by UPI
 enum Type {
+   // Unspecified type
    TYPE_UNSPECIFIED = 0;
    // Double precision floating number (64-bit)
    TYPE_DOUBLE = 1;

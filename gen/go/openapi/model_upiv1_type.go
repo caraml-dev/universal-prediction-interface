@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// Upiv1Type - TYPE_DOUBLE: Double precision floating number (64-bit)  - TYPE_INTEGER: 64-bit Integer  - TYPE_STRING: String
+// Upiv1Type - TYPE_UNSPECIFIED: Unspecified type  - TYPE_DOUBLE: Double precision floating number (64-bit)  - TYPE_INTEGER: 64-bit Integer  - TYPE_STRING: String
 type Upiv1Type string
 
 // List of upiv1Type

@@ -20,8 +20,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// Table represents a 2D data structure that has one or more columns
-// with potentially different types
+// Table represents a 2D data structure that has one or more columns with potentially different types
 type Table struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -157,8 +156,8 @@ type Row struct {
 	// Row ID must be populated for prediction_table
 	RowId string `protobuf:"bytes,1,opt,name=row_id,json=rowId,proto3" json:"row_id,omitempty"`
 	// List of values within a row.
-	// It is table's creator responsibility to ensure that the number of entry
-	// values matches with the length of columns in the table.
+	// It is table's creator responsibility to ensure that the length of
+	// this field matches with the number of columns in the table.
 	Values []*Value `protobuf:"bytes,2,rep,name=values,proto3" json:"values,omitempty"`
 }
 
@@ -208,16 +207,19 @@ func (x *Row) GetValues() []*Value {
 	return nil
 }
 
-// Value of a cell within a table. Value is nullable.
+// Value of a cell within a table. Value is nullable by setting is_null to true.
+// Depending on the column's type, one of double_value, integer_value, or string_value field should be set when is_null is false
 type Value struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// One of following field will be set depending on the column's type
-	DoubleValue  float64 `protobuf:"fixed64,1,opt,name=double_value,json=doubleValue,proto3" json:"double_value,omitempty"`
-	IntegerValue int64   `protobuf:"varint,2,opt,name=integer_value,json=integerValue,proto3" json:"integer_value,omitempty"`
-	StringValue  string  `protobuf:"bytes,3,opt,name=string_value,json=stringValue,proto3" json:"string_value,omitempty"`
+	// Double precision floating number (64-bit). Should be set when the column type is TYPE_DOUBLE
+	DoubleValue float64 `protobuf:"fixed64,1,opt,name=double_value,json=doubleValue,proto3" json:"double_value,omitempty"`
+	// 64-bit Integer value. Should be set when the column type is TYPE_INTEGER
+	IntegerValue int64 `protobuf:"varint,2,opt,name=integer_value,json=integerValue,proto3" json:"integer_value,omitempty"`
+	// String value. Should be set when the column type is TYPE_STRING
+	StringValue string `protobuf:"bytes,3,opt,name=string_value,json=stringValue,proto3" json:"string_value,omitempty"`
 	// Flag to be used to signify that the value is null
 	IsNull bool `protobuf:"varint,10,opt,name=is_null,json=isNull,proto3" json:"is_null,omitempty"`
 }

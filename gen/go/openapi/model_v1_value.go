@@ -14,7 +14,7 @@ import (
 	"encoding/json"
 )
 
-// V1Value Value of a cell within a table. Value is nullable.
+// V1Value struct for V1Value
 type V1Value struct {
 	DoubleValue *float64 `json:"doubleValue,omitempty"`
 	IntegerValue *string `json:"integerValue,omitempty"`

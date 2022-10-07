@@ -24,6 +24,7 @@ const (
 type Type int32
 
 const (
+	// Unspecified type
 	Type_TYPE_UNSPECIFIED Type = 0
 	// Double precision floating number (64-bit)
 	Type_TYPE_DOUBLE Type = 1

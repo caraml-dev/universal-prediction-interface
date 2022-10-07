@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | Pointer to **string** |  | [optional] 
+**Name** | Pointer to **string** | Name of the variable. | [optional] 
 **Type** | Pointer to [**Upiv1Type**](Upiv1Type.md) |  | [optional] [default to UPIV1TYPE_UNSPECIFIED]
 **DoubleValue** | Pointer to **float64** |  | [optional] 
 **IntegerValue** | Pointer to **string** |  | [optional] 

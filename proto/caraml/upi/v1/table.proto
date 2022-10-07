@@ -5,8 +5,7 @@ package caraml.upi.v1;
 import "caraml/upi/v1/type.proto";
 
 
-// Table represents a 2D data structure that has one or more columns 
-// with potentially different types
+// Table represents a 2D data structure that has one or more columns with potentially different types
 message Table {
     // Table's name
     string name = 1;
@@ -32,16 +31,19 @@ message Row {
     string row_id = 1;
 
     // List of values within a row. 
-    // It is table's creator responsibility to ensure that the number of entry 
-    // values matches with the length of columns in the table.
+    // It is table's creator responsibility to ensure that the length of 
+    // this field matches with the number of columns in the table.
     repeated Value values = 2;
 }
 
-// Value of a cell within a table. Value is nullable.
+// Value of a cell within a table. Value is nullable by setting is_null to true. 
+// Depending on the column's type, one of double_value, integer_value, or string_value field should be set when is_null is false
 message Value {
-    // One of following field will be set depending on the column's type 
+    // Double precision floating number (64-bit). Should be set when the column type is TYPE_DOUBLE
     double double_value = 1;
+    // 64-bit Integer value. Should be set when the column type is TYPE_INTEGER
     int64 integer_value = 2;
+    // String value. Should be set when the column type is TYPE_STRING
     string string_value = 3;
 
     // Flag to be used to signify that the value is null

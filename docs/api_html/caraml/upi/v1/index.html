@@ -294,7 +294,7 @@
               <tr>
                 <td>TYPE_UNSPECIFIED</td>
                 <td>0</td>
-                <td><p></p></td>
+                <td><p>Unspecified type</p></td>
               </tr>
             
               <tr>
@@ -385,8 +385,8 @@ Row ID must be populated for prediction_table </p></td>
                   <td><a href="#caraml.upi.v1.Value">Value</a></td>
                   <td>repeated</td>
                   <td><p>List of values within a row. 
-It is table&#39;s creator responsibility to ensure that the number of entry 
-values matches with the length of columns in the table. </p></td>
+It is table&#39;s creator responsibility to ensure that the length of 
+this field matches with the number of columns in the table. </p></td>
                 </tr>
               
             </tbody>
@@ -397,7 +397,7 @@ values matches with the length of columns in the table. </p></td>
         
       
         <h3 id="caraml.upi.v1.Table">Table</h3>
-        <p>Table represents a 2D data structure that has one or more columns </p><p>with potentially different types</p>
+        <p>Table represents a 2D data structure that has one or more columns with potentially different types</p>
 
         
           <table class="field-table">
@@ -435,7 +435,7 @@ values matches with the length of columns in the table. </p></td>
         
       
         <h3 id="caraml.upi.v1.Value">Value</h3>
-        <p>Value of a cell within a table. Value is nullable.</p>
+        <p>Value of a cell within a table. Value is nullable by setting is_null to true. </p><p>Depending on the column's type, one of double_value, integer_value, or string_value field should be set when is_null is false</p>
 
         
           <table class="field-table">
@@ -448,21 +448,21 @@ values matches with the length of columns in the table. </p></td>
                   <td>double_value</td>
                   <td><a href="#double">double</a></td>
                   <td></td>
-                  <td><p>One of following field will be set depending on the column&#39;s type </p></td>
+                  <td><p>Double precision floating number (64-bit). Should be set when the column type is TYPE_DOUBLE </p></td>
                 </tr>
               
                 <tr>
                   <td>integer_value</td>
                   <td><a href="#int64">int64</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>64-bit Integer value. Should be set when the column type is TYPE_INTEGER </p></td>
                 </tr>
               
                 <tr>
                   <td>string_value</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>String value. Should be set when the column type is TYPE_STRING </p></td>
                 </tr>
               
                 <tr>
@@ -507,39 +507,35 @@ values matches with the length of columns in the table. </p></td>
                   <td>name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Name describing what the value represents.
-Uses include:
-- Ensuring ML models process columns in the correct order
-- Defining a Feast row entity name
-- Parsing metadata to apply traffic rules </p></td>
+                  <td><p>Name of the variable. </p></td>
                 </tr>
               
                 <tr>
                   <td>type</td>
                   <td><a href="#caraml.upi.v1.Type">Type</a></td>
                   <td></td>
-                  <td><p>Type of the variable </p></td>
+                  <td><p>Type of the variable. One of double_value, integer_value, and string_value field should be set depending on the type. </p></td>
                 </tr>
               
                 <tr>
                   <td>double_value</td>
                   <td><a href="#double">double</a></td>
                   <td></td>
-                  <td><p>One of the following field will be set depending on the type </p></td>
+                  <td><p>Double precision floating number (64-bit). Should be set when the variable type is TYPE_DOUBLE </p></td>
                 </tr>
               
                 <tr>
                   <td>integer_value</td>
                   <td><a href="#int64">int64</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>64-bit Integer value. Should be set when the variable type is TYPE_INTEGER </p></td>
                 </tr>
               
                 <tr>
                   <td>string_value</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>String value. Should be set when the variable type is TYPE_STRING </p></td>
                 </tr>
               
             </tbody>
@@ -615,7 +611,7 @@ The column ordering in the prediction table must be the same as feature order ex
 Prediction table can be populated via 3 ways:
 - By performing preprocessing in the client-side and sent as part of original request.
 - By transforming feature values stored in transformer_inputs.
-- By retrieving precomputed feature value from feature store. 
+- By retrieving precomputed feature value from feature store.
 Row ID of the prediction_table must be populated by the client and can be used
 to join a row in prediction_table with another row in the prediction_result_table,
 and to track predictions generated by multiple models.
@@ -728,8 +724,8 @@ NOTE: the ordering of prediction_result_rows might differ with prediction_table 
                   <td>prediction_id</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Unique identifier for each request. Optional.
-Prediction ID will generated by the platform. The user is expected
+                  <td><p>Unique identifier for each request. 
+Prediction ID will be generated by the platform. The user is expected
 include the prediction ID (along with row ID) when calling
 the observations API so that predictions and observations can be joined.
 Prediction ID is needed because row ID may not be globally unique

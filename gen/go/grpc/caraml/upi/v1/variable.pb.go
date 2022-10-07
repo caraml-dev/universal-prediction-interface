@@ -28,18 +28,16 @@ type Variable struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Name describing what the value represents.
-	// Uses include:
-	// - Ensuring ML models process columns in the correct order
-	// - Defining a Feast row entity name
-	// - Parsing metadata to apply traffic rules
+	// Name of the variable.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// Type of the variable
+	// Type of the variable. One of double_value, integer_value, and string_value field should be set depending on the type.
 	Type Type `protobuf:"varint,2,opt,name=type,proto3,enum=caraml.upi.v1.Type" json:"type,omitempty"`
-	// One of the following field will be set depending on the type
-	DoubleValue  float64 `protobuf:"fixed64,3,opt,name=double_value,json=doubleValue,proto3" json:"double_value,omitempty"`
-	IntegerValue int64   `protobuf:"varint,4,opt,name=integer_value,json=integerValue,proto3" json:"integer_value,omitempty"`
-	StringValue  string  `protobuf:"bytes,5,opt,name=string_value,json=stringValue,proto3" json:"string_value,omitempty"`
+	// Double precision floating number (64-bit). Should be set when the variable type is TYPE_DOUBLE
+	DoubleValue float64 `protobuf:"fixed64,3,opt,name=double_value,json=doubleValue,proto3" json:"double_value,omitempty"`
+	// 64-bit Integer value. Should be set when the variable type is TYPE_INTEGER
+	IntegerValue int64 `protobuf:"varint,4,opt,name=integer_value,json=integerValue,proto3" json:"integer_value,omitempty"`
+	// String value. Should be set when the variable type is TYPE_STRING
+	StringValue string `protobuf:"bytes,5,opt,name=string_value,json=stringValue,proto3" json:"string_value,omitempty"`
 }
 
 func (x *Variable) Reset() {

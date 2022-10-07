@@ -16,6 +16,8 @@ class _Type:
 class _TypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_Type.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     TYPE_UNSPECIFIED: _Type.ValueType  # 0
+    """Unspecified type"""
+
     TYPE_DOUBLE: _Type.ValueType  # 1
     """Double precision floating number (64-bit)"""
 
@@ -30,6 +32,8 @@ class Type(_Type, metaclass=_TypeEnumTypeWrapper):
     pass
 
 TYPE_UNSPECIFIED: Type.ValueType  # 0
+"""Unspecified type"""
+
 TYPE_DOUBLE: Type.ValueType  # 1
 """Double precision floating number (64-bit)"""
 
