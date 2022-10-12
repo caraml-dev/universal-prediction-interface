@@ -12,9 +12,10 @@ import (
 
 type UpiServer struct {
 	upiv1.UnimplementedUniversalPredictionServiceServer
+	modelName string
 }
 
-func (_ *UpiServer) PredictValues(
+func (s *UpiServer) PredictValues(
 	_ context.Context,
 	req *upiv1.PredictValuesRequest,
 ) (*upiv1.PredictValuesResponse, error) {
@@ -22,7 +23,7 @@ func (_ *UpiServer) PredictValues(
 		Metadata: &upiv1.ResponseMetadata{
 			Models: []*upiv1.ModelMetadata{
 				{
-					Name:    "Echo Request Table",
+					Name:    s.modelName,
 					Version: "1",
 				},
 			},
@@ -39,7 +40,7 @@ func (us *UpiServer) Run(address string) {
 	s := grpc.NewServer()
 	upiv1.RegisterUniversalPredictionServiceServer(s, us)
 	reflection.Register(s)
-	log.Printf("listening on port %s", address)
+	log.Printf("running model %s on port %s", us.modelName, address)
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)
 	}
