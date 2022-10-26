@@ -6,8 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **PredictionId** | Pointer to **string** |  | [optional] 
 **Models** | Pointer to [**[]V1ModelMetadata**](V1ModelMetadata.md) |  | [optional] 
-**ExperimentId** | Pointer to **string** |  | [optional] 
-**TreatmentId** | Pointer to **string** |  | [optional] 
+**ExperimentName** | Pointer to **string** |  | [optional] 
+**TreatmentName** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
@@ -78,55 +78,55 @@ SetModels sets Models field to given value.
 
 HasModels returns a boolean if a field has been set.
 
-### GetExperimentId
+### GetExperimentName
 
-`func (o *V1ResponseMetadata) GetExperimentId() string`
+`func (o *V1ResponseMetadata) GetExperimentName() string`
 
-GetExperimentId returns the ExperimentId field if non-nil, zero value otherwise.
+GetExperimentName returns the ExperimentName field if non-nil, zero value otherwise.
 
-### GetExperimentIdOk
+### GetExperimentNameOk
 
-`func (o *V1ResponseMetadata) GetExperimentIdOk() (*string, bool)`
+`func (o *V1ResponseMetadata) GetExperimentNameOk() (*string, bool)`
 
-GetExperimentIdOk returns a tuple with the ExperimentId field if it's non-nil, zero value otherwise
+GetExperimentNameOk returns a tuple with the ExperimentName field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetExperimentId
+### SetExperimentName
 
-`func (o *V1ResponseMetadata) SetExperimentId(v string)`
+`func (o *V1ResponseMetadata) SetExperimentName(v string)`
 
-SetExperimentId sets ExperimentId field to given value.
+SetExperimentName sets ExperimentName field to given value.
 
-### HasExperimentId
+### HasExperimentName
 
-`func (o *V1ResponseMetadata) HasExperimentId() bool`
+`func (o *V1ResponseMetadata) HasExperimentName() bool`
 
-HasExperimentId returns a boolean if a field has been set.
+HasExperimentName returns a boolean if a field has been set.
 
-### GetTreatmentId
+### GetTreatmentName
 
-`func (o *V1ResponseMetadata) GetTreatmentId() string`
+`func (o *V1ResponseMetadata) GetTreatmentName() string`
 
-GetTreatmentId returns the TreatmentId field if non-nil, zero value otherwise.
+GetTreatmentName returns the TreatmentName field if non-nil, zero value otherwise.
 
-### GetTreatmentIdOk
+### GetTreatmentNameOk
 
-`func (o *V1ResponseMetadata) GetTreatmentIdOk() (*string, bool)`
+`func (o *V1ResponseMetadata) GetTreatmentNameOk() (*string, bool)`
 
-GetTreatmentIdOk returns a tuple with the TreatmentId field if it's non-nil, zero value otherwise
+GetTreatmentNameOk returns a tuple with the TreatmentName field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetTreatmentId
+### SetTreatmentName
 
-`func (o *V1ResponseMetadata) SetTreatmentId(v string)`
+`func (o *V1ResponseMetadata) SetTreatmentName(v string)`
 
-SetTreatmentId sets TreatmentId field to given value.
+SetTreatmentName sets TreatmentName field to given value.
 
-### HasTreatmentId
+### HasTreatmentName
 
-`func (o *V1ResponseMetadata) HasTreatmentId() bool`
+`func (o *V1ResponseMetadata) HasTreatmentName() bool`
 
-HasTreatmentId returns a boolean if a field has been set.
+HasTreatmentName returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

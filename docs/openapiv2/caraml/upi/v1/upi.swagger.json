@@ -197,12 +197,13 @@
           },
           "title": "List of model that produces the prediction \nThis field is repeated to cater for use case such as ensembling several model production results"
         },
-        "experimentId": {
+        "experimentName": {
           "type": "string",
-          "title": "Optional experimentation metadata"
+          "title": "Name of the experiment that is used to produce the response \nThe value might be empty if experimentation is not involved to produce response"
         },
-        "treatmentId": {
-          "type": "string"
+        "treatmentName": {
+          "type": "string",
+          "title": "Name of the treatment chosen from the experiment to produce the response\nThe value might be empty if experimentation is not involved to produce response"
         }
       }
     },

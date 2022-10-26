@@ -784,17 +784,19 @@ This field is repeated to cater for use case such as ensembling several model pr
                 </tr>
               
                 <tr>
-                  <td>experiment_id</td>
+                  <td>experiment_name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Optional experimentation metadata </p></td>
+                  <td><p>Name of the experiment that is used to produce the response 
+The value might be empty if experimentation is not involved to produce response </p></td>
                 </tr>
               
                 <tr>
-                  <td>treatment_id</td>
+                  <td>treatment_name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Name of the treatment chosen from the experiment to produce the response
+The value might be empty if experimentation is not involved to produce response </p></td>
                 </tr>
               
             </tbody>

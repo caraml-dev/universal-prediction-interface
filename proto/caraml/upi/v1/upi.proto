@@ -103,9 +103,12 @@ message ResponseMetadata {
   // This field is repeated to cater for use case such as ensembling several model production results
   repeated ModelMetadata models = 2;
 
-  // Optional experimentation metadata
-  string experiment_id = 3;
-  string treatment_id = 4;
+  // Name of the experiment that is used to produce the response 
+  // The value might be empty if experimentation is not involved to produce response
+  string experiment_name = 3;
+  // Name of the treatment chosen from the experiment to produce the response
+  // The value might be empty if experimentation is not involved to produce response
+  string treatment_name = 4;
 }
 
 message ModelMetadata {
