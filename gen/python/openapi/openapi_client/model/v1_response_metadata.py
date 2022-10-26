@@ -89,8 +89,8 @@ class V1ResponseMetadata(ModelNormal):
         return {
             'prediction_id': (str,),  # noqa: E501
             'models': ([V1ModelMetadata],),  # noqa: E501
-            'experiment_id': (str,),  # noqa: E501
-            'treatment_id': (str,),  # noqa: E501
+            'experiment_name': (str,),  # noqa: E501
+            'treatment_name': (str,),  # noqa: E501
         }
 
     @cached_property
@@ -101,8 +101,8 @@ class V1ResponseMetadata(ModelNormal):
     attribute_map = {
         'prediction_id': 'predictionId',  # noqa: E501
         'models': 'models',  # noqa: E501
-        'experiment_id': 'experimentId',  # noqa: E501
-        'treatment_id': 'treatmentId',  # noqa: E501
+        'experiment_name': 'experimentName',  # noqa: E501
+        'treatment_name': 'treatmentName',  # noqa: E501
     }
 
     read_only_vars = {
@@ -148,8 +148,8 @@ class V1ResponseMetadata(ModelNormal):
                                 _visited_composed_classes = (Animal,)
             prediction_id (str): [optional]  # noqa: E501
             models ([V1ModelMetadata]): [optional]  # noqa: E501
-            experiment_id (str): [optional]  # noqa: E501
-            treatment_id (str): [optional]  # noqa: E501
+            experiment_name (str): [optional]  # noqa: E501
+            treatment_name (str): [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -237,8 +237,8 @@ class V1ResponseMetadata(ModelNormal):
                                 _visited_composed_classes = (Animal,)
             prediction_id (str): [optional]  # noqa: E501
             models ([V1ModelMetadata]): [optional]  # noqa: E501
-            experiment_id (str): [optional]  # noqa: E501
-            treatment_id (str): [optional]  # noqa: E501
+            experiment_name (str): [optional]  # noqa: E501
+            treatment_name (str): [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
