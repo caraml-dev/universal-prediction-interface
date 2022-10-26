@@ -18,8 +18,8 @@ import (
 type V1ResponseMetadata struct {
 	PredictionId *string `json:"predictionId,omitempty"`
 	Models []V1ModelMetadata `json:"models,omitempty"`
-	ExperimentId *string `json:"experimentId,omitempty"`
-	TreatmentId *string `json:"treatmentId,omitempty"`
+	ExperimentName *string `json:"experimentName,omitempty"`
+	TreatmentName *string `json:"treatmentName,omitempty"`
 }
 
 // NewV1ResponseMetadata instantiates a new V1ResponseMetadata object
@@ -103,68 +103,68 @@ func (o *V1ResponseMetadata) SetModels(v []V1ModelMetadata) {
 	o.Models = v
 }
 
-// GetExperimentId returns the ExperimentId field value if set, zero value otherwise.
-func (o *V1ResponseMetadata) GetExperimentId() string {
-	if o == nil || o.ExperimentId == nil {
+// GetExperimentName returns the ExperimentName field value if set, zero value otherwise.
+func (o *V1ResponseMetadata) GetExperimentName() string {
+	if o == nil || o.ExperimentName == nil {
 		var ret string
 		return ret
 	}
-	return *o.ExperimentId
+	return *o.ExperimentName
 }
 
-// GetExperimentIdOk returns a tuple with the ExperimentId field value if set, nil otherwise
+// GetExperimentNameOk returns a tuple with the ExperimentName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *V1ResponseMetadata) GetExperimentIdOk() (*string, bool) {
-	if o == nil || o.ExperimentId == nil {
+func (o *V1ResponseMetadata) GetExperimentNameOk() (*string, bool) {
+	if o == nil || o.ExperimentName == nil {
 		return nil, false
 	}
-	return o.ExperimentId, true
+	return o.ExperimentName, true
 }
 
-// HasExperimentId returns a boolean if a field has been set.
-func (o *V1ResponseMetadata) HasExperimentId() bool {
-	if o != nil && o.ExperimentId != nil {
+// HasExperimentName returns a boolean if a field has been set.
+func (o *V1ResponseMetadata) HasExperimentName() bool {
+	if o != nil && o.ExperimentName != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetExperimentId gets a reference to the given string and assigns it to the ExperimentId field.
-func (o *V1ResponseMetadata) SetExperimentId(v string) {
-	o.ExperimentId = &v
+// SetExperimentName gets a reference to the given string and assigns it to the ExperimentName field.
+func (o *V1ResponseMetadata) SetExperimentName(v string) {
+	o.ExperimentName = &v
 }
 
-// GetTreatmentId returns the TreatmentId field value if set, zero value otherwise.
-func (o *V1ResponseMetadata) GetTreatmentId() string {
-	if o == nil || o.TreatmentId == nil {
+// GetTreatmentName returns the TreatmentName field value if set, zero value otherwise.
+func (o *V1ResponseMetadata) GetTreatmentName() string {
+	if o == nil || o.TreatmentName == nil {
 		var ret string
 		return ret
 	}
-	return *o.TreatmentId
+	return *o.TreatmentName
 }
 
-// GetTreatmentIdOk returns a tuple with the TreatmentId field value if set, nil otherwise
+// GetTreatmentNameOk returns a tuple with the TreatmentName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *V1ResponseMetadata) GetTreatmentIdOk() (*string, bool) {
-	if o == nil || o.TreatmentId == nil {
+func (o *V1ResponseMetadata) GetTreatmentNameOk() (*string, bool) {
+	if o == nil || o.TreatmentName == nil {
 		return nil, false
 	}
-	return o.TreatmentId, true
+	return o.TreatmentName, true
 }
 
-// HasTreatmentId returns a boolean if a field has been set.
-func (o *V1ResponseMetadata) HasTreatmentId() bool {
-	if o != nil && o.TreatmentId != nil {
+// HasTreatmentName returns a boolean if a field has been set.
+func (o *V1ResponseMetadata) HasTreatmentName() bool {
+	if o != nil && o.TreatmentName != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetTreatmentId gets a reference to the given string and assigns it to the TreatmentId field.
-func (o *V1ResponseMetadata) SetTreatmentId(v string) {
-	o.TreatmentId = &v
+// SetTreatmentName gets a reference to the given string and assigns it to the TreatmentName field.
+func (o *V1ResponseMetadata) SetTreatmentName(v string) {
+	o.TreatmentName = &v
 }
 
 func (o V1ResponseMetadata) MarshalJSON() ([]byte, error) {
@@ -175,11 +175,11 @@ func (o V1ResponseMetadata) MarshalJSON() ([]byte, error) {
 	if o.Models != nil {
 		toSerialize["models"] = o.Models
 	}
-	if o.ExperimentId != nil {
-		toSerialize["experimentId"] = o.ExperimentId
+	if o.ExperimentName != nil {
+		toSerialize["experimentName"] = o.ExperimentName
 	}
-	if o.TreatmentId != nil {
-		toSerialize["treatmentId"] = o.TreatmentId
+	if o.TreatmentName != nil {
+		toSerialize["treatmentName"] = o.TreatmentName
 	}
 	return json.Marshal(toSerialize)
 }
