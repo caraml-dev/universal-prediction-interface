@@ -6,14 +6,21 @@
 - [caraml/upi/v1/type.proto](#caraml_upi_v1_type-proto)
     - [Type](#caraml-upi-v1-Type)
   
+- [caraml/upi/v1/variable.proto](#caraml_upi_v1_variable-proto)
+    - [Variable](#caraml-upi-v1-Variable)
+  
 - [caraml/upi/v1/table.proto](#caraml_upi_v1_table-proto)
     - [Column](#caraml-upi-v1-Column)
     - [Row](#caraml-upi-v1-Row)
     - [Table](#caraml-upi-v1-Table)
     - [Value](#caraml-upi-v1-Value)
   
-- [caraml/upi/v1/variable.proto](#caraml_upi_v1_variable-proto)
-    - [Variable](#caraml-upi-v1-Variable)
+- [caraml/upi/v1/observation_log.proto](#caraml_upi_v1_observation_log-proto)
+    - [LogObservationsRequest](#caraml-upi-v1-LogObservationsRequest)
+    - [LogObservationsResponse](#caraml-upi-v1-LogObservationsResponse)
+    - [ObservationLog](#caraml-upi-v1-ObservationLog)
+  
+    - [ObservationService](#caraml-upi-v1-ObservationService)
   
 - [caraml/upi/v1/upi.proto](#caraml_upi_v1_upi-proto)
     - [ModelMetadata](#caraml-upi-v1-ModelMetadata)
@@ -50,6 +57,43 @@ Type supported by UPI
 | TYPE_INTEGER | 2 | 64-bit Integer |
 | TYPE_STRING | 3 | String |
 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="caraml_upi_v1_variable-proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## caraml/upi/v1/variable.proto
+
+
+
+<a name="caraml-upi-v1-Variable"></a>
+
+### Variable
+Represents a named and typed data point.
+Can be used as a prediction input, output or metadata.
+Oneof types are avoided as these can be difficult to handle
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | Name describing what the value represents. Uses include: - Ensuring ML models process columns in the correct order - Defining a Feast row entity name - Parsing metadata to apply traffic rules |
+| type | [Type](#caraml-upi-v1-Type) |  | Type of the variable |
+| double_value | [double](#double) |  | One of the following field will be set depending on the type |
+| integer_value | [int64](#int64) |  |  |
+| string_value | [string](#string) |  |  |
+
+
+
+
+
+ 
 
  
 
@@ -143,28 +187,59 @@ Value of a cell within a table. Value is nullable.
 
 
 
-<a name="caraml_upi_v1_variable-proto"></a>
+<a name="caraml_upi_v1_observation_log-proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## caraml/upi/v1/variable.proto
+## caraml/upi/v1/observation_log.proto
 
 
 
-<a name="caraml-upi-v1-Variable"></a>
+<a name="caraml-upi-v1-LogObservationsRequest"></a>
 
-### Variable
-Represents a named and typed data point.
-Can be used as a prediction input, output or metadata.
-Oneof types are avoided as these can be difficult to handle
+### LogObservationsRequest
+
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| name | [string](#string) |  | Name describing what the value represents. Uses include: - Ensuring ML models process columns in the correct order - Defining a Feast row entity name - Parsing metadata to apply traffic rules |
-| type | [Type](#caraml-upi-v1-Type) |  | Type of the variable |
-| double_value | [double](#double) |  | One of the following field will be set depending on the type |
-| integer_value | [int64](#int64) |  |  |
-| string_value | [string](#string) |  |  |
+| observations | [ObservationLog](#caraml-upi-v1-ObservationLog) | repeated | List of observations per request |
+
+
+
+
+
+
+<a name="caraml-upi-v1-LogObservationsResponse"></a>
+
+### LogObservationsResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| observation_batch_id | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="caraml-upi-v1-ObservationLog"></a>
+
+### ObservationLog
+ObservationLog represents ground truth signals to be combined
+with the prediction log produced by CaraML prediction service
+to form data sets used for training ML models
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| prediction_id | [string](#string) |  | Unique identifier of a prediction response returned by prediction service. This information is used to join the prediction to an observation. |
+| row_id | [string](#string) |  | Prediction requests may contain multiple prediction instances. The row_id identifies a particular prediction instance that was used to produce an observation. This information is used to join the prediction to an observation. |
+| target_name | [string](#string) |  | The name of the observation target. This information is used to join the prediction to an observation. |
+| observation_values | [Value](#caraml-upi-v1-Value) | repeated | The ground-truth value. It can be a double, string or integer type. |
+| observation_context | [Variable](#caraml-upi-v1-Variable) | repeated | A set of key-value pairs to provide additional context for the observation. |
+| observation_timestamp | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | Timestamp when the observation is made |
 
 
 
@@ -175,6 +250,16 @@ Oneof types are avoided as these can be difficult to handle
  
 
  
+
+
+<a name="caraml-upi-v1-ObservationService"></a>
+
+### ObservationService
+Service for logging observations
+
+| Method Name | Request Type | Response Type | Description |
+| ----------- | ------------ | ------------- | ------------|
+| LogObservations | [LogObservationsRequest](#caraml-upi-v1-LogObservationsRequest) | [LogObservationsResponse](#caraml-upi-v1-LogObservationsResponse) |  |
 
  
 

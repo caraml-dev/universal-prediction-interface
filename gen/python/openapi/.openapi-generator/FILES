@@ -1,6 +1,5 @@
 .gitignore
 .gitlab-ci.yml
-.openapi-generator-ignore
 .travis.yml
 README.md
 docs/ProtobufAny.md
@@ -49,19 +48,4 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_protobuf_any.py
-test/test_rpc_status.py
-test/test_universal_prediction_service_api.py
-test/test_upiv1_type.py
-test/test_v1_column.py
-test/test_v1_model_metadata.py
-test/test_v1_predict_values_request.py
-test/test_v1_predict_values_response.py
-test/test_v1_request_metadata.py
-test/test_v1_response_metadata.py
-test/test_v1_row.py
-test/test_v1_table.py
-test/test_v1_transformer_input.py
-test/test_v1_value.py
-test/test_v1_variable.py
 tox.ini

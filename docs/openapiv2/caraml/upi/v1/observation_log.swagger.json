@@ -1,0 +1,198 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "caraml/upi/v1/observation_log.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "ObservationService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/log-observation": {
+      "post": {
+        "operationId": "ObservationService_LogObservations",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1LogObservationsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1LogObservationsRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ObservationService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "upiv1Type": {
+      "type": "string",
+      "enum": [
+        "TYPE_UNSPECIFIED",
+        "TYPE_DOUBLE",
+        "TYPE_INTEGER",
+        "TYPE_STRING"
+      ],
+      "default": "TYPE_UNSPECIFIED",
+      "description": "- TYPE_DOUBLE: Double precision floating number (64-bit)\n - TYPE_INTEGER: 64-bit Integer\n - TYPE_STRING: String",
+      "title": "Type supported by UPI"
+    },
+    "v1LogObservationsRequest": {
+      "type": "object",
+      "properties": {
+        "observations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1ObservationLog"
+          },
+          "title": "List of observations per request"
+        }
+      }
+    },
+    "v1LogObservationsResponse": {
+      "type": "object",
+      "properties": {
+        "observationBatchId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1ObservationLog": {
+      "type": "object",
+      "properties": {
+        "predictionId": {
+          "type": "string",
+          "description": "Unique identifier of a prediction response returned by prediction service.\nThis information is used to join the prediction to an observation."
+        },
+        "rowId": {
+          "type": "string",
+          "description": "Prediction requests may contain multiple prediction instances.\nThe row_id identifies a particular prediction instance that was used to produce an observation.\nThis information is used to join the prediction to an observation."
+        },
+        "targetName": {
+          "type": "string",
+          "description": "The name of the observation target. This information is used to join the prediction to an observation."
+        },
+        "observationValues": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Value"
+          },
+          "description": "The ground-truth value. It can be a double, string or integer type."
+        },
+        "observationContext": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Variable"
+          },
+          "description": "A set of key-value pairs to provide additional context for the observation."
+        },
+        "observationTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "title": "Timestamp when the observation is made"
+        }
+      },
+      "title": "ObservationLog represents ground truth signals to be combined\nwith the prediction log produced by CaraML prediction service\nto form data sets used for training ML models"
+    },
+    "v1Value": {
+      "type": "object",
+      "properties": {
+        "doubleValue": {
+          "type": "number",
+          "format": "double",
+          "title": "One of following field will be set depending on the column's type"
+        },
+        "integerValue": {
+          "type": "string",
+          "format": "int64"
+        },
+        "stringValue": {
+          "type": "string"
+        },
+        "isNull": {
+          "type": "boolean",
+          "title": "Flag to be used to signify that the value is null"
+        }
+      },
+      "description": "Value of a cell within a table. Value is nullable."
+    },
+    "v1Variable": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "Name describing what the value represents.\nUses include:\n- Ensuring ML models process columns in the correct order\n- Defining a Feast row entity name\n- Parsing metadata to apply traffic rules"
+        },
+        "type": {
+          "$ref": "#/definitions/upiv1Type",
+          "title": "Type of the variable"
+        },
+        "doubleValue": {
+          "type": "number",
+          "format": "double",
+          "title": "One of the following field will be set depending on the type"
+        },
+        "integerValue": {
+          "type": "string",
+          "format": "int64"
+        },
+        "stringValue": {
+          "type": "string"
+        }
+      },
+      "title": "Represents a named and typed data point.\nCan be used as a prediction input, output or metadata.\nOneof types are avoided as these can be difficult to handle"
+    }
+  }
+}
