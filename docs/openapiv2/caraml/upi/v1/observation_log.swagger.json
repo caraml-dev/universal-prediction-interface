@@ -127,7 +127,7 @@
         "observationValues": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/v1Value"
+            "$ref": "#/definitions/v1Variable"
           },
           "description": "The ground-truth value. It can be a double, string or integer type."
         },
@@ -145,28 +145,6 @@
         }
       },
       "title": "ObservationLog represents ground truth signals to be combined\nwith the prediction log produced by CaraML prediction service\nto form data sets used for training ML models"
-    },
-    "v1Value": {
-      "type": "object",
-      "properties": {
-        "doubleValue": {
-          "type": "number",
-          "format": "double",
-          "title": "One of following field will be set depending on the column's type"
-        },
-        "integerValue": {
-          "type": "string",
-          "format": "int64"
-        },
-        "stringValue": {
-          "type": "string"
-        },
-        "isNull": {
-          "type": "boolean",
-          "title": "Flag to be used to signify that the value is null"
-        }
-      },
-      "description": "Value of a cell within a table. Value is nullable."
     },
     "v1Variable": {
       "type": "object",

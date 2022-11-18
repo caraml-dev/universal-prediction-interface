@@ -9,18 +9,18 @@
 - [caraml/upi/v1/variable.proto](#caraml_upi_v1_variable-proto)
     - [Variable](#caraml-upi-v1-Variable)
   
-- [caraml/upi/v1/table.proto](#caraml_upi_v1_table-proto)
-    - [Column](#caraml-upi-v1-Column)
-    - [Row](#caraml-upi-v1-Row)
-    - [Table](#caraml-upi-v1-Table)
-    - [Value](#caraml-upi-v1-Value)
-  
 - [caraml/upi/v1/observation_log.proto](#caraml_upi_v1_observation_log-proto)
     - [LogObservationsRequest](#caraml-upi-v1-LogObservationsRequest)
     - [LogObservationsResponse](#caraml-upi-v1-LogObservationsResponse)
     - [ObservationLog](#caraml-upi-v1-ObservationLog)
   
     - [ObservationService](#caraml-upi-v1-ObservationService)
+  
+- [caraml/upi/v1/table.proto](#caraml_upi_v1_table-proto)
+    - [Column](#caraml-upi-v1-Column)
+    - [Row](#caraml-upi-v1-Row)
+    - [Table](#caraml-upi-v1-Table)
+    - [Value](#caraml-upi-v1-Value)
   
 - [caraml/upi/v1/upi.proto](#caraml_upi_v1_upi-proto)
     - [ModelMetadata](#caraml-upi-v1-ModelMetadata)
@@ -98,6 +98,84 @@ Oneof types are avoided as these can be difficult to handle
  
 
  
+
+ 
+
+
+
+<a name="caraml_upi_v1_observation_log-proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## caraml/upi/v1/observation_log.proto
+
+
+
+<a name="caraml-upi-v1-LogObservationsRequest"></a>
+
+### LogObservationsRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| observations | [ObservationLog](#caraml-upi-v1-ObservationLog) | repeated | List of observations per request |
+
+
+
+
+
+
+<a name="caraml-upi-v1-LogObservationsResponse"></a>
+
+### LogObservationsResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| observation_batch_id | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="caraml-upi-v1-ObservationLog"></a>
+
+### ObservationLog
+ObservationLog represents ground truth signals to be combined
+with the prediction log produced by CaraML prediction service
+to form data sets used for training ML models
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| prediction_id | [string](#string) |  | Unique identifier of a prediction response returned by prediction service. This information is used to join the prediction to an observation. |
+| row_id | [string](#string) |  | Prediction requests may contain multiple prediction instances. The row_id identifies a particular prediction instance that was used to produce an observation. This information is used to join the prediction to an observation. |
+| target_name | [string](#string) |  | The name of the observation target. This information is used to join the prediction to an observation. |
+| observation_values | [Variable](#caraml-upi-v1-Variable) | repeated | The ground-truth value. It can be a double, string or integer type. |
+| observation_context | [Variable](#caraml-upi-v1-Variable) | repeated | A set of key-value pairs to provide additional context for the observation. |
+| observation_timestamp | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | Timestamp when the observation is made |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+
+<a name="caraml-upi-v1-ObservationService"></a>
+
+### ObservationService
+Service for logging observations
+
+| Method Name | Request Type | Response Type | Description |
+| ----------- | ------------ | ------------- | ------------|
+| LogObservations | [LogObservationsRequest](#caraml-upi-v1-LogObservationsRequest) | [LogObservationsResponse](#caraml-upi-v1-LogObservationsResponse) |  |
 
  
 
@@ -182,84 +260,6 @@ Value of a cell within a table. Value is nullable.
  
 
  
-
- 
-
-
-
-<a name="caraml_upi_v1_observation_log-proto"></a>
-<p align="right"><a href="#top">Top</a></p>
-
-## caraml/upi/v1/observation_log.proto
-
-
-
-<a name="caraml-upi-v1-LogObservationsRequest"></a>
-
-### LogObservationsRequest
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| observations | [ObservationLog](#caraml-upi-v1-ObservationLog) | repeated | List of observations per request |
-
-
-
-
-
-
-<a name="caraml-upi-v1-LogObservationsResponse"></a>
-
-### LogObservationsResponse
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| observation_batch_id | [string](#string) |  |  |
-
-
-
-
-
-
-<a name="caraml-upi-v1-ObservationLog"></a>
-
-### ObservationLog
-ObservationLog represents ground truth signals to be combined
-with the prediction log produced by CaraML prediction service
-to form data sets used for training ML models
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| prediction_id | [string](#string) |  | Unique identifier of a prediction response returned by prediction service. This information is used to join the prediction to an observation. |
-| row_id | [string](#string) |  | Prediction requests may contain multiple prediction instances. The row_id identifies a particular prediction instance that was used to produce an observation. This information is used to join the prediction to an observation. |
-| target_name | [string](#string) |  | The name of the observation target. This information is used to join the prediction to an observation. |
-| observation_values | [Value](#caraml-upi-v1-Value) | repeated | The ground-truth value. It can be a double, string or integer type. |
-| observation_context | [Variable](#caraml-upi-v1-Variable) | repeated | A set of key-value pairs to provide additional context for the observation. |
-| observation_timestamp | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | Timestamp when the observation is made |
-
-
-
-
-
- 
-
- 
-
- 
-
-
-<a name="caraml-upi-v1-ObservationService"></a>
-
-### ObservationService
-Service for logging observations
-
-| Method Name | Request Type | Response Type | Description |
-| ----------- | ------------ | ------------- | ------------|
-| LogObservations | [LogObservationsRequest](#caraml-upi-v1-LogObservationsRequest) | [LogObservationsResponse](#caraml-upi-v1-LogObservationsResponse) |  |
 
  
 

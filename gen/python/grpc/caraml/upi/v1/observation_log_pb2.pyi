@@ -3,7 +3,6 @@
 isort:skip_file
 """
 import builtins
-import caraml.upi.v1.table_pb2
 import caraml.upi.v1.variable_pb2
 import google.protobuf.descriptor
 import google.protobuf.internal.containers
@@ -41,7 +40,7 @@ class ObservationLog(google.protobuf.message.Message):
     """The name of the observation target. This information is used to join the prediction to an observation."""
 
     @property
-    def observation_values(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[caraml.upi.v1.table_pb2.Value]:
+    def observation_values(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[caraml.upi.v1.variable_pb2.Variable]:
         """The ground-truth value. It can be a double, string or integer type."""
         pass
     @property
@@ -57,7 +56,7 @@ class ObservationLog(google.protobuf.message.Message):
         prediction_id: typing.Text = ...,
         row_id: typing.Text = ...,
         target_name: typing.Text = ...,
-        observation_values: typing.Optional[typing.Iterable[caraml.upi.v1.table_pb2.Value]] = ...,
+        observation_values: typing.Optional[typing.Iterable[caraml.upi.v1.variable_pb2.Variable]] = ...,
         observation_context: typing.Optional[typing.Iterable[caraml.upi.v1.variable_pb2.Variable]] = ...,
         observation_timestamp: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
         ) -> None: ...

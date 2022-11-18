@@ -3,7 +3,6 @@ syntax = "proto3";
 package caraml.upi.v1;
 
 import "caraml/upi/v1/variable.proto";
-import "caraml/upi/v1/table.proto";
 import "google/protobuf/timestamp.proto";
 import "google/api/annotations.proto";
 
@@ -32,7 +31,7 @@ message ObservationLog {
     // The name of the observation target. This information is used to join the prediction to an observation.
     string target_name = 3;
     // The ground-truth value. It can be a double, string or integer type.
-    repeated Value observation_values = 4;
+    repeated Variable observation_values = 4;
     // A set of key-value pairs to provide additional context for the observation.
     repeated Variable observation_context = 5;
     // Timestamp when the observation is made
