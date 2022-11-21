@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package caraml.upi.v1;
+
+import "caraml/upi/v1/variable.proto";
+import "google/protobuf/timestamp.proto";
+import "google/api/annotations.proto";
+
+// Service for logging observations
+service ObservationService {
+  rpc LogObservations(LogObservationsRequest)
+    returns (LogObservationsResponse) {
+      option (google.api.http) = {
+        post : "/v1/log-observation"
+        body : "*"
+      };
+    }
+}
+
+// ObservationLog represents ground truth signals to be combined
+// with the prediction log produced by CaraML prediction service
+// to form data sets used for training ML models
+message ObservationLog {
+    // Unique identifier of a prediction response returned by prediction service.
+    // This information is used to join the prediction to an observation.
+    string prediction_id = 1;
+    // Prediction requests may contain multiple prediction instances.
+    // The row_id identifies a particular prediction instance that was used to produce an observation.
+    // This information is used to join the prediction to an observation.
+    string row_id = 2;
+    // The name of the observation target. This information is used to join the prediction to an observation.
+    string target_name = 3;
+    // The ground-truth value. It can be a double, string or integer type.
+    repeated Variable observation_values = 4;
+    // A set of key-value pairs to provide additional context for the observation.
+    repeated Variable observation_context = 5;
+    // Timestamp when the observation is made
+    google.protobuf.Timestamp observation_timestamp = 6;
+}
+  
+message LogObservationsRequest {
+    // List of observations per request
+    repeated ObservationLog observations = 1;
+}
+
+message LogObservationsResponse {
+    string observation_batch_id = 1;
+}
