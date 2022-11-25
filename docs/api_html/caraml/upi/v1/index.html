@@ -220,6 +220,10 @@
                   <a href="#caraml.upi.v1.ObservationLog"><span class="badge">M</span>ObservationLog</a>
                 </li>
               
+                <li>
+                  <a href="#caraml.upi.v1.ObservationLogKey"><span class="badge">M</span>ObservationLogKey</a>
+                </li>
+              
               
               
               
@@ -465,7 +469,7 @@ Uses include:
                   <td>observation_batch_id</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Unique identifier to identify records from a batch of observation logs </p></td>
                 </tr>
               
             </tbody>
@@ -528,6 +532,47 @@ This information is used to join the prediction to an observation. </p></td>
                   <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                   <td></td>
                   <td><p>Timestamp when the observation is made </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="caraml.upi.v1.ObservationLogKey">ObservationLogKey</h3>
+        <p>ObservationLogKey contains necessary values for generating unique records for</p><p>downstream usages, eg. Dataset Generation Service</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>prediction_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Unique identifier of a prediction response returned by prediction service.
+This information is used to join the prediction to an observation. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>row_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Prediction requests may contain multiple prediction instances.
+The row_id identifies a particular prediction instance that was used to produce an observation.
+This information is used to join the prediction to an observation. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>observation_batch_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Id to uniquely identify records from a batch of observation logs </p></td>
                 </tr>
               
             </tbody>

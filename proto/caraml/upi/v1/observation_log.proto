@@ -17,6 +17,20 @@ service ObservationService {
     }
 }
 
+// ObservationLogKey contains necessary values for generating unique records for
+// downstream usages, eg. Dataset Generation Service
+message ObservationLogKey {
+    // Unique identifier of a prediction response returned by prediction service.
+    // This information is used to join the prediction to an observation.
+	string prediction_id = 1;
+    // Prediction requests may contain multiple prediction instances.
+    // The row_id identifies a particular prediction instance that was used to produce an observation.
+    // This information is used to join the prediction to an observation.
+    string row_id = 2;
+    // Id to uniquely identify records from a batch of observation logs
+    string observation_batch_id = 3;
+}
+
 // ObservationLog represents ground truth signals to be combined
 // with the prediction log produced by CaraML prediction service
 // to form data sets used for training ML models
@@ -44,5 +58,6 @@ message LogObservationsRequest {
 }
 
 message LogObservationsResponse {
+    // Unique identifier to identify records from a batch of observation logs
     string observation_batch_id = 1;
 }
