@@ -18,9 +18,12 @@ class ObservationLogKey(google.protobuf.message.Message):
     downstream usages, eg. Dataset Generation Service
     """
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    OBSERVATION_BATCH_ID_FIELD_NUMBER: builtins.int
     PREDICTION_ID_FIELD_NUMBER: builtins.int
     ROW_ID_FIELD_NUMBER: builtins.int
-    OBSERVATION_BATCH_ID_FIELD_NUMBER: builtins.int
+    observation_batch_id: typing.Text
+    """Id to uniquely identify records from a batch of observation logs"""
+
     prediction_id: typing.Text
     """Unique identifier of a prediction response returned by prediction service.
     This information is used to join the prediction to an observation.
@@ -32,14 +35,11 @@ class ObservationLogKey(google.protobuf.message.Message):
     This information is used to join the prediction to an observation.
     """
 
-    observation_batch_id: typing.Text
-    """Id to uniquely identify records from a batch of observation logs"""
-
     def __init__(self,
         *,
+        observation_batch_id: typing.Text = ...,
         prediction_id: typing.Text = ...,
         row_id: typing.Text = ...,
-        observation_batch_id: typing.Text = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["observation_batch_id",b"observation_batch_id","prediction_id",b"prediction_id","row_id",b"row_id"]) -> None: ...
 global___ObservationLogKey = ObservationLogKey

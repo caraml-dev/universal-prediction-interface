@@ -172,9 +172,9 @@ downstream usages, eg. Dataset Generation Service
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
+| observation_batch_id | [string](#string) |  | Id to uniquely identify records from a batch of observation logs |
 | prediction_id | [string](#string) |  | Unique identifier of a prediction response returned by prediction service. This information is used to join the prediction to an observation. |
 | row_id | [string](#string) |  | Prediction requests may contain multiple prediction instances. The row_id identifies a particular prediction instance that was used to produce an observation. This information is used to join the prediction to an observation. |
-| observation_batch_id | [string](#string) |  | Id to uniquely identify records from a batch of observation logs |
 
 
 
