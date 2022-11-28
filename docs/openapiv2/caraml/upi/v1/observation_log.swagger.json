@@ -105,7 +105,8 @@
       "type": "object",
       "properties": {
         "observationBatchId": {
-          "type": "string"
+          "type": "string",
+          "title": "Unique identifier to identify records from a batch of observation logs"
         }
       }
     },

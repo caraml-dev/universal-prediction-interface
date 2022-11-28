@@ -17,13 +17,21 @@ from google.protobuf import timestamp_pb2 as google_dot_protobuf_dot_timestamp__
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n#caraml/upi/v1/observation_log.proto\x12\rcaraml.upi.v1\x1a\x1c\x63\x61raml/upi/v1/variable.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/api/annotations.proto\"\xd0\x02\n\x0eObservationLog\x12#\n\rprediction_id\x18\x01 \x01(\tR\x0cpredictionId\x12\x15\n\x06row_id\x18\x02 \x01(\tR\x05rowId\x12\x1f\n\x0btarget_name\x18\x03 \x01(\tR\ntargetName\x12\x46\n\x12observation_values\x18\x04 \x03(\x0b\x32\x17.caraml.upi.v1.VariableR\x11observationValues\x12H\n\x13observation_context\x18\x05 \x03(\x0b\x32\x17.caraml.upi.v1.VariableR\x12observationContext\x12O\n\x15observation_timestamp\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.TimestampR\x14observationTimestamp\"[\n\x16LogObservationsRequest\x12\x41\n\x0cobservations\x18\x01 \x03(\x0b\x32\x1d.caraml.upi.v1.ObservationLogR\x0cobservations\"K\n\x17LogObservationsResponse\x12\x30\n\x14observation_batch_id\x18\x01 \x01(\tR\x12observationBatchId2\x97\x01\n\x12ObservationService\x12\x80\x01\n\x0fLogObservations\x12%.caraml.upi.v1.LogObservationsRequest\x1a&.caraml.upi.v1.LogObservationsResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v1/log-observationB\xcf\x01\n\x11\x63om.caraml.upi.v1B\x13ObservationLogProtoP\x01ZOgithub.com/caraml-dev/universal-prediction-interface/gen/go/caraml/upi/v1;upiv1\xa2\x02\x03\x43UX\xaa\x02\rCaraml.Upi.V1\xca\x02\rCaraml\\Upi\\V1\xe2\x02\x19\x43\x61raml\\Upi\\V1\\GPBMetadata\xea\x02\x0f\x43\x61raml::Upi::V1b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n#caraml/upi/v1/observation_log.proto\x12\rcaraml.upi.v1\x1a\x1c\x63\x61raml/upi/v1/variable.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/api/annotations.proto\"\x81\x01\n\x11ObservationLogKey\x12\x30\n\x14observation_batch_id\x18\x01 \x01(\tR\x12observationBatchId\x12#\n\rprediction_id\x18\x02 \x01(\tR\x0cpredictionId\x12\x15\n\x06row_id\x18\x03 \x01(\tR\x05rowId\"\xd0\x02\n\x0eObservationLog\x12#\n\rprediction_id\x18\x01 \x01(\tR\x0cpredictionId\x12\x15\n\x06row_id\x18\x02 \x01(\tR\x05rowId\x12\x1f\n\x0btarget_name\x18\x03 \x01(\tR\ntargetName\x12\x46\n\x12observation_values\x18\x04 \x03(\x0b\x32\x17.caraml.upi.v1.VariableR\x11observationValues\x12H\n\x13observation_context\x18\x05 \x03(\x0b\x32\x17.caraml.upi.v1.VariableR\x12observationContext\x12O\n\x15observation_timestamp\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.TimestampR\x14observationTimestamp\"[\n\x16LogObservationsRequest\x12\x41\n\x0cobservations\x18\x01 \x03(\x0b\x32\x1d.caraml.upi.v1.ObservationLogR\x0cobservations\"K\n\x17LogObservationsResponse\x12\x30\n\x14observation_batch_id\x18\x01 \x01(\tR\x12observationBatchId2\x97\x01\n\x12ObservationService\x12\x80\x01\n\x0fLogObservations\x12%.caraml.upi.v1.LogObservationsRequest\x1a&.caraml.upi.v1.LogObservationsResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v1/log-observationB\xcf\x01\n\x11\x63om.caraml.upi.v1B\x13ObservationLogProtoP\x01ZOgithub.com/caraml-dev/universal-prediction-interface/gen/go/caraml/upi/v1;upiv1\xa2\x02\x03\x43UX\xaa\x02\rCaraml.Upi.V1\xca\x02\rCaraml\\Upi\\V1\xe2\x02\x19\x43\x61raml\\Upi\\V1\\GPBMetadata\xea\x02\x0f\x43\x61raml::Upi::V1b\x06proto3')
 
 
 
+_OBSERVATIONLOGKEY = DESCRIPTOR.message_types_by_name['ObservationLogKey']
 _OBSERVATIONLOG = DESCRIPTOR.message_types_by_name['ObservationLog']
 _LOGOBSERVATIONSREQUEST = DESCRIPTOR.message_types_by_name['LogObservationsRequest']
 _LOGOBSERVATIONSRESPONSE = DESCRIPTOR.message_types_by_name['LogObservationsResponse']
+ObservationLogKey = _reflection.GeneratedProtocolMessageType('ObservationLogKey', (_message.Message,), {
+  'DESCRIPTOR' : _OBSERVATIONLOGKEY,
+  '__module__' : 'caraml.upi.v1.observation_log_pb2'
+  # @@protoc_insertion_point(class_scope:caraml.upi.v1.ObservationLogKey)
+  })
+_sym_db.RegisterMessage(ObservationLogKey)
+
 ObservationLog = _reflection.GeneratedProtocolMessageType('ObservationLog', (_message.Message,), {
   'DESCRIPTOR' : _OBSERVATIONLOG,
   '__module__' : 'caraml.upi.v1.observation_log_pb2'
@@ -52,12 +60,14 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   DESCRIPTOR._serialized_options = b'\n\021com.caraml.upi.v1B\023ObservationLogProtoP\001ZOgithub.com/caraml-dev/universal-prediction-interface/gen/go/caraml/upi/v1;upiv1\242\002\003CUX\252\002\rCaraml.Upi.V1\312\002\rCaraml\\Upi\\V1\342\002\031Caraml\\Upi\\V1\\GPBMetadata\352\002\017Caraml::Upi::V1'
   _OBSERVATIONSERVICE.methods_by_name['LogObservations']._options = None
   _OBSERVATIONSERVICE.methods_by_name['LogObservations']._serialized_options = b'\202\323\344\223\002\030:\001*\"\023/v1/log-observation'
-  _OBSERVATIONLOG._serialized_start=148
-  _OBSERVATIONLOG._serialized_end=484
-  _LOGOBSERVATIONSREQUEST._serialized_start=486
-  _LOGOBSERVATIONSREQUEST._serialized_end=577
-  _LOGOBSERVATIONSRESPONSE._serialized_start=579
-  _LOGOBSERVATIONSRESPONSE._serialized_end=654
-  _OBSERVATIONSERVICE._serialized_start=657
-  _OBSERVATIONSERVICE._serialized_end=808
+  _OBSERVATIONLOGKEY._serialized_start=148
+  _OBSERVATIONLOGKEY._serialized_end=277
+  _OBSERVATIONLOG._serialized_start=280
+  _OBSERVATIONLOG._serialized_end=616
+  _LOGOBSERVATIONSREQUEST._serialized_start=618
+  _LOGOBSERVATIONSREQUEST._serialized_end=709
+  _LOGOBSERVATIONSRESPONSE._serialized_start=711
+  _LOGOBSERVATIONSRESPONSE._serialized_end=786
+  _OBSERVATIONSERVICE._serialized_start=789
+  _OBSERVATIONSERVICE._serialized_end=940
 # @@protoc_insertion_point(module_scope)

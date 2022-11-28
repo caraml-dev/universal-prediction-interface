@@ -13,6 +13,7 @@
     - [LogObservationsRequest](#caraml-upi-v1-LogObservationsRequest)
     - [LogObservationsResponse](#caraml-upi-v1-LogObservationsResponse)
     - [ObservationLog](#caraml-upi-v1-ObservationLog)
+    - [ObservationLogKey](#caraml-upi-v1-ObservationLogKey)
   
     - [ObservationService](#caraml-upi-v1-ObservationService)
   
@@ -133,7 +134,7 @@ Oneof types are avoided as these can be difficult to handle
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| observation_batch_id | [string](#string) |  |  |
+| observation_batch_id | [string](#string) |  | Unique identifier to identify records from a batch of observation logs |
 
 
 
@@ -156,6 +157,24 @@ to form data sets used for training ML models
 | observation_values | [Variable](#caraml-upi-v1-Variable) | repeated | The ground-truth value. It can be a double, string or integer type. |
 | observation_context | [Variable](#caraml-upi-v1-Variable) | repeated | A set of key-value pairs to provide additional context for the observation. |
 | observation_timestamp | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | Timestamp when the observation is made |
+
+
+
+
+
+
+<a name="caraml-upi-v1-ObservationLogKey"></a>
+
+### ObservationLogKey
+ObservationLogKey contains necessary values for generating unique records for
+downstream usages, eg. Dataset Generation Service
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| observation_batch_id | [string](#string) |  | Id to uniquely identify records from a batch of observation logs |
+| prediction_id | [string](#string) |  | Unique identifier of a prediction response returned by prediction service. This information is used to join the prediction to an observation. |
+| row_id | [string](#string) |  | Prediction requests may contain multiple prediction instances. The row_id identifies a particular prediction instance that was used to produce an observation. This information is used to join the prediction to an observation. |
 
 
 
