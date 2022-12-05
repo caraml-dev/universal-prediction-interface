@@ -3,7 +3,7 @@ syntax = "proto3";
 package caraml.upi.v1;
 
 import "caraml/upi/v1/variable.proto";
-import "google/protobuf/timestamp.proto";
+// import "google/protobuf/timestamp.proto";
 
 // PredictionLog
 message PredictionLog {
@@ -17,6 +17,6 @@ message PredictionLog {
     string features = 8;
     string entities = 9;
     string prediction_results = 10;
-    google.protobuf.Timestamp request_timestamp = 11;
+    // google.protobuf.Timestamp request_timestamp = 11;
 }
 
