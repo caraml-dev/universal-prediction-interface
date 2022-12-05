@@ -17,6 +17,9 @@
   
     - [ObservationService](#caraml-upi-v1-ObservationService)
   
+- [caraml/upi/v1/prediction_log.proto](#caraml_upi_v1_prediction_log-proto)
+    - [PredictionLog](#caraml-upi-v1-PredictionLog)
+  
 - [caraml/upi/v1/table.proto](#caraml_upi_v1_table-proto)
     - [Column](#caraml-upi-v1-Column)
     - [Row](#caraml-upi-v1-Row)
@@ -32,6 +35,9 @@
     - [TransformerInput](#caraml-upi-v1-TransformerInput)
   
     - [UniversalPredictionService](#caraml-upi-v1-UniversalPredictionService)
+  
+- [caraml/upi/v1/router_log.proto](#caraml_upi_v1_router_log-proto)
+    - [RouterLog](#caraml-upi-v1-RouterLog)
   
 - [Scalar Value Types](#scalar-value-types)
 
@@ -195,6 +201,47 @@ Service for logging observations
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
 | LogObservations | [LogObservationsRequest](#caraml-upi-v1-LogObservationsRequest) | [LogObservationsResponse](#caraml-upi-v1-LogObservationsResponse) |  |
+
+ 
+
+
+
+<a name="caraml_upi_v1_prediction_log-proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## caraml/upi/v1/prediction_log.proto
+
+
+
+<a name="caraml-upi-v1-PredictionLog"></a>
+
+### PredictionLog
+PredictionLog
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| prediction_id | [string](#string) |  |  |
+| target_name | [string](#string) |  |  |
+| project_name | [string](#string) |  |  |
+| model_name | [string](#string) |  |  |
+| model_version | [string](#string) |  |  |
+| prediction_context | [Variable](#caraml-upi-v1-Variable) | repeated |  |
+| raw_features | [google.protobuf.Struct](#google-protobuf-Struct) |  |  |
+| features | [google.protobuf.Struct](#google-protobuf-Struct) |  |  |
+| entities | [google.protobuf.Struct](#google-protobuf-Struct) |  |  |
+| prediction_results | [google.protobuf.Struct](#google-protobuf-Struct) |  |  |
+| request_timestamp | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  |  |
+
+
+
+
+
+ 
+
+ 
+
+ 
 
  
 
@@ -409,6 +456,47 @@ Service for performing model prediction
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
 | PredictValues | [PredictValuesRequest](#caraml-upi-v1-PredictValuesRequest) | [PredictValuesResponse](#caraml-upi-v1-PredictValuesResponse) |  |
+
+ 
+
+
+
+<a name="caraml_upi_v1_router_log-proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## caraml/upi/v1/router_log.proto
+
+
+
+<a name="caraml-upi-v1-RouterLog"></a>
+
+### RouterLog
+RouterLog
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| prediction_id | [string](#string) |  |  |
+| target_name | [string](#string) |  |  |
+| project_name | [string](#string) |  |  |
+| router_name | [string](#string) |  |  |
+| models | [ModelMetadata](#caraml-upi-v1-ModelMetadata) | repeated |  |
+| prediction_context | [Variable](#caraml-upi-v1-Variable) | repeated |  |
+| traffic_rule | [string](#string) |  |  |
+| experiment_name | [string](#string) |  |  |
+| treatment_name | [string](#string) |  |  |
+| prediction_results | [google.protobuf.Struct](#google-protobuf-Struct) |  |  |
+| request_timestamp | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  |  |
+
+
+
+
+
+ 
+
+ 
+
+ 
 
  
 

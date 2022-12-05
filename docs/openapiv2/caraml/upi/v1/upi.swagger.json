@@ -89,6 +89,28 @@
       "description": "- TYPE_DOUBLE: Double precision floating number (64-bit)\n - TYPE_INTEGER: 64-bit Integer\n - TYPE_STRING: String",
       "title": "Type supported by UPI"
     },
+    "upiv1Value": {
+      "type": "object",
+      "properties": {
+        "doubleValue": {
+          "type": "number",
+          "format": "double",
+          "title": "One of following field will be set depending on the column's type"
+        },
+        "integerValue": {
+          "type": "string",
+          "format": "int64"
+        },
+        "stringValue": {
+          "type": "string"
+        },
+        "isNull": {
+          "type": "boolean",
+          "title": "Flag to be used to signify that the value is null"
+        }
+      },
+      "description": "Value of a cell within a table. Value is nullable."
+    },
     "v1Column": {
       "type": "object",
       "properties": {
@@ -217,7 +239,7 @@
         "values": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/v1Value"
+            "$ref": "#/definitions/upiv1Value"
           },
           "description": "List of values within a row. \nIt is table's creator responsibility to ensure that the number of entry \nvalues matches with the length of columns in the table."
         }
@@ -267,28 +289,6 @@
         }
       },
       "description": "Transformer input contains additional information that can be used to enrich prediction_table using standard transformer.\nAll tables and variables within transformer input will be imported to the standard transformer runtime automatically."
-    },
-    "v1Value": {
-      "type": "object",
-      "properties": {
-        "doubleValue": {
-          "type": "number",
-          "format": "double",
-          "title": "One of following field will be set depending on the column's type"
-        },
-        "integerValue": {
-          "type": "string",
-          "format": "int64"
-        },
-        "stringValue": {
-          "type": "string"
-        },
-        "isNull": {
-          "type": "boolean",
-          "title": "Flag to be used to signify that the value is null"
-        }
-      },
-      "description": "Value of a cell within a table. Value is nullable."
     },
     "v1Variable": {
       "type": "object",

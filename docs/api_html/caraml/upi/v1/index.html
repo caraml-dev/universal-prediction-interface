@@ -236,6 +236,21 @@
         
           
           <li>
+            <a href="#caraml%2fupi%2fv1%2fprediction_log.proto">caraml/upi/v1/prediction_log.proto</a>
+            <ul>
+              
+                <li>
+                  <a href="#caraml.upi.v1.PredictionLog"><span class="badge">M</span>PredictionLog</a>
+                </li>
+              
+              
+              
+              
+            </ul>
+          </li>
+        
+          
+          <li>
             <a href="#caraml%2fupi%2fv1%2ftable.proto">caraml/upi/v1/table.proto</a>
             <ul>
               
@@ -296,6 +311,21 @@
                 <li>
                   <a href="#caraml.upi.v1.UniversalPredictionService"><span class="badge">S</span>UniversalPredictionService</a>
                 </li>
+              
+            </ul>
+          </li>
+        
+          
+          <li>
+            <a href="#caraml%2fupi%2fv1%2frouter_log.proto">caraml/upi/v1/router_log.proto</a>
+            <ul>
+              
+                <li>
+                  <a href="#caraml.upi.v1.RouterLog"><span class="badge">M</span>RouterLog</a>
+                </li>
+              
+              
+              
               
             </ul>
           </li>
@@ -635,6 +665,114 @@ This information is used to join the prediction to an observation. </p></td>
           </table>
           
         
+    
+      
+      <div class="file-heading">
+        <h2 id="caraml/upi/v1/prediction_log.proto">caraml/upi/v1/prediction_log.proto</h2><a href="#title">Top</a>
+      </div>
+      <p></p>
+
+      
+        <h3 id="caraml.upi.v1.PredictionLog">PredictionLog</h3>
+        <p>PredictionLog</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>prediction_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>target_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>project_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>model_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>model_version</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>prediction_context</td>
+                  <td><a href="#caraml.upi.v1.Variable">Variable</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>raw_features</td>
+                  <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>features</td>
+                  <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>entities</td>
+                  <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>prediction_results</td>
+                  <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>request_timestamp</td>
+                  <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+
+      
+
+      
+
+      
     
       
       <div class="file-heading">
@@ -1135,6 +1273,114 @@ Each table doesn&#39;t need to have same number of row. </p></td>
           </table>
           
         
+    
+      
+      <div class="file-heading">
+        <h2 id="caraml/upi/v1/router_log.proto">caraml/upi/v1/router_log.proto</h2><a href="#title">Top</a>
+      </div>
+      <p></p>
+
+      
+        <h3 id="caraml.upi.v1.RouterLog">RouterLog</h3>
+        <p>RouterLog</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>prediction_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>target_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>project_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>router_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>models</td>
+                  <td><a href="#caraml.upi.v1.ModelMetadata">ModelMetadata</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>prediction_context</td>
+                  <td><a href="#caraml.upi.v1.Variable">Variable</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>traffic_rule</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>experiment_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>treatment_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>prediction_results</td>
+                  <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>request_timestamp</td>
+                  <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+
+      
+
+      
+
+      
     
 
     <h2 id="scalar-value-types">Scalar Value Types</h2>
