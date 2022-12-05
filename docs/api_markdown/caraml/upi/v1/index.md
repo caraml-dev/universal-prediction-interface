@@ -227,10 +227,10 @@ PredictionLog
 | model_name | [string](#string) |  |  |
 | model_version | [string](#string) |  |  |
 | prediction_context | [Variable](#caraml-upi-v1-Variable) | repeated |  |
-| raw_features | [google.protobuf.Struct](#google-protobuf-Struct) |  |  |
-| features | [google.protobuf.Struct](#google-protobuf-Struct) |  |  |
-| entities | [google.protobuf.Struct](#google-protobuf-Struct) |  |  |
-| prediction_results | [google.protobuf.Struct](#google-protobuf-Struct) |  |  |
+| raw_features | [string](#string) |  |  |
+| features | [string](#string) |  |  |
+| entities | [string](#string) |  |  |
+| prediction_results | [string](#string) |  |  |
 | request_timestamp | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  |  |
 
 
@@ -485,7 +485,7 @@ RouterLog
 | traffic_rule | [string](#string) |  |  |
 | experiment_name | [string](#string) |  |  |
 | treatment_name | [string](#string) |  |  |
-| prediction_results | [google.protobuf.Struct](#google-protobuf-Struct) |  |  |
+| prediction_results | [string](#string) |  |  |
 | request_timestamp | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  |  |
 
 
