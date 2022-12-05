@@ -8,7 +8,6 @@ import caraml.upi.v1.variable_pb2
 import google.protobuf.descriptor
 import google.protobuf.internal.containers
 import google.protobuf.message
-import google.protobuf.struct_pb2
 import google.protobuf.timestamp_pb2
 import typing
 import typing_extensions
@@ -40,8 +39,7 @@ class RouterLog(google.protobuf.message.Message):
     traffic_rule: typing.Text
     experiment_name: typing.Text
     treatment_name: typing.Text
-    @property
-    def prediction_results(self) -> google.protobuf.struct_pb2.Struct: ...
+    prediction_results: typing.Text
     @property
     def request_timestamp(self) -> google.protobuf.timestamp_pb2.Timestamp: ...
     def __init__(self,
@@ -55,9 +53,9 @@ class RouterLog(google.protobuf.message.Message):
         traffic_rule: typing.Text = ...,
         experiment_name: typing.Text = ...,
         treatment_name: typing.Text = ...,
-        prediction_results: typing.Optional[google.protobuf.struct_pb2.Struct] = ...,
+        prediction_results: typing.Text = ...,
         request_timestamp: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
         ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["prediction_results",b"prediction_results","request_timestamp",b"request_timestamp"]) -> builtins.bool: ...
+    def HasField(self, field_name: typing_extensions.Literal["request_timestamp",b"request_timestamp"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["experiment_name",b"experiment_name","models",b"models","prediction_context",b"prediction_context","prediction_id",b"prediction_id","prediction_results",b"prediction_results","project_name",b"project_name","request_timestamp",b"request_timestamp","router_name",b"router_name","target_name",b"target_name","traffic_rule",b"traffic_rule","treatment_name",b"treatment_name"]) -> None: ...
 global___RouterLog = RouterLog

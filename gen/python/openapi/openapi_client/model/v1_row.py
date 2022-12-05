@@ -30,8 +30,8 @@ from openapi_client.exceptions import ApiAttributeError
 
 
 def lazy_import():
-    from openapi_client.model.upiv1_value import Upiv1Value
-    globals()['Upiv1Value'] = Upiv1Value
+    from openapi_client.model.v1_value import V1Value
+    globals()['V1Value'] = V1Value
 
 
 class V1Row(ModelNormal):
@@ -88,7 +88,7 @@ class V1Row(ModelNormal):
         lazy_import()
         return {
             'row_id': (str,),  # noqa: E501
-            'values': ([Upiv1Value],),  # noqa: E501
+            'values': ([V1Value],),  # noqa: E501
         }
 
     @cached_property
@@ -143,7 +143,7 @@ class V1Row(ModelNormal):
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
             row_id (str): [optional]  # noqa: E501
-            values ([Upiv1Value]): List of values within a row.  It is table's creator responsibility to ensure that the number of entry  values matches with the length of columns in the table.. [optional]  # noqa: E501
+            values ([V1Value]): List of values within a row.  It is table's creator responsibility to ensure that the number of entry  values matches with the length of columns in the table.. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)
@@ -230,7 +230,7 @@ class V1Row(ModelNormal):
                                 through its discriminator because we passed in
                                 _visited_composed_classes = (Animal,)
             row_id (str): [optional]  # noqa: E501
-            values ([Upiv1Value]): List of values within a row.  It is table's creator responsibility to ensure that the number of entry  values matches with the length of columns in the table.. [optional]  # noqa: E501
+            values ([V1Value]): List of values within a row.  It is table's creator responsibility to ensure that the number of entry  values matches with the length of columns in the table.. [optional]  # noqa: E501
         """
 
         _check_type = kwargs.pop('_check_type', True)

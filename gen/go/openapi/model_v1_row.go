@@ -18,7 +18,7 @@ import (
 type V1Row struct {
 	RowId *string `json:"rowId,omitempty"`
 	// List of values within a row.  It is table's creator responsibility to ensure that the number of entry  values matches with the length of columns in the table.
-	Values []Upiv1Value `json:"values,omitempty"`
+	Values []V1Value `json:"values,omitempty"`
 }
 
 // NewV1Row instantiates a new V1Row object
@@ -71,9 +71,9 @@ func (o *V1Row) SetRowId(v string) {
 }
 
 // GetValues returns the Values field value if set, zero value otherwise.
-func (o *V1Row) GetValues() []Upiv1Value {
+func (o *V1Row) GetValues() []V1Value {
 	if o == nil || o.Values == nil {
-		var ret []Upiv1Value
+		var ret []V1Value
 		return ret
 	}
 	return o.Values
@@ -81,7 +81,7 @@ func (o *V1Row) GetValues() []Upiv1Value {
 
 // GetValuesOk returns a tuple with the Values field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *V1Row) GetValuesOk() ([]Upiv1Value, bool) {
+func (o *V1Row) GetValuesOk() ([]V1Value, bool) {
 	if o == nil || o.Values == nil {
 		return nil, false
 	}
@@ -97,8 +97,8 @@ func (o *V1Row) HasValues() bool {
 	return false
 }
 
-// SetValues gets a reference to the given []Upiv1Value and assigns it to the Values field.
-func (o *V1Row) SetValues(v []Upiv1Value) {
+// SetValues gets a reference to the given []V1Value and assigns it to the Values field.
+func (o *V1Row) SetValues(v []V1Value) {
 	o.Values = v
 }
 

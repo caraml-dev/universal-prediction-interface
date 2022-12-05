@@ -5,7 +5,6 @@ require 'google/protobuf'
 
 require 'caraml/upi/v1/variable_pb'
 require 'google/protobuf/timestamp_pb'
-require 'google/protobuf/struct_pb'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("caraml/upi/v1/prediction_log.proto", :syntax => :proto3) do
@@ -16,10 +15,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :model_name, :string, 4, json_name: "modelName"
       optional :model_version, :string, 5, json_name: "modelVersion"
       repeated :prediction_context, :message, 6, "caraml.upi.v1.Variable", json_name: "predictionContext"
-      optional :raw_features, :message, 7, "google.protobuf.Struct", json_name: "rawFeatures"
-      optional :features, :message, 8, "google.protobuf.Struct", json_name: "features"
-      optional :entities, :message, 9, "google.protobuf.Struct", json_name: "entities"
-      optional :prediction_results, :message, 10, "google.protobuf.Struct", json_name: "predictionResults"
+      optional :raw_features, :string, 7, json_name: "rawFeatures"
+      optional :features, :string, 8, json_name: "features"
+      optional :entities, :string, 9, json_name: "entities"
+      optional :prediction_results, :string, 10, json_name: "predictionResults"
       optional :request_timestamp, :message, 11, "google.protobuf.Timestamp", json_name: "requestTimestamp"
     end
   end

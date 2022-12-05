@@ -14,10 +14,9 @@ _sym_db = _symbol_database.Default()
 
 from caraml.upi.v1 import variable_pb2 as caraml_dot_upi_dot_v1_dot_variable__pb2
 from google.protobuf import timestamp_pb2 as google_dot_protobuf_dot_timestamp__pb2
-from google.protobuf import struct_pb2 as google_dot_protobuf_dot_struct__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\"caraml/upi/v1/prediction_log.proto\x12\rcaraml.upi.v1\x1a\x1c\x63\x61raml/upi/v1/variable.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/protobuf/struct.proto\"\xbb\x04\n\rPredictionLog\x12#\n\rprediction_id\x18\x01 \x01(\tR\x0cpredictionId\x12\x1f\n\x0btarget_name\x18\x02 \x01(\tR\ntargetName\x12!\n\x0cproject_name\x18\x03 \x01(\tR\x0bprojectName\x12\x1d\n\nmodel_name\x18\x04 \x01(\tR\tmodelName\x12#\n\rmodel_version\x18\x05 \x01(\tR\x0cmodelVersion\x12\x46\n\x12prediction_context\x18\x06 \x03(\x0b\x32\x17.caraml.upi.v1.VariableR\x11predictionContext\x12:\n\x0craw_features\x18\x07 \x01(\x0b\x32\x17.google.protobuf.StructR\x0brawFeatures\x12\x33\n\x08\x66\x65\x61tures\x18\x08 \x01(\x0b\x32\x17.google.protobuf.StructR\x08\x66\x65\x61tures\x12\x33\n\x08\x65ntities\x18\t \x01(\x0b\x32\x17.google.protobuf.StructR\x08\x65ntities\x12\x46\n\x12prediction_results\x18\n \x01(\x0b\x32\x17.google.protobuf.StructR\x11predictionResults\x12G\n\x11request_timestamp\x18\x0b \x01(\x0b\x32\x1a.google.protobuf.TimestampR\x10requestTimestampB\xce\x01\n\x11\x63om.caraml.upi.v1B\x12PredictionLogProtoP\x01ZOgithub.com/caraml-dev/universal-prediction-interface/gen/go/caraml/upi/v1;upiv1\xa2\x02\x03\x43UX\xaa\x02\rCaraml.Upi.V1\xca\x02\rCaraml\\Upi\\V1\xe2\x02\x19\x43\x61raml\\Upi\\V1\\GPBMetadata\xea\x02\x0f\x43\x61raml::Upi::V1b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\"caraml/upi/v1/prediction_log.proto\x12\rcaraml.upi.v1\x1a\x1c\x63\x61raml/upi/v1/variable.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xd7\x03\n\rPredictionLog\x12#\n\rprediction_id\x18\x01 \x01(\tR\x0cpredictionId\x12\x1f\n\x0btarget_name\x18\x02 \x01(\tR\ntargetName\x12!\n\x0cproject_name\x18\x03 \x01(\tR\x0bprojectName\x12\x1d\n\nmodel_name\x18\x04 \x01(\tR\tmodelName\x12#\n\rmodel_version\x18\x05 \x01(\tR\x0cmodelVersion\x12\x46\n\x12prediction_context\x18\x06 \x03(\x0b\x32\x17.caraml.upi.v1.VariableR\x11predictionContext\x12!\n\x0craw_features\x18\x07 \x01(\tR\x0brawFeatures\x12\x1a\n\x08\x66\x65\x61tures\x18\x08 \x01(\tR\x08\x66\x65\x61tures\x12\x1a\n\x08\x65ntities\x18\t \x01(\tR\x08\x65ntities\x12-\n\x12prediction_results\x18\n \x01(\tR\x11predictionResults\x12G\n\x11request_timestamp\x18\x0b \x01(\x0b\x32\x1a.google.protobuf.TimestampR\x10requestTimestampB\xce\x01\n\x11\x63om.caraml.upi.v1B\x12PredictionLogProtoP\x01ZOgithub.com/caraml-dev/universal-prediction-interface/gen/go/caraml/upi/v1;upiv1\xa2\x02\x03\x43UX\xaa\x02\rCaraml.Upi.V1\xca\x02\rCaraml\\Upi\\V1\xe2\x02\x19\x43\x61raml\\Upi\\V1\\GPBMetadata\xea\x02\x0f\x43\x61raml::Upi::V1b\x06proto3')
 
 
 
@@ -33,6 +32,6 @@ if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
   DESCRIPTOR._serialized_options = b'\n\021com.caraml.upi.v1B\022PredictionLogProtoP\001ZOgithub.com/caraml-dev/universal-prediction-interface/gen/go/caraml/upi/v1;upiv1\242\002\003CUX\252\002\rCaraml.Upi.V1\312\002\rCaraml\\Upi\\V1\342\002\031Caraml\\Upi\\V1\\GPBMetadata\352\002\017Caraml::Upi::V1'
-  _PREDICTIONLOG._serialized_start=147
-  _PREDICTIONLOG._serialized_end=718
+  _PREDICTIONLOG._serialized_start=117
+  _PREDICTIONLOG._serialized_end=588
 # @@protoc_insertion_point(module_scope)

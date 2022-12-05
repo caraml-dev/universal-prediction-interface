@@ -6,7 +6,6 @@ require 'google/protobuf'
 require 'caraml/upi/v1/variable_pb'
 require 'google/protobuf/timestamp_pb'
 require 'caraml/upi/v1/upi_pb'
-require 'google/protobuf/struct_pb'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("caraml/upi/v1/router_log.proto", :syntax => :proto3) do
@@ -20,7 +19,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :traffic_rule, :string, 7, json_name: "trafficRule"
       optional :experiment_name, :string, 8, json_name: "experimentName"
       optional :treatment_name, :string, 9, json_name: "treatmentName"
-      optional :prediction_results, :message, 10, "google.protobuf.Struct", json_name: "predictionResults"
+      optional :prediction_results, :string, 10, json_name: "predictionResults"
       optional :request_timestamp, :message, 11, "google.protobuf.Timestamp", json_name: "requestTimestamp"
     end
   end

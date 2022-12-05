@@ -64,27 +64,6 @@ components:
       - TYPE_STRING
       title: Type supported by UPI
       type: string
-    upiv1Value:
-      description: Value of a cell within a table. Value is nullable.
-      example:
-        stringValue: stringValue
-        isNull: true
-        integerValue: integerValue
-        doubleValue: 0.8008281904610115
-      properties:
-        doubleValue:
-          format: double
-          title: One of following field will be set depending on the column's type
-          type: number
-        integerValue:
-          format: int64
-          type: string
-        stringValue:
-          type: string
-        isNull:
-          title: Flag to be used to signify that the value is null
-          type: boolean
-      type: object
     v1Column:
       example:
         name: name
@@ -274,7 +253,7 @@ components:
             \ to ensure that the number of entry \nvalues matches with the length\
             \ of columns in the table."
           items:
-            $ref: '#/components/schemas/upiv1Value'
+            $ref: '#/components/schemas/v1Value'
           type: array
       title: Row represents list of value stored within a row of a table
       type: object
@@ -342,6 +321,27 @@ components:
             $ref: '#/components/schemas/v1Variable'
           title: List of variables
           type: array
+      type: object
+    v1Value:
+      description: Value of a cell within a table. Value is nullable.
+      example:
+        stringValue: stringValue
+        isNull: true
+        integerValue: integerValue
+        doubleValue: 0.8008281904610115
+      properties:
+        doubleValue:
+          format: double
+          title: One of following field will be set depending on the column's type
+          type: number
+        integerValue:
+          format: int64
+          type: string
+        stringValue:
+          type: string
+        isNull:
+          title: Flag to be used to signify that the value is null
+          type: boolean
       type: object
     v1Variable:
       example:

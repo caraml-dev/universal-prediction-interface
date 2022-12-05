@@ -47,7 +47,7 @@ with openapi_client.ApiClient() as api_client:
                 V1Row(
                     row_id="row_id_example",
                     values=[
-                        Upiv1Value(
+                        V1Value(
                             double_value=3.14,
                             integer_value="integer_value_example",
                             string_value="string_value_example",
@@ -71,7 +71,7 @@ with openapi_client.ApiClient() as api_client:
                         V1Row(
                             row_id="row_id_example",
                             values=[
-                                Upiv1Value(
+                                V1Value(
                                     double_value=3.14,
                                     integer_value="integer_value_example",
                                     string_value="string_value_example",

@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **RowId** | Pointer to **string** |  | [optional] 
-**Values** | Pointer to [**[]Upiv1Value**](Upiv1Value.md) | List of values within a row.  It is table&#39;s creator responsibility to ensure that the number of entry  values matches with the length of columns in the table. | [optional] 
+**Values** | Pointer to [**[]V1Value**](V1Value.md) | List of values within a row.  It is table&#39;s creator responsibility to ensure that the number of entry  values matches with the length of columns in the table. | [optional] 
 
 ## Methods
 
@@ -53,20 +53,20 @@ HasRowId returns a boolean if a field has been set.
 
 ### GetValues
 
-`func (o *V1Row) GetValues() []Upiv1Value`
+`func (o *V1Row) GetValues() []V1Value`
 
 GetValues returns the Values field if non-nil, zero value otherwise.
 
 ### GetValuesOk
 
-`func (o *V1Row) GetValuesOk() (*[]Upiv1Value, bool)`
+`func (o *V1Row) GetValuesOk() (*[]V1Value, bool)`
 
 GetValuesOk returns a tuple with the Values field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetValues
 
-`func (o *V1Row) SetValues(v []Upiv1Value)`
+`func (o *V1Row) SetValues(v []V1Value)`
 
 SetValues sets Values field to given value.
 
