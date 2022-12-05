@@ -27,6 +27,9 @@ plugins:
     out: gen/python/grpc
   - remote: buf.build/jeffsawatzky/plugins/mypy-grpc-protobuf:v3.2.0-1
     out: gen/python/grpc
+# Ruby code gen
+  - remote: buf.build/protocolbuffers/plugins/ruby:v21.10.0-1
+    out: gen/ruby/grpc
 # Documentations
   - remote: buf.build/grpc-ecosystem/plugins/openapiv2:v2.6.0-1
     out: docs/openapiv2
