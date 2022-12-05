@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package caraml.upi.v1;
+
+import "caraml/upi/v1/variable.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/struct.proto";
+
+// PredictionLog
+message PredictionLog {
+    string prediction_id = 1;
+    string target_name = 2;
+    string project_name = 3;
+    string model_name = 4;
+    string model_version = 5;
+    repeated Variable prediction_context = 6;   
+    google.protobuf.Struct raw_features = 7;
+    google.protobuf.Struct features = 8;
+    google.protobuf.Struct entities = 9;
+    google.protobuf.Struct prediction_results = 10;
+    google.protobuf.Timestamp request_timestamp = 11;
+}
+

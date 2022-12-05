@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package caraml.upi.v1;
+
+import "caraml/upi/v1/variable.proto";
+import "google/protobuf/timestamp.proto";
+import "caraml/upi/v1/upi.proto";
+import "google/protobuf/struct.proto";
+
+// RouterLog
+message RouterLog {
+    string prediction_id = 1;
+    string target_name = 2;
+    string project_name = 3;
+    string router_name = 4;
+    repeated ModelMetadata models = 5;
+    repeated Variable prediction_context = 6;   
+    string traffic_rule = 7;
+    string experiment_name = 8;
+    string treatment_name = 9;
+    google.protobuf.Struct prediction_results = 10;
+    google.protobuf.Timestamp request_timestamp = 11;
+}
