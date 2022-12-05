@@ -7,7 +7,6 @@ import caraml.upi.v1.variable_pb2
 import google.protobuf.descriptor
 import google.protobuf.internal.containers
 import google.protobuf.message
-import google.protobuf.timestamp_pb2
 import typing
 import typing_extensions
 
@@ -26,7 +25,6 @@ class PredictionLog(google.protobuf.message.Message):
     FEATURES_FIELD_NUMBER: builtins.int
     ENTITIES_FIELD_NUMBER: builtins.int
     PREDICTION_RESULTS_FIELD_NUMBER: builtins.int
-    REQUEST_TIMESTAMP_FIELD_NUMBER: builtins.int
     prediction_id: typing.Text
     target_name: typing.Text
     project_name: typing.Text
@@ -38,8 +36,8 @@ class PredictionLog(google.protobuf.message.Message):
     features: typing.Text
     entities: typing.Text
     prediction_results: typing.Text
-    @property
-    def request_timestamp(self) -> google.protobuf.timestamp_pb2.Timestamp: ...
+    """google.protobuf.Timestamp request_timestamp = 11;"""
+
     def __init__(self,
         *,
         prediction_id: typing.Text = ...,
@@ -52,8 +50,6 @@ class PredictionLog(google.protobuf.message.Message):
         features: typing.Text = ...,
         entities: typing.Text = ...,
         prediction_results: typing.Text = ...,
-        request_timestamp: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
         ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["request_timestamp",b"request_timestamp"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["entities",b"entities","features",b"features","model_name",b"model_name","model_version",b"model_version","prediction_context",b"prediction_context","prediction_id",b"prediction_id","prediction_results",b"prediction_results","project_name",b"project_name","raw_features",b"raw_features","request_timestamp",b"request_timestamp","target_name",b"target_name"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["entities",b"entities","features",b"features","model_name",b"model_name","model_version",b"model_version","prediction_context",b"prediction_context","prediction_id",b"prediction_id","prediction_results",b"prediction_results","project_name",b"project_name","raw_features",b"raw_features","target_name",b"target_name"]) -> None: ...
 global___PredictionLog = PredictionLog

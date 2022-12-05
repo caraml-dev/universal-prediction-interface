@@ -4,7 +4,6 @@
 require 'google/protobuf'
 
 require 'caraml/upi/v1/variable_pb'
-require 'google/protobuf/timestamp_pb'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("caraml/upi/v1/prediction_log.proto", :syntax => :proto3) do
@@ -19,7 +18,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :features, :string, 8, json_name: "features"
       optional :entities, :string, 9, json_name: "entities"
       optional :prediction_results, :string, 10, json_name: "predictionResults"
-      optional :request_timestamp, :message, 11, "google.protobuf.Timestamp", json_name: "requestTimestamp"
     end
   end
 end

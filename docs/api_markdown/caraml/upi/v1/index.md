@@ -230,8 +230,7 @@ PredictionLog
 | raw_features | [string](#string) |  |  |
 | features | [string](#string) |  |  |
 | entities | [string](#string) |  |  |
-| prediction_results | [string](#string) |  |  |
-| request_timestamp | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  |  |
+| prediction_results | [string](#string) |  | google.protobuf.Timestamp request_timestamp = 11; |
 
 
 
