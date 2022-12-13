@@ -78,7 +78,7 @@ with openapi_client.ApiClient(configuration) as api_client:
                 V1Row(
                     row_id="row_id_example",
                     values=[
-                        V1Value(
+                        Upiv1Value(
                             double_value=3.14,
                             integer_value="integer_value_example",
                             string_value="string_value_example",
@@ -102,7 +102,7 @@ with openapi_client.ApiClient(configuration) as api_client:
                         V1Row(
                             row_id="row_id_example",
                             values=[
-                                V1Value(
+                                Upiv1Value(
                                     double_value=3.14,
                                     integer_value="integer_value_example",
                                     string_value="string_value_example",
@@ -160,6 +160,7 @@ Class | Method | HTTP request | Description
  - [ProtobufAny](docs/ProtobufAny.md)
  - [RpcStatus](docs/RpcStatus.md)
  - [Upiv1Type](docs/Upiv1Type.md)
+ - [Upiv1Value](docs/Upiv1Value.md)
  - [V1Column](docs/V1Column.md)
  - [V1ModelMetadata](docs/V1ModelMetadata.md)
  - [V1PredictValuesRequest](docs/V1PredictValuesRequest.md)
@@ -169,7 +170,6 @@ Class | Method | HTTP request | Description
  - [V1Row](docs/V1Row.md)
  - [V1Table](docs/V1Table.md)
  - [V1TransformerInput](docs/V1TransformerInput.md)
- - [V1Value](docs/V1Value.md)
  - [V1Variable](docs/V1Variable.md)
 
 
