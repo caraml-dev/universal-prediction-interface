@@ -17,6 +17,13 @@
   
     - [ObservationService](#caraml-upi-v1-ObservationService)
   
+- [caraml/upi/v1/prediction_log.proto](#caraml_upi_v1_prediction_log-proto)
+    - [ModelInput](#caraml-upi-v1-ModelInput)
+    - [ModelInput.HeadersEntry](#caraml-upi-v1-ModelInput-HeadersEntry)
+    - [ModelOutput](#caraml-upi-v1-ModelOutput)
+    - [ModelOutput.HeadersEntry](#caraml-upi-v1-ModelOutput-HeadersEntry)
+    - [PredictionLog](#caraml-upi-v1-PredictionLog)
+  
 - [caraml/upi/v1/table.proto](#caraml_upi_v1_table-proto)
     - [Column](#caraml-upi-v1-Column)
     - [Row](#caraml-upi-v1-Row)
@@ -32,6 +39,14 @@
     - [TransformerInput](#caraml-upi-v1-TransformerInput)
   
     - [UniversalPredictionService](#caraml-upi-v1-UniversalPredictionService)
+  
+- [caraml/upi/v1/router_log.proto](#caraml_upi_v1_router_log-proto)
+    - [RouterInput](#caraml-upi-v1-RouterInput)
+    - [RouterInput.HeadersEntry](#caraml-upi-v1-RouterInput-HeadersEntry)
+    - [RouterLog](#caraml-upi-v1-RouterLog)
+    - [RouterOutput](#caraml-upi-v1-RouterOutput)
+    - [RouterOutput.HeadersEntry](#caraml-upi-v1-RouterOutput-HeadersEntry)
+    - [RoutingLogic](#caraml-upi-v1-RoutingLogic)
   
 - [Scalar Value Types](#scalar-value-types)
 
@@ -195,6 +210,117 @@ Service for logging observations
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
 | LogObservations | [LogObservationsRequest](#caraml-upi-v1-LogObservationsRequest) | [LogObservationsResponse](#caraml-upi-v1-LogObservationsResponse) |  |
+
+ 
+
+
+
+<a name="caraml_upi_v1_prediction_log-proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## caraml/upi/v1/prediction_log.proto
+
+
+
+<a name="caraml-upi-v1-ModelInput"></a>
+
+### ModelInput
+Model input stores information of all input for prediction process.
+The information in model input are extracted from the prediction request received by model.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| features_table | [google.protobuf.Struct](#google-protobuf-Struct) |  | JSON-representation of features table. &#34;table_schema_version&#34; field describe the encoding of this field. |
+| entities_table | [google.protobuf.Struct](#google-protobuf-Struct) |  | JSON-representation of entities table. &#34;table_schema_version&#34; field describe the encoding of this field. |
+| raw_features | [google.protobuf.Struct](#google-protobuf-Struct) |  | JSON-representation of raw_features table. &#34;table_schema_version&#34; field describe the encoding of this field. |
+| prediction_context | [Variable](#caraml-upi-v1-Variable) | repeated | Context of the prediction request. |
+| headers | [ModelInput.HeadersEntry](#caraml-upi-v1-ModelInput-HeadersEntry) | repeated | map containing request headers/metadata |
+
+
+
+
+
+
+<a name="caraml-upi-v1-ModelInput-HeadersEntry"></a>
+
+### ModelInput.HeadersEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="caraml-upi-v1-ModelOutput"></a>
+
+### ModelOutput
+Model output stores information of all output produced from prediction process.
+Model output is extracted from the prediction response sent by model.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| prediction_results_table | [google.protobuf.Struct](#google-protobuf-Struct) |  | JSON-representation of prediction result table. &#34;table_schema_version&#34; field describe the encoding of this field. |
+| prediction_context | [Variable](#caraml-upi-v1-Variable) | repeated | Context of the prediction response. |
+| headers | [ModelOutput.HeadersEntry](#caraml-upi-v1-ModelOutput-HeadersEntry) | repeated | map containing response headers/metadata |
+| status | [uint32](#uint32) |  | grpc status of the response from model (see https://grpc.github.io/grpc/core/md_doc_statuscodes.html) |
+| message | [string](#string) |  | grpc message |
+
+
+
+
+
+
+<a name="caraml-upi-v1-ModelOutput-HeadersEntry"></a>
+
+### ModelOutput.HeadersEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="caraml-upi-v1-PredictionLog"></a>
+
+### PredictionLog
+PredictionLog stores information of prediction request handled by a specific model version.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| prediction_id | [string](#string) |  | Unique identifier of prediction. |
+| target_name | [string](#string) |  | Target name / concept to be predicted by the prediction. |
+| project_name | [string](#string) |  | Project name that host the model performing prediction. |
+| model_name | [string](#string) |  | Model name perforing the prediction. |
+| model_version | [string](#string) |  | Model version performing the prediction. |
+| input | [ModelInput](#caraml-upi-v1-ModelInput) |  | Input of the prediction process |
+| output | [ModelOutput](#caraml-upi-v1-ModelOutput) |  | Output of the prediction process |
+| request_timestamp | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | Timestamp of the corresponding prediction request |
+| table_schema_version | [uint32](#uint32) |  | Schema version of raw_features, features, entities, and prediction results fields are formatted I.e. for version 1, all of those fields will be formatted as a modified JSON SPLIT representation of a table |
+
+
+
+
+
+ 
+
+ 
+
+ 
 
  
 
@@ -409,6 +535,136 @@ Service for performing model prediction
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
 | PredictValues | [PredictValuesRequest](#caraml-upi-v1-PredictValuesRequest) | [PredictValuesResponse](#caraml-upi-v1-PredictValuesResponse) |  |
+
+ 
+
+
+
+<a name="caraml_upi_v1_router_log-proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## caraml/upi/v1/router_log.proto
+
+
+
+<a name="caraml-upi-v1-RouterInput"></a>
+
+### RouterInput
+Input received by router.
+These informations are extracted from the request received by the router.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| prediction_table | [google.protobuf.Struct](#google-protobuf-Struct) |  | JSON-representation of prediction_table of the UPI request to router. &#34;table_schema_version&#34; field describe the encoding of this field. |
+| transformer_tables | [google.protobuf.Struct](#google-protobuf-Struct) | repeated | List of tables in the transformer inputs in JSON format. &#34;table_schema_version&#34; field describe the encoding of this field. |
+| transformer_variables | [Variable](#caraml-upi-v1-Variable) | repeated | List of variables extracted from &#34;transformer_inputs&#34; |
+| prediction_context | [Variable](#caraml-upi-v1-Variable) | repeated | Context of the prediction request. |
+| headers | [RouterInput.HeadersEntry](#caraml-upi-v1-RouterInput-HeadersEntry) | repeated | map containing request headers/metadata |
+
+
+
+
+
+
+<a name="caraml-upi-v1-RouterInput-HeadersEntry"></a>
+
+### RouterInput.HeadersEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="caraml-upi-v1-RouterLog"></a>
+
+### RouterLog
+RouterLog stores information of a multi-model orchestration performed by a router.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| prediction_id | [string](#string) |  | Unique identifier of prediction. |
+| target_name | [string](#string) |  | Target name / concept to be predicted by the prediction. |
+| project_name | [string](#string) |  | Project name that host the router. |
+| router_name | [string](#string) |  | Name of the router. |
+| router_version | [string](#string) |  | Router version. |
+| routing_logic | [RoutingLogic](#caraml-upi-v1-RoutingLogic) |  | Routing logic describes the decision that was made within the router to produce the router output |
+| router_input | [RouterInput](#caraml-upi-v1-RouterInput) |  | Input of the router |
+| router_output | [RouterOutput](#caraml-upi-v1-RouterOutput) |  | Output of the router |
+| request_timestamp | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | Timestamp of the corresponding prediction request |
+| table_schema_version | [uint32](#uint32) |  | Schema version of raw_features, features, entities, and prediction results fields are formatted I.e. for version 1, all of those fields will be formatted as a modified JSON SPLIT representation of a table |
+
+
+
+
+
+
+<a name="caraml-upi-v1-RouterOutput"></a>
+
+### RouterOutput
+Output produced by router.
+These informations are extracted from the response produced by the router.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| prediction_results_table | [google.protobuf.Struct](#google-protobuf-Struct) |  | JSON-representation of prediction result table returned by router. &#34;table_schema_version&#34; field describe the encoding of this field. |
+| prediction_context | [Variable](#caraml-upi-v1-Variable) | repeated | Context of the prediction response. |
+| headers | [RouterOutput.HeadersEntry](#caraml-upi-v1-RouterOutput-HeadersEntry) | repeated | map containing response headers/metadata |
+| status | [uint32](#uint32) |  | grpc status of the response from model (see https://grpc.github.io/grpc/core/md_doc_statuscodes.html) |
+| message | [string](#string) |  | grpc message |
+
+
+
+
+
+
+<a name="caraml-upi-v1-RouterOutput-HeadersEntry"></a>
+
+### RouterOutput.HeadersEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="caraml-upi-v1-RoutingLogic"></a>
+
+### RoutingLogic
+Routing logic describes the decision that was made within the router to produce the router output
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| models | [ModelMetadata](#caraml-upi-v1-ModelMetadata) | repeated | List of models that was involved in producing the router output. Router can behave as multiplexer or combiner. In multiplexer case, the router will select 1 out of many models, thus this field will only have 1 entry. In combiner case, this field can contain more than 1 entries. This field will be used to join witht the prediction log. |
+| traffic_rule | [string](#string) |  | Traffic rule that was used to route the prediction request (optional). |
+| experiment_name | [string](#string) |  | Experiment name that was used to handle the prediction request (optional). |
+| treatment_name | [string](#string) |  | Treatment name from the experiment that was used to handle the prediction request (optional). |
+
+
+
+
+
+ 
+
+ 
+
+ 
 
  
 
