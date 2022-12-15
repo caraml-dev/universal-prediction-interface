@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package caraml.upi.v1;
 
+import "caraml/upi/v1/log.proto";
 import "caraml/upi/v1/variable.proto";
 import "google/protobuf/timestamp.proto";
 import "google/api/annotations.proto";
@@ -45,4 +46,106 @@ message LogObservationsRequest {
 
 message LogObservationsResponse {
     string observation_batch_id = 1;
+}
+
+// Data source where Observation logs should be retrieved from
+enum ObservationServiceDataSourceType {
+  OBSERVATION_SERVICE_DATA_SOURCE_TYPE_UNSPECIFIED = 0;
+  // No-Op represents no need to fetch logs from any data source, this should be selected if
+  // Observation Service should be deployed for just the eager API
+  OBSERVATION_SERVICE_DATA_SOURCE_TYPE_NOOP = 1;
+  // Observation Service will poll logs from a Kafka source
+  OBSERVATION_SERVICE_DATA_SOURCE_TYPE_KAFKA = 2;
+}
+
+// Configurations of Data source where Observation logs should be retrieved from
+message ObservationServiceDataSource {
+  ObservationServiceDataSourceType type = 1;
+  KafkaConfig kafka_config = 2;
+}
+
+// Data sink where Observation logs would be flushed to
+enum ObservationServiceDataSinkType {
+  OBSERVATION_SERVICE_DATA_SINK_TYPE_UNSPECIFIED = 0;
+  // No-Op represents no need to flush logs to any data sink
+  OBSERVATION_SERVICE_DATA_SINK_TYPE_NOOP = 1;
+  // Observation Service will publish logs to standard output
+  OBSERVATION_SERVICE_DATA_SINK_TYPE_STDOUT = 2;
+  // Observation Service will flush logs to a Kafka sink
+  OBSERVATION_SERVICE_DATA_SINK_TYPE_KAFKA = 3;
+  // Observation Service will flush logs to Fluentd
+  OBSERVATION_SERVICE_DATA_SINK_TYPE_FLUENTD = 4;
+}
+
+// Configurations of Data sink where Observation logs would be flushed to
+message ObservationServiceDataSink {
+  ObservationServiceDataSinkType type = 1;
+  KafkaConfig kafka_config = 2;
+  FluentdConfig fluentd_config = 3;
+}
+
+// ObservationService describes details of a Observation Service
+message ObservationServiceConfig {
+  // Unique identifier of an Observation Service deployed by Dataset Service.
+  string id = 1;
+  // Configuration for pull-based Observation Service data source.
+  ObservationServiceDataSource source = 2;
+  // Configuration for Observation Service data sink.
+  ObservationServiceDataSink sink = 3;
+}
+
+// Request message for ListObservationServices method.
+message ListObservationServicesRequest {
+  // The CaraML project ID to retrieve log resource from.
+  int64 project_id = 1;
+}
+
+// Response message for ListObservationServices method.
+message ListObservationServicesResponse {
+  // Observation Services deployed by Dataset Service for a particular CaraML project.
+  repeated ObservationServiceConfig observation_services = 1;
+}
+
+// Request message for GetObservationService method.
+message GetObservationServiceRequest {
+  // The CaraML project ID to retrieve log resource from.
+  int64 project_id = 1;
+  // The ID of the Observation Service resource to retrieve.
+  int64 id = 2;
+}
+
+// Response message for GetObservationService method.
+message GetObservationServiceResponse {
+  // Details of single Observation Service deployed by Dataset Service.
+  ObservationServiceConfig observation_service = 1;
+}
+
+// Request message for CreateObservationService method.
+message CreateObservationServiceRequest {
+  // The CaraML project ID to retrieve log resource from.
+  int64 project_id = 1;
+  // Details of single Observation Service to be deployed by Dataset Service.
+  ObservationServiceConfig observation_service = 2;
+}
+
+// Response message for CreateObservationService method.
+message CreateObservationServiceResponse {
+  // Details of single Observation Service deployed by Dataset Service.
+  ObservationServiceConfig observation_service = 1;
+}
+
+// Request message for UpdateObservationService method.
+message UpdateObservationServiceRequest {
+  // The CaraML project ID to retrieve log resource from.
+  int64 project_id = 1;
+  // The ID of Observation Service to update.
+  int64 id = 2;
+  // Details of single Observation Service to be updated by Dataset Service.
+  ObservationServiceConfig observation_service = 3;
+}
+
+// Response message for UpdateObservationService method.
+message UpdateObservationServiceResponse {
+  // Details of single Observation Service updated by Dataset Service.
+  ObservationServiceConfig observation_service = 1;
 }

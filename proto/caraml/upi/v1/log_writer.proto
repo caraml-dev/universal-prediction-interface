@@ -1,0 +1,74 @@
+syntax = "proto3";
+
+package caraml.upi.v1;
+
+import "caraml/upi/v1/log.proto";
+
+// Type of logging application for specified log
+enum LogWriterType {
+    LOG_WRITER_TYPE_UNSPECIFIED = 0;
+    // Fluentd will be used for logging
+    LOG_WRITER_TYPE_FLUENTD = 1;
+}
+
+// LogWriter describes details of a Log Writer
+message LogWriter {
+    LogWriterType type = 1;
+    FluentdConfig fluentd_config = 2;
+}
+
+// Request message for ListLogWriters method.
+message ListLogWritersRequest {
+    // The CaraML project ID to retrieve log resource from.
+    int64 project_id = 1;
+}
+
+// Response message for ListLogWriters method.
+message ListLogWritersResponse {
+    // Log Writers deployed by Dataset Service for a particular CaraML project.
+    repeated LogWriter log_writers = 1;
+}
+
+// Request message for GetLogWriter method.
+message GetLogWriterRequest {
+    // The CaraML project ID to write log resource from.
+    int64 project_id = 1;
+    // The ID of the Log Writer resource to retrieve.
+    int64 id = 2;
+}
+
+// Response message for GetLogWriter method.
+message GetLogWriterResponse {
+    // Details of single Log Writer deployed by Dataset Service.
+    LogWriter log_writer = 1;
+}
+
+// Request message for CreateLogWriter method.
+message CreateLogWriterRequest {
+    // The CaraML project ID to write log resource from.
+    int64 project_id = 1;
+    // Details of single Log Writer to be deployed by Dataset Service.
+    LogWriter log_writer = 2;
+}
+
+// Response message for CreateLogWriter method.
+message CreateLogWriterResponse {
+    // Details of single Log Writer deployed by Dataset Service.
+    LogWriter log_writer = 1;
+}
+
+// Request message for UpdateLogWriter method.
+message UpdateLogWriterRequest {
+    // The CaraML project ID to write log resource from.
+    int64 project_id = 1;
+    // The ID of Log Writer to update.
+    int64 id = 2;
+    // Details of single Log Writer to be updated by Dataset Service.
+    LogWriter log_writer = 3;
+}
+
+// Response message for UpdateLogWriter method.
+message UpdateLogWriterResponse {
+    // Details of single Log Writer updated by Dataset Service.
+    LogWriter log_writer = 1;
+}

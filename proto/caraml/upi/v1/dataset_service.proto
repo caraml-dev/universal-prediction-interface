@@ -1,0 +1,107 @@
+syntax = "proto3";
+
+package caraml.upi.v1;
+
+import "google/api/annotations.proto";
+import "caraml/upi/v1/log.proto";
+import "caraml/upi/v1/log_writer.proto";
+import "caraml/upi/v1/observation_log.proto";
+
+// Service for performing:
+// 1. Deploy/undeploy log writer deployment based on the availability of model and router deployment. 
+// 2. Synchronize the access control list of CaraML projects to the corresponding BQ dataset to avoid maintaining separate processes to obtain access to the dataset. .
+// 3. Store and provide access to the log table metadata produced in CaraML. 
+// 4. Store and provide read only access to the list of log writers it manages.
+// 5. Store and provide read only access to the list of observation services it manages.
+service DatasetService {
+    // ListLogs return paginated list of logs under a project and filtered by query string.
+    rpc ListLogs(ListLogsRequest) returns (ListLogsResponse) {
+        option (google.api.http) = {
+            get: "/v1/projects/{project_id}/logs"
+        };
+    };
+    // GetLogs return details of a log.
+    rpc GetLogs(GetLogsRequest) returns (GetLogsResponse) {
+        option (google.api.http) = {
+            get: "/v1/projects/{project_id}/logs/{id}"
+        };
+    };
+    // ListLogWriters return paginated list of log writers under a project and filtered by query string.
+    rpc ListLogWriters(ListLogWritersRequest) returns (ListLogWritersResponse) {
+        option (google.api.http) = {
+            get: "/v1/projects/{project_id}/log_writers"
+        };
+    };
+    // GetLogWriter return details of the log writer deployment.
+    rpc GetLogWriter(GetLogWriterRequest) returns (GetLogWriterResponse) {
+        option (google.api.http) = {
+            get: "/v1/projects/{project_id}/log_writers/{id}"
+        };
+    };
+    // CreateLogWriter creates a new log writer deployment as specified by the details given in the request body. 
+    rpc CreateLogWriter(CreateLogWriterRequest) returns (CreateLogWriterResponse) {
+        option (google.api.http) = {
+            post: "/v1/projects/{project_id}/log_writers"
+            body: "*"
+        };
+    };
+    // UpdateLogWriter updates an existing log writer deployment as specified by the details given in the request body. 
+    rpc UpdateLogWriter(UpdateLogWriterRequest) returns (UpdateLogWriterResponse) {
+        option (google.api.http) = {
+            put: "/v1/projects/{project_id}/log_writers/{id}"
+            body: "*"
+        };
+    };
+    // ListObservationServices return paginated list of observation services under a project and filtered by query string.
+    rpc ListObservationServices(ListObservationServicesRequest) returns (ListObservationServicesResponse) {
+        option (google.api.http) = {
+            get: "/v1/projects/{project_id}/observation_services"
+        };
+    };
+    // GetObservationService return details of the observation service deployment.
+    rpc GetObservationService(GetObservationServiceRequest) returns (GetObservationServiceResponse) {
+        option (google.api.http) = {
+            get: "/v1/projects/{project_id}/observation_services/{id}"
+        };
+    };
+    // CreateObservationService creates a new observation service deployment as specified by the details given in the request body. 
+    rpc CreateObservationService(CreateObservationServiceRequest) returns (CreateObservationServiceResponse) {
+        option (google.api.http) = {
+            post: "/v1/projects/{project_id}/observation_services"
+            body: "*"
+        };
+    };
+    // UpdateObservationService updates an existing observation service deployment as specified by the details given in the request body. 
+    rpc UpdateObservationService(UpdateObservationServiceRequest) returns (UpdateObservationServiceResponse) {
+        option (google.api.http) = {
+            put: "/v1/projects/{project_id}/observation_services/{id}"
+            body: "*"
+        };
+    };
+};
+
+// Request message for ListLogs method.
+message ListLogsRequest {
+    // The CaraML project ID to retrieve log resource from.
+    int64 project_id = 1;
+}
+
+// Response message for ListLogs method.
+message ListLogsResponse {
+    // Logs stored in configured Dataset Service storage sink.
+    repeated Log logs = 1;
+}
+
+// Request message for GetLogs method.
+message GetLogsRequest {
+    // The CaraML project ID to retrieve log resource from.
+    int64 project_id = 1;
+    // The ID of the log resource to retrieve.
+    int64 id = 2;
+}
+
+// Response message for GetLogs method.
+message GetLogsResponse {
+    // Single log stored in configured Dataset Service storage sink.
+    Log log = 1;
+}
