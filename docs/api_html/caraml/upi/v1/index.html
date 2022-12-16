@@ -236,6 +236,37 @@
         
           
           <li>
+            <a href="#caraml%2fupi%2fv1%2fprediction_log.proto">caraml/upi/v1/prediction_log.proto</a>
+            <ul>
+              
+                <li>
+                  <a href="#caraml.upi.v1.ModelInput"><span class="badge">M</span>ModelInput</a>
+                </li>
+              
+                <li>
+                  <a href="#caraml.upi.v1.ModelInput.HeadersEntry"><span class="badge">M</span>ModelInput.HeadersEntry</a>
+                </li>
+              
+                <li>
+                  <a href="#caraml.upi.v1.ModelOutput"><span class="badge">M</span>ModelOutput</a>
+                </li>
+              
+                <li>
+                  <a href="#caraml.upi.v1.ModelOutput.HeadersEntry"><span class="badge">M</span>ModelOutput.HeadersEntry</a>
+                </li>
+              
+                <li>
+                  <a href="#caraml.upi.v1.PredictionLog"><span class="badge">M</span>PredictionLog</a>
+                </li>
+              
+              
+              
+              
+            </ul>
+          </li>
+        
+          
+          <li>
             <a href="#caraml%2fupi%2fv1%2ftable.proto">caraml/upi/v1/table.proto</a>
             <ul>
               
@@ -296,6 +327,41 @@
                 <li>
                   <a href="#caraml.upi.v1.UniversalPredictionService"><span class="badge">S</span>UniversalPredictionService</a>
                 </li>
+              
+            </ul>
+          </li>
+        
+          
+          <li>
+            <a href="#caraml%2fupi%2fv1%2frouter_log.proto">caraml/upi/v1/router_log.proto</a>
+            <ul>
+              
+                <li>
+                  <a href="#caraml.upi.v1.RouterInput"><span class="badge">M</span>RouterInput</a>
+                </li>
+              
+                <li>
+                  <a href="#caraml.upi.v1.RouterInput.HeadersEntry"><span class="badge">M</span>RouterInput.HeadersEntry</a>
+                </li>
+              
+                <li>
+                  <a href="#caraml.upi.v1.RouterLog"><span class="badge">M</span>RouterLog</a>
+                </li>
+              
+                <li>
+                  <a href="#caraml.upi.v1.RouterOutput"><span class="badge">M</span>RouterOutput</a>
+                </li>
+              
+                <li>
+                  <a href="#caraml.upi.v1.RouterOutput.HeadersEntry"><span class="badge">M</span>RouterOutput.HeadersEntry</a>
+                </li>
+              
+                <li>
+                  <a href="#caraml.upi.v1.RoutingLogic"><span class="badge">M</span>RoutingLogic</a>
+                </li>
+              
+              
+              
               
             </ul>
           </li>
@@ -635,6 +701,267 @@ This information is used to join the prediction to an observation. </p></td>
           </table>
           
         
+    
+      
+      <div class="file-heading">
+        <h2 id="caraml/upi/v1/prediction_log.proto">caraml/upi/v1/prediction_log.proto</h2><a href="#title">Top</a>
+      </div>
+      <p></p>
+
+      
+        <h3 id="caraml.upi.v1.ModelInput">ModelInput</h3>
+        <p>Model input stores information of all input for prediction process.</p><p>The information in model input are extracted from the prediction request received by model.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>features_table</td>
+                  <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
+                  <td></td>
+                  <td><p>JSON-representation of features table. &#34;table_schema_version&#34; field describe the encoding of this field. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>entities_table</td>
+                  <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
+                  <td></td>
+                  <td><p>JSON-representation of entities table. &#34;table_schema_version&#34; field describe the encoding of this field. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>raw_features</td>
+                  <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
+                  <td></td>
+                  <td><p>JSON-representation of raw_features table. &#34;table_schema_version&#34; field describe the encoding of this field. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>prediction_context</td>
+                  <td><a href="#caraml.upi.v1.Variable">Variable</a></td>
+                  <td>repeated</td>
+                  <td><p>Context of the prediction request. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>headers</td>
+                  <td><a href="#caraml.upi.v1.ModelInput.HeadersEntry">ModelInput.HeadersEntry</a></td>
+                  <td>repeated</td>
+                  <td><p>map containing request headers/metadata </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="caraml.upi.v1.ModelInput.HeadersEntry">ModelInput.HeadersEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="caraml.upi.v1.ModelOutput">ModelOutput</h3>
+        <p>Model output stores information of all output produced from prediction process.</p><p>Model output is extracted from the prediction response sent by model.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>prediction_results_table</td>
+                  <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
+                  <td></td>
+                  <td><p>JSON-representation of prediction result table. &#34;table_schema_version&#34; field describe the encoding of this field. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>prediction_context</td>
+                  <td><a href="#caraml.upi.v1.Variable">Variable</a></td>
+                  <td>repeated</td>
+                  <td><p>Context of the prediction response. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>headers</td>
+                  <td><a href="#caraml.upi.v1.ModelOutput.HeadersEntry">ModelOutput.HeadersEntry</a></td>
+                  <td>repeated</td>
+                  <td><p>map containing response headers/metadata </p></td>
+                </tr>
+              
+                <tr>
+                  <td>status</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td></td>
+                  <td><p>grpc status of the response from model (see https://grpc.github.io/grpc/core/md_doc_statuscodes.html) </p></td>
+                </tr>
+              
+                <tr>
+                  <td>message</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>grpc message </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="caraml.upi.v1.ModelOutput.HeadersEntry">ModelOutput.HeadersEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="caraml.upi.v1.PredictionLog">PredictionLog</h3>
+        <p>PredictionLog stores information of prediction request handled by a specific model version.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>prediction_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Unique identifier of prediction. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>target_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Target name / concept to be predicted by the prediction. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>project_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Project name that host the model performing prediction. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>model_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Model name perforing the prediction. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>model_version</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Model version performing the prediction. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>input</td>
+                  <td><a href="#caraml.upi.v1.ModelInput">ModelInput</a></td>
+                  <td></td>
+                  <td><p>Input of the prediction process </p></td>
+                </tr>
+              
+                <tr>
+                  <td>output</td>
+                  <td><a href="#caraml.upi.v1.ModelOutput">ModelOutput</a></td>
+                  <td></td>
+                  <td><p>Output of the prediction process </p></td>
+                </tr>
+              
+                <tr>
+                  <td>request_timestamp</td>
+                  <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
+                  <td></td>
+                  <td><p>Timestamp of the corresponding prediction request </p></td>
+                </tr>
+              
+                <tr>
+                  <td>table_schema_version</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td></td>
+                  <td><p>Schema version of raw_features, features, entities, and prediction results fields are formatted
+I.e. for version 1, all of those fields will be formatted as a modified JSON SPLIT representation of a table </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+
+      
+
+      
+
+      
     
       
       <div class="file-heading">
@@ -1135,6 +1462,323 @@ Each table doesn&#39;t need to have same number of row. </p></td>
           </table>
           
         
+    
+      
+      <div class="file-heading">
+        <h2 id="caraml/upi/v1/router_log.proto">caraml/upi/v1/router_log.proto</h2><a href="#title">Top</a>
+      </div>
+      <p></p>
+
+      
+        <h3 id="caraml.upi.v1.RouterInput">RouterInput</h3>
+        <p>Input received by router.</p><p>These informations are extracted from the request received by the router.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>prediction_table</td>
+                  <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
+                  <td></td>
+                  <td><p>JSON-representation of prediction_table of the UPI request to router. &#34;table_schema_version&#34; field describe the encoding of this field. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>transformer_tables</td>
+                  <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
+                  <td>repeated</td>
+                  <td><p>List of tables in the transformer inputs in JSON format. &#34;table_schema_version&#34; field describe the encoding of this field. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>transformer_variables</td>
+                  <td><a href="#caraml.upi.v1.Variable">Variable</a></td>
+                  <td>repeated</td>
+                  <td><p>List of variables extracted from &#34;transformer_inputs&#34; </p></td>
+                </tr>
+              
+                <tr>
+                  <td>prediction_context</td>
+                  <td><a href="#caraml.upi.v1.Variable">Variable</a></td>
+                  <td>repeated</td>
+                  <td><p>Context of the prediction request. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>headers</td>
+                  <td><a href="#caraml.upi.v1.RouterInput.HeadersEntry">RouterInput.HeadersEntry</a></td>
+                  <td>repeated</td>
+                  <td><p>map containing request headers/metadata </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="caraml.upi.v1.RouterInput.HeadersEntry">RouterInput.HeadersEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="caraml.upi.v1.RouterLog">RouterLog</h3>
+        <p>RouterLog stores information of a multi-model orchestration performed by a router.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>prediction_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Unique identifier of prediction. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>target_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Target name / concept to be predicted by the prediction. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>project_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Project name that host the router. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>router_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Name of the router. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>router_version</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Router version. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>routing_logic</td>
+                  <td><a href="#caraml.upi.v1.RoutingLogic">RoutingLogic</a></td>
+                  <td></td>
+                  <td><p>Routing logic describes the decision that was made within the router to produce the router output </p></td>
+                </tr>
+              
+                <tr>
+                  <td>router_input</td>
+                  <td><a href="#caraml.upi.v1.RouterInput">RouterInput</a></td>
+                  <td></td>
+                  <td><p>Input of the router </p></td>
+                </tr>
+              
+                <tr>
+                  <td>router_output</td>
+                  <td><a href="#caraml.upi.v1.RouterOutput">RouterOutput</a></td>
+                  <td></td>
+                  <td><p>Output of the router </p></td>
+                </tr>
+              
+                <tr>
+                  <td>request_timestamp</td>
+                  <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
+                  <td></td>
+                  <td><p>Timestamp of the corresponding prediction request </p></td>
+                </tr>
+              
+                <tr>
+                  <td>table_schema_version</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td></td>
+                  <td><p>Schema version of raw_features, features, entities, and prediction results fields are formatted
+I.e. for version 1, all of those fields will be formatted as a modified JSON SPLIT representation of a table </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="caraml.upi.v1.RouterOutput">RouterOutput</h3>
+        <p>Output produced by router.</p><p>These informations are extracted from the response produced by the router.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>prediction_results_table</td>
+                  <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
+                  <td></td>
+                  <td><p>JSON-representation of prediction result table returned by router. &#34;table_schema_version&#34; field describe the encoding of this field. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>prediction_context</td>
+                  <td><a href="#caraml.upi.v1.Variable">Variable</a></td>
+                  <td>repeated</td>
+                  <td><p>Context of the prediction response. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>headers</td>
+                  <td><a href="#caraml.upi.v1.RouterOutput.HeadersEntry">RouterOutput.HeadersEntry</a></td>
+                  <td>repeated</td>
+                  <td><p>map containing response headers/metadata </p></td>
+                </tr>
+              
+                <tr>
+                  <td>status</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td></td>
+                  <td><p>grpc status of the response from model (see https://grpc.github.io/grpc/core/md_doc_statuscodes.html) </p></td>
+                </tr>
+              
+                <tr>
+                  <td>message</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>grpc message </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="caraml.upi.v1.RouterOutput.HeadersEntry">RouterOutput.HeadersEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="caraml.upi.v1.RoutingLogic">RoutingLogic</h3>
+        <p>Routing logic describes the decision that was made within the router to produce the router output</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>models</td>
+                  <td><a href="#caraml.upi.v1.ModelMetadata">ModelMetadata</a></td>
+                  <td>repeated</td>
+                  <td><p>List of models that was involved in producing the router output.
+Router can behave as multiplexer or combiner.
+In multiplexer case, the router will select 1 out of many models, thus this field will only have 1 entry.
+In combiner case, this field can contain more than 1 entries.
+This field will be used to join witht the prediction log. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>traffic_rule</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Traffic rule that was used to route the prediction request (optional). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>experiment_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Experiment name that was used to handle the prediction request (optional). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>treatment_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Treatment name from the experiment that was used to handle the prediction request (optional). </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+
+      
+
+      
+
+      
     
 
     <h2 id="scalar-value-types">Scalar Value Types</h2>

@@ -1,0 +1,63 @@
+syntax = "proto3";
+
+package caraml.upi.v1;
+
+import "caraml/upi/v1/variable.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/struct.proto";
+
+// PredictionLog stores information of prediction request handled by a specific model version.
+message PredictionLog {
+    // Unique identifier of prediction.
+    string prediction_id = 1;
+    // Target name / concept to be predicted by the prediction.
+    string target_name = 2;
+    // Project name that host the model performing prediction.
+    string project_name = 3;
+    // Model name performing the prediction.
+    string model_name = 4;
+    // Model version performing the prediction.
+    string model_version = 5;
+
+    // Input of the prediction process 
+    ModelInput input = 10;
+    // Output of the prediction process
+    ModelOutput output = 11;
+
+    // Timestamp of the corresponding prediction request
+    google.protobuf.Timestamp request_timestamp = 20;
+
+    // Schema version of raw_features, features, entities, and prediction results fields are formatted
+    // I.e. for version 1, all of those fields will be formatted as a modified JSON SPLIT representation of a table
+    uint32 table_schema_version = 100;    
+}
+
+// Model input stores information of all input for prediction process.
+// The information in model input are extracted from the prediction request received by model.
+message ModelInput {
+    // JSON-representation of features table. "table_schema_version" field describe the encoding of this field.
+    google.protobuf.Struct features_table = 1;
+    // JSON-representation of entities table. "table_schema_version" field describe the encoding of this field.
+    google.protobuf.Struct entities_table = 2;
+    // JSON-representation of raw_features table. "table_schema_version" field describe the encoding of this field.
+    google.protobuf.Struct raw_features = 3;
+    // Context of the prediction request.
+    repeated Variable prediction_context = 4;   
+    // map containing request headers/metadata
+    map<string,string> headers = 10;
+}
+
+// Model output stores information of all output produced from prediction process.
+// Model output is extracted from the prediction response sent by model.
+message ModelOutput {
+    // JSON-representation of prediction result table. "table_schema_version" field describe the encoding of this field.
+    google.protobuf.Struct prediction_results_table = 1;
+    // Context of the prediction response.
+    repeated Variable prediction_context = 2;   
+    // map containing response headers/metadata
+    map<string,string> headers = 10;
+    // grpc status of the response from model (see https://grpc.github.io/grpc/core/md_doc_statuscodes.html)
+    uint32 status = 11;
+    // grpc message 
+    string message = 12;
+}

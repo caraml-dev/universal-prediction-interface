@@ -1,0 +1,81 @@
+syntax = "proto3";
+
+package caraml.upi.v1;
+
+import "caraml/upi/v1/variable.proto";
+import "caraml/upi/v1/upi.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/struct.proto";
+
+// RouterLog stores information of a multi-model orchestration performed by a router.
+message RouterLog {
+    // Unique identifier of prediction.
+    string prediction_id = 1;
+    // Target name / concept to be predicted by the prediction.
+    string target_name = 2;
+    // Project name that host the router.
+    string project_name = 3;
+    // Name of the router.
+    string router_name = 4;
+    // Router version.
+    string router_version = 5;
+
+    // Routing logic describes the decision that was made within the router to produce the router output
+    RoutingLogic routing_logic = 10;
+    // Input of the router 
+    RouterInput router_input = 11; 
+    // Output of the router
+    RouterOutput router_output = 12;
+    // Timestamp of the corresponding prediction request
+    google.protobuf.Timestamp request_timestamp = 20;
+    // Schema version of raw_features, features, entities, and prediction results fields are formatted
+    // I.e. for version 1, all of those fields will be formatted as a modified JSON SPLIT representation of a table
+    uint32 table_schema_version = 100;    
+}
+
+// Routing logic describes the decision that was made within the router to produce the router output
+message RoutingLogic {
+    // List of models that was involved in producing the router output.
+    // Router can behave as multiplexer or combiner.
+    // In multiplexer case, the router will select 1 out of many models, thus this field will only have 1 entry.
+    // In combiner case, this field can contain more than 1 entries.
+    // This field will be used to join witht the prediction log.
+    repeated ModelMetadata models = 1;
+    // Traffic rule that was used to route the prediction request (optional).
+    string traffic_rule = 2;
+    // Experiment name that was used to handle the prediction request (optional).
+    string experiment_name = 3;
+    // Treatment name from the experiment that was used to handle the prediction request (optional).
+    string treatment_name = 4;
+}
+
+// Input received by router.
+// These informations are extracted from the request received by the router.
+message RouterInput{
+    // JSON-representation of prediction_table of the UPI request to router. "table_schema_version" field describe the encoding of this field.
+    google.protobuf.Struct prediction_table = 1;
+    // List of tables in the transformer inputs in JSON format. "table_schema_version" field describe the encoding of this field.
+    repeated google.protobuf.Struct transformer_tables = 2;
+    // List of variables extracted from "transformer_inputs"
+    repeated Variable transformer_variables = 3;
+    // Context of the prediction request.
+    repeated Variable prediction_context = 4;   
+    // map containing request headers/metadata
+    map<string,string> headers = 10;
+}
+
+// Output produced by router.
+// These informations are extracted from the response produced by the router.
+message RouterOutput {
+    // JSON-representation of prediction result table returned by router. "table_schema_version" field describe the encoding of this field.
+    google.protobuf.Struct prediction_results_table = 1;
+    // Context of the prediction response.
+    repeated Variable prediction_context = 2;   
+    // map containing response headers/metadata
+    map<string,string> headers = 10;
+    // grpc status of the response from model (see https://grpc.github.io/grpc/core/md_doc_statuscodes.html)
+    uint32 status = 11;
+    // grpc message
+    string message = 12;
+}
+

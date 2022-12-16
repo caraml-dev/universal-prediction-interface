@@ -9,6 +9,7 @@ docs/ProtobufAny.md
 docs/RpcStatus.md
 docs/UniversalPredictionServiceApi.md
 docs/Upiv1Type.md
+docs/Upiv1Value.md
 docs/V1Column.md
 docs/V1ModelMetadata.md
 docs/V1PredictValuesRequest.md
@@ -18,7 +19,6 @@ docs/V1ResponseMetadata.md
 docs/V1Row.md
 docs/V1Table.md
 docs/V1TransformerInput.md
-docs/V1Value.md
 docs/V1Variable.md
 git_push.sh
 go.mod
@@ -26,6 +26,7 @@ go.sum
 model_protobuf_any.go
 model_rpc_status.go
 model_upiv1_type.go
+model_upiv1_value.go
 model_v1_column.go
 model_v1_model_metadata.go
 model_v1_predict_values_request.go
@@ -35,7 +36,6 @@ model_v1_response_metadata.go
 model_v1_row.go
 model_v1_table.go
 model_v1_transformer_input.go
-model_v1_value.go
 model_v1_variable.go
 response.go
 utils.go
