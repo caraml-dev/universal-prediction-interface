@@ -1,10 +1,11 @@
 Gem::Specification.new do |s|
-  s.name        = "upi-proto"
-  s.version     = "0.0.0.dev"
+  s.name        = "caraml-upi-protos"
+  s.version     = "0.0.0"
   s.summary     = "UPI generated proto"
   s.description = "Universal Prediction Interface codegen proto"
   s.authors     = ["Caraml Dev"]
   s.email       = "caraml-dev@gojek.com"
+  s.license     = "Apache-2.0"
   s.files       = Dir["gen/ruby/grpc/**/*.rb"]
   s.homepage    = "https://github.com/caraml-dev/universal-prediction-interface/"
   s.add_runtime_dependency "google-protobuf", ["~> 3.12"]
