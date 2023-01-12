@@ -11,7 +11,6 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.1'
-      - run: bundle install
       - name: Publish to RubyGems
         run: |
           mkdir -p $HOME/.gem
