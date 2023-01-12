@@ -305,7 +305,7 @@ PredictionLog stores information of prediction request handled by a specific mod
 | prediction_id | [string](#string) |  | Unique identifier of prediction. |
 | target_name | [string](#string) |  | Target name / concept to be predicted by the prediction. |
 | project_name | [string](#string) |  | Project name that host the model performing prediction. |
-| model_name | [string](#string) |  | Model name perforing the prediction. |
+| model_name | [string](#string) |  | Model name performing the prediction. |
 | model_version | [string](#string) |  | Model version performing the prediction. |
 | input | [ModelInput](#caraml-upi-v1-ModelInput) |  | Input of the prediction process |
 | output | [ModelOutput](#caraml-upi-v1-ModelOutput) |  | Output of the prediction process |

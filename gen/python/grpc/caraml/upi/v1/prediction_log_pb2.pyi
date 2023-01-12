@@ -36,7 +36,7 @@ class PredictionLog(google.protobuf.message.Message):
     """Project name that host the model performing prediction."""
 
     model_name: typing.Text
-    """Model name perforing the prediction."""
+    """Model name performing the prediction."""
 
     model_version: typing.Text
     """Model version performing the prediction."""
