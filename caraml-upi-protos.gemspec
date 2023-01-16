@@ -10,6 +10,5 @@ Gem::Specification.new do |s|
   s.homepage    = "https://github.com/caraml-dev/universal-prediction-interface/"
   s.add_runtime_dependency "google-protobuf", ["~> 3.12"]
   s.add_runtime_dependency "googleapis-common-protos-types", ["~> 1.5.0"]
-  s.add_runtime_dependency "ruby-protocol-buffers", ["~> 1.5.0"]
   s.require_paths = ["gen/ruby/grpc"]
 end
