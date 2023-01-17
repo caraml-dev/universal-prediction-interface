@@ -175,6 +175,21 @@
         
           
           <li>
+            <a href="#caraml%2fupi%2fv1%2fheader.proto">caraml/upi/v1/header.proto</a>
+            <ul>
+              
+                <li>
+                  <a href="#caraml.upi.v1.Header"><span class="badge">M</span>Header</a>
+                </li>
+              
+              
+              
+              
+            </ul>
+          </li>
+        
+          
+          <li>
             <a href="#caraml%2fupi%2fv1%2ftype.proto">caraml/upi/v1/type.proto</a>
             <ul>
               
@@ -244,15 +259,7 @@
                 </li>
               
                 <li>
-                  <a href="#caraml.upi.v1.ModelInput.HeadersEntry"><span class="badge">M</span>ModelInput.HeadersEntry</a>
-                </li>
-              
-                <li>
                   <a href="#caraml.upi.v1.ModelOutput"><span class="badge">M</span>ModelOutput</a>
-                </li>
-              
-                <li>
-                  <a href="#caraml.upi.v1.ModelOutput.HeadersEntry"><span class="badge">M</span>ModelOutput.HeadersEntry</a>
                 </li>
               
                 <li>
@@ -341,19 +348,11 @@
                 </li>
               
                 <li>
-                  <a href="#caraml.upi.v1.RouterInput.HeadersEntry"><span class="badge">M</span>RouterInput.HeadersEntry</a>
-                </li>
-              
-                <li>
                   <a href="#caraml.upi.v1.RouterLog"><span class="badge">M</span>RouterLog</a>
                 </li>
               
                 <li>
                   <a href="#caraml.upi.v1.RouterOutput"><span class="badge">M</span>RouterOutput</a>
-                </li>
-              
-                <li>
-                  <a href="#caraml.upi.v1.RouterOutput.HeadersEntry"><span class="badge">M</span>RouterOutput.HeadersEntry</a>
                 </li>
               
                 <li>
@@ -370,6 +369,51 @@
       </ul>
     </div>
 
+    
+      
+      <div class="file-heading">
+        <h2 id="caraml/upi/v1/header.proto">caraml/upi/v1/header.proto</h2><a href="#title">Top</a>
+      </div>
+      <p></p>
+
+      
+        <h3 id="caraml.upi.v1.Header">Header</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+
+      
+
+      
+
+      
     
       
       <div class="file-heading">
@@ -749,40 +793,9 @@ This information is used to join the prediction to an observation. </p></td>
               
                 <tr>
                   <td>headers</td>
-                  <td><a href="#caraml.upi.v1.ModelInput.HeadersEntry">ModelInput.HeadersEntry</a></td>
+                  <td><a href="#caraml.upi.v1.Header">Header</a></td>
                   <td>repeated</td>
                   <td><p>map containing request headers/metadata </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="caraml.upi.v1.ModelInput.HeadersEntry">ModelInput.HeadersEntry</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>key</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>value</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
                 </tr>
               
             </tbody>
@@ -818,7 +831,7 @@ This information is used to join the prediction to an observation. </p></td>
               
                 <tr>
                   <td>headers</td>
-                  <td><a href="#caraml.upi.v1.ModelOutput.HeadersEntry">ModelOutput.HeadersEntry</a></td>
+                  <td><a href="#caraml.upi.v1.Header">Header</a></td>
                   <td>repeated</td>
                   <td><p>map containing response headers/metadata </p></td>
                 </tr>
@@ -835,37 +848,6 @@ This information is used to join the prediction to an observation. </p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>grpc message </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="caraml.upi.v1.ModelOutput.HeadersEntry">ModelOutput.HeadersEntry</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>key</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>value</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
                 </tr>
               
             </tbody>
@@ -1510,40 +1492,9 @@ Each table doesn&#39;t need to have same number of row. </p></td>
               
                 <tr>
                   <td>headers</td>
-                  <td><a href="#caraml.upi.v1.RouterInput.HeadersEntry">RouterInput.HeadersEntry</a></td>
+                  <td><a href="#caraml.upi.v1.Header">Header</a></td>
                   <td>repeated</td>
                   <td><p>map containing request headers/metadata </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="caraml.upi.v1.RouterInput.HeadersEntry">RouterInput.HeadersEntry</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>key</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>value</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
                 </tr>
               
             </tbody>
@@ -1667,7 +1618,7 @@ I.e. for version 1, all of those fields will be formatted as a modified JSON SPL
               
                 <tr>
                   <td>headers</td>
-                  <td><a href="#caraml.upi.v1.RouterOutput.HeadersEntry">RouterOutput.HeadersEntry</a></td>
+                  <td><a href="#caraml.upi.v1.Header">Header</a></td>
                   <td>repeated</td>
                   <td><p>map containing response headers/metadata </p></td>
                 </tr>
@@ -1684,37 +1635,6 @@ I.e. for version 1, all of those fields will be formatted as a modified JSON SPL
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>grpc message </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="caraml.upi.v1.RouterOutput.HeadersEntry">RouterOutput.HeadersEntry</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>key</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>value</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
                 </tr>
               
             </tbody>

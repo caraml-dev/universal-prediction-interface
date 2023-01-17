@@ -3,6 +3,7 @@
 
 require 'google/protobuf'
 
+require 'caraml/upi/v1/header_pb'
 require 'caraml/upi/v1/variable_pb'
 require 'caraml/upi/v1/upi_pb'
 require 'google/protobuf/timestamp_pb'
@@ -33,12 +34,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :transformer_tables, :message, 2, "google.protobuf.Struct", json_name: "transformerTables"
       repeated :transformer_variables, :message, 3, "caraml.upi.v1.Variable", json_name: "transformerVariables"
       repeated :prediction_context, :message, 4, "caraml.upi.v1.Variable", json_name: "predictionContext"
-      map :headers, :string, :string, 10
+      repeated :headers, :message, 10, "caraml.upi.v1.Header", json_name: "headers"
     end
     add_message "caraml.upi.v1.RouterOutput" do
       optional :prediction_results_table, :message, 1, "google.protobuf.Struct", json_name: "predictionResultsTable"
       repeated :prediction_context, :message, 2, "caraml.upi.v1.Variable", json_name: "predictionContext"
-      map :headers, :string, :string, 10
+      repeated :headers, :message, 10, "caraml.upi.v1.Header", json_name: "headers"
       optional :status, :uint32, 11, json_name: "status"
       optional :message, :string, 12, json_name: "message"
     end
