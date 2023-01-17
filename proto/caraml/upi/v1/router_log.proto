@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package caraml.upi.v1;
 
+import "caraml/upi/v1/header.proto";
 import "caraml/upi/v1/variable.proto";
 import "caraml/upi/v1/upi.proto";
 import "google/protobuf/timestamp.proto";
@@ -61,7 +62,7 @@ message RouterInput{
     // Context of the prediction request.
     repeated Variable prediction_context = 4;   
     // map containing request headers/metadata
-    map<string,string> headers = 10;
+    repeated Header  headers = 10;
 }
 
 // Output produced by router.
@@ -72,7 +73,7 @@ message RouterOutput {
     // Context of the prediction response.
     repeated Variable prediction_context = 2;   
     // map containing response headers/metadata
-    map<string,string> headers = 10;
+    repeated Header  headers = 10;
     // grpc status of the response from model (see https://grpc.github.io/grpc/core/md_doc_statuscodes.html)
     uint32 status = 11;
     // grpc message

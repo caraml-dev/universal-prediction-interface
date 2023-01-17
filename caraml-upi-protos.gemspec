@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = "caraml-upi-protos"
-  s.version     = "0.0.0"
+  s.version     = "0.0.1"
   s.summary     = "UPI generated proto"
   s.description = "Universal Prediction Interface codegen proto"
   s.authors     = ["Caraml Dev"]
