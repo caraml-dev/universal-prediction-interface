@@ -8,19 +8,104 @@ import (
 )
 
 const (
-	IntType     = "INT64"
-	NumberType  = "FLOAT64"
-	StringType  = "STRING"
-	UnknownType = ""
+	int64Type   = "INT64"
+	float64Type = "FLOAT64"
+	stringType  = "STRING"
+	unknownType = ""
 
-	NameKey       = "name"
-	ColumnNameKey = "columns"
-	ColumnTypeKey = "column_types"
-	RowIdKey      = "row_ids"
-	DataKey       = "data"
+	// name of the table
+	nameKey = "name"
+	// list of column in the table
+	columnNameKey = "columns"
+	// list of column type in the table
+	columnTypeKey = "column_types"
+	// row ids contained in the table
+	rowIdKey = "row_ids"
+	// table content
+	dataKey = "data"
 )
 
-// tableToStructV1 convert upi table into protobuf Struct using schema version 1
+// tableToStructV1 convert upi table into protobuf Struct using schema version 1.
+// For example following UPI table
+// upiTable := &upiv1.Table{
+//		Name: "small_table",
+//		Columns: []*upiv1.Column{
+//			{
+//				Name: "double_col",
+//				Type: upiv1.Type_TYPE_DOUBLE,
+//			},
+//			{
+//				Name: "int_col",
+//				Type: upiv1.Type_TYPE_INTEGER,
+//			},
+//			{
+//				Name: "string_col",
+//				Type: upiv1.Type_TYPE_STRING,
+//			},
+//		},
+//		Rows: []*upiv1.Row{
+//			{
+//				RowId: "1",
+//				Values: []*upiv1.Value{
+//					{
+//						DoubleValue: 1.1,
+//					},
+//					{
+//						IntegerValue: 1,
+//					},
+//					{
+//						StringValue: "1.1",
+//					},
+//				},
+//			},
+//			{
+//				RowId: "2",
+//				Values: []*upiv1.Value{
+//					{
+//						DoubleValue: 2.2,
+//					},
+//					{
+//						IntegerValue: 2,
+//					},
+//					{
+//						StringValue: "2.2",
+//					},
+//				},
+//			},
+//		},
+//	}
+//
+//  is converted into following struct/json:
+//
+// {
+//  "column_types": [
+//    "FLOAT64",
+//    "INT64",
+//    "STRING"
+//  ],
+//  "columns": [
+//    "double_col",
+//    "int_col",
+//    "string_col"
+//  ],
+//  "data": [
+//    [
+//      1.1,
+//      1,
+//      "1.1"
+//    ],
+//    [
+//      2.2,
+//      2,
+//      "2.2"
+//    ]
+//  ],
+//  "name": "small_table",
+//  "row_ids": [
+//    "1",
+//    "2"
+//  ]
+//}
 func tableToStructV1(upitable *upiv1.Table) (*structpb.Struct, error) {
 	columnNames, columnTypes, err := unwrapColumns(upitable.Columns)
 	if err != nil {
@@ -32,11 +117,11 @@ func tableToStructV1(upitable *upiv1.Table) (*structpb.Struct, error) {
 	}
 
 	maps := map[string]interface{}{
-		NameKey:       upitable.Name,
-		ColumnNameKey: columnNames,
-		ColumnTypeKey: columnTypes,
-		RowIdKey:      rowIds,
-		DataKey:       data,
+		nameKey:       upitable.Name,
+		columnNameKey: columnNames,
+		columnTypeKey: columnTypes,
+		rowIdKey:      rowIds,
+		dataKey:       data,
 	}
 
 	return structpb.NewStruct(maps)
@@ -84,13 +169,13 @@ func unwrapRows(rows []*upiv1.Row, columns []*upiv1.Column) ([]interface{}, []in
 func upiTypeToJSONType(upiCellType upiv1.Type) (interface{}, error) {
 	switch upiCellType {
 	case upiv1.Type_TYPE_DOUBLE:
-		return NumberType, nil
+		return float64Type, nil
 	case upiv1.Type_TYPE_INTEGER:
-		return IntType, nil
+		return int64Type, nil
 	case upiv1.Type_TYPE_STRING:
-		return StringType, nil
+		return stringType, nil
 	default:
-		return UnknownType, fmt.Errorf("unknown type: %d", upiCellType)
+		return unknownType, fmt.Errorf("unknown type: %d", upiCellType)
 	}
 }
 
