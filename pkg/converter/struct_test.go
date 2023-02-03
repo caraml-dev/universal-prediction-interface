@@ -75,7 +75,7 @@ func TestTableToStruct(t *testing.T) {
 			want: newStruct(t, map[string]interface{}{
 				"name":         "small_table",
 				"columns":      []interface{}{"double_col", "int_col", "string_col"},
-				"column_types": []interface{}{"FLOAT64", "INT64", "STRING"},
+				"column_types": []interface{}{floatType, integerType, stringType},
 				"row_ids":      []interface{}{"1", "2"},
 				"data": []interface{}{
 					[]interface{}{1.1, 1, "1.1"},

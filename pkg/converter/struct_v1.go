@@ -8,8 +8,8 @@ import (
 )
 
 const (
-	int64Type   = "INT64"
-	float64Type = "FLOAT64"
+	integerType = "INTEGER"
+	floatType   = "FLOAT"
 	stringType  = "STRING"
 	unknownType = ""
 
@@ -169,9 +169,9 @@ func unwrapRows(rows []*upiv1.Row, columns []*upiv1.Column) ([]interface{}, []in
 func upiTypeToJSONType(upiCellType upiv1.Type) (interface{}, error) {
 	switch upiCellType {
 	case upiv1.Type_TYPE_DOUBLE:
-		return float64Type, nil
+		return floatType, nil
 	case upiv1.Type_TYPE_INTEGER:
-		return int64Type, nil
+		return integerType, nil
 	case upiv1.Type_TYPE_STRING:
 		return stringType, nil
 	default:
