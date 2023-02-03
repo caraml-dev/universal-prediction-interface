@@ -3,6 +3,7 @@
 isort:skip_file
 """
 import builtins
+import caraml.upi.v1.header_pb2
 import caraml.upi.v1.variable_pb2
 import google.protobuf.descriptor
 import google.protobuf.internal.containers
@@ -36,7 +37,7 @@ class PredictionLog(google.protobuf.message.Message):
     """Project name that host the model performing prediction."""
 
     model_name: typing.Text
-    """Model name perforing the prediction."""
+    """Model name performing the prediction."""
 
     model_version: typing.Text
     """Model version performing the prediction."""
@@ -79,19 +80,6 @@ class ModelInput(google.protobuf.message.Message):
     The information in model input are extracted from the prediction request received by model.
     """
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
-    class HeadersEntry(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
-        KEY_FIELD_NUMBER: builtins.int
-        VALUE_FIELD_NUMBER: builtins.int
-        key: typing.Text
-        value: typing.Text
-        def __init__(self,
-            *,
-            key: typing.Text = ...,
-            value: typing.Text = ...,
-            ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> None: ...
-
     FEATURES_TABLE_FIELD_NUMBER: builtins.int
     ENTITIES_TABLE_FIELD_NUMBER: builtins.int
     RAW_FEATURES_FIELD_NUMBER: builtins.int
@@ -114,7 +102,7 @@ class ModelInput(google.protobuf.message.Message):
         """Context of the prediction request."""
         pass
     @property
-    def headers(self) -> google.protobuf.internal.containers.ScalarMap[typing.Text, typing.Text]:
+    def headers(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[caraml.upi.v1.header_pb2.Header]:
         """map containing request headers/metadata"""
         pass
     def __init__(self,
@@ -123,7 +111,7 @@ class ModelInput(google.protobuf.message.Message):
         entities_table: typing.Optional[google.protobuf.struct_pb2.Struct] = ...,
         raw_features: typing.Optional[google.protobuf.struct_pb2.Struct] = ...,
         prediction_context: typing.Optional[typing.Iterable[caraml.upi.v1.variable_pb2.Variable]] = ...,
-        headers: typing.Optional[typing.Mapping[typing.Text, typing.Text]] = ...,
+        headers: typing.Optional[typing.Iterable[caraml.upi.v1.header_pb2.Header]] = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["entities_table",b"entities_table","features_table",b"features_table","raw_features",b"raw_features"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["entities_table",b"entities_table","features_table",b"features_table","headers",b"headers","prediction_context",b"prediction_context","raw_features",b"raw_features"]) -> None: ...
@@ -134,19 +122,6 @@ class ModelOutput(google.protobuf.message.Message):
     Model output is extracted from the prediction response sent by model.
     """
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
-    class HeadersEntry(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
-        KEY_FIELD_NUMBER: builtins.int
-        VALUE_FIELD_NUMBER: builtins.int
-        key: typing.Text
-        value: typing.Text
-        def __init__(self,
-            *,
-            key: typing.Text = ...,
-            value: typing.Text = ...,
-            ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> None: ...
-
     PREDICTION_RESULTS_TABLE_FIELD_NUMBER: builtins.int
     PREDICTION_CONTEXT_FIELD_NUMBER: builtins.int
     HEADERS_FIELD_NUMBER: builtins.int
@@ -161,7 +136,7 @@ class ModelOutput(google.protobuf.message.Message):
         """Context of the prediction response."""
         pass
     @property
-    def headers(self) -> google.protobuf.internal.containers.ScalarMap[typing.Text, typing.Text]:
+    def headers(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[caraml.upi.v1.header_pb2.Header]:
         """map containing response headers/metadata"""
         pass
     status: builtins.int
@@ -174,7 +149,7 @@ class ModelOutput(google.protobuf.message.Message):
         *,
         prediction_results_table: typing.Optional[google.protobuf.struct_pb2.Struct] = ...,
         prediction_context: typing.Optional[typing.Iterable[caraml.upi.v1.variable_pb2.Variable]] = ...,
-        headers: typing.Optional[typing.Mapping[typing.Text, typing.Text]] = ...,
+        headers: typing.Optional[typing.Iterable[caraml.upi.v1.header_pb2.Header]] = ...,
         status: builtins.int = ...,
         message: typing.Text = ...,
         ) -> None: ...

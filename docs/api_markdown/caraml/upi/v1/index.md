@@ -3,6 +3,9 @@
 
 ## Table of Contents
 
+- [caraml/upi/v1/header.proto](#caraml_upi_v1_header-proto)
+    - [Header](#caraml-upi-v1-Header)
+  
 - [caraml/upi/v1/type.proto](#caraml_upi_v1_type-proto)
     - [Type](#caraml-upi-v1-Type)
   
@@ -19,9 +22,7 @@
   
 - [caraml/upi/v1/prediction_log.proto](#caraml_upi_v1_prediction_log-proto)
     - [ModelInput](#caraml-upi-v1-ModelInput)
-    - [ModelInput.HeadersEntry](#caraml-upi-v1-ModelInput-HeadersEntry)
     - [ModelOutput](#caraml-upi-v1-ModelOutput)
-    - [ModelOutput.HeadersEntry](#caraml-upi-v1-ModelOutput-HeadersEntry)
     - [PredictionLog](#caraml-upi-v1-PredictionLog)
   
 - [caraml/upi/v1/table.proto](#caraml_upi_v1_table-proto)
@@ -42,13 +43,43 @@
   
 - [caraml/upi/v1/router_log.proto](#caraml_upi_v1_router_log-proto)
     - [RouterInput](#caraml-upi-v1-RouterInput)
-    - [RouterInput.HeadersEntry](#caraml-upi-v1-RouterInput-HeadersEntry)
     - [RouterLog](#caraml-upi-v1-RouterLog)
     - [RouterOutput](#caraml-upi-v1-RouterOutput)
-    - [RouterOutput.HeadersEntry](#caraml-upi-v1-RouterOutput-HeadersEntry)
     - [RoutingLogic](#caraml-upi-v1-RoutingLogic)
   
 - [Scalar Value Types](#scalar-value-types)
+
+
+
+<a name="caraml_upi_v1_header-proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## caraml/upi/v1/header.proto
+
+
+
+<a name="caraml-upi-v1-Header"></a>
+
+### Header
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [string](#string) |  |  |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
 
 
 
@@ -235,23 +266,7 @@ The information in model input are extracted from the prediction request receive
 | entities_table | [google.protobuf.Struct](#google-protobuf-Struct) |  | JSON-representation of entities table. &#34;table_schema_version&#34; field describe the encoding of this field. |
 | raw_features | [google.protobuf.Struct](#google-protobuf-Struct) |  | JSON-representation of raw_features table. &#34;table_schema_version&#34; field describe the encoding of this field. |
 | prediction_context | [Variable](#caraml-upi-v1-Variable) | repeated | Context of the prediction request. |
-| headers | [ModelInput.HeadersEntry](#caraml-upi-v1-ModelInput-HeadersEntry) | repeated | map containing request headers/metadata |
-
-
-
-
-
-
-<a name="caraml-upi-v1-ModelInput-HeadersEntry"></a>
-
-### ModelInput.HeadersEntry
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| key | [string](#string) |  |  |
-| value | [string](#string) |  |  |
+| headers | [Header](#caraml-upi-v1-Header) | repeated | map containing request headers/metadata |
 
 
 
@@ -269,25 +284,9 @@ Model output is extracted from the prediction response sent by model.
 | ----- | ---- | ----- | ----------- |
 | prediction_results_table | [google.protobuf.Struct](#google-protobuf-Struct) |  | JSON-representation of prediction result table. &#34;table_schema_version&#34; field describe the encoding of this field. |
 | prediction_context | [Variable](#caraml-upi-v1-Variable) | repeated | Context of the prediction response. |
-| headers | [ModelOutput.HeadersEntry](#caraml-upi-v1-ModelOutput-HeadersEntry) | repeated | map containing response headers/metadata |
+| headers | [Header](#caraml-upi-v1-Header) | repeated | map containing response headers/metadata |
 | status | [uint32](#uint32) |  | grpc status of the response from model (see https://grpc.github.io/grpc/core/md_doc_statuscodes.html) |
 | message | [string](#string) |  | grpc message |
-
-
-
-
-
-
-<a name="caraml-upi-v1-ModelOutput-HeadersEntry"></a>
-
-### ModelOutput.HeadersEntry
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| key | [string](#string) |  |  |
-| value | [string](#string) |  |  |
 
 
 
@@ -305,7 +304,7 @@ PredictionLog stores information of prediction request handled by a specific mod
 | prediction_id | [string](#string) |  | Unique identifier of prediction. |
 | target_name | [string](#string) |  | Target name / concept to be predicted by the prediction. |
 | project_name | [string](#string) |  | Project name that host the model performing prediction. |
-| model_name | [string](#string) |  | Model name perforing the prediction. |
+| model_name | [string](#string) |  | Model name performing the prediction. |
 | model_version | [string](#string) |  | Model version performing the prediction. |
 | input | [ModelInput](#caraml-upi-v1-ModelInput) |  | Input of the prediction process |
 | output | [ModelOutput](#caraml-upi-v1-ModelOutput) |  | Output of the prediction process |
@@ -560,23 +559,7 @@ These informations are extracted from the request received by the router.
 | transformer_tables | [google.protobuf.Struct](#google-protobuf-Struct) | repeated | List of tables in the transformer inputs in JSON format. &#34;table_schema_version&#34; field describe the encoding of this field. |
 | transformer_variables | [Variable](#caraml-upi-v1-Variable) | repeated | List of variables extracted from &#34;transformer_inputs&#34; |
 | prediction_context | [Variable](#caraml-upi-v1-Variable) | repeated | Context of the prediction request. |
-| headers | [RouterInput.HeadersEntry](#caraml-upi-v1-RouterInput-HeadersEntry) | repeated | map containing request headers/metadata |
-
-
-
-
-
-
-<a name="caraml-upi-v1-RouterInput-HeadersEntry"></a>
-
-### RouterInput.HeadersEntry
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| key | [string](#string) |  |  |
-| value | [string](#string) |  |  |
+| headers | [Header](#caraml-upi-v1-Header) | repeated | map containing request headers/metadata |
 
 
 
@@ -618,25 +601,9 @@ These informations are extracted from the response produced by the router.
 | ----- | ---- | ----- | ----------- |
 | prediction_results_table | [google.protobuf.Struct](#google-protobuf-Struct) |  | JSON-representation of prediction result table returned by router. &#34;table_schema_version&#34; field describe the encoding of this field. |
 | prediction_context | [Variable](#caraml-upi-v1-Variable) | repeated | Context of the prediction response. |
-| headers | [RouterOutput.HeadersEntry](#caraml-upi-v1-RouterOutput-HeadersEntry) | repeated | map containing response headers/metadata |
+| headers | [Header](#caraml-upi-v1-Header) | repeated | map containing response headers/metadata |
 | status | [uint32](#uint32) |  | grpc status of the response from model (see https://grpc.github.io/grpc/core/md_doc_statuscodes.html) |
 | message | [string](#string) |  | grpc message |
-
-
-
-
-
-
-<a name="caraml-upi-v1-RouterOutput-HeadersEntry"></a>
-
-### RouterOutput.HeadersEntry
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| key | [string](#string) |  |  |
-| value | [string](#string) |  |  |
 
 
 

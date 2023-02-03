@@ -3,6 +3,7 @@
 isort:skip_file
 """
 import builtins
+import caraml.upi.v1.header_pb2
 import caraml.upi.v1.upi_pb2
 import caraml.upi.v1.variable_pb2
 import google.protobuf.descriptor
@@ -121,19 +122,6 @@ class RouterInput(google.protobuf.message.Message):
     These informations are extracted from the request received by the router.
     """
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
-    class HeadersEntry(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
-        KEY_FIELD_NUMBER: builtins.int
-        VALUE_FIELD_NUMBER: builtins.int
-        key: typing.Text
-        value: typing.Text
-        def __init__(self,
-            *,
-            key: typing.Text = ...,
-            value: typing.Text = ...,
-            ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> None: ...
-
     PREDICTION_TABLE_FIELD_NUMBER: builtins.int
     TRANSFORMER_TABLES_FIELD_NUMBER: builtins.int
     TRANSFORMER_VARIABLES_FIELD_NUMBER: builtins.int
@@ -156,7 +144,7 @@ class RouterInput(google.protobuf.message.Message):
         """Context of the prediction request."""
         pass
     @property
-    def headers(self) -> google.protobuf.internal.containers.ScalarMap[typing.Text, typing.Text]:
+    def headers(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[caraml.upi.v1.header_pb2.Header]:
         """map containing request headers/metadata"""
         pass
     def __init__(self,
@@ -165,7 +153,7 @@ class RouterInput(google.protobuf.message.Message):
         transformer_tables: typing.Optional[typing.Iterable[google.protobuf.struct_pb2.Struct]] = ...,
         transformer_variables: typing.Optional[typing.Iterable[caraml.upi.v1.variable_pb2.Variable]] = ...,
         prediction_context: typing.Optional[typing.Iterable[caraml.upi.v1.variable_pb2.Variable]] = ...,
-        headers: typing.Optional[typing.Mapping[typing.Text, typing.Text]] = ...,
+        headers: typing.Optional[typing.Iterable[caraml.upi.v1.header_pb2.Header]] = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["prediction_table",b"prediction_table"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["headers",b"headers","prediction_context",b"prediction_context","prediction_table",b"prediction_table","transformer_tables",b"transformer_tables","transformer_variables",b"transformer_variables"]) -> None: ...
@@ -176,19 +164,6 @@ class RouterOutput(google.protobuf.message.Message):
     These informations are extracted from the response produced by the router.
     """
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
-    class HeadersEntry(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
-        KEY_FIELD_NUMBER: builtins.int
-        VALUE_FIELD_NUMBER: builtins.int
-        key: typing.Text
-        value: typing.Text
-        def __init__(self,
-            *,
-            key: typing.Text = ...,
-            value: typing.Text = ...,
-            ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> None: ...
-
     PREDICTION_RESULTS_TABLE_FIELD_NUMBER: builtins.int
     PREDICTION_CONTEXT_FIELD_NUMBER: builtins.int
     HEADERS_FIELD_NUMBER: builtins.int
@@ -203,7 +178,7 @@ class RouterOutput(google.protobuf.message.Message):
         """Context of the prediction response."""
         pass
     @property
-    def headers(self) -> google.protobuf.internal.containers.ScalarMap[typing.Text, typing.Text]:
+    def headers(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[caraml.upi.v1.header_pb2.Header]:
         """map containing response headers/metadata"""
         pass
     status: builtins.int
@@ -216,7 +191,7 @@ class RouterOutput(google.protobuf.message.Message):
         *,
         prediction_results_table: typing.Optional[google.protobuf.struct_pb2.Struct] = ...,
         prediction_context: typing.Optional[typing.Iterable[caraml.upi.v1.variable_pb2.Variable]] = ...,
-        headers: typing.Optional[typing.Mapping[typing.Text, typing.Text]] = ...,
+        headers: typing.Optional[typing.Iterable[caraml.upi.v1.header_pb2.Header]] = ...,
         status: builtins.int = ...,
         message: typing.Text = ...,
         ) -> None: ...
