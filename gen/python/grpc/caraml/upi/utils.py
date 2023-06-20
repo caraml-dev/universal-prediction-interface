@@ -1,10 +1,16 @@
 from math import isnan
-from typing import List, Tuple, Union
+from typing import List, Tuple, Union, Dict, Any
+from enum import Enum
 
 import pandas as pd
 import numpy as np
 
 from caraml.upi.v1 import table_pb2, type_pb2
+
+class DictValuesType(Enum):
+    DICT = 0
+    SPLIT = 1
+    RECORDS = 2
 
 
 def df_to_table(df: pd.DataFrame, table_name: str) -> table_pb2.Table:
@@ -83,15 +89,89 @@ def table_to_df(table: table_pb2.Table) -> Tuple[pd.DataFrame, str]:
         indices.append(row.row_id)
         row_value = []
 
-        if len(row.values) != n_cols:
+        vals = row.values
+        if len(vals) != n_cols:
             raise ValueError(f"column size does not match, expected {n_cols}, got {len(row.values)}")
 
-        for i, value in enumerate(row.values):
+        for i, value in enumerate(vals):
             row_value.append(get_value(value, types[i]))
         rows_values.append(row_value)
 
     return pd.DataFrame(columns=columns, data=rows_values, index=indices), table.name
 
+
+def get_columns_types(table: table_pb2.Table):
+    columns = [column.name for column in table.columns]
+    types = [column.type for column in table.columns]
+    return columns, types
+
+
+def table_to_dict(table: table_pb2.Table, format: DictValuesType):
+    if format == DictValuesType.DICT:
+        return __table_to_dict_value_type(table)       
+    elif format == DictValuesType.RECORDS:
+        return __table_to_dict_records_type(table)
+    elif format == DictValuesType.SPLIT:
+        return __table_to_dict_split_type(table)
+    else:
+        raise ValueError(f"format {format} is not supported")
+    
+def __table_to_dict_value_type(table: table_pb2.Table) -> Dict[str, Any]:
+    columns = [column.name for column in table.columns]
+    types = [column.type for column in table.columns]  
+    n_cols = len(columns)  
+    res = {}
+    for row in table.rows:
+        vals = row.values
+        if len(vals) != n_cols:
+            raise ValueError(f"column size does not match, expected {n_cols}, got {len(row.values)}")
+        
+        row_id = row.row_id
+        for i, val in enumerate(vals):
+            column_name = columns[i]
+            value = get_value(val, types[i])
+            if res.get(column_name) is None:
+                res[column_name] = {}
+            res[column_name][row_id] = value
+    return res
+
+def __table_to_dict_records_type(table: table_pb2.Table) -> List[Dict[str, Any]]:
+    columns = [column.name for column in table.columns]
+    types = [column.type for column in table.columns]
+    n_cols = len(columns)
+    res = []
+    for row in table.rows:
+        vals = row.values
+        if len(vals) != n_cols:
+            raise ValueError(f"column size does not match, expected {n_cols}, got {len(row.values)}")
+        
+        row_val = {}
+        for i, val in enumerate(vals):
+            column_name = columns[i]
+            value = get_value(val, types[i])
+            row_val[column_name] = value
+        res.append(row_val)
+    return res
+
+def __table_to_dict_split_type(table: table_pb2.Table) -> Dict[str, Any]:
+    columns = [column.name for column in table.columns]
+    types = [column.type for column in table.columns]
+    n_cols = len(columns)
+    indices = []
+    rows_values = []
+    for row in table.rows:
+        indices.append(row.row_id)
+        row_value = []
+
+        vals = row.values
+        if len(vals) != n_cols:
+            raise ValueError(f"column size does not match, expected {n_cols}, got {len(row.values)}")
+
+        for i, value in enumerate(vals):
+            row_value.append(get_value(value, types[i]))
+        rows_values.append(row_value)
+    return {"index": indices, "columns": columns, "data": rows_values}
+    
 
 def get_value(value: table_pb2.Value, type: type_pb2.Type) -> Union[int, float, str, None]:
     """
