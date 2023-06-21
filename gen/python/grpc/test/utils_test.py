@@ -153,12 +153,12 @@ test_cases = [
                 table_pb2.Row(row_id="1",
                                 values=[
                                     table_pb2.Value(integer_value=222),
-                                    table_pb2.Value(double_value=10.1)
+                                    table_pb2.Value(is_null=True)
                                 ])
             ]
         ),
         DictValuesType.DICT,
-        {"int_col": {"0": 111, "1": 222}, "double_col":{"0": 12.2, "1":10.1}}
+        {"int_col": {"0": 111, "1": 222}, "double_col":{"0": 12.2, "1": np.NaN}}
     ),
     (
         table_pb2.Table(
@@ -173,12 +173,12 @@ test_cases = [
                 table_pb2.Row(row_id="1",
                                 values=[
                                     table_pb2.Value(integer_value=222),
-                                    table_pb2.Value(double_value=10.1)
+                                    table_pb2.Value(is_null=True)
                                 ])
             ]
         ),
         DictValuesType.RECORDS,
-        [{"int_col": 111, "double_col": 12.2}, {"int_col": 222, "double_col": 10.1}]
+        [{"int_col": 111, "double_col": 12.2}, {"int_col": 222, "double_col": np.NaN}]
     ),
     (
         table_pb2.Table(
@@ -193,12 +193,12 @@ test_cases = [
                 table_pb2.Row(row_id="1",
                                 values=[
                                     table_pb2.Value(integer_value=222),
-                                    table_pb2.Value(double_value=10.1)
+                                    table_pb2.Value(is_null=True)
                                 ])
             ]
         ),
         DictValuesType.SPLIT,
-        {"index":["0", "1"], "columns":["int_col", "double_col"], "data":[[111, 12.2], [222, 10.1]]}
+        {"index":["0", "1"], "columns":["int_col", "double_col"], "data":[[111, 12.2], [222, np.NaN]]}
     )
 ]
 

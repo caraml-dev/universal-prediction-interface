@@ -99,14 +99,21 @@ def table_to_df(table: table_pb2.Table) -> Tuple[pd.DataFrame, str]:
 
     return pd.DataFrame(columns=columns, data=rows_values, index=indices), table.name
 
+def table_to_dict(table: table_pb2.Table, format: DictValuesType) -> Union[List[Dict[str, Any]], Dict[str, Any]]: 
+    """
+    Convert upi table into dict with certain value type
 
-def get_columns_types(table: table_pb2.Table):
-    columns = [column.name for column in table.columns]
-    types = [column.type for column in table.columns]
-    return columns, types
+    Usage:
 
+    >>> dict = table_to_dict(upi_table, DictValuesType.RECORDS)
 
-def table_to_dict(table: table_pb2.Table, format: DictValuesType):
+    Args:
+        table (table_pb2.Table): upi table
+        format (DictValuesType): value type of dictionary
+
+    Returns: Union[List[Dict[str, Any]], Dict[str, Any]]
+    The return type can be `dictionary` or `array of dictionary`
+    """
     if format == DictValuesType.DICT:
         return __table_to_dict_value_type(table)       
     elif format == DictValuesType.RECORDS:
