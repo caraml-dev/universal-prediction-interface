@@ -1,7 +1,7 @@
 import numpy as np
 import pytest
 import pandas as pd
-from caraml.upi.utils import df_to_table, table_to_df
+from caraml.upi.utils import df_to_table, table_to_df, DictValuesType, table_to_dict
 from caraml.upi.v1 import table_pb2, type_pb2
 
 conversion_test_cases = [
@@ -137,3 +137,72 @@ def test_table_to_df(exp_name, exp_df, table, cast):
     df, name = table_to_df(table)
     assert exp_df.equals(df)
     assert name == exp_name
+
+
+test_cases = [
+    (
+        table_pb2.Table(
+            name="int_table",
+            columns=[table_pb2.Column(name="int_col", type=type_pb2.TYPE_INTEGER), table_pb2.Column(name="double_col", type=type_pb2.TYPE_DOUBLE)],
+            rows=[
+                table_pb2.Row(row_id="0",
+                                values=[
+                                    table_pb2.Value(integer_value=111),
+                                    table_pb2.Value(double_value=12.2)
+                                ]),
+                table_pb2.Row(row_id="1",
+                                values=[
+                                    table_pb2.Value(integer_value=222),
+                                    table_pb2.Value(is_null=True)
+                                ])
+            ]
+        ),
+        DictValuesType.DICT,
+        {"int_col": {"0": 111, "1": 222}, "double_col":{"0": 12.2, "1": np.NaN}}
+    ),
+    (
+        table_pb2.Table(
+            name="int_table",
+            columns=[table_pb2.Column(name="int_col", type=type_pb2.TYPE_INTEGER), table_pb2.Column(name="double_col", type=type_pb2.TYPE_DOUBLE)],
+            rows=[
+                table_pb2.Row(row_id="0",
+                                values=[
+                                    table_pb2.Value(integer_value=111),
+                                    table_pb2.Value(double_value=12.2)
+                                ]),
+                table_pb2.Row(row_id="1",
+                                values=[
+                                    table_pb2.Value(integer_value=222),
+                                    table_pb2.Value(is_null=True)
+                                ])
+            ]
+        ),
+        DictValuesType.RECORDS,
+        [{"int_col": 111, "double_col": 12.2}, {"int_col": 222, "double_col": np.NaN}]
+    ),
+    (
+        table_pb2.Table(
+            name="int_table",
+            columns=[table_pb2.Column(name="int_col", type=type_pb2.TYPE_INTEGER), table_pb2.Column(name="double_col", type=type_pb2.TYPE_DOUBLE)],
+            rows=[
+                table_pb2.Row(row_id="0",
+                                values=[
+                                    table_pb2.Value(integer_value=111),
+                                    table_pb2.Value(double_value=12.2)
+                                ]),
+                table_pb2.Row(row_id="1",
+                                values=[
+                                    table_pb2.Value(integer_value=222),
+                                    table_pb2.Value(is_null=True)
+                                ])
+            ]
+        ),
+        DictValuesType.SPLIT,
+        {"index":["0", "1"], "columns":["int_col", "double_col"], "data":[[111, 12.2], [222, np.NaN]]}
+    )
+]
+
+@pytest.mark.parametrize("table,format,exp",test_cases)
+def test_table_to_dict(table, format, exp):
+    res = table_to_dict(table, format)
+    assert exp == res
