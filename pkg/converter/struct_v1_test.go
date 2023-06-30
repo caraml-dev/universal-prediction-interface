@@ -144,6 +144,55 @@ func Test_tableToStructV1(t *testing.T) {
 				},
 			}),
 		},
+		{
+			name: "small_table with mismatch dimension between columns and values row",
+			args: args{
+				table: &upiv1.Table{
+					Name: "small_table",
+					Columns: []*upiv1.Column{
+						{
+							Name: "double_col",
+							Type: upiv1.Type_TYPE_DOUBLE,
+						},
+						{
+							Name: "int_col",
+							Type: upiv1.Type_TYPE_INTEGER,
+						},
+					},
+					Rows: []*upiv1.Row{
+						{
+							RowId: "1",
+							Values: []*upiv1.Value{
+								{
+									DoubleValue: 1.1,
+								},
+								{
+									IntegerValue: 1,
+								},
+								{
+									StringValue: "1.1",
+								},
+							},
+						},
+						{
+							RowId: "2",
+							Values: []*upiv1.Value{
+								{
+									DoubleValue: 2.2,
+								},
+								{
+									IntegerValue: 2,
+								},
+								{
+									StringValue: "2.2",
+								},
+							},
+						},
+					},
+				},
+			},
+			wantErr: true,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

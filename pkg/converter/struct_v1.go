@@ -27,85 +27,86 @@ const (
 
 // tableToStructV1 convert upi table into protobuf Struct using schema version 1.
 // For example following UPI table
-// upiTable := &upiv1.Table{
-//		Name: "small_table",
-//		Columns: []*upiv1.Column{
-//			{
-//				Name: "double_col",
-//				Type: upiv1.Type_TYPE_DOUBLE,
+//
+//	upiTable := &upiv1.Table{
+//			Name: "small_table",
+//			Columns: []*upiv1.Column{
+//				{
+//					Name: "double_col",
+//					Type: upiv1.Type_TYPE_DOUBLE,
+//				},
+//				{
+//					Name: "int_col",
+//					Type: upiv1.Type_TYPE_INTEGER,
+//				},
+//				{
+//					Name: "string_col",
+//					Type: upiv1.Type_TYPE_STRING,
+//				},
 //			},
-//			{
-//				Name: "int_col",
-//				Type: upiv1.Type_TYPE_INTEGER,
-//			},
-//			{
-//				Name: "string_col",
-//				Type: upiv1.Type_TYPE_STRING,
-//			},
-//		},
-//		Rows: []*upiv1.Row{
-//			{
-//				RowId: "1",
-//				Values: []*upiv1.Value{
-//					{
-//						DoubleValue: 1.1,
+//			Rows: []*upiv1.Row{
+//				{
+//					RowId: "1",
+//					Values: []*upiv1.Value{
+//						{
+//							DoubleValue: 1.1,
+//						},
+//						{
+//							IntegerValue: 1,
+//						},
+//						{
+//							StringValue: "1.1",
+//						},
 //					},
-//					{
-//						IntegerValue: 1,
-//					},
-//					{
-//						StringValue: "1.1",
+//				},
+//				{
+//					RowId: "2",
+//					Values: []*upiv1.Value{
+//						{
+//							DoubleValue: 2.2,
+//						},
+//						{
+//							IntegerValue: 2,
+//						},
+//						{
+//							StringValue: "2.2",
+//						},
 //					},
 //				},
 //			},
-//			{
-//				RowId: "2",
-//				Values: []*upiv1.Value{
-//					{
-//						DoubleValue: 2.2,
-//					},
-//					{
-//						IntegerValue: 2,
-//					},
-//					{
-//						StringValue: "2.2",
-//					},
-//				},
-//			},
-//		},
+//		}
+//
+//	 is converted into following struct/json:
+//
+//	{
+//	 "column_types": [
+//	   "FLOAT64",
+//	   "INT64",
+//	   "STRING"
+//	 ],
+//	 "columns": [
+//	   "double_col",
+//	   "int_col",
+//	   "string_col"
+//	 ],
+//	 "data": [
+//	   [
+//	     1.1,
+//	     1,
+//	     "1.1"
+//	   ],
+//	   [
+//	     2.2,
+//	     2,
+//	     "2.2"
+//	   ]
+//	 ],
+//	 "name": "small_table",
+//	 "row_ids": [
+//	   "1",
+//	   "2"
+//	 ]
 //	}
-//
-//  is converted into following struct/json:
-//
-// {
-//  "column_types": [
-//    "FLOAT64",
-//    "INT64",
-//    "STRING"
-//  ],
-//  "columns": [
-//    "double_col",
-//    "int_col",
-//    "string_col"
-//  ],
-//  "data": [
-//    [
-//      1.1,
-//      1,
-//      "1.1"
-//    ],
-//    [
-//      2.2,
-//      2,
-//      "2.2"
-//    ]
-//  ],
-//  "name": "small_table",
-//  "row_ids": [
-//    "1",
-//    "2"
-//  ]
-//}
 func tableToStructV1(upitable *upiv1.Table) (*structpb.Struct, error) {
 	columnNames, columnTypes, err := unwrapColumns(upitable.Columns)
 	if err != nil {
@@ -148,10 +149,15 @@ func unwrapColumns(columns []*upiv1.Column) ([]interface{}, []interface{}, error
 func unwrapRows(rows []*upiv1.Row, columns []*upiv1.Column) ([]interface{}, []interface{}, error) {
 	rowIds := make([]interface{}, len(rows))
 	data := make([]interface{}, len(rows))
+	numOfColumns := len(columns)
 
 	for i, row := range rows {
 		rowIds[i] = row.RowId
-		rowValues := make([]interface{}, len(row.Values))
+		numOfValues := len(row.Values)
+		rowValues := make([]interface{}, numOfValues)
+		if numOfValues != numOfColumns {
+			return nil, nil, fmt.Errorf("number of values in a row: %d not the same with number of columns: %d", numOfValues, numOfColumns)
+		}
 		for j, val := range row.Values {
 			jsonVal, err := upiValueToJSONValue(val, columns[j].Type)
 			if err != nil {
