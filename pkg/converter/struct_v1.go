@@ -149,13 +149,14 @@ func unwrapColumns(columns []*upiv1.Column) ([]interface{}, []interface{}, error
 func unwrapRows(rows []*upiv1.Row, columns []*upiv1.Column) ([]interface{}, []interface{}, error) {
 	rowIds := make([]interface{}, len(rows))
 	data := make([]interface{}, len(rows))
+	numOfColumns := len(columns)
 
 	for i, row := range rows {
 		rowIds[i] = row.RowId
 		numOfValues := len(row.Values)
 		rowValues := make([]interface{}, numOfValues)
-		if numOfValues != len(columns) {
-			return nil, nil, fmt.Errorf("number of values in a row: %d not the same with number of columns: %d", numOfValues, len(columns))
+		if numOfValues != numOfColumns {
+			return nil, nil, fmt.Errorf("number of values in a row: %d not the same with number of columns: %d", numOfValues, numOfColumns)
 		}
 		for j, val := range row.Values {
 			jsonVal, err := upiValueToJSONValue(val, columns[j].Type)
