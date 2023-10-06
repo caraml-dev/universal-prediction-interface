@@ -4,23 +4,44 @@ isort:skip_file
 """
 import abc
 import caraml.upi.v1.upi_pb2
+import collections.abc
 import grpc
+import grpc.aio
+import typing
+
+_T = typing.TypeVar('_T')
+
+class _MaybeAsyncIterator(collections.abc.AsyncIterator[_T], collections.abc.Iterator[_T], metaclass=abc.ABCMeta):
+    ...
+
+class _ServicerContext(grpc.ServicerContext, grpc.aio.ServicerContext):  # type: ignore
+    ...
 
 class UniversalPredictionServiceStub:
     """Service for performing model prediction"""
-    def __init__(self, channel: grpc.Channel) -> None: ...
+
+    def __init__(self, channel: typing.Union[grpc.Channel, grpc.aio.Channel]) -> None: ...
     PredictValues: grpc.UnaryUnaryMultiCallable[
         caraml.upi.v1.upi_pb2.PredictValuesRequest,
-        caraml.upi.v1.upi_pb2.PredictValuesResponse]
+        caraml.upi.v1.upi_pb2.PredictValuesResponse,
+    ]
 
+class UniversalPredictionServiceAsyncStub:
+    """Service for performing model prediction"""
+
+    PredictValues: grpc.aio.UnaryUnaryMultiCallable[
+        caraml.upi.v1.upi_pb2.PredictValuesRequest,
+        caraml.upi.v1.upi_pb2.PredictValuesResponse,
+    ]
 
 class UniversalPredictionServiceServicer(metaclass=abc.ABCMeta):
     """Service for performing model prediction"""
+
     @abc.abstractmethod
-    def PredictValues(self,
+    def PredictValues(
+        self,
         request: caraml.upi.v1.upi_pb2.PredictValuesRequest,
-        context: grpc.ServicerContext,
-    ) -> caraml.upi.v1.upi_pb2.PredictValuesResponse: ...
+        context: _ServicerContext,
+    ) -> typing.Union[caraml.upi.v1.upi_pb2.PredictValuesResponse, collections.abc.Awaitable[caraml.upi.v1.upi_pb2.PredictValuesResponse]]: ...
 
-
-def add_UniversalPredictionServiceServicer_to_server(servicer: UniversalPredictionServiceServicer, server: grpc.Server) -> None: ...
+def add_UniversalPredictionServiceServicer_to_server(servicer: UniversalPredictionServiceServicer, server: typing.Union[grpc.Server, grpc.aio.Server]) -> None: ...

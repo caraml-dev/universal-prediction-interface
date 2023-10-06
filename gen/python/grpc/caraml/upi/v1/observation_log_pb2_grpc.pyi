@@ -4,23 +4,44 @@ isort:skip_file
 """
 import abc
 import caraml.upi.v1.observation_log_pb2
+import collections.abc
 import grpc
+import grpc.aio
+import typing
+
+_T = typing.TypeVar('_T')
+
+class _MaybeAsyncIterator(collections.abc.AsyncIterator[_T], collections.abc.Iterator[_T], metaclass=abc.ABCMeta):
+    ...
+
+class _ServicerContext(grpc.ServicerContext, grpc.aio.ServicerContext):  # type: ignore
+    ...
 
 class ObservationServiceStub:
     """Service for logging observations"""
-    def __init__(self, channel: grpc.Channel) -> None: ...
+
+    def __init__(self, channel: typing.Union[grpc.Channel, grpc.aio.Channel]) -> None: ...
     LogObservations: grpc.UnaryUnaryMultiCallable[
         caraml.upi.v1.observation_log_pb2.LogObservationsRequest,
-        caraml.upi.v1.observation_log_pb2.LogObservationsResponse]
+        caraml.upi.v1.observation_log_pb2.LogObservationsResponse,
+    ]
 
+class ObservationServiceAsyncStub:
+    """Service for logging observations"""
+
+    LogObservations: grpc.aio.UnaryUnaryMultiCallable[
+        caraml.upi.v1.observation_log_pb2.LogObservationsRequest,
+        caraml.upi.v1.observation_log_pb2.LogObservationsResponse,
+    ]
 
 class ObservationServiceServicer(metaclass=abc.ABCMeta):
     """Service for logging observations"""
+
     @abc.abstractmethod
-    def LogObservations(self,
+    def LogObservations(
+        self,
         request: caraml.upi.v1.observation_log_pb2.LogObservationsRequest,
-        context: grpc.ServicerContext,
-    ) -> caraml.upi.v1.observation_log_pb2.LogObservationsResponse: ...
+        context: _ServicerContext,
+    ) -> typing.Union[caraml.upi.v1.observation_log_pb2.LogObservationsResponse, collections.abc.Awaitable[caraml.upi.v1.observation_log_pb2.LogObservationsResponse]]: ...
 
-
-def add_ObservationServiceServicer_to_server(servicer: ObservationServiceServicer, server: grpc.Server) -> None: ...
+def add_ObservationServiceServicer_to_server(servicer: ObservationServiceServicer, server: typing.Union[grpc.Server, grpc.aio.Server]) -> None: ...
