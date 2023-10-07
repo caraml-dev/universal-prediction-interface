@@ -26,7 +26,7 @@ setup(
     author_email="dsp@gojek.com",
     url="",
     keywords=["caraml", "upi", "grpc", "protobuf", "stub"],
-    python_requires=">=3.8",
+    python_requires=">=3.7",
     install_requires=REQUIRES,
     extras_require={ "test": TEST_REQUIRES },
     packages=find_packages(exclude=["test"]),
