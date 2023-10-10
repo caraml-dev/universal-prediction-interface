@@ -22,10 +22,10 @@ _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'caraml.upi.v1.observation_log_pb2', _globals)
 if _descriptor._USE_C_DESCRIPTORS == False:
-  DESCRIPTOR._options = None
-  DESCRIPTOR._serialized_options = b'\n\021com.caraml.upi.v1B\023ObservationLogProtoP\001ZOgithub.com/caraml-dev/universal-prediction-interface/gen/go/caraml/upi/v1;upiv1\242\002\003CUX\252\002\rCaraml.Upi.V1\312\002\rCaraml\\Upi\\V1\342\002\031Caraml\\Upi\\V1\\GPBMetadata\352\002\017Caraml::Upi::V1'
-  _OBSERVATIONSERVICE.methods_by_name['LogObservations']._options = None
-  _OBSERVATIONSERVICE.methods_by_name['LogObservations']._serialized_options = b'\202\323\344\223\002\030\"\023/v1/log-observation:\001*'
+  _globals['DESCRIPTOR']._options = None
+  _globals['DESCRIPTOR']._serialized_options = b'\n\021com.caraml.upi.v1B\023ObservationLogProtoP\001ZOgithub.com/caraml-dev/universal-prediction-interface/gen/go/caraml/upi/v1;upiv1\242\002\003CUX\252\002\rCaraml.Upi.V1\312\002\rCaraml\\Upi\\V1\342\002\031Caraml\\Upi\\V1\\GPBMetadata\352\002\017Caraml::Upi::V1'
+  _globals['_OBSERVATIONSERVICE'].methods_by_name['LogObservations']._options = None
+  _globals['_OBSERVATIONSERVICE'].methods_by_name['LogObservations']._serialized_options = b'\202\323\344\223\002\030\"\023/v1/log-observation:\001*'
   _globals['_OBSERVATIONLOGKEY']._serialized_start=148
   _globals['_OBSERVATIONLOGKEY']._serialized_end=277
   _globals['_OBSERVATIONLOG']._serialized_start=280

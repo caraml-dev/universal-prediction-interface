@@ -23,10 +23,10 @@ _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'caraml.upi.v1.upi_pb2', _globals)
 if _descriptor._USE_C_DESCRIPTORS == False:
-  DESCRIPTOR._options = None
-  DESCRIPTOR._serialized_options = b'\n\021com.caraml.upi.v1B\010UpiProtoP\001ZOgithub.com/caraml-dev/universal-prediction-interface/gen/go/caraml/upi/v1;upiv1\242\002\003CUX\252\002\rCaraml.Upi.V1\312\002\rCaraml\\Upi\\V1\342\002\031Caraml\\Upi\\V1\\GPBMetadata\352\002\017Caraml::Upi::V1'
-  _UNIVERSALPREDICTIONSERVICE.methods_by_name['PredictValues']._options = None
-  _UNIVERSALPREDICTIONSERVICE.methods_by_name['PredictValues']._serialized_options = b'\202\323\344\223\002\020\"\013/v1/predict:\001*'
+  _globals['DESCRIPTOR']._options = None
+  _globals['DESCRIPTOR']._serialized_options = b'\n\021com.caraml.upi.v1B\010UpiProtoP\001ZOgithub.com/caraml-dev/universal-prediction-interface/gen/go/caraml/upi/v1;upiv1\242\002\003CUX\252\002\rCaraml.Upi.V1\312\002\rCaraml\\Upi\\V1\342\002\031Caraml\\Upi\\V1\\GPBMetadata\352\002\017Caraml::Upi::V1'
+  _globals['_UNIVERSALPREDICTIONSERVICE'].methods_by_name['PredictValues']._options = None
+  _globals['_UNIVERSALPREDICTIONSERVICE'].methods_by_name['PredictValues']._serialized_options = b'\202\323\344\223\002\020\"\013/v1/predict:\001*'
   _globals['_PREDICTVALUESREQUEST']._serialized_start=163
   _globals['_PREDICTVALUESREQUEST']._serialized_end=493
   _globals['_REQUESTMETADATA']._serialized_start=495
