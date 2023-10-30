@@ -5,39 +5,38 @@ isort:skip_file
 import builtins
 import google.protobuf.descriptor
 import google.protobuf.internal.enum_type_wrapper
+import sys
 import typing
-import typing_extensions
+
+if sys.version_info >= (3, 10):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
 class _Type:
-    ValueType = typing.NewType('ValueType', builtins.int)
+    ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
+
 class _TypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_Type.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     TYPE_UNSPECIFIED: _Type.ValueType  # 0
     TYPE_DOUBLE: _Type.ValueType  # 1
     """Double precision floating number (64-bit)"""
-
     TYPE_INTEGER: _Type.ValueType  # 2
     """64-bit Integer"""
-
     TYPE_STRING: _Type.ValueType  # 3
     """String"""
 
 class Type(_Type, metaclass=_TypeEnumTypeWrapper):
     """Type supported by UPI"""
-    pass
 
 TYPE_UNSPECIFIED: Type.ValueType  # 0
 TYPE_DOUBLE: Type.ValueType  # 1
 """Double precision floating number (64-bit)"""
-
 TYPE_INTEGER: Type.ValueType  # 2
 """64-bit Integer"""
-
 TYPE_STRING: Type.ValueType  # 3
 """String"""
-
 global___Type = Type
-

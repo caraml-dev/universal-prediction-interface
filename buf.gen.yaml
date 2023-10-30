@@ -19,13 +19,13 @@ plugins:
     out: gen/go/grpc
     opt: paths=import,module=github.com/caraml-dev/universal-prediction-interface/gen/go
 # Python code gen
-  - remote: buf.build/protocolbuffers/plugins/python:v3.19.1-1
+  - plugin: buf.build/protocolbuffers/python:v24.4
     out: gen/python/grpc
-  - remote: buf.build/grpc/plugins/python:v1.46.2-1
+  - plugin: buf.build/grpc/python:v1.58.1
     out: gen/python/grpc
-  - remote: buf.build/jeffsawatzky/plugins/mypy-protobuf:v3.2.0-1
+  - plugin: buf.build/community/nipunn1313-mypy:v3.5.0
     out: gen/python/grpc
-  - remote: buf.build/jeffsawatzky/plugins/mypy-grpc-protobuf:v3.2.0-1
+  - plugin: buf.build/community/nipunn1313-mypy-grpc:v3.5.0
     out: gen/python/grpc
 # Ruby code gen
   - plugin: buf.build/grpc/ruby
@@ -33,7 +33,7 @@ plugins:
   - plugin: buf.build/protocolbuffers/ruby
     out: gen/ruby/grpc
 # Documentations
-  - remote: buf.build/grpc-ecosystem/plugins/openapiv2:v2.6.0-1
+  - plugin: buf.build/grpc-ecosystem/openapiv2:v2.18.0
     out: docs/openapiv2
   - name: doc
     out: docs/api_html

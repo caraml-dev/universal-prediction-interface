@@ -6,19 +6,27 @@ import builtins
 import caraml.upi.v1.header_pb2
 import caraml.upi.v1.upi_pb2
 import caraml.upi.v1.variable_pb2
+import collections.abc
 import google.protobuf.descriptor
 import google.protobuf.internal.containers
 import google.protobuf.message
 import google.protobuf.struct_pb2
 import google.protobuf.timestamp_pb2
-import typing
-import typing_extensions
+import sys
+
+if sys.version_info >= (3, 8):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
+@typing_extensions.final
 class RouterLog(google.protobuf.message.Message):
     """RouterLog stores information of a multi-model orchestration performed by a router."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     PREDICTION_ID_FIELD_NUMBER: builtins.int
     TARGET_NAME_FIELD_NUMBER: builtins.int
     PROJECT_NAME_FIELD_NUMBER: builtins.int
@@ -29,62 +37,57 @@ class RouterLog(google.protobuf.message.Message):
     ROUTER_OUTPUT_FIELD_NUMBER: builtins.int
     REQUEST_TIMESTAMP_FIELD_NUMBER: builtins.int
     TABLE_SCHEMA_VERSION_FIELD_NUMBER: builtins.int
-    prediction_id: typing.Text
+    prediction_id: builtins.str
     """Unique identifier of prediction."""
-
-    target_name: typing.Text
+    target_name: builtins.str
     """Target name / concept to be predicted by the prediction."""
-
-    project_name: typing.Text
+    project_name: builtins.str
     """Project name that host the router."""
-
-    router_name: typing.Text
+    router_name: builtins.str
     """Name of the router."""
-
-    router_version: typing.Text
+    router_version: builtins.str
     """Router version."""
-
     @property
     def routing_logic(self) -> global___RoutingLogic:
         """Routing logic describes the decision that was made within the router to produce the router output"""
-        pass
     @property
     def router_input(self) -> global___RouterInput:
         """Input of the router"""
-        pass
     @property
     def router_output(self) -> global___RouterOutput:
         """Output of the router"""
-        pass
     @property
     def request_timestamp(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """Timestamp of the corresponding prediction request"""
-        pass
     table_schema_version: builtins.int
     """Schema version of raw_features, features, entities, and prediction results fields are formatted
     I.e. for version 1, all of those fields will be formatted as a modified JSON SPLIT representation of a table
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        prediction_id: typing.Text = ...,
-        target_name: typing.Text = ...,
-        project_name: typing.Text = ...,
-        router_name: typing.Text = ...,
-        router_version: typing.Text = ...,
-        routing_logic: typing.Optional[global___RoutingLogic] = ...,
-        router_input: typing.Optional[global___RouterInput] = ...,
-        router_output: typing.Optional[global___RouterOutput] = ...,
-        request_timestamp: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        prediction_id: builtins.str = ...,
+        target_name: builtins.str = ...,
+        project_name: builtins.str = ...,
+        router_name: builtins.str = ...,
+        router_version: builtins.str = ...,
+        routing_logic: global___RoutingLogic | None = ...,
+        router_input: global___RouterInput | None = ...,
+        router_output: global___RouterOutput | None = ...,
+        request_timestamp: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         table_schema_version: builtins.int = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["request_timestamp",b"request_timestamp","router_input",b"router_input","router_output",b"router_output","routing_logic",b"routing_logic"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["prediction_id",b"prediction_id","project_name",b"project_name","request_timestamp",b"request_timestamp","router_input",b"router_input","router_name",b"router_name","router_output",b"router_output","router_version",b"router_version","routing_logic",b"routing_logic","table_schema_version",b"table_schema_version","target_name",b"target_name"]) -> None: ...
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["request_timestamp", b"request_timestamp", "router_input", b"router_input", "router_output", b"router_output", "routing_logic", b"routing_logic"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["prediction_id", b"prediction_id", "project_name", b"project_name", "request_timestamp", b"request_timestamp", "router_input", b"router_input", "router_name", b"router_name", "router_output", b"router_output", "router_version", b"router_version", "routing_logic", b"routing_logic", "table_schema_version", b"table_schema_version", "target_name", b"target_name"]) -> None: ...
+
 global___RouterLog = RouterLog
 
+@typing_extensions.final
 class RoutingLogic(google.protobuf.message.Message):
     """Routing logic describes the decision that was made within the router to produce the router output"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     MODELS_FIELD_NUMBER: builtins.int
     TRAFFIC_RULE_FIELD_NUMBER: builtins.int
     EXPERIMENT_NAME_FIELD_NUMBER: builtins.int
@@ -97,31 +100,32 @@ class RoutingLogic(google.protobuf.message.Message):
         In combiner case, this field can contain more than 1 entries.
         This field will be used to join witht the prediction log.
         """
-        pass
-    traffic_rule: typing.Text
+    traffic_rule: builtins.str
     """Traffic rule that was used to route the prediction request (optional)."""
-
-    experiment_name: typing.Text
+    experiment_name: builtins.str
     """Experiment name that was used to handle the prediction request (optional)."""
-
-    treatment_name: typing.Text
+    treatment_name: builtins.str
     """Treatment name from the experiment that was used to handle the prediction request (optional)."""
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        models: typing.Optional[typing.Iterable[caraml.upi.v1.upi_pb2.ModelMetadata]] = ...,
-        traffic_rule: typing.Text = ...,
-        experiment_name: typing.Text = ...,
-        treatment_name: typing.Text = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["experiment_name",b"experiment_name","models",b"models","traffic_rule",b"traffic_rule","treatment_name",b"treatment_name"]) -> None: ...
+        models: collections.abc.Iterable[caraml.upi.v1.upi_pb2.ModelMetadata] | None = ...,
+        traffic_rule: builtins.str = ...,
+        experiment_name: builtins.str = ...,
+        treatment_name: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["experiment_name", b"experiment_name", "models", b"models", "traffic_rule", b"traffic_rule", "treatment_name", b"treatment_name"]) -> None: ...
+
 global___RoutingLogic = RoutingLogic
 
+@typing_extensions.final
 class RouterInput(google.protobuf.message.Message):
     """Input received by router.
     These informations are extracted from the request received by the router.
     """
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     PREDICTION_TABLE_FIELD_NUMBER: builtins.int
     TRANSFORMER_TABLES_FIELD_NUMBER: builtins.int
     TRANSFORMER_VARIABLES_FIELD_NUMBER: builtins.int
@@ -130,40 +134,40 @@ class RouterInput(google.protobuf.message.Message):
     @property
     def prediction_table(self) -> google.protobuf.struct_pb2.Struct:
         """JSON-representation of prediction_table of the UPI request to router. "table_schema_version" field describe the encoding of this field."""
-        pass
     @property
     def transformer_tables(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[google.protobuf.struct_pb2.Struct]:
         """List of tables in the transformer inputs in JSON format. "table_schema_version" field describe the encoding of this field."""
-        pass
     @property
     def transformer_variables(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[caraml.upi.v1.variable_pb2.Variable]:
         """List of variables extracted from "transformer_inputs" """
-        pass
     @property
     def prediction_context(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[caraml.upi.v1.variable_pb2.Variable]:
         """Context of the prediction request."""
-        pass
     @property
     def headers(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[caraml.upi.v1.header_pb2.Header]:
         """map containing request headers/metadata"""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        prediction_table: typing.Optional[google.protobuf.struct_pb2.Struct] = ...,
-        transformer_tables: typing.Optional[typing.Iterable[google.protobuf.struct_pb2.Struct]] = ...,
-        transformer_variables: typing.Optional[typing.Iterable[caraml.upi.v1.variable_pb2.Variable]] = ...,
-        prediction_context: typing.Optional[typing.Iterable[caraml.upi.v1.variable_pb2.Variable]] = ...,
-        headers: typing.Optional[typing.Iterable[caraml.upi.v1.header_pb2.Header]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["prediction_table",b"prediction_table"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["headers",b"headers","prediction_context",b"prediction_context","prediction_table",b"prediction_table","transformer_tables",b"transformer_tables","transformer_variables",b"transformer_variables"]) -> None: ...
+        prediction_table: google.protobuf.struct_pb2.Struct | None = ...,
+        transformer_tables: collections.abc.Iterable[google.protobuf.struct_pb2.Struct] | None = ...,
+        transformer_variables: collections.abc.Iterable[caraml.upi.v1.variable_pb2.Variable] | None = ...,
+        prediction_context: collections.abc.Iterable[caraml.upi.v1.variable_pb2.Variable] | None = ...,
+        headers: collections.abc.Iterable[caraml.upi.v1.header_pb2.Header] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["prediction_table", b"prediction_table"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["headers", b"headers", "prediction_context", b"prediction_context", "prediction_table", b"prediction_table", "transformer_tables", b"transformer_tables", "transformer_variables", b"transformer_variables"]) -> None: ...
+
 global___RouterInput = RouterInput
 
+@typing_extensions.final
 class RouterOutput(google.protobuf.message.Message):
     """Output produced by router.
     These informations are extracted from the response produced by the router.
     """
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     PREDICTION_RESULTS_TABLE_FIELD_NUMBER: builtins.int
     PREDICTION_CONTEXT_FIELD_NUMBER: builtins.int
     HEADERS_FIELD_NUMBER: builtins.int
@@ -172,29 +176,26 @@ class RouterOutput(google.protobuf.message.Message):
     @property
     def prediction_results_table(self) -> google.protobuf.struct_pb2.Struct:
         """JSON-representation of prediction result table returned by router. "table_schema_version" field describe the encoding of this field."""
-        pass
     @property
     def prediction_context(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[caraml.upi.v1.variable_pb2.Variable]:
         """Context of the prediction response."""
-        pass
     @property
     def headers(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[caraml.upi.v1.header_pb2.Header]:
         """map containing response headers/metadata"""
-        pass
     status: builtins.int
     """grpc status of the response from model (see https://grpc.github.io/grpc/core/md_doc_statuscodes.html)"""
-
-    message: typing.Text
+    message: builtins.str
     """grpc message"""
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        prediction_results_table: typing.Optional[google.protobuf.struct_pb2.Struct] = ...,
-        prediction_context: typing.Optional[typing.Iterable[caraml.upi.v1.variable_pb2.Variable]] = ...,
-        headers: typing.Optional[typing.Iterable[caraml.upi.v1.header_pb2.Header]] = ...,
+        prediction_results_table: google.protobuf.struct_pb2.Struct | None = ...,
+        prediction_context: collections.abc.Iterable[caraml.upi.v1.variable_pb2.Variable] | None = ...,
+        headers: collections.abc.Iterable[caraml.upi.v1.header_pb2.Header] | None = ...,
         status: builtins.int = ...,
-        message: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["prediction_results_table",b"prediction_results_table"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["headers",b"headers","message",b"message","prediction_context",b"prediction_context","prediction_results_table",b"prediction_results_table","status",b"status"]) -> None: ...
+        message: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["prediction_results_table", b"prediction_results_table"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["headers", b"headers", "message", b"message", "prediction_context", b"prediction_context", "prediction_results_table", b"prediction_results_table", "status", b"status"]) -> None: ...
+
 global___RouterOutput = RouterOutput

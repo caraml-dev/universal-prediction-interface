@@ -72,6 +72,7 @@
         "details": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/protobufAny"
           }
         }
@@ -156,6 +157,7 @@
         "predictionContext": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/v1Variable"
           },
           "title": "Prediction context may contain additional data applicable to all prediction instances\nFor example it can be used to store information for traffic rules, experimentation\nor tracking purposes.\nEg. country_code, service_type, service_area_id"
@@ -181,6 +183,7 @@
         "predictionContext": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/v1Variable"
           },
           "title": "Extensible field to cover unforeseen requirements"
@@ -215,6 +218,7 @@
         "models": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/v1ModelMetadata"
           },
           "title": "List of model that produces the prediction \nThis field is repeated to cater for use case such as ensembling several model production results"
@@ -239,6 +243,7 @@
         "values": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/upiv1Value"
           },
           "description": "List of values within a row. \nIt is table's creator responsibility to ensure that the number of entry \nvalues matches with the length of columns in the table."
@@ -256,6 +261,7 @@
         "columns": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/v1Column"
           },
           "description": "Columns stores schema informations of all columns in the table."
@@ -263,6 +269,7 @@
         "rows": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/v1Row"
           },
           "description": "Rows stores list of row values in the table."
@@ -276,6 +283,7 @@
         "tables": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/v1Table"
           },
           "description": "List of tables\nAll tables must have unique name.\nEach table doesn't need to have same number of row."
@@ -283,6 +291,7 @@
         "variables": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/v1Variable"
           },
           "title": "List of variables"

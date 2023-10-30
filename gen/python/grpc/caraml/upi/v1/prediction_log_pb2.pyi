@@ -5,19 +5,27 @@ isort:skip_file
 import builtins
 import caraml.upi.v1.header_pb2
 import caraml.upi.v1.variable_pb2
+import collections.abc
 import google.protobuf.descriptor
 import google.protobuf.internal.containers
 import google.protobuf.message
 import google.protobuf.struct_pb2
 import google.protobuf.timestamp_pb2
-import typing
-import typing_extensions
+import sys
+
+if sys.version_info >= (3, 8):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
+@typing_extensions.final
 class PredictionLog(google.protobuf.message.Message):
     """PredictionLog stores information of prediction request handled by a specific model version."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     PREDICTION_ID_FIELD_NUMBER: builtins.int
     TARGET_NAME_FIELD_NUMBER: builtins.int
     PROJECT_NAME_FIELD_NUMBER: builtins.int
@@ -27,59 +35,55 @@ class PredictionLog(google.protobuf.message.Message):
     OUTPUT_FIELD_NUMBER: builtins.int
     REQUEST_TIMESTAMP_FIELD_NUMBER: builtins.int
     TABLE_SCHEMA_VERSION_FIELD_NUMBER: builtins.int
-    prediction_id: typing.Text
+    prediction_id: builtins.str
     """Unique identifier of prediction."""
-
-    target_name: typing.Text
+    target_name: builtins.str
     """Target name / concept to be predicted by the prediction."""
-
-    project_name: typing.Text
+    project_name: builtins.str
     """Project name that host the model performing prediction."""
-
-    model_name: typing.Text
+    model_name: builtins.str
     """Model name performing the prediction."""
-
-    model_version: typing.Text
+    model_version: builtins.str
     """Model version performing the prediction."""
-
     @property
     def input(self) -> global___ModelInput:
         """Input of the prediction process"""
-        pass
     @property
     def output(self) -> global___ModelOutput:
         """Output of the prediction process"""
-        pass
     @property
     def request_timestamp(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """Timestamp of the corresponding prediction request"""
-        pass
     table_schema_version: builtins.int
     """Schema version of raw_features, features, entities, and prediction results fields are formatted
     I.e. for version 1, all of those fields will be formatted as a modified JSON SPLIT representation of a table
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        prediction_id: typing.Text = ...,
-        target_name: typing.Text = ...,
-        project_name: typing.Text = ...,
-        model_name: typing.Text = ...,
-        model_version: typing.Text = ...,
-        input: typing.Optional[global___ModelInput] = ...,
-        output: typing.Optional[global___ModelOutput] = ...,
-        request_timestamp: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        prediction_id: builtins.str = ...,
+        target_name: builtins.str = ...,
+        project_name: builtins.str = ...,
+        model_name: builtins.str = ...,
+        model_version: builtins.str = ...,
+        input: global___ModelInput | None = ...,
+        output: global___ModelOutput | None = ...,
+        request_timestamp: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         table_schema_version: builtins.int = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["input",b"input","output",b"output","request_timestamp",b"request_timestamp"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["input",b"input","model_name",b"model_name","model_version",b"model_version","output",b"output","prediction_id",b"prediction_id","project_name",b"project_name","request_timestamp",b"request_timestamp","table_schema_version",b"table_schema_version","target_name",b"target_name"]) -> None: ...
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["input", b"input", "output", b"output", "request_timestamp", b"request_timestamp"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["input", b"input", "model_name", b"model_name", "model_version", b"model_version", "output", b"output", "prediction_id", b"prediction_id", "project_name", b"project_name", "request_timestamp", b"request_timestamp", "table_schema_version", b"table_schema_version", "target_name", b"target_name"]) -> None: ...
+
 global___PredictionLog = PredictionLog
 
+@typing_extensions.final
 class ModelInput(google.protobuf.message.Message):
     """Model input stores information of all input for prediction process.
     The information in model input are extracted from the prediction request received by model.
     """
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     FEATURES_TABLE_FIELD_NUMBER: builtins.int
     ENTITIES_TABLE_FIELD_NUMBER: builtins.int
     RAW_FEATURES_FIELD_NUMBER: builtins.int
@@ -88,40 +92,40 @@ class ModelInput(google.protobuf.message.Message):
     @property
     def features_table(self) -> google.protobuf.struct_pb2.Struct:
         """JSON-representation of features table. "table_schema_version" field describe the encoding of this field."""
-        pass
     @property
     def entities_table(self) -> google.protobuf.struct_pb2.Struct:
         """JSON-representation of entities table. "table_schema_version" field describe the encoding of this field."""
-        pass
     @property
     def raw_features(self) -> google.protobuf.struct_pb2.Struct:
         """JSON-representation of raw_features table. "table_schema_version" field describe the encoding of this field."""
-        pass
     @property
     def prediction_context(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[caraml.upi.v1.variable_pb2.Variable]:
         """Context of the prediction request."""
-        pass
     @property
     def headers(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[caraml.upi.v1.header_pb2.Header]:
         """map containing request headers/metadata"""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        features_table: typing.Optional[google.protobuf.struct_pb2.Struct] = ...,
-        entities_table: typing.Optional[google.protobuf.struct_pb2.Struct] = ...,
-        raw_features: typing.Optional[google.protobuf.struct_pb2.Struct] = ...,
-        prediction_context: typing.Optional[typing.Iterable[caraml.upi.v1.variable_pb2.Variable]] = ...,
-        headers: typing.Optional[typing.Iterable[caraml.upi.v1.header_pb2.Header]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["entities_table",b"entities_table","features_table",b"features_table","raw_features",b"raw_features"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["entities_table",b"entities_table","features_table",b"features_table","headers",b"headers","prediction_context",b"prediction_context","raw_features",b"raw_features"]) -> None: ...
+        features_table: google.protobuf.struct_pb2.Struct | None = ...,
+        entities_table: google.protobuf.struct_pb2.Struct | None = ...,
+        raw_features: google.protobuf.struct_pb2.Struct | None = ...,
+        prediction_context: collections.abc.Iterable[caraml.upi.v1.variable_pb2.Variable] | None = ...,
+        headers: collections.abc.Iterable[caraml.upi.v1.header_pb2.Header] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["entities_table", b"entities_table", "features_table", b"features_table", "raw_features", b"raw_features"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["entities_table", b"entities_table", "features_table", b"features_table", "headers", b"headers", "prediction_context", b"prediction_context", "raw_features", b"raw_features"]) -> None: ...
+
 global___ModelInput = ModelInput
 
+@typing_extensions.final
 class ModelOutput(google.protobuf.message.Message):
     """Model output stores information of all output produced from prediction process.
     Model output is extracted from the prediction response sent by model.
     """
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     PREDICTION_RESULTS_TABLE_FIELD_NUMBER: builtins.int
     PREDICTION_CONTEXT_FIELD_NUMBER: builtins.int
     HEADERS_FIELD_NUMBER: builtins.int
@@ -130,29 +134,26 @@ class ModelOutput(google.protobuf.message.Message):
     @property
     def prediction_results_table(self) -> google.protobuf.struct_pb2.Struct:
         """JSON-representation of prediction result table. "table_schema_version" field describe the encoding of this field."""
-        pass
     @property
     def prediction_context(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[caraml.upi.v1.variable_pb2.Variable]:
         """Context of the prediction response."""
-        pass
     @property
     def headers(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[caraml.upi.v1.header_pb2.Header]:
         """map containing response headers/metadata"""
-        pass
     status: builtins.int
     """grpc status of the response from model (see https://grpc.github.io/grpc/core/md_doc_statuscodes.html)"""
-
-    message: typing.Text
+    message: builtins.str
     """grpc message"""
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        prediction_results_table: typing.Optional[google.protobuf.struct_pb2.Struct] = ...,
-        prediction_context: typing.Optional[typing.Iterable[caraml.upi.v1.variable_pb2.Variable]] = ...,
-        headers: typing.Optional[typing.Iterable[caraml.upi.v1.header_pb2.Header]] = ...,
+        prediction_results_table: google.protobuf.struct_pb2.Struct | None = ...,
+        prediction_context: collections.abc.Iterable[caraml.upi.v1.variable_pb2.Variable] | None = ...,
+        headers: collections.abc.Iterable[caraml.upi.v1.header_pb2.Header] | None = ...,
         status: builtins.int = ...,
-        message: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["prediction_results_table",b"prediction_results_table"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["headers",b"headers","message",b"message","prediction_context",b"prediction_context","prediction_results_table",b"prediction_results_table","status",b"status"]) -> None: ...
+        message: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["prediction_results_table", b"prediction_results_table"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["headers", b"headers", "message", b"message", "prediction_context", b"prediction_context", "prediction_results_table", b"prediction_results_table", "status", b"status"]) -> None: ...
+
 global___ModelOutput = ModelOutput
